@@ -4,32 +4,34 @@
         xmlns:perception="clr-namespace:STColorPerception"
         xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
         xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
-        Title="MainWindow" Height="600" Width="800">
-
-  <Window.Resources>
-    <data:Color x:Key="cts1" L="0" U="0.05" V="0" />
-    <data:Color x:Key="cts2" L="0" U="0.6" V="0" />
-    <data:Color x:Key="cts3" L="0" U="0" V="0.6" />
-    <data:Color x:Key="cts4" L="0" U="0.6" V="0.6" />
-    <data:Color x:Key="cts5" L="0" U="0.3" V="0.3" />
-
-    <data:Color x:Key="cm1" L="0" U="0.1" V="0.2" />
-    <data:Color x:Key="cm2" L="0" U="0.5" V="0.1" />
-    <data:Color x:Key="cm3" L="0" U="0.1" V="0.5" />
-    <data:Color x:Key="cm4" L="0" U="0.5" V="0.5" />
-
-    <hacks:XAMLMeasurementPairCollection x:Key="mpcColors">
-      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts1}" ColorCaptured="{StaticResource ResourceKey=cm1}" />
-      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts2}" ColorCaptured="{StaticResource ResourceKey=cm2}" />
-      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts3}" ColorCaptured="{StaticResource ResourceKey=cm3}" />
-      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts4}" ColorCaptured="{StaticResource ResourceKey=cm4}" />
-      <data:MeasurementPair />
-      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts5}"/>
-    </hacks:XAMLMeasurementPairCollection>
-  </Window.Resources>
+        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="600" Width="800" Loaded="Window_Loaded">
 
   <Grid>
-    <perception:CIE1976Control VerticalAlignment="Top" HorizontalAlignment="Left" Height="400" Width="400"
+    <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <StackPanel Orientation="Vertical">
+            <Label>Color To Show</Label>
+            <Rectangle Width="50" Height="50" Fill="Blue" Stroke="White"/>
+            <Label>{L,u,v} - {RGB}</Label>
+          </StackPanel>
+          <StackPanel Orientation="Vertical">
+            <Label>Color Captured</Label>
+            <Rectangle Width="50" Height="50" Fill="Red" Stroke="Black"/>
+            <Label>{L,u,v} - {RGB}</Label>
+          </StackPanel>
+        </StackPanel>
+        <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="400" Width="400"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
+      </StackPanel>
+      <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+        <Label>Color List</Label>
+        <Rectangle Width="370" Height="400" Fill="Azure"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+          <Button Width="50" Margin="0,0,5,0">Load</Button>
+          <Button Width="50">Start</Button>
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
   </Grid>
 </Window>

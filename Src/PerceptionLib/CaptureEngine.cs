@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PerceptionLib
 {
-  class CaptureEngine
+  public class CaptureEngine
   {
     public event EventHandler CaptureFinished;
     public event EventHandler<ColorCaptureEventArgs> PreCapture;

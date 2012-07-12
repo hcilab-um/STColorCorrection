@@ -48,6 +48,17 @@ namespace PerceptionLib
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
+
+    public System.Windows.Media.Color ToRBG()
+    {
+      return System.Windows.Media.Colors.Black;
+    }
+
+    public static Color FromRGB(System.Windows.Media.Color cRGB)
+    {
+      return null;
+    }
+
   }
 
 }

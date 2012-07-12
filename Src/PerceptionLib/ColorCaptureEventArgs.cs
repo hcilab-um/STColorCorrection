@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PerceptionLib
 {
-  class ColorCaptureEventArgs : EventArgs
+  public class ColorCaptureEventArgs : EventArgs
   {
     public MeasurementPair Pair { get; set; }
   }
