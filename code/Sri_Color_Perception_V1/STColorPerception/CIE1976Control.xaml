@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="STColorPerception.CIE1976Control" x:Name="cie1976"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:util="clr-namespace:STColorPerception.Util"
+             xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
+             xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+
+  <UserControl.Resources>
+    <util:FixTranslationConverter x:Key="ftConverter" />
+    <util:DivideByHalfConverter x:Key="dhConverter" />
+    <util:ColorMarginConverter x:Key="cmConverter" />
+    <util:MarginExtractorConverter x:Key="meConverter" />
+    <util:NullVisibilityConverter x:Key="nvConverter" />
+
+    <data:Color x:Key="cts1" L="0" U="0.05" V="0" />
+    <data:Color x:Key="cts2" L="0" U="0.6" V="0" />
+    <data:Color x:Key="cts3" L="0" U="0" V="0.6" />
+    <data:Color x:Key="cts4" L="0" U="0.6" V="0.6" />
+    <data:Color x:Key="cts5" L="0" U="0.3" V="0.3" />
+
+    <data:Color x:Key="cm1" L="0" U="0.1" V="0.2" />
+    <data:Color x:Key="cm2" L="0" U="0.5" V="0.1" />
+    <data:Color x:Key="cm3" L="0" U="0.1" V="0.5" />
+    <data:Color x:Key="cm4" L="0" U="0.5" V="0.5" />
+
+    <hacks:XAMLMeasurementPairCollection x:Key="mpcColors">
+      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts1}" ColorCaptured="{StaticResource ResourceKey=cm1}" />
+      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts2}" ColorCaptured="{StaticResource ResourceKey=cm2}" />
+      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts3}" ColorCaptured="{StaticResource ResourceKey=cm3}" />
+      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts4}" ColorCaptured="{StaticResource ResourceKey=cm4}" />
+      <data:MeasurementPair />
+      <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts5}"/>
+    </hacks:XAMLMeasurementPairCollection>
+
+    <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Border>
+              <ScrollViewer>
+                <ItemsPresenter />
+              </ScrollViewer>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ListBoxItem}">
+            <ContentPresenter VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+
+  <Grid>
+    <Image Source="Images\CIE_1976_UCS.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+    <ListBox Name="lbCanvas" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Background="Transparent" 
+             ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent">
+            <Grid.RenderTransform>
+              <TransformGroup>
+                <TranslateTransform X="{Binding ElementName=cie1976, Path=ActualWidth, Converter={StaticResource ResourceKey=ftConverter}, ConverterParameter=1}" 
+                                    Y="{Binding ElementName=cie1976, Path=ActualHeight, Converter={StaticResource ResourceKey=ftConverter}, ConverterParameter=-1}"/>
+              </TransformGroup>
+            </Grid.RenderTransform>
+          </Grid>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Grid>
+            <Ellipse x:Name="sColor" Width="10" Height="10" Fill="Red" Stroke="Black" StrokeThickness="1.5"
+                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                     Visibility="{Binding Path=ColorToShow, Converter={StaticResource ResourceKey=nvConverter}}">
+              <Ellipse.RenderTransform>
+                <TranslateTransform X="{Binding ElementName=sColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=-1}" 
+                                  Y="{Binding ElementName=sColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+              </Ellipse.RenderTransform>
+              <Ellipse.Margin>
+                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                  <Binding Path="ColorToShow.U" />
+                  <Binding Path="ColorToShow.V" />
+                  <Binding ElementName="cie1976" Path="ActualWidth"/>
+                  <Binding ElementName="cie1976" Path="ActualHeight"/>
+                </MultiBinding>
+              </Ellipse.Margin>
+            </Ellipse>
+            <Ellipse x:Name="cColor" Width="10" Height="10" Fill="Blue" Stroke="White" StrokeThickness="1.5"
+                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                     Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}">
+              <Ellipse.RenderTransform>
+                <TranslateTransform X="{Binding ElementName=cColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=-1}" 
+                                    Y="{Binding ElementName=cColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+              </Ellipse.RenderTransform>
+              <Ellipse.Margin>
+                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                  <Binding Path="ColorCaptured.U" />
+                  <Binding Path="ColorCaptured.V" />
+                  <Binding ElementName="cie1976" Path="ActualWidth"/>
+                  <Binding ElementName="cie1976" Path="ActualHeight"/>
+                </MultiBinding>
+              </Ellipse.Margin>
+            </Ellipse>
+            <Line Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Panel.ZIndex="-1" 
+                  Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}"
+                  X1="{Binding ElementName=cColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Left}" 
+                  Y1="{Binding ElementName=cColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Bottom}"
+                  X2="{Binding ElementName=sColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Left}" 
+                  Y2="{Binding ElementName=sColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Bottom}"/>
+          </Grid>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </Grid>
+</UserControl>
