@@ -53,5 +53,11 @@ namespace STColorPerception
       pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
       cie1976C.DataContext = pairs;
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+
+
+    }
   }
 }

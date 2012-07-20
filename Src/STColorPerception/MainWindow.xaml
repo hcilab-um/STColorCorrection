@@ -4,10 +4,14 @@
         xmlns:perception="clr-namespace:STColorPerception"
         xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
         xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
-        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="600" Width="800" Loaded="Window_Loaded">
+        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="820" Width="1109" Loaded="Window_Loaded">
 
   <Grid>
-    <StackPanel Orientation="Horizontal">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="314*" />
+      <RowDefinition Height="467*" />
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal" Grid.RowSpan="2">
       <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
           <StackPanel Orientation="Vertical">
@@ -24,13 +28,18 @@
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="400" Width="400"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
       </StackPanel>
-      <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+      <StackPanel Orientation="Vertical" Margin="5,0,0,0" Width="323" Height="749">
         <Label>Color List</Label>
-        <Rectangle Width="370" Height="400" Fill="Azure"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
-          <Button Width="50" Margin="0,0,5,0">Load</Button>
-          <Button Width="50">Start</Button>
-        </StackPanel>
+        <Rectangle Width="244" Height="167" Fill="Azure"/>
+        <Grid Height="42">
+          <Button Width="50" Click="Button_Click" Name="Btn_Load_File" Margin="69,0,204,0">Load</Button>
+          <Button Width="50" Margin="6,0,267,0">Start</Button>
+        </Grid>
+      </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="332">
+        <Image Name="Camera_Image" Stretch="Fill" Width="189" Height="215" />
+        <Image Height="99" Name="Croped_Image" Stretch="Fill" Width="126" />
+       
       </StackPanel>
     </StackPanel>
   </Grid>

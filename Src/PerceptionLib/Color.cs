@@ -10,7 +10,7 @@ namespace PerceptionLib
   public class Color : INotifyPropertyChanged
   {
 
-    private double u, v;
+    private double u, v,uR,vR;
     private double l, uP, vP;
 
     public double L
@@ -42,6 +42,44 @@ namespace PerceptionLib
         OnPropertyChanged("VP");
       }
     }
+    public double UR
+    {
+      get { return uR; }
+      set
+      {
+        uR = value;
+        OnPropertyChanged("UR");
+      }
+    }
+
+    public double VR
+    {
+      get { return vR; }
+      set
+      {
+        vR = value;
+        OnPropertyChanged("VR");
+      }
+    }
+    public double U
+    {
+      get { return u; }
+      set
+      {
+        u = value;
+        OnPropertyChanged("U");
+      }
+    }
+
+    public double V
+    {
+      get { return v; }
+      set
+      {
+        v = value;
+        OnPropertyChanged("V");
+      }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
     private void OnPropertyChanged(String name)
@@ -62,6 +100,9 @@ namespace PerceptionLib
 
       rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
       rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+      
+      rColor.UR = (4 * CIEXYZ.D65.X) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
+      rColor.VR = (9 * CIEXYZ.D65.Y) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
 
       double yr = xyz.Y / CIEXYZ.D65.Y;
       rColor.L = Lxyz(yr);
