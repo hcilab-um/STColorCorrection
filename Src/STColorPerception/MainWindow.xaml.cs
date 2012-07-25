@@ -51,7 +51,7 @@ namespace STColorPerception
       //Btn_Load_File.IsEnabled = false;
 
       Btn_StartMeasurment.IsEnabled = false;
-           
+
 
       //MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
       //pairs.Add(new MeasurementPair()
@@ -59,23 +59,23 @@ namespace STColorPerception
       //  ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
       //  ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
       //});
-   
-      
+
+
       //  pairs.Add(new MeasurementPair()
-    //  {
-    //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
-    //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
-    //  });
-    //  pairs.Add(new MeasurementPair()
-    //  {
-    //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
-    //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
-    //  });
-    //  pairs.Add(new MeasurementPair()
-    //  {
-    //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
-    //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
-    //  });
+      //  {
+      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
+      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
+      //  });
+      //  pairs.Add(new MeasurementPair()
+      //  {
+      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
+      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
+      //  });
+      //  pairs.Add(new MeasurementPair()
+      //  {
+      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
+      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
+      //  });
       //pairs.Add(new MeasurementPair());
       //pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
       //cie1976C.DataContext = pairs;
@@ -85,7 +85,7 @@ namespace STColorPerception
     {
       Btn_StartMeasurment.IsEnabled = true;
 
-      // measure ment of LUV and U' V' from the rgb values in the text box
+    
       colorObject = new PerceptionLib.Color();
       System.Drawing.Color RGB = new System.Drawing.Color();
 
@@ -96,24 +96,25 @@ namespace STColorPerception
       B = Convert.ToInt32(txt_B.Text);
 
       RGB = Util.ColorSpaceConverter.ToGetRGB(R, G, B);
+
+      // to measure LUV from Color class
       colorObject = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
       
-      //RGB = System.Drawing.Color.FromArgb(R, G, B);
-
-      //colorObject = colorObject.ToLUV(RGB);
-
-      MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-      
+     
 
       lbl_L.Content = colorObject.L.ToString();
       lbl_U.Content = colorObject.U.ToString();
       lbl_V.Content = colorObject.V.ToString();
+      lbl_UP.Content = colorObject.UP.ToString();
+      lbl_VP.Content = colorObject.VP.ToString();
       
       Rectangle_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R,RGB.G,RGB.B));
-
+      Rectangle_DisplayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
 
     }
 
+    
+    
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
       GetImage();
@@ -135,7 +136,7 @@ namespace STColorPerception
       {
         //My_image_copy = My_Image.ToBitmap();
         Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(capture);
-
+        _capture.QueryFrame().Dispose();
       }
     }
     
@@ -176,7 +177,7 @@ namespace STColorPerception
       });
       cie1976C.DataContext = pairs;
 
-      //to display the colors in
+      //to display the color in the rectangle 
       Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
 
       lbl_MR.Content = RGB.R.ToString();
@@ -186,8 +187,10 @@ namespace STColorPerception
       lbl_ML.Content = colorObject_M.L.ToString();
       lbl_MU.Content = colorObject_M.U.ToString();
       lbl_MV.Content = colorObject_M.V.ToString();
+      lbl_MUP.Content = colorObject_M.UP.ToString();
+      lbl_MVP.Content = colorObject_M.VP.ToString();
 
-
+      
      
     }
 

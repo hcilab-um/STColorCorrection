@@ -4,7 +4,7 @@
         xmlns:perception="clr-namespace:STColorPerception"
         xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
         xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
-        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="820" Width="1109" Loaded="Window_Loaded">
+        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="820" Width="3000" Loaded="Window_Loaded">
 
   <Grid>
     <Grid.RowDefinitions>
@@ -28,42 +28,62 @@
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="400" Width="400"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
         <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="392" Height="276">
-           
-          <Image Name="Image_Camera" Stretch="Fill" Width="251" Height="143" Margin="10,10,10,10" />
-          <Image Height="87" Name="Image_Croped" Stretch="Fill" Width="140" Margin="10,5,10,10" />
+          <Label Name="LBL_Camera" Width="90" Height="25" Margin="0,0,0,0" >Camera Image</Label>
+          <Image Name="Image_Camera" Stretch="Fill" Width="251" Height="129" Margin="10,0,10,0" />
+          <Label Name="LBL_Crop" Width="92" Height="25" Margin="0,0,0,0">Cropped Image</Label>
+          <Image Height="87" Name="Image_Croped" Stretch="Fill" Width="140" Margin="10,0,10,10" />
         </StackPanel>
       </StackPanel>
       <StackPanel Orientation="Vertical" Margin="5,0,0,0" Width="680" Height="749">
         <Label>Color List</Label>
         <DataGrid Name="dtgrid_corrDisplay" Width="680" Height="523">Corrdinates</DataGrid>
-        <StackPanel Orientation="Horizontal" Width="635" Height="26" Margin="10,20,10,10 ">  
+        <StackPanel Orientation="Horizontal" Width="635" Height="26" Margin="10,10,10,10 ">  
           <Button Width="81" Click="Button_Click" Name="Btn_Load_File" Margin="10,0,0,0">Load</Button>
           <Button Width="84" Name="Btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,10,10,10 ">
-          <Label Name="lbl_R" Width="19" Height="26" Margin="10,10,0,0">R:</Label>
+        <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
+          <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>
           <TextBox Name="txt_R" Width="43" Height="24" Margin="0,10,0,0">225</TextBox>
           <Label Name="lbl_G" Width="19" Height="26" Margin="10,10,0,0">G:</Label>
           <TextBox Name="txt_G" Width="43" Height="24" Margin="0,10,0,0">0</TextBox>
           <Label Name="lbl_B" Width="19" Height="26" Margin="10,10,0,0">B:</Label>
           <TextBox Name="txt_B" Width="43" Height="24" Margin="0,10,0,0">0</TextBox>
           <Label Name="lbl_m" Width="64" Height="26" Margin="50,10,0,0">Measured</Label>
-          <Label Name="lbl_MR" Width="50" Height="26" Margin="10,10,0,0">R:</Label>
-          <Label Name="lbl_MG" Width="50" Height="26" Margin="10,10,0,0">G:</Label>
-          <Label Name="lbl_MB" Width="50" Height="26" Margin="10,10,0,0">B:</Label>
+          <Label Name="MR" Width="20" Height="24" Margin="0,10,0,0">R:</Label>
+          <Label Name="lbl_MR" Width="50" Height="26" Margin="10,10,0,0"></Label>
+          <Label Name="MG" Width="20" Height="26" Margin="0,10,0,0">G:</Label>
+          <Label Name="lbl_MG" Width="50" Height="26" Margin="10,10,0,0"></Label>
+          <Label Name="MB" Width="20" Height="26" Margin="0,10,0,0">B:</Label>
+          <Label Name="lbl_MB" Width="50" Height="26" Margin="10,10,0,0"></Label>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,10,10,10 ">
-          <Label Name="lbl_L" Width="50" Height="26" Margin="10,10,0,0">L:</Label>
-          <Label Name="lbl_U" Width="50" Height="26" Margin="10,10,0,0">U*:</Label>
-          <Label Name="lbl_V" Width="50" Height="26" Margin="10,10,0,0">V*:</Label>
+        <StackPanel Orientation="Horizontal" Width="635" Height="41" Margin="10,0,10,10 ">
+          <Label Name="L" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
+          <Label Name="lbl_L" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="U" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
+          <Label Name="lbl_U" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="V" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
+          <Label Name="lbl_V" Width="50" Height="26" Margin="0,10,0,0"></Label>
           <Label Name="lbl_mluv" Width="64" Height="26" Margin="50,10,0,0">Measured</Label>
-          <Label Name="lbl_ML" Width="50" Height="26" Margin="10,10,0,0">L:</Label>
-          <Label Name="lbl_MU" Width="50" Height="26" Margin="10,10,0,0">U*:</Label>
-          <Label Name="lbl_MV" Width="50" Height="26" Margin="10,10,0,0">V*:</Label>
+          <Label Name="ML" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
+          <Label Name="lbl_ML" Width="50" Height="26" Margin="10,10,0,0"></Label>
+          <Label Name="MU" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
+          <Label Name="lbl_MU" Width="50" Height="26" Margin="10,10,0,0"></Label>
+          <Label Name="MV" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
+          <Label Name="lbl_MV" Width="50" Height="26" Margin="10,10,0,0"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Width="635" Height="41" Margin="10,0,10,100">
+          <Label Name="UP" Width="20" Height="24" Margin="0,10,0,0">U':</Label>
+          <Label Name="lbl_UP" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="VP" Width="20" Height="24" Margin="0,10,0,0">V':</Label>
+          <Label Name="lbl_VP" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="MUP" Width="20" Height="24" Margin="187,10,0,0">U':</Label>
+          <Label Name="lbl_MUP" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="MVP" Width="20" Height="24" Margin="10,10,0,0">V':</Label>
+          <Label Name="lbl_MVP" Width="50" Height="26" Margin="0,10,0,0"></Label>
         </StackPanel>
       </StackPanel>
-       
-     </StackPanel>
+      <Rectangle Name="Rectangle_DisplayColor" Width="1891" Height="777" Stroke="White"/>
+      </StackPanel>
     
     
 

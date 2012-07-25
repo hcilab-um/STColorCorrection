@@ -107,8 +107,8 @@ namespace PerceptionLib
 
       double yr = xyz.Y / CIEXYZ.D65.Y;
       rColor.L = Lxyz(yr);
-      rColor.U = (13 * rColor.L) / (rColor.UP - rColor.UR);
-      rColor.V = (13 * rColor.L) / (rColor.VP - rColor.VR);
+      rColor.U = (13 * rColor.L) * (rColor.UP - rColor.UR);
+      rColor.V = (13 * rColor.L) * (rColor.VP - rColor.VR);
       return rColor;
     }
 
