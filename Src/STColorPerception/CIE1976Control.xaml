@@ -16,16 +16,16 @@
     <util:MarginExtractorConverter x:Key="meConverter" />
     <util:NullVisibilityConverter x:Key="nvConverter" />
 
-    <data:Color x:Key="cts1" L="0" U="0.05" V="0" />
-    <data:Color x:Key="cts2" L="0" U="0.6" V="0" />
-    <data:Color x:Key="cts3" L="0" U="0" V="0.6" />
-    <data:Color x:Key="cts4" L="0" U="0.6" V="0.6" />
-    <data:Color x:Key="cts5" L="0" U="0.3" V="0.3" />
+    <data:Color x:Key="cts1" L="0" UP="0.05" VP="0" />
+    <data:Color x:Key="cts2" L="0" UP="0.6" VP="0" />
+    <data:Color x:Key="cts3" L="0" UP="0" VP="0.6" />
+    <data:Color x:Key="cts4" L="0" UP="0.6" VP="0.6" />
+    <data:Color x:Key="cts5" L="0" UP="0.3" VP="0.3" />
 
-    <data:Color x:Key="cm1" L="0" U="0.1" V="0.2" />
-    <data:Color x:Key="cm2" L="0" U="0.5" V="0.1" />
-    <data:Color x:Key="cm3" L="0" U="0.1" V="0.5" />
-    <data:Color x:Key="cm4" L="0" U="0.5" V="0.5" />
+    <data:Color x:Key="cm1" L="0" UP="0.1" VP="0.2" />
+    <data:Color x:Key="cm2" L="0" UP="0.5" VP="0.1" />
+    <data:Color x:Key="cm3" L="0" UP="0.1" VP="0.5" />
+    <data:Color x:Key="cm4" L="0" UP="0.5" VP="0.5" />
 
     <hacks:XAMLMeasurementPairCollection x:Key="mpcColors">
       <data:MeasurementPair ColorToShow="{StaticResource ResourceKey=cts1}" ColorCaptured="{StaticResource ResourceKey=cm1}" />
@@ -88,8 +88,8 @@
               </Ellipse.RenderTransform>
               <Ellipse.Margin>
                 <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
-                  <Binding Path="ColorToShow.U" />
-                  <Binding Path="ColorToShow.V" />
+                  <Binding Path="ColorToShow.UP" />
+                  <Binding Path="ColorToShow.VP" />
                   <Binding ElementName="cie1976" Path="ActualWidth"/>
                   <Binding ElementName="cie1976" Path="ActualHeight"/>
                 </MultiBinding>
@@ -104,8 +104,8 @@
               </Ellipse.RenderTransform>
               <Ellipse.Margin>
                 <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
-                  <Binding Path="ColorCaptured.U" />
-                  <Binding Path="ColorCaptured.V" />
+                  <Binding Path="ColorCaptured.UP" />
+                  <Binding Path="ColorCaptured.VP" />
                   <Binding ElementName="cie1976" Path="ActualWidth"/>
                   <Binding ElementName="cie1976" Path="ActualHeight"/>
                 </MultiBinding>
