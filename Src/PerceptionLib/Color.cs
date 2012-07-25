@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.ComponentModel;
 
 namespace PerceptionLib
@@ -93,7 +94,7 @@ namespace PerceptionLib
       return System.Windows.Media.Colors.Black;
     }
 
-    public static Color FromRGB(System.Windows.Media.Color cRGB)
+    public  Color ToLUV(System.Drawing.Color cRGB)
     {
       Color rColor = new Color();
       CIEXYZ xyz = RGBToXYZ(cRGB);
@@ -106,7 +107,8 @@ namespace PerceptionLib
 
       double yr = xyz.Y / CIEXYZ.D65.Y;
       rColor.L = Lxyz(yr);
-
+      rColor.U = (13 * rColor.L) / (rColor.UP - rColor.UR);
+      rColor.V = (13 * rColor.L) / (rColor.VP - rColor.VR);
       return rColor;
     }
 
@@ -115,7 +117,7 @@ namespace PerceptionLib
       return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
     }
 
-    private static CIEXYZ RGBToXYZ(System.Windows.Media.Color cRGB)
+    private static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
     {
       // by the formula given the the web page http://www.brucelindbloom.com/index.html [XYZ]=[M][RGB]
       //In order to properly use this matrix, the RGB values must be linear and in the nominal range [0.0, 1.0].
@@ -134,7 +136,6 @@ namespace PerceptionLib
       double g = (gLinear > 0.04045) ? Math.Pow((gLinear + 0.055) / (1 + 0.055), 2.2) : (gLinear / 12.92);
       double b = (bLinear > 0.04045) ? Math.Pow((bLinear + 0.055) / (1 + 0.055), 2.2) : (bLinear / 12.92);
 
-      // converts and returs as a struct
       return new CIEXYZ((r * 0.4124 + g * 0.3576 + b * 0.1805),
                          (r * 0.2126 + g * 0.7152 + b * 0.0722),
                          (r * 0.0193 + g * 0.1192 + b * 0.9505));
@@ -145,10 +146,7 @@ namespace PerceptionLib
     /// </summary>
     public class CIEXYZ
     {
-      /// <summary>
-      /// Gets an empty CIEXYZ structure.
-      /// </summary>
-      public static readonly CIEXYZ Empty = new CIEXYZ(0, 0, 0);
+      
       /// <summary>
       /// Gets the CIE D65 lighting's white structure coordinates.
       /// </summary>
@@ -206,9 +204,9 @@ namespace PerceptionLib
 
       public CIEXYZ(double pX, double pY, double pZ)
       {
-        X = x;
-        Y = y;
-        Z = z;
+        X = pX;
+        Y = pY;
+        Z = pZ;
       }
     }
 
