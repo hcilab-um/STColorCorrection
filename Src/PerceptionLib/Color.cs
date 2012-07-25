@@ -173,7 +173,7 @@ namespace PerceptionLib
         }
         set
         {
-          this.x = (value > 0.3127) ? 0.3127 : ((value < 0) ? 0 : value);
+          this.x = (value > 0.9504) ? 0.9504 : ((value < 0) ? 0 : value);
         }
       }
 
@@ -188,7 +188,7 @@ namespace PerceptionLib
         }
         set
         {
-          this.y = (value > 0.3290) ? 0.3290 : ((value < 0) ? 0 : value);
+          this.y = (value > 1.0000) ? 1.0000 : ((value < 0) ? 0 : value);
         }
       }
 
@@ -203,7 +203,7 @@ namespace PerceptionLib
         }
         set
         {
-          this.z = (value > 0.3583) ? 0.3583 : ((value < 0) ? 0 : value);
+          this.z = (value > 1.0888) ? 1.0888 : ((value < 0) ? 0 : value);
         }
       }
 
