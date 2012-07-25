@@ -27,6 +27,7 @@ namespace STColorPerception
   {
     // color class object
     PerceptionLib.Color colorObject;
+    PerceptionLib.Color colorObject_M;
 
     //EMGU CV objects
     Image<Bgr, Byte> capture;
@@ -52,12 +53,12 @@ namespace STColorPerception
       Btn_StartMeasurment.IsEnabled = false;
            
 
-      MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
-      });
+      //MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+      //pairs.Add(new MeasurementPair()
+      //{
+      //  ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
+      //  ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
+      //});
    
       
       //  pairs.Add(new MeasurementPair()
@@ -75,9 +76,9 @@ namespace STColorPerception
     //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
     //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
     //  });
-      pairs.Add(new MeasurementPair());
-      pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
-      cie1976C.DataContext = pairs;
+      //pairs.Add(new MeasurementPair());
+      //pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
+      //cie1976C.DataContext = pairs;
       }
 
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -102,14 +103,7 @@ namespace STColorPerception
       //colorObject = colorObject.ToLUV(RGB);
 
       MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorObject.UP, VP = colorObject.VP },
-       ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
-      });
-      pairs.Add(new MeasurementPair());
-      pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
-      cie1976C.DataContext = pairs;
+      
 
       lbl_L.Content = colorObject.L.ToString();
       lbl_U.Content = colorObject.U.ToString();
@@ -157,7 +151,7 @@ namespace STColorPerception
        
     private void MeasureRGB()
     {
-      colorObject = new PerceptionLib.Color();
+      colorObject_M = new PerceptionLib.Color();
       System.Drawing.Color RGB = new System.Drawing.Color();
 
       int Avg_R, Avg_G, Avg_B;
@@ -171,17 +165,27 @@ namespace STColorPerception
       Avg_R = Convert.ToInt32(a.Red);
 
       RGB = Util.ColorSpaceConverter.ToGetRGB(Avg_R, Avg_G, Avg_B);
-      colorObject = Util.ColorSpaceConverter.ToGetLUV(Avg_R, Avg_G, Avg_B);
+      colorObject_M = Util.ColorSpaceConverter.ToGetLUV(Avg_R, Avg_G, Avg_B);
+    
+      // to display the shift
+      MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorObject.UP, VP = colorObject.VP },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorObject_M.UP, VP = colorObject_M.VP }
+      });
+      cie1976C.DataContext = pairs;
 
+      //to display the colors in
       Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
 
       lbl_MR.Content = RGB.R.ToString();
       lbl_MG.Content = RGB.G.ToString();
       lbl_MB.Content = RGB.B.ToString();
 
-      lbl_ML.Content = colorObject.L.ToString();
-      lbl_MU.Content = colorObject.U.ToString();
-      lbl_MV.Content = colorObject.V.ToString();
+      lbl_ML.Content = colorObject_M.L.ToString();
+      lbl_MU.Content = colorObject_M.U.ToString();
+      lbl_MV.Content = colorObject_M.V.ToString();
 
 
      
