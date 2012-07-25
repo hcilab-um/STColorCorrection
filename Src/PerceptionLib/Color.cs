@@ -151,7 +151,12 @@ namespace PerceptionLib
       /// Gets the CIE D65 lighting's white structure coordinates.
       /// </summary>
       //  public static readonly CIEXYZ D50 = new CIEXYZ(0.9505, 1.0, 1.0890);
-      public static readonly CIEXYZ D65 = new CIEXYZ(0.3127, 0.3290, 0.3583);
+
+      // this is wrong as pointed out by David as its for xyz rather than XYZ
+      //public static readonly CIEXYZ D65 = new CIEXYZ(0.3127, 0.3290, 0.3583);
+
+      // the new D65 XYZ as provided by David and also cross verified with wikipedia
+      public static readonly CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
 
       private double x;
       private double y;
