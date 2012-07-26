@@ -1,4 +1,4 @@
-﻿<Window x:Class="STColorPerception.MainWindow"
+﻿<Window x:Class="STColorPerception.MainWindow" x:Name="mainW"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:perception="clr-namespace:STColorPerception"
@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
           <StackPanel Orientation="Vertical">
             <Label>Color To Show</Label>
-            <Rectangle Name="Rectangle_shown" Width="50" Height="50" Fill="Blue" Stroke="White"/>
+            <Rectangle Name="rec_shown" Width="50" Height="50" Fill="Blue" Stroke="White"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
           <StackPanel Orientation="Vertical">
@@ -38,16 +38,15 @@
         <Label>Color List</Label>
         <DataGrid Name="dtgrid_corrDisplay" Width="680" Height="523">Corrdinates</DataGrid>
         <StackPanel Orientation="Horizontal" Width="635" Height="26" Margin="10,10,10,10 ">  
-          <Button Width="81" Click="Button_Click" Name="Btn_Load_File" Margin="10,0,0,0">Load</Button>
-          <Button Width="84" Name="Btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
+          <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
           <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>
-          <TextBox Name="txt_R" Width="43" Height="24" Margin="0,10,0,0">225</TextBox>
+          <TextBox Name="txt_R" Width="43" Height="24" Margin="0,10,0,0" Text="{Binding ElementName=mainW, Path=R}"/>
           <Label Name="lbl_G" Width="19" Height="26" Margin="10,10,0,0">G:</Label>
-          <TextBox Name="txt_G" Width="43" Height="24" Margin="0,10,0,0">0</TextBox>
+          <TextBox Name="txt_G" Width="43" Height="24" Margin="0,10,0,0" Text="{Binding ElementName=mainW, Path=G}"/>
           <Label Name="lbl_B" Width="19" Height="26" Margin="10,10,0,0">B:</Label>
-          <TextBox Name="txt_B" Width="43" Height="24" Margin="0,10,0,0">0</TextBox>
+          <TextBox Name="txt_B" Width="43" Height="24" Margin="0,10,0,0" Text="{Binding ElementName=mainW, Path=B}"/>
           <Label Name="lbl_m" Width="64" Height="26" Margin="50,10,0,0">Measured</Label>
           <Label Name="MR" Width="20" Height="24" Margin="0,10,0,0">R:</Label>
           <Label Name="lbl_MR" Width="50" Height="26" Margin="10,10,0,0"></Label>
@@ -58,11 +57,11 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="41" Margin="10,0,10,10 ">
           <Label Name="L" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
-          <Label Name="lbl_L" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="lbl_L" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.L}"/>
           <Label Name="U" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
-          <Label Name="lbl_U" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="lbl_U" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.U}"/>
           <Label Name="V" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
-          <Label Name="lbl_V" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="lbl_V" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.V}"/>
           <Label Name="lbl_mluv" Width="64" Height="26" Margin="50,10,0,0">Measured</Label>
           <Label Name="ML" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
           <Label Name="lbl_ML" Width="50" Height="26" Margin="10,10,0,0"></Label>
@@ -73,16 +72,16 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="41" Margin="10,0,10,100">
           <Label Name="UP" Width="20" Height="24" Margin="0,10,0,0">U':</Label>
-          <Label Name="lbl_UP" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="lbl_UP" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.UP}"/>
           <Label Name="VP" Width="20" Height="24" Margin="0,10,0,0">V':</Label>
-          <Label Name="lbl_VP" Width="50" Height="26" Margin="0,10,0,0"></Label>
+          <Label Name="lbl_VP" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.VP}"/>
           <Label Name="MUP" Width="20" Height="24" Margin="187,10,0,0">U':</Label>
           <Label Name="lbl_MUP" Width="50" Height="26" Margin="0,10,0,0"></Label>
           <Label Name="MVP" Width="20" Height="24" Margin="10,10,0,0">V':</Label>
           <Label Name="lbl_MVP" Width="50" Height="26" Margin="0,10,0,0"></Label>
         </StackPanel>
       </StackPanel>
-      <Rectangle Name="Rectangle_DisplayColor" Width="1891" Height="777" Stroke="White"/>
+      <Rectangle Name="rec_displayColor" Width="1891" Height="777" Stroke="White"/>
       </StackPanel>
     
     

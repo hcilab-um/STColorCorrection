@@ -11,7 +11,7 @@ namespace PerceptionLib
   public class Color : INotifyPropertyChanged
   {
 
-    private double u, v,uR,vR;
+    private double u, v, uR, vR;
     private double l, uP, vP;
 
     public double L
@@ -62,6 +62,7 @@ namespace PerceptionLib
         OnPropertyChanged("VR");
       }
     }
+
     public double U
     {
       get { return u; }
@@ -94,14 +95,14 @@ namespace PerceptionLib
       return System.Windows.Media.Colors.Black;
     }
 
-    public  Color ToLUV(System.Drawing.Color cRGB)
+    public static Color ToLUV(System.Drawing.Color cRGB)
     {
       Color rColor = new Color();
       CIEXYZ xyz = RGBToXYZ(cRGB);
 
       rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
       rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
-      
+
       rColor.UR = (4 * CIEXYZ.D65.X) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
       rColor.VR = (9 * CIEXYZ.D65.Y) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
 
@@ -146,7 +147,7 @@ namespace PerceptionLib
     /// </summary>
     public class CIEXYZ
     {
-      
+
       /// <summary>
       /// Gets the CIE D65 lighting's white structure coordinates.
       /// </summary>

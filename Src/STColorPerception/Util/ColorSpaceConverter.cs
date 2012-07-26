@@ -10,28 +10,22 @@ namespace STColorPerception.Util
 {
   class ColorSpaceConverter
   {
-    
-  
-    
-    public static System.Drawing.Color ToGetRGB(int R, int G, int B)
+
+
+
+    public static System.Drawing.Color ToGetRGB(int r, int g, int b)
     {
       System.Drawing.Color mRGB = new System.Drawing.Color();
-      mRGB = System.Drawing.Color.FromArgb(R, G, B);
+      mRGB = System.Drawing.Color.FromArgb(r, g, b);
       return mRGB;
     }
 
 
-    public static PerceptionLib.Color ToGetLUV(int R, int G, int B)
+    public static PerceptionLib.Color ToGetLUV(int r, int g, int b)
     {
-       PerceptionLib.Color colorObject = new PerceptionLib.Color();
-     
-      System.Drawing.Color mRGB = new System.Drawing.Color();
-      mRGB = new System.Drawing.Color();
-      mRGB = System.Drawing.Color.FromArgb(R, G, B);
-      
-      colorObject = colorObject.ToLUV(mRGB);
+      System.Drawing.Color mRGB = ToGetRGB(r, g, b);
+      PerceptionLib.Color colorObject = PerceptionLib.Color.ToLUV(mRGB);
       return colorObject;
-    
     }
 
 
