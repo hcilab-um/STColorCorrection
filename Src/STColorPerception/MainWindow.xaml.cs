@@ -32,11 +32,14 @@ namespace STColorPerception
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
-    private byte r, g, b;
+    private byte r, g, b,mr,mg,mb;
 
     //EMGU CV objects
     private Image<Bgr, Byte> captureImage;
     private Image<Bgr, Byte> croppedImage;
+    
+    // this is a color object of BGR value ,.. uit  gives avg blue green and red value from cropped image.
+    Bgr avgRGB;
     
     // obj for web cam capture
     private Capture captureDevice;
@@ -50,7 +53,18 @@ namespace STColorPerception
         OnPropertyChanged("ColorToShow");
       }
     }
-
+  
+    public PerceptionLib.Color ColorMeasured
+    {
+      get { return colorMeasured; }
+      set
+      {
+        colorMeasured = value;
+        OnPropertyChanged("ColorMeasured");
+      }
+    }
+   
+    //Displayed RGB
     public byte R
     {
       get { return r; }
@@ -78,6 +92,38 @@ namespace STColorPerception
       {
         b = value;
         OnPropertyChanged("B");
+      }
+    }
+
+
+    //measured RGB
+    public byte MR
+    {
+      get { return mr; }
+      set
+      {
+        mr = value;
+        OnPropertyChanged("MR");
+      }
+    }
+
+    public byte MG
+    {
+      get { return mg; }
+      set
+      {
+        mg = value;
+        OnPropertyChanged("MG");
+      }
+    }
+
+    public byte MB
+    {
+      get { return mb; }
+      set
+      {
+        mb = value;
+        OnPropertyChanged("MB");
       }
     }
 
@@ -139,12 +185,50 @@ namespace STColorPerception
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
       }
     }
-    
+
+    //void Measured_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    //{
+    //  if ("MR".Equals(e.PropertyName) || "MG".Equals(e.PropertyName) || "MB".Equals(e.PropertyName))
+    //  {
+        
+
+    //  }
+    //}
+
+
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
-      GetImage();
-      CropImage();
-      MeasureRGB();
+      
+      // temp int cariables to do the calculations for AVG rgb form the cropped pics
+      int tempMr=0, tempMg=0, tempMb=0;
+      for (int i = 0; i < 6; i++)
+      {
+
+        GetImage();
+        CropImage();
+        if (i == 0)
+        {
+          tempMr = 0;
+          tempMg = 0;
+          tempMb = 0;
+
+        }
+
+        tempMr = Convert.ToInt32(tempMr + avgRGB.Red);
+        tempMg = Convert.ToInt32(tempMg + avgRGB.Green);
+        tempMb = Convert.ToInt32(tempMb + avgRGB.Blue);
+      }
+
+      tempMr = tempMr / 5;
+      tempMg = tempMg / 5;
+      tempMb = tempMb / 5;
+
+      MR = Convert.ToByte(tempMr);
+      MG = Convert.ToByte(tempMg);
+      MB= Convert.ToByte(tempMb);
+
+      DisplayMeasuredValues();
+    
     }
 
 
@@ -154,13 +238,17 @@ namespace STColorPerception
 
     private void GetImage()
     {
+      
+      System.Threading.Thread.Sleep(500);
+            
       captureImage = captureDevice.QueryFrame();
       croppedImage = captureImage.Copy();
       if (captureImage != null)
       {
-        //My_image_copy = My_Image.ToBitmap();
+        
         Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(captureImage);
         captureDevice.QueryFrame().Dispose();
+       
       }
     }
     
@@ -169,29 +257,59 @@ namespace STColorPerception
       int Center_x, Center_y;
       Center_x = croppedImage.Width / 2;
       Center_y = croppedImage.Height / 2;
+      avgRGB = new Bgr();
 
       croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 100, 100);
       Image_Croped.Source = Util.ToImageSourceConverter.ToBitmapSource(croppedImage);
+      avgRGB = croppedImage.GetAverage();
+
+      captureImage.Dispose();
+      croppedImage.Dispose();
+            
+     // captureDevice.Dispose();
+      
     }
        
-    private void MeasureRGB()
+    //private void MeasureRGB()
+    //{      
+    //  System.Drawing.Color RGB = new System.Drawing.Color();
+               
+    //  // fget avg give the avg color value of the image in its present ROI
+      
+
+    //  //Avg_B = Convert.ToInt32(a.Blue);
+    //  //Avg_G = Convert.ToInt32(a.Green);
+    //  //Avg_R = Convert.ToInt32(a.Red);
+
+
+
+    //  //RGB = Util.ColorSpaceConverter.ToGetRGB(Avg_R, Avg_G, Avg_B);
+      
+        
+
+    //  ////to display the color in the rectangle 
+    //  //Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
+
+    //lbl_MR.Content = RGB.R.ToString();
+    //lbl_MG.Content = RGB.G.ToString();
+    //lbl_MB.Content = RGB.B.ToString();
+
+    //  //lbl_ML.Content = colorMeasured.L.ToString();
+    //  //lbl_MU.Content = colorMeasured.U.ToString();
+    //  //lbl_MV.Content = colorMeasured.V.ToString();
+    //  //lbl_MUP.Content = colorMeasured.UP.ToString();
+    //  //lbl_MVP.Content = colorMeasured.VP.ToString();
+
+           
+    //}
+
+    private void DisplayMeasuredValues()
     {
-      colorMeasured = new PerceptionLib.Color();
-      System.Drawing.Color RGB = new System.Drawing.Color();
+      ColorMeasured = Util.ColorSpaceConverter.ToGetLUV(MR, MG, MB);
+      //to display the color in the rectangle 
 
-      int Avg_R, Avg_G, Avg_B;
-      // this is a color object of BGR value ,.. uit gives blue green and red value.
-      Bgr a = new Bgr();
-      // fget avg give the avg color value of the image in its present ROI
-      a = croppedImage.GetAverage();
+      Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(MR, MG, MB));
 
-      Avg_B = Convert.ToInt32(a.Blue);
-      Avg_G = Convert.ToInt32(a.Green);
-      Avg_R = Convert.ToInt32(a.Red);
-
-      RGB = Util.ColorSpaceConverter.ToGetRGB(Avg_R, Avg_G, Avg_B);
-      colorMeasured = Util.ColorSpaceConverter.ToGetLUV(Avg_R, Avg_G, Avg_B);
-    
       // to display the shift
       pairs.Clear();
       pairs.Add(new MeasurementPair()
@@ -199,24 +317,11 @@ namespace STColorPerception
         ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorToShow.UP, VP = colorToShow.VP },
         ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
       });
-
-      //to display the color in the rectangle 
-      Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
-
-      lbl_MR.Content = RGB.R.ToString();
-      lbl_MG.Content = RGB.G.ToString();
-      lbl_MB.Content = RGB.B.ToString();
-
-      lbl_ML.Content = colorMeasured.L.ToString();
-      lbl_MU.Content = colorMeasured.U.ToString();
-      lbl_MV.Content = colorMeasured.V.ToString();
-      lbl_MUP.Content = colorMeasured.UP.ToString();
-      lbl_MVP.Content = colorMeasured.VP.ToString();
-
       
-     
+    
     }
 
+  
     public event PropertyChangedEventHandler PropertyChanged;
     private void OnPropertyChanged(String name)
     {
