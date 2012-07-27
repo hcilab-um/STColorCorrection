@@ -240,6 +240,8 @@ namespace STColorPerception
     {
 
       System.Threading.Thread.Sleep(500);
+      
+      captureDevice = new Capture();
 
       captureImage = captureDevice.QueryFrame();
       croppedImage = captureImage.Copy();
@@ -265,10 +267,12 @@ namespace STColorPerception
 
       captureImage.Dispose();
       croppedImage.Dispose();
+     //// captureDevice.Dispose();
 
-      // captureDevice.Dispose();
-
-    }
+      //((IDisposable)captureDevice).Dispose();
+      //((IDisposable)croppedImage).Dispose();
+      ////((IDisposable)captureImage).Dispose();
+     }
 
     //private void MeasureRGB()
     //{      
