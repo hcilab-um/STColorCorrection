@@ -144,37 +144,45 @@ namespace STColorPerception
       //Btn_Load_File.IsEnabled = false;
       btn_StartMeasurment.IsEnabled = false;
 
-      //MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-      //pairs.Add(new MeasurementPair()
-      //{
-      //  ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
-      //  ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
-      //});
+
+      // initial xy plots to cross verify the graph's accuracy 
+      MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
+      });
 
 
-      //  pairs.Add(new MeasurementPair()
-      //  {
-      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
-      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
-      //  });
-      //  pairs.Add(new MeasurementPair()
-      //  {
-      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
-      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
-      //  });
-      //  pairs.Add(new MeasurementPair()
-      //  {
-      //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
-      //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
-      //  });
-      //pairs.Add(new MeasurementPair());
-      //pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
-      //cie1976C.DataContext = pairs;
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
+      });
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
+      });
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
+      });
+      pairs.Add(new MeasurementPair());
+      pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
+      cie1976C.DataContext = pairs;
     }
 
+
+    /// <summary>
+    ///   // to change all values of shown color when each time RGB text box value chabges
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-      if ("R".Equals(e.PropertyName) || "G".Equals(e.PropertyName) || "B".Equals(e.PropertyName))
+     if ("R".Equals(e.PropertyName) || "G".Equals(e.PropertyName) || "B".Equals(e.PropertyName))
       {
         btn_StartMeasurment.IsEnabled = true;
 
@@ -185,21 +193,16 @@ namespace STColorPerception
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
       }
     }
-
-    //void Measured_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    //{
-    //  if ("MR".Equals(e.PropertyName) || "MG".Equals(e.PropertyName) || "MB".Equals(e.PropertyName))
-    //  {
-
-
-    //  }
-    //}
-
-
+    
+    /// <summary>
+    /// when start measure button is clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
 
-      // temp int cariables to do the calculations for AVG rgb form the cropped pics
+      // temp int cariables to do the calculations for AVG rgb from the cropped pics
       int tempMr = 0, tempMg = 0, tempMb = 0;
       for (int i = 0; i < 6; i++)
       {
@@ -219,10 +222,12 @@ namespace STColorPerception
         tempMb = (int)(tempMb + avgRGB.Blue);
       }
 
+      // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
       tempMr = tempMr / 5;
       tempMg = tempMg / 5;
       tempMb = tempMb / 5;
 
+      // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
       MR = (byte)(tempMr);
       MG = (byte)(tempMg);
       MB = (byte)(tempMb);
@@ -238,22 +243,28 @@ namespace STColorPerception
 
     private void GetImage()
     {
-
+      // make the camera wait 500 milli sec before it caprtures a img
       System.Threading.Thread.Sleep(500);
       
+      // caputure device obj
       captureDevice = new Capture();
-
+      // query frame catures web cam image in EMGU CV
       captureImage = captureDevice.QueryFrame();
       croppedImage = captureImage.Copy();
+      
       if (captureImage != null)
       {
 
         Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(captureImage);
+        // to dispose the query frame instance
         captureDevice.QueryFrame().Dispose();
 
       }
     }
 
+    /// <summary>
+    /// function to crop the img to its center and get its avg RGB value
+    /// </summary>
     private void CropImage()
     {
       int Center_x, Center_y;
@@ -307,6 +318,10 @@ namespace STColorPerception
 
     //}
 
+    /// <summary>
+    /// to display all measyre color's values 
+    /// </summary>
+
     private void DisplayMeasuredValues()
     {
       ColorMeasured = Util.ColorSpaceConverter.ToGetLUV(MR, MG, MB);
@@ -314,7 +329,8 @@ namespace STColorPerception
 
       Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(MR, MG, MB));
 
-      // to display the shift
+      
+      // to display the shift in the CIE 1976 graph
       pairs.Clear();
       pairs.Add(new MeasurementPair()
       {
@@ -325,7 +341,9 @@ namespace STColorPerception
 
     }
 
-
+    /// <summary>
+    /// to get the propert change name of the property which has changed
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
     private void OnPropertyChanged(String name)
     {
