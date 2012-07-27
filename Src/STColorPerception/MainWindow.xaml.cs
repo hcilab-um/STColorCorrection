@@ -32,28 +32,28 @@ namespace STColorPerception
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
-    private byte r, g, b,mr,mg,mb;
+    private byte r, g, b, mr, mg, mb;
 
     //EMGU CV objects
     private Image<Bgr, Byte> captureImage;
     private Image<Bgr, Byte> croppedImage;
-    
+
     // this is a color object of BGR value ,.. uit  gives avg blue green and red value from cropped image.
     Bgr avgRGB;
-    
+
     // obj for web cam capture
     private Capture captureDevice;
 
-    public PerceptionLib.Color ColorToShow 
+    public PerceptionLib.Color ColorToShow
     {
       get { return colorToShow; }
-      set 
+      set
       {
         colorToShow = value;
         OnPropertyChanged("ColorToShow");
       }
     }
-  
+
     public PerceptionLib.Color ColorMeasured
     {
       get { return colorMeasured; }
@@ -63,7 +63,7 @@ namespace STColorPerception
         OnPropertyChanged("ColorMeasured");
       }
     }
-   
+
     //Displayed RGB
     public byte R
     {
@@ -170,7 +170,7 @@ namespace STColorPerception
       //pairs.Add(new MeasurementPair());
       //pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
       //cie1976C.DataContext = pairs;
-      }
+    }
 
     void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -190,7 +190,7 @@ namespace STColorPerception
     //{
     //  if ("MR".Equals(e.PropertyName) || "MG".Equals(e.PropertyName) || "MB".Equals(e.PropertyName))
     //  {
-        
+
 
     //  }
     //}
@@ -198,9 +198,9 @@ namespace STColorPerception
 
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
-      
+
       // temp int cariables to do the calculations for AVG rgb form the cropped pics
-      int tempMr=0, tempMg=0, tempMb=0;
+      int tempMr = 0, tempMg = 0, tempMb = 0;
       for (int i = 0; i < 6; i++)
       {
 
@@ -214,21 +214,21 @@ namespace STColorPerception
 
         }
 
-        tempMr = Convert.ToInt32(tempMr + avgRGB.Red);
-        tempMg = Convert.ToInt32(tempMg + avgRGB.Green);
-        tempMb = Convert.ToInt32(tempMb + avgRGB.Blue);
+        tempMr = (int)(tempMr + avgRGB.Red);
+        tempMg = (int)(tempMg + avgRGB.Green);
+        tempMb = (int)(tempMb + avgRGB.Blue);
       }
 
       tempMr = tempMr / 5;
       tempMg = tempMg / 5;
       tempMb = tempMb / 5;
 
-      MR = Convert.ToByte(tempMr);
-      MG = Convert.ToByte(tempMg);
-      MB= Convert.ToByte(tempMb);
+      MR = (byte)(tempMr);
+      MG = (byte)(tempMg);
+      MB = (byte)(tempMb);
 
       DisplayMeasuredValues();
-    
+
     }
 
 
@@ -238,20 +238,20 @@ namespace STColorPerception
 
     private void GetImage()
     {
-      
+
       System.Threading.Thread.Sleep(500);
-            
+
       captureImage = captureDevice.QueryFrame();
       croppedImage = captureImage.Copy();
       if (captureImage != null)
       {
-        
+
         Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(captureImage);
         captureDevice.QueryFrame().Dispose();
-       
+
       }
     }
-    
+
     private void CropImage()
     {
       int Center_x, Center_y;
@@ -265,17 +265,17 @@ namespace STColorPerception
 
       captureImage.Dispose();
       croppedImage.Dispose();
-            
-     // captureDevice.Dispose();
-      
+
+      // captureDevice.Dispose();
+
     }
-       
+
     //private void MeasureRGB()
     //{      
     //  System.Drawing.Color RGB = new System.Drawing.Color();
-               
+
     //  // fget avg give the avg color value of the image in its present ROI
-      
+
 
     //  //Avg_B = Convert.ToInt32(a.Blue);
     //  //Avg_G = Convert.ToInt32(a.Green);
@@ -284,8 +284,8 @@ namespace STColorPerception
 
 
     //  //RGB = Util.ColorSpaceConverter.ToGetRGB(Avg_R, Avg_G, Avg_B);
-      
-        
+
+
 
     //  ////to display the color in the rectangle 
     //  //Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
@@ -300,7 +300,7 @@ namespace STColorPerception
     //  //lbl_MUP.Content = colorMeasured.UP.ToString();
     //  //lbl_MVP.Content = colorMeasured.VP.ToString();
 
-           
+
     //}
 
     private void DisplayMeasuredValues()
@@ -317,11 +317,11 @@ namespace STColorPerception
         ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorToShow.UP, VP = colorToShow.VP },
         ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
       });
-      
-    
+
+
     }
 
-  
+
     public event PropertyChangedEventHandler PropertyChanged;
     private void OnPropertyChanged(String name)
     {
