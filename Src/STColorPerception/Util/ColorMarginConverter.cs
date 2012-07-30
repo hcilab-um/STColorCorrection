@@ -9,8 +9,8 @@ namespace STColorPerception.Util
 {
   public class ColorMarginConverter : IMultiValueConverter
   {
-    private const double IMAGE_SIDE = 2048;
-    private const double ZERO_XY = 102;
+    private const double IMAGE_SIDE = 1945;//2048;
+    private const double ZERO_XY = 103;
     private const double IMAGE_GRAPH_SIDE = IMAGE_SIDE - 2 * ZERO_XY;
 
     public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)

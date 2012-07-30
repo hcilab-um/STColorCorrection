@@ -66,10 +66,10 @@
              ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-          <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent">
+          <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent" >
             <Grid.RenderTransform>
               <TransformGroup>
-                <TranslateTransform X="{Binding ElementName=cie1976, Path=ActualWidth, Converter={StaticResource ResourceKey=ftConverter}, ConverterParameter=1}" 
+                <TranslateTransform X="{Binding ElementName=cie1976, Path=ActualWidth-103, Converter={StaticResource ResourceKey=ftConverter}, ConverterParameter=1}" 
                                     Y="{Binding ElementName=cie1976, Path=ActualHeight, Converter={StaticResource ResourceKey=ftConverter}, ConverterParameter=-1}"/>
               </TransformGroup>
             </Grid.RenderTransform>
@@ -83,8 +83,8 @@
                      VerticalAlignment="Bottom" HorizontalAlignment="Left"
                      Visibility="{Binding Path=ColorToShow, Converter={StaticResource ResourceKey=nvConverter}}">
               <Ellipse.RenderTransform>
-                <TranslateTransform X="{Binding ElementName=sColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=-1}" 
-                                  Y="{Binding ElementName=sColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                <TranslateTransform X="{Binding ElementName=sColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                    Y="{Binding ElementName=sColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
               </Ellipse.RenderTransform>
               <Ellipse.Margin>
                 <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
@@ -94,12 +94,20 @@
                   <Binding ElementName="cie1976" Path="ActualHeight"/>
                 </MultiBinding>
               </Ellipse.Margin>
+              <Ellipse.ToolTip>
+                <ToolTip>
+                  <StackPanel Width="50">
+                    <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorToShow.UP}"/>
+                    <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorToShow.VP}"/>
+                  </StackPanel>
+                </ToolTip>
+              </Ellipse.ToolTip>
             </Ellipse>
             <Ellipse x:Name="cColor" Width="10" Height="10" Fill="Blue" Stroke="White" StrokeThickness="1.5"
                      VerticalAlignment="Bottom" HorizontalAlignment="Left"
                      Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}">
               <Ellipse.RenderTransform>
-                <TranslateTransform X="{Binding ElementName=cColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=-1}" 
+                <TranslateTransform X="{Binding ElementName=cColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
                                     Y="{Binding ElementName=cColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
               </Ellipse.RenderTransform>
               <Ellipse.Margin>
@@ -110,13 +118,32 @@
                   <Binding ElementName="cie1976" Path="ActualHeight"/>
                 </MultiBinding>
               </Ellipse.Margin>
+              <Ellipse.ToolTip>
+                <ToolTip>
+                  <StackPanel Width="50">
+                    <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorCaptured.UP}"/>
+                    <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorCaptured.VP}"/>
+                  </StackPanel>
+                </ToolTip>
+              </Ellipse.ToolTip>
+
             </Ellipse>
-            <Line Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Panel.ZIndex="-1" 
+            <!--<Line Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Panel.ZIndex="1"
+                  X1="{Binding ElementName=sColor, Path=ColorToShow.UP, ConverterParameter=Left}"
+                  Y1="{Binding ElementName=sColor, Path=ColorToShow.VP, ConverterParameter=Bottom}"
+                  X2="{Binding ElementName=sColor, Path=ColorCaptured.UP, ConverterParameter=Left}"
+                  Y2="{Binding ElementName=sColor, Path=ColorCaptured.UP, ConverterParameter=Bottom}"
+                                  
+              />-->
+         
+            <Line Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Panel.ZIndex="1" 
                   Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}"
                   X1="{Binding ElementName=cColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Left}" 
                   Y1="{Binding ElementName=cColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Bottom}"
                   X2="{Binding ElementName=sColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Left}" 
-                  Y2="{Binding ElementName=sColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Bottom}"/>
+                  Y2="{Binding ElementName=sColor, Path=Margin, Converter={StaticResource ResourceKey=meConverter}, ConverterParameter=Bottom}"
+             />
+            
           </Grid>
         </DataTemplate>
       </ListBox.ItemTemplate>

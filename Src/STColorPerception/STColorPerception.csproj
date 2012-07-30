@@ -45,9 +45,6 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.Util.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\SharedLibs\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

@@ -18,9 +18,10 @@ namespace STColorPerception.Util
       String side = parameter as String;
 
       if ("Left".Equals(side))
-        return margin.Left;
+        
+        return margin.Left+23;
       if ("Bottom".Equals(side))
-        return -1 * margin.Bottom;
+        return -1 *margin.Bottom;
       return 0;
     }
 

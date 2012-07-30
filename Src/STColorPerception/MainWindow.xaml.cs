@@ -146,7 +146,7 @@ namespace STColorPerception
 
 
       // initial xy plots to cross verify the graph's accuracy 
-      MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+   //   MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
       pairs.Add(new MeasurementPair()
       {
         ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },

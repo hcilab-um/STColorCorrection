@@ -9,8 +9,8 @@ namespace STColorPerception.Util
 {
   class FixTranslationConverter : IValueConverter
   {
-    private const double IMAGE_SIDE = 2048;
-    private const double ZERO_XY = 102;
+    private const double IMAGE_SIDE = 1945;//2048;
+    private const double ZERO_XY = 103;
 
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
