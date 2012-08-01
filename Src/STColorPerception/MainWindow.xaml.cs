@@ -31,6 +31,7 @@ namespace STColorPerception
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
+    private PerceptionLib.Color correctedcolor;
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
@@ -71,11 +72,21 @@ namespace STColorPerception
 
     public PerceptionLib.Color ColorDifference
     {
-      get { return colorDifference;}
+      get { return colorDifference; }
       set
       {
         colorDifference = value;
         OnPropertyChanged("ColorDifference");
+      }
+    }
+
+    public PerceptionLib.Color Correctedcolor
+    {
+      get { return correctedcolor; }
+      set
+      {
+        colorToShow = value;
+        OnPropertyChanged("Correctedcolor");
       }
     }
 
@@ -172,6 +183,7 @@ namespace STColorPerception
     {
       //Btn_Load_File.IsEnabled = false;
       btn_StartMeasurment.IsEnabled = false;
+      btn_CheckMeasurment.IsEnabled = false;
 
 
    //   // initial xy plots to cross verify the graph's accuracy 
@@ -231,6 +243,8 @@ namespace STColorPerception
     /// <param name="e"></param>
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
+      // to enable measurement check
+      btn_CheckMeasurment.IsEnabled = true;
 
       // temp int cariables to do the calculations for AVG rgb from the cropped pics
       int tempMr = 0, tempMg = 0, tempMb = 0;
@@ -263,6 +277,7 @@ namespace STColorPerception
       MB = (byte)(tempMb);
 
       DisplayMeasuredValues();
+      DifferenceCalculation();
 
     }
 
@@ -372,8 +387,13 @@ namespace STColorPerception
     }
 
     private void DifferenceCalculation()
-    {
-
+    {      
+      ColorDifference = new PerceptionLib.Color();
+      colorDifference.L = ColorToShow.L - ColorMeasured.L;
+      colorDifference.U = ColorToShow.U - ColorMeasured.U;
+      colorDifference.V = ColorToShow.V - ColorMeasured.V;
+      colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
+      colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
     }
 
     /// <summary>
@@ -384,6 +404,28 @@ namespace STColorPerception
     {
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(name));
+    }
+
+    private void Btn_CheckMeasurment_Click(object sender, RoutedEventArgs e)
+    {
+      correctedcolor = new PerceptionLib.Color();
+      correctedcolor.L = ColorDifference.L + ColorMeasured.L;
+      correctedcolor.U = ColorDifference.U + ColorMeasured.U;
+      correctedcolor.V = ColorDifference.V + ColorMeasured.V;
+      correctedcolor.UP = 0;
+      correctedcolor.VP = 0;
+
+
+      PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
+
+      rgb = PerceptionLib.Color.ToRBG(correctedcolor);
+
+      if (txt_R.Text.ToString() == rgb.R.ToString() && txt_G.Text.ToString() == rgb.G.ToString() && txt_B.Text.ToString() == rgb.B.ToString())
+        MessageBox.Show("matched R:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);
+      else
+        MessageBox.Show("didn matchR:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);
+            
+
     }
 
   }

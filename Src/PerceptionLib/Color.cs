@@ -258,7 +258,7 @@ namespace PerceptionLib
     /// </summary>
     /// <param name="a"></param>
     /// <returns></returns>
-    public RGBValue ToRBG(Color PassedLUV)
+    public static RGBValue ToRBG(Color PassedLUV)
     {
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
       RGBValue rgb = new RGBValue();
