@@ -30,6 +30,7 @@ namespace STColorPerception
     // color class object
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
+    private PerceptionLib.Color colorDifference;
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
@@ -65,6 +66,16 @@ namespace STColorPerception
       {
         colorMeasured = value;
         OnPropertyChanged("ColorMeasured");
+      }
+    }
+
+    public PerceptionLib.Color ColorDifference
+    {
+      get { return colorDifference;}
+      set
+      {
+        colorDifference = value;
+        OnPropertyChanged("ColorDifference");
       }
     }
 
@@ -216,6 +227,7 @@ namespace STColorPerception
     /// when start measure button is clicked
     /// </summary>
     /// <param name="sender"></param>
+    /// 
     /// <param name="e"></param>
     private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
     {
@@ -356,6 +368,11 @@ namespace STColorPerception
         ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
       });
 
+
+    }
+
+    private void DifferenceCalculation()
+    {
 
     }
 
