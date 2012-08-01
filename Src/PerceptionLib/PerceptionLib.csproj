@@ -48,6 +48,7 @@
     <Compile Include="CaptureEngine.cs" />
     <Compile Include="Capture\CameraSensor.cs" />
     <Compile Include="Capture\IColorSensor.cs" />
+    <Compile Include="CSV.cs" />
     <Compile Include="Hacks\CollectionChangedWrapperEventData.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="ColorCaptureEventArgs.cs" />

@@ -36,7 +36,7 @@
       </StackPanel>
       <StackPanel Orientation="Vertical" Margin="5,0,0,0" Width="680" Height="749">
         <Label>Color List</Label>
-        <DataGrid Name="dtgrid_corrDisplay" Width="676" Height="523">Corrdinates</DataGrid>
+        <DataGrid Name="dtgrid_corrDisplay" Width="676" Height="523"></DataGrid>
         <StackPanel Orientation="Horizontal" Width="635" Height="26" Margin="10,10,10,10 ">  
           <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
         </StackPanel>

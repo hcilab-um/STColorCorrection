@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Drawing;
+using System.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -38,6 +39,9 @@ namespace STColorPerception
     private Image<Bgr, Byte> captureImage;
     private Image<Bgr, Byte> croppedImage;
 
+    //Data Loader class obj
+    //DataLoader dataTable = new DataLoader();
+     
     // this is a color object of BGR value ,.. uit  gives avg blue green and red value from cropped image.
     Bgr avgRGB;
 
@@ -132,6 +136,8 @@ namespace STColorPerception
       InitializeComponent();
       captureDevice = new Capture();
 
+      PopulateGrid();
+
       ColorToShow = new PerceptionLib.Color();
       pairs = new MTObservableCollection<MeasurementPair>();
       cie1976C.DataContext = pairs;
@@ -139,39 +145,51 @@ namespace STColorPerception
       PropertyChanged += new PropertyChangedEventHandler(MainWindow_PropertyChanged);
     }
 
+    private void PopulateGrid()
+    {
+      DataTable table = CSV.GetDataTableFromCSV(@"C:\See-through Project\github\STColorCorrection\Src\STColorPerception\bin\color.txt");
+      if (table.Columns.Count == 0)
+        MessageBox.Show("Error!");
+      else
+        dtgrid_corrDisplay.ItemsSource = table.DefaultView;
+      dtgrid_corrDisplay.AutoGenerateColumns = true;
+      
+    }
+
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
       //Btn_Load_File.IsEnabled = false;
       btn_StartMeasurment.IsEnabled = false;
 
 
-      // initial xy plots to cross verify the graph's accuracy 
-   //   MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
-      });
+   //   // initial xy plots to cross verify the graph's accuracy 
+   ////   MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+   //   pairs.Add(new MeasurementPair()
+   //   {
+   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
+   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
+   //   });
 
 
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
-      });
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
-      });
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
-      });
-      pairs.Add(new MeasurementPair());
-      pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
-      cie1976C.DataContext = pairs;
+   //   pairs.Add(new MeasurementPair()
+   //   {
+   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
+   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
+   //   });
+   //   pairs.Add(new MeasurementPair()
+   //   {
+   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
+   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
+   //   });
+   //   pairs.Add(new MeasurementPair()
+   //   {
+   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
+   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
+   //   });
+   //   pairs.Add(new MeasurementPair());
+   //   pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
+   //   cie1976C.DataContext = pairs;
     }
 
 
