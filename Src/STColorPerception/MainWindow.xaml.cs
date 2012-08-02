@@ -169,7 +169,7 @@ namespace STColorPerception
 
     private void PopulateGrid()
     {
-      DataTable table = CSV.GetDataTableFromCSV(@"C:\See-through Project\github\STColorCorrection\Src\STColorPerception\bin\color.txt");
+        DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
       if (table.Columns.Count == 0)
         MessageBox.Show("Error!");
       else
@@ -408,17 +408,17 @@ namespace STColorPerception
 
     private void Btn_CheckMeasurment_Click(object sender, RoutedEventArgs e)
     {
-      //correctedcolor = new PerceptionLib.Color();
-      //correctedcolor.L = ColorDifference.L + ColorMeasured.L;
-      //correctedcolor.U = ColorDifference.U + ColorMeasured.U;
-      //correctedcolor.V = ColorDifference.V + ColorMeasured.V;
-      //correctedcolor.UP = 0;
-      //correctedcolor.VP = 0;
+        correctedcolor = new PerceptionLib.Color();
+        correctedcolor.L = ColorDifference.L + ColorMeasured.L;
+        correctedcolor.U = ColorDifference.U + ColorMeasured.U;
+        correctedcolor.V = ColorDifference.V + ColorMeasured.V;
+        correctedcolor.UP = 0;
+        correctedcolor.VP = 0;
 
 
       PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
 
-      rgb = PerceptionLib.Color.ToRBG(ColorToShow);
+      rgb = PerceptionLib.Color.ToRBG(correctedcolor);
 
       if (txt_R.Text.ToString() == rgb.R.ToString() && txt_G.Text.ToString() == rgb.G.ToString() && txt_B.Text.ToString() == rgb.B.ToString())
         MessageBox.Show("matched R:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);
