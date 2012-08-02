@@ -183,7 +183,7 @@ namespace STColorPerception
     {
       //Btn_Load_File.IsEnabled = false;
       btn_StartMeasurment.IsEnabled = false;
-      btn_CheckMeasurment.IsEnabled = false;
+     // btn_CheckMeasurment.IsEnabled = false;
 
 
    //   // initial xy plots to cross verify the graph's accuracy 
@@ -389,9 +389,9 @@ namespace STColorPerception
     private void DifferenceCalculation()
     {      
       ColorDifference = new PerceptionLib.Color();
-      colorDifference.L = ColorToShow.L - ColorMeasured.L;
-      colorDifference.U = ColorToShow.U - ColorMeasured.U;
-      colorDifference.V = ColorToShow.V - ColorMeasured.V;
+      colorDifference.L = ColorToShow.L -ColorMeasured.L;
+      colorDifference.U = ColorToShow.U -ColorMeasured.U;
+      colorDifference.V = ColorToShow.V -ColorMeasured.V;
       colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
       colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
     }
@@ -408,17 +408,17 @@ namespace STColorPerception
 
     private void Btn_CheckMeasurment_Click(object sender, RoutedEventArgs e)
     {
-      correctedcolor = new PerceptionLib.Color();
-      correctedcolor.L = ColorDifference.L + ColorMeasured.L;
-      correctedcolor.U = ColorDifference.U + ColorMeasured.U;
-      correctedcolor.V = ColorDifference.V + ColorMeasured.V;
-      correctedcolor.UP = 0;
-      correctedcolor.VP = 0;
+      //correctedcolor = new PerceptionLib.Color();
+      //correctedcolor.L = ColorDifference.L + ColorMeasured.L;
+      //correctedcolor.U = ColorDifference.U + ColorMeasured.U;
+      //correctedcolor.V = ColorDifference.V + ColorMeasured.V;
+      //correctedcolor.UP = 0;
+      //correctedcolor.VP = 0;
 
 
       PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
 
-      rgb = PerceptionLib.Color.ToRBG(correctedcolor);
+      rgb = PerceptionLib.Color.ToRBG(ColorToShow);
 
       if (txt_R.Text.ToString() == rgb.R.ToString() && txt_G.Text.ToString() == rgb.G.ToString() && txt_B.Text.ToString() == rgb.B.ToString())
         MessageBox.Show("matched R:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);

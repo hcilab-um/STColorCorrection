@@ -253,6 +253,12 @@ namespace PerceptionLib
     }
 
 
+
+
+
+
+
+
     /// <summary>
     /// Function to go from LUV to RGB
     /// </summary>
@@ -263,10 +269,21 @@ namespace PerceptionLib
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
       RGBValue rgb = new RGBValue();
 
-      rgb.R = (byte)(xyz.X * 3.2404542 + (xyz.Y * (-0.9692660)) + xyz.Z * 0.0556434);
-      rgb.G = (byte)((xyz.X * (-1.5371385)) + xyz.Y * 1.8760108 + (xyz.Z * -0.2040259));
-      rgb.B = (byte)((xyz.X * (-0.4985314)) + xyz.Y * 0.0415560 + xyz.Z * 1.0572252);
-      
+      double[] Clinear = new double[3];
+     
+      Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
+      Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 - xyz.Z * 0.0415560; // green
+      Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
+
+      //gamma companding
+      for (int i = 0; i < 3; i++)
+      {
+        Clinear[i] = (Clinear[i] <= 0.0031308) ? 12.92 * Clinear[i] : (1.055) * Math.Pow(Clinear[i], (1.0 / 2.4)) - 0.055;
+      }
+          
+      rgb.R = (byte)(Clinear[0] * 255.0);
+      rgb.G = (byte)(Clinear[1] * 255.0);
+      rgb.B = (byte)(Clinear[2] * 255.0);
       return rgb; 
     }
     
@@ -281,15 +298,19 @@ namespace PerceptionLib
 
       y = GetY(PassedLUV.L);
 
-      a = (1 / 3) * ((52 * PassedLUV.L) / (PassedLUV.U + (13 * PassedLUV.L * PassedLUV.UR)) - 1);
-      b = -5 * y;
-      c = -1 / 3;
-      d = y * ((39 * PassedLUV.L) / (PassedLUV.V + (13 * PassedLUV.L * PassedLUV.VR)));
+      a = (1.0 / 3.0) * ((52.0 * PassedLUV.L) / (PassedLUV.U + (13.0 * PassedLUV.L * PassedLUV.UR)) - 1.0);
+      b = -5.0 * y;
+      c =  -1.0 / 3.0;
+      d = y * (((39.0 * PassedLUV.L) / (PassedLUV.V + (13.0 * PassedLUV.L * PassedLUV.VR)))-5.0);
 
       x = (d - b) / (a - c);
+      if (Double.IsNaN(x)) { x = 0.0; }
+     
       z = (x * a) + b;
+      if (Double.IsNaN(z)) { z = 0.0; }
+    
       CIEXYZ xyz = new CIEXYZ(x,y,z);
-                 
+             
       return xyz ;
     }
 
