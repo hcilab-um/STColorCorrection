@@ -418,11 +418,9 @@ namespace STColorPerception
 
       PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
 
-<<<<<<< HEAD
+
       rgb = PerceptionLib.Color.ToRBG(Correctedcolor);
-=======
-      rgb = PerceptionLib.Color.ToRBG(correctedcolor);
->>>>>>> e15c5f3e13d431360e42317787b6471bfca9b627
+
 
       if (txt_R.Text.ToString() == rgb.R.ToString() && txt_G.Text.ToString() == rgb.G.ToString() && txt_B.Text.ToString() == rgb.B.ToString())
         MessageBox.Show("matched R:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);

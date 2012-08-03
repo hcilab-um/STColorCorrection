@@ -243,21 +243,12 @@ namespace PerceptionLib
       double bLinear = (double)cRGB.B / 255.0;
 
       // convert to a sRGB form
-<<<<<<< HEAD
+
       double r =  Math.Pow((rLinear ), 2.2) ;
       double g =  Math.Pow((gLinear ), 2.2) ;
       double b = Math.Pow((bLinear ), 2.2) ;
-=======
 
-        //double r = (rLinear > 0.04045) ? Math.Pow((rLinear + 0.055) / (1 + 0.055), 2.2) : (rLinear / 12.92);
-        //double g = (gLinear > 0.04045) ? Math.Pow((gLinear + 0.055) / (1 + 0.055), 2.2) : (gLinear / 12.92);
-        //double b = (bLinear > 0.04045) ? Math.Pow((bLinear + 0.055) / (1 + 0.055), 2.2) : (bLinear / 12.92);
 
-      double r = Math.Pow(rLinear, 2.2) ;
-      double g = Math.Pow(gLinear, 2.2);
-      double b = Math.Pow(bLinear, 2.2);
-
->>>>>>> e15c5f3e13d431360e42317787b6471bfca9b627
 
       return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
                          (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
@@ -273,7 +264,7 @@ namespace PerceptionLib
     {
         int tempr,tempg,tempb;
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
-      int rtemp, gtemp, btemp;
+      
 
       RGBValue rgb = new RGBValue();
 
@@ -286,7 +277,7 @@ namespace PerceptionLib
       //gamma companding
       for (int i = 0; i < 3; i++)
       {
-<<<<<<< HEAD
+
         Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
       }          
         
@@ -298,26 +289,6 @@ namespace PerceptionLib
       rgb.R = (byte)tempr;
       rgb.G = (byte)tempg;
       rgb.B = (byte)tempb;
-=======
-       // Clinear[i] = (Clinear[i] <= 0.0031308) ? 12.92 * Clinear[i] : (1.055) * Math.Pow(Clinear[i], (1.0 / 2.4)) - 0.055;
-          Clinear[i] =  Math.Pow(Clinear[i], (1.0 / 2.2));
-          // negociates infinity
-          if (Double.IsNaN(Clinear[i]))
-          {
-              Clinear[i] = 0.0;
-          }
-
-      }
-
-      // round off the decimal (.99 like) value into whole numbers 
-       rtemp = (int)(Math.Round(Clinear[0] * 255.0));
-       gtemp = (int)(Math.Round(Clinear[1] * 255.0));
-       btemp = (int)(Math.Round(Clinear[2] * 255.0));
-
-       rgb.R = (byte)rtemp;
-       rgb.G = (byte)gtemp;
-       rgb.B = (byte)btemp;
->>>>>>> e15c5f3e13d431360e42317787b6471bfca9b627
       return rgb; 
     }
     
