@@ -243,9 +243,9 @@ namespace PerceptionLib
       double bLinear = (double)cRGB.B / 255.0;
 
       // convert to a sRGB form
-      double r = (rLinear > 0.04045) ? Math.Pow((rLinear + 0.055) / (1 + 0.055), 2.2) : (rLinear / 12.92);
-      double g = (gLinear > 0.04045) ? Math.Pow((gLinear + 0.055) / (1 + 0.055), 2.2) : (gLinear / 12.92);
-      double b = (bLinear > 0.04045) ? Math.Pow((bLinear + 0.055) / (1 + 0.055), 2.2) : (bLinear / 12.92);
+      double r =  Math.Pow((rLinear ), 2.2) ;
+      double g =  Math.Pow((gLinear ), 2.2) ;
+      double b = Math.Pow((bLinear ), 2.2) ;
 
       return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
                          (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
@@ -266,24 +266,30 @@ namespace PerceptionLib
     /// <returns></returns>
     public static RGBValue ToRBG(Color PassedLUV)
     {
+        int tempr,tempg,tempb;
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
       RGBValue rgb = new RGBValue();
 
       double[] Clinear = new double[3];
      
       Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
-      Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 - xyz.Z * 0.0415560; // green
+      Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
       Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
 
       //gamma companding
       for (int i = 0; i < 3; i++)
       {
-        Clinear[i] = (Clinear[i] <= 0.0031308) ? 12.92 * Clinear[i] : (1.055) * Math.Pow(Clinear[i], (1.0 / 2.4)) - 0.055;
-      }
-          
-      rgb.R = (byte)(Clinear[0] * 255.0);
-      rgb.G = (byte)(Clinear[1] * 255.0);
-      rgb.B = (byte)(Clinear[2] * 255.0);
+        Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
+      }          
+        
+        tempr=(int)Math.Round(Clinear[0] * 255.0);
+        tempg = (int)Math.Round(Clinear[1] * 255.0);
+        tempb = (int)Math.Round(Clinear[2] * 255.0);
+
+
+      rgb.R = (byte)tempr;
+      rgb.G = (byte)tempg;
+      rgb.B = (byte)tempb;
       return rgb; 
     }
     
