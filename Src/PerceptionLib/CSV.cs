@@ -54,9 +54,9 @@ namespace PerceptionLib
                         sw.Write(dr[i].ToString());
                         sw.Write(",");
                     }
-                    sw.Write(sw.NewLine);
+                  
                 }
-               
+                sw.Write(sw.NewLine);
 
             }
             sw.Close();
