@@ -40,6 +40,7 @@
         <StackPanel Orientation="Horizontal" Width="635" Height="26" Margin="10,10,10,10 ">  
           <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
           <Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>
+          <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
           <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>

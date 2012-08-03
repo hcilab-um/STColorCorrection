@@ -430,5 +430,21 @@ namespace STColorPerception
 
     }
 
+    private void Btn_ExportGrid_Click(object sender, RoutedEventArgs e)
+    {
+      
+        DataTable dt = new DataTable();
+      
+      
+        dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+        PerceptionLib.CSV.ToCSVFromDataTable(dt);
+        DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\GridData.csv");
+        if (table.Columns.Count == 0)
+            MessageBox.Show("Error!");
+        else
+            MessageBox.Show("Success!");
+    }
+
   }
 }
