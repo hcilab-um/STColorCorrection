@@ -237,27 +237,32 @@ namespace PerceptionLib
       //0.2126729  0.7151522  0.0721750
       //0.0193339  0.1191920  0.9503041
 
-      // to make rgb values linear red, green, blue values
+      //// to make rgb values linear red, green, blue values
       double rLinear = (double)cRGB.R / 255.0;
       double gLinear = (double)cRGB.G / 255.0;
       double bLinear = (double)cRGB.B / 255.0;
 
       // convert to a sRGB form
+<<<<<<< HEAD
       double r =  Math.Pow((rLinear ), 2.2) ;
       double g =  Math.Pow((gLinear ), 2.2) ;
       double b = Math.Pow((bLinear ), 2.2) ;
+=======
+
+        //double r = (rLinear > 0.04045) ? Math.Pow((rLinear + 0.055) / (1 + 0.055), 2.2) : (rLinear / 12.92);
+        //double g = (gLinear > 0.04045) ? Math.Pow((gLinear + 0.055) / (1 + 0.055), 2.2) : (gLinear / 12.92);
+        //double b = (bLinear > 0.04045) ? Math.Pow((bLinear + 0.055) / (1 + 0.055), 2.2) : (bLinear / 12.92);
+
+      double r = Math.Pow(rLinear, 2.2) ;
+      double g = Math.Pow(gLinear, 2.2);
+      double b = Math.Pow(bLinear, 2.2);
+
+>>>>>>> e15c5f3e13d431360e42317787b6471bfca9b627
 
       return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
                          (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
                          (r * 0.0193339 + g * 0.1191920 + b * 0.9503041));
     }
-
-
-
-
-
-
-
 
     /// <summary>
     /// Function to go from LUV to RGB
@@ -268,6 +273,8 @@ namespace PerceptionLib
     {
         int tempr,tempg,tempb;
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
+      int rtemp, gtemp, btemp;
+
       RGBValue rgb = new RGBValue();
 
       double[] Clinear = new double[3];
@@ -279,6 +286,7 @@ namespace PerceptionLib
       //gamma companding
       for (int i = 0; i < 3; i++)
       {
+<<<<<<< HEAD
         Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
       }          
         
@@ -290,6 +298,26 @@ namespace PerceptionLib
       rgb.R = (byte)tempr;
       rgb.G = (byte)tempg;
       rgb.B = (byte)tempb;
+=======
+       // Clinear[i] = (Clinear[i] <= 0.0031308) ? 12.92 * Clinear[i] : (1.055) * Math.Pow(Clinear[i], (1.0 / 2.4)) - 0.055;
+          Clinear[i] =  Math.Pow(Clinear[i], (1.0 / 2.2));
+          // negociates infinity
+          if (Double.IsNaN(Clinear[i]))
+          {
+              Clinear[i] = 0.0;
+          }
+
+      }
+
+      // round off the decimal (.99 like) value into whole numbers 
+       rtemp = (int)(Math.Round(Clinear[0] * 255.0));
+       gtemp = (int)(Math.Round(Clinear[1] * 255.0));
+       btemp = (int)(Math.Round(Clinear[2] * 255.0));
+
+       rgb.R = (byte)rtemp;
+       rgb.G = (byte)gtemp;
+       rgb.B = (byte)btemp;
+>>>>>>> e15c5f3e13d431360e42317787b6471bfca9b627
       return rgb; 
     }
     
@@ -300,19 +328,20 @@ namespace PerceptionLib
     /// <returns></returns>
     private static CIEXYZ LUVToXYZ(Color PassedLUV)
     {
+     // by the formula given the the web page http://www.brucelindbloom.com/index.html 
       double x,y,z,a, b, c, d;
 
       y = GetY(PassedLUV.L);
 
-      a = (1.0 / 3.0) * ((52.0 * PassedLUV.L) / (PassedLUV.U + (13.0 * PassedLUV.L * PassedLUV.UR)) - 1.0);
-      b = -5.0 * y;
-      c =  -1.0 / 3.0;
-      d = y * (((39.0 * PassedLUV.L) / (PassedLUV.V + (13.0 * PassedLUV.L * PassedLUV.VR)))-5.0);
+      a = (double)(1.0 / 3.0) * ((52.0 * PassedLUV.L) / (PassedLUV.U + (13.0 * PassedLUV.L * PassedLUV.UR)) - 1.0);
+      b = (double)-5.0 * y;
+      c = (double)-1.0 / 3.0;
+      d = (double)y * (((39.0 * PassedLUV.L) / (PassedLUV.V + (13.0 * PassedLUV.L * PassedLUV.VR))) - 5.0);
 
-      x = (d - b) / (a - c);
+      x = (double)(d - b) / (double)(a - c);
       if (Double.IsNaN(x)) { x = 0.0; }
-     
-      z = (x * a) + b;
+
+      z = (double)(x * a) + (double)b;
       if (Double.IsNaN(z)) { z = 0.0; }
     
       CIEXYZ xyz = new CIEXYZ(x,y,z);
@@ -323,7 +352,7 @@ namespace PerceptionLib
     // function to get y value
     private static double GetY(double l)
     {
-      return (l > (0.008856 * 903.3)) ? Math.Pow(((l + 16) / 116),3) : (l/903.3);
+      return (l > (0.008856 * 903.3)) ? Math.Pow(((l + 16.0) / 116.0),3.0) : (l/903.3);
     }
      
 
