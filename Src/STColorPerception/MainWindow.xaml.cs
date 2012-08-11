@@ -13,12 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using PerceptionLib.Hacks;
 using PerceptionLib;
 using Emgu.CV;
 using Emgu.Util;
 using Emgu.CV.Structure;
 using System.ComponentModel;
+using System.Threading;
 
 namespace STColorPerception
 {
@@ -174,7 +176,8 @@ namespace STColorPerception
         MessageBox.Show("Error!");
       else
         dtgrid_corrDisplay.ItemsSource = table.DefaultView;
-      dtgrid_corrDisplay.AutoGenerateColumns = true;
+     
+      dtgrid_corrDisplay.AutoGenerateColumns = true; 
       
     }
 
@@ -245,156 +248,12 @@ namespace STColorPerception
     {
       // to enable measurement check
       btn_CheckMeasurment.IsEnabled = true;
-
-      // temp int cariables to do the calculations for AVG rgb from the cropped pics
-      int tempMr = 0, tempMg = 0, tempMb = 0;
-      for (int i = 0; i < 6; i++)
-      {
-
-        GetImage();
-        CropImage();
-        if (i == 0)
-        {
-          tempMr = 0;
-          tempMg = 0;
-          tempMb = 0;
-
-        }
-
-        tempMr = (int)(tempMr + avgRGB.Red);
-        tempMg = (int)(tempMg + avgRGB.Green);
-        tempMb = (int)(tempMb + avgRGB.Blue);
-      }
-
-      // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
-      tempMr = tempMr / 5;
-      tempMg = tempMg / 5;
-      tempMb = tempMb / 5;
-
-      // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
-      MR = (byte)(tempMr);
-      MG = (byte)(tempMg);
-      MB = (byte)(tempMb);
-
-      DisplayMeasuredValues();
-      DifferenceCalculation();
+      startCapture();
+    
 
     }
 
-
-    /// <summary>
-    /// funtions to capture Image via web cam , Crop it to its center , and get avg RGB value of its center
-    /// </summary>
-
-    private void GetImage()
-    {
-      // make the camera wait 500 milli sec before it caprtures a img
-      System.Threading.Thread.Sleep(500);
-      
-      // caputure device obj
-      captureDevice = new Capture();
-      // query frame catures web cam image in EMGU CV
-      captureImage = captureDevice.QueryFrame();
-      croppedImage = captureImage.Copy();
-      
-      if (captureImage != null)
-      {
-
-        Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(captureImage);
-        // to dispose the query frame instance
-        captureDevice.QueryFrame().Dispose();
-
-      }
-    }
-
-    /// <summary>
-    /// function to crop the img to its center and get its avg RGB value
-    /// </summary>
-    private void CropImage()
-    {
-      int Center_x, Center_y;
-      Center_x = croppedImage.Width / 2;
-      Center_y = croppedImage.Height / 2;
-      avgRGB = new Bgr();
-
-      croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 100, 100);
-      Image_Croped.Source = Util.ToImageSourceConverter.ToBitmapSource(croppedImage);
-      avgRGB = croppedImage.GetAverage();
-
-      captureImage.Dispose();
-      croppedImage.Dispose();
-     //// captureDevice.Dispose();
-
-      //((IDisposable)captureDevice).Dispose();
-      //((IDisposable)croppedImage).Dispose();
-      ////((IDisposable)captureImage).Dispose();
-     }
-
-    //private void MeasureRGB()
-    //{      
-    //  System.Drawing.Color RGB = new System.Drawing.Color();
-
-    //  // fget avg give the avg color value of the image in its present ROI
-
-
-    //  //Avg_B = Convert.ToInt32(a.Blue);
-    //  //Avg_G = Convert.ToInt32(a.Green);
-    //  //Avg_R = Convert.ToInt32(a.Red);
-
-
-
-    //  //RGB = Util.ColorSpaceConverter.ToGetRGB(Avg_R, Avg_G, Avg_B);
-
-
-
-    //  ////to display the color in the rectangle 
-    //  //Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RGB.R, RGB.G, RGB.B));
-
-    //lbl_MR.Content = RGB.R.ToString();
-    //lbl_MG.Content = RGB.G.ToString();
-    //lbl_MB.Content = RGB.B.ToString();
-
-    //  //lbl_ML.Content = colorMeasured.L.ToString();
-    //  //lbl_MU.Content = colorMeasured.U.ToString();
-    //  //lbl_MV.Content = colorMeasured.V.ToString();
-    //  //lbl_MUP.Content = colorMeasured.UP.ToString();
-    //  //lbl_MVP.Content = colorMeasured.VP.ToString();
-
-
-    //}
-
-    /// <summary>
-    /// to display all measyre color's values 
-    /// </summary>
-
-    private void DisplayMeasuredValues()
-    {
-      ColorMeasured = Util.ColorSpaceConverter.ToGetLUV(MR, MG, MB);
-      //to display the color in the rectangle 
-
-      Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(MR, MG, MB));
-
-      
-      // to display the shift in the CIE 1976 graph
-      pairs.Clear();
-      pairs.Add(new MeasurementPair()
-      {
-        ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorToShow.UP, VP = colorToShow.VP },
-        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
-      });
-
-
-    }
-
-    private void DifferenceCalculation()
-    {      
-      ColorDifference = new PerceptionLib.Color();
-      colorDifference.L = ColorToShow.L -ColorMeasured.L;
-      colorDifference.U = ColorToShow.U -ColorMeasured.U;
-      colorDifference.V = ColorToShow.V -ColorMeasured.V;
-      colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
-      colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
-    }
+  
 
     /// <summary>
     /// to get the propert change name of the property which has changed
@@ -406,6 +265,7 @@ namespace STColorPerception
         PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
 
+  
     private void Btn_CheckMeasurment_Click(object sender, RoutedEventArgs e)
     {
         correctedcolor = new PerceptionLib.Color();
@@ -445,6 +305,207 @@ namespace STColorPerception
         else
             MessageBox.Show("Success!");
     }
+
+    private void Btn_UseGridData_Click(object sender, RoutedEventArgs e)
+    {
+        btn_StartMeasurment.IsEnabled = false;
+        txt_R.IsEnabled = false;
+        txt_G.IsEnabled = false;
+        txt_B.IsEnabled = false;
+        DataTable dt = new DataTable();
+        DataTable new_dt = new DataTable();
+
+        
+      
+        dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+        
+        //for (int i = 1; i < dt.Rows.Count; i++)
+        for (int i = 0; i < 4; i++)
+        {
+            mainW.R = Convert.ToByte(dt.Rows[i][0].ToString());
+            mainW.G = Convert.ToByte(dt.Rows[i][1].ToString());
+            mainW.B = Convert.ToByte(dt.Rows[i][2].ToString());
+
+            // converts rendered RGB to luv and displays the colour in to measure
+
+            //NoArgDelegate fetcher = new NoArgDelegate(
+            //        this.ColorCapturedUpdate);
+            //ColorCapturedUpdate();
+
+            //Dispatcher.BeginInvoke();
+
+            //does all the caputure and difference calculations
+            startCapture();
+
+            // assignes the data to a the datatable 
+            dt.Rows[i][3] = colorToShow.L.ToString();
+            dt.Rows[i][4] = colorToShow.U.ToString();
+            dt.Rows[i][5] = colorToShow.V.ToString();
+            dt.Rows[i][6] = colorToShow.UP.ToString();
+            dt.Rows[i][7] = colorToShow.VP.ToString();
+            dt.Rows[i][8] = ColorMeasured.L.ToString();
+            dt.Rows[i][9] = ColorMeasured.U.ToString();
+            dt.Rows[i][10] = ColorMeasured.V.ToString();
+            dt.Rows[i][11] = ColorMeasured.UP.ToString();
+            dt.Rows[i][12] = ColorMeasured.VP.ToString();
+            dt.Rows[i][13] = ColorDifference.L.ToString();
+            dt.Rows[i][14] = ColorDifference.U.ToString();
+            dt.Rows[i][15] = ColorDifference.V.ToString();
+
+           // System.Threading.Thread.Sleep(10000);
+        }
+        
+        // grid is populated with new datatable which has luv values
+        dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+        
+        // to show all the pairs in cie graph
+        pairs.Clear();
+
+        for (int i = 0; i < 4; i++)
+        {
+            pairs.Add(new MeasurementPair()
+            {
+                ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[i][6].ToString()), VP = Convert.ToDouble(dt.Rows[i][7].ToString()) },
+                ColorCaptured = new PerceptionLib.Color() { L = 0, UP =  Convert.ToDouble(dt.Rows[i][11].ToString()), VP =  Convert.ToDouble(dt.Rows[i][12].ToString()) }
+            });
+        }
+
+
+        //dtgrid_corrDisplay.ItemsSource=
+    }
+
+    private void ColorCapturedUpdate()
+    {
+        // to measure LUV from Color class
+        ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+
+        rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+    }
+
+
+
+    private void startCapture()
+    {
+        // temp int cariables to do the calculations for AVG rgb from the cropped pics
+        int tempMr = 0, tempMg = 0, tempMb = 0;
+        for (int i = 0; i < 6; i++)
+        {
+
+            GetImage();
+            CropImage();
+            if (i == 0)
+            {
+                tempMr = 0;
+                tempMg = 0;
+                tempMb = 0;
+
+            }
+
+            tempMr = (int)(tempMr + avgRGB.Red);
+            tempMg = (int)(tempMg + avgRGB.Green);
+            tempMb = (int)(tempMb + avgRGB.Blue);
+        }
+
+        // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
+        tempMr = tempMr / 5;
+        tempMg = tempMg / 5;
+        tempMb = tempMb / 5;
+
+        // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
+        MR = (byte)(tempMr);
+        MG = (byte)(tempMg);
+        MB = (byte)(tempMb);
+
+        DisplayMeasuredValues();
+        DifferenceCalculation();
+    }
+
+    /// <summary>
+    /// funtions to capture Image via web cam , Crop it to its center , and get avg RGB value of its center
+    /// </summary>
+
+    private void GetImage()
+    {
+        // make the camera wait 500 milli sec before it caprtures a img
+        System.Threading.Thread.Sleep(500);
+
+        // caputure device obj
+        captureDevice = new Capture();
+        // query frame catures web cam image in EMGU CV
+        captureImage = captureDevice.QueryFrame();
+        croppedImage = captureImage.Copy();
+
+        if (captureImage != null)
+        {
+
+            Image_Camera.Source = Util.ToImageSourceConverter.ToBitmapSource(captureImage);
+            // to dispose the query frame instance
+            captureDevice.QueryFrame().Dispose();
+
+        }
+    }
+
+    /// <summary>
+    /// function to crop the img to its center and get its avg RGB value
+    /// </summary>
+    private void CropImage()
+    {
+        int Center_x, Center_y;
+        Center_x = croppedImage.Width / 2;
+        Center_y = croppedImage.Height / 2;
+        avgRGB = new Bgr();
+
+        croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 100, 100);
+        Image_Croped.Source = Util.ToImageSourceConverter.ToBitmapSource(croppedImage);
+        avgRGB = croppedImage.GetAverage();
+
+        captureImage.Dispose();
+        croppedImage.Dispose();
+        //// captureDevice.Dispose();
+
+        //((IDisposable)captureDevice).Dispose();
+        //((IDisposable)croppedImage).Dispose();
+        ////((IDisposable)captureImage).Dispose();
+    }
+
+
+    /// <summary>
+    /// to display all measyre color's values 
+    /// </summary>
+
+    private void DisplayMeasuredValues()
+    {
+        ColorMeasured = Util.ColorSpaceConverter.ToGetLUV(MR, MG, MB);
+        //to display the color in the rectangle 
+
+        Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(MR, MG, MB));
+
+
+        // to display the shift in the CIE 1976 graph
+        //pairs.Clear();
+        //pairs.Add(new MeasurementPair()
+        //{
+        //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorToShow.UP, VP = colorToShow.VP },
+        //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
+        //});
+
+
+    }
+
+    private void DifferenceCalculation()
+    {
+        ColorDifference = new PerceptionLib.Color();
+        colorDifference.L = ColorToShow.L - ColorMeasured.L;
+        colorDifference.U = ColorToShow.U - ColorMeasured.U;
+        colorDifference.V = ColorToShow.V - ColorMeasured.V;
+        colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
+        colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
+    }
+
+   
+
+
 
   }
 }

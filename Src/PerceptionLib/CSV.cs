@@ -9,6 +9,9 @@ using System.IO;
 
 namespace PerceptionLib
 {
+    /// <summary>
+    /// this class gets the data in terms to and from CSV in terms of Data Table 
+    /// </summary>
     public class CSV
     {
         public static DataTable GetDataTableFromCSV(string strFileName)
@@ -57,7 +60,6 @@ namespace PerceptionLib
                   
                 }
                 sw.Write(sw.NewLine);
-
             }
             sw.Close();
         }
