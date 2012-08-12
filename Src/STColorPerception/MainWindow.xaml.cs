@@ -21,6 +21,8 @@ using Emgu.Util;
 using Emgu.CV.Structure;
 using System.ComponentModel;
 using System.Threading;
+using System.Windows.Forms;
+
 
 namespace STColorPerception
 {
@@ -173,7 +175,7 @@ namespace STColorPerception
     {
         DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
       if (table.Columns.Count == 0)
-        MessageBox.Show("Error!");
+       System.Windows.MessageBox.Show("Error!");
       else
         dtgrid_corrDisplay.ItemsSource = table.DefaultView;
      
@@ -283,9 +285,9 @@ namespace STColorPerception
 
 
       if (txt_R.Text.ToString() == rgb.R.ToString() && txt_G.Text.ToString() == rgb.G.ToString() && txt_B.Text.ToString() == rgb.B.ToString())
-        MessageBox.Show("matched R:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);
+          System.Windows.MessageBox.Show("matched R:" + rgb.R + "G:" + rgb.G + "B:" + rgb.B);
       else
-        MessageBox.Show("didn matchR:"+rgb.R+"G:"+rgb.G+"B:"+rgb.B);
+          System.Windows.MessageBox.Show("didn matchR:" + rgb.R + "G:" + rgb.G + "B:" + rgb.B);
             
 
     }
@@ -301,9 +303,9 @@ namespace STColorPerception
         PerceptionLib.CSV.ToCSVFromDataTable(dt);
         DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\GridData.csv");
         if (table.Columns.Count == 0)
-            MessageBox.Show("Error!");
+            System.Windows.MessageBox.Show("Error!");
         else
-            MessageBox.Show("Success!");
+            System.Windows.MessageBox.Show("Success!");
     }
 
     private void Btn_UseGridData_Click(object sender, RoutedEventArgs e)
@@ -314,13 +316,17 @@ namespace STColorPerception
         txt_B.IsEnabled = false;
         DataTable dt = new DataTable();
         DataTable new_dt = new DataTable();
+                  
+        dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+        //mainW.R = Convert.ToByte(dt.Rows[0][0].ToString());
+        //mainW.G = Convert.ToByte(dt.Rows[0][1].ToString());
+        //mainW.B = Convert.ToByte(dt.Rows[0][2].ToString());
+        //ColorCapturedUpdate();
+        //System.Windows.Forms.Application.DoEvents();
 
         
-      
-        dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-        
         //for (int i = 1; i < dt.Rows.Count; i++)
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < dt.Rows.Count-1; i++)
         {
             mainW.R = Convert.ToByte(dt.Rows[i][0].ToString());
             mainW.G = Convert.ToByte(dt.Rows[i][1].ToString());
@@ -330,12 +336,20 @@ namespace STColorPerception
 
             //NoArgDelegate fetcher = new NoArgDelegate(
             //        this.ColorCapturedUpdate);
-            //ColorCapturedUpdate();
+            
 
             //Dispatcher.BeginInvoke();
 
+            
+            if(i!=0)
+            System.Threading.Thread.Sleep(500);
+            ColorCapturedUpdate();
+            System.Windows.Forms.Application.DoEvents();
+
             //does all the caputure and difference calculations
+            //System.Threading.Thread.Sleep(500);
             startCapture();
+            //System.Windows.Forms.Application.DoEvents();
 
             // assignes the data to a the datatable 
             dt.Rows[i][3] = colorToShow.L.ToString();
@@ -361,7 +375,7 @@ namespace STColorPerception
         // to show all the pairs in cie graph
         pairs.Clear();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < dt.Rows.Count-1; i++)
         {
             pairs.Add(new MeasurementPair()
             {
