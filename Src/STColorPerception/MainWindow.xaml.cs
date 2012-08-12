@@ -365,7 +365,14 @@ namespace STColorPerception
             dt.Rows[i][13] = ColorDifference.L.ToString();
             dt.Rows[i][14] = ColorDifference.U.ToString();
             dt.Rows[i][15] = ColorDifference.V.ToString();
-
+            
+            pairs.Clear();
+            pairs.Add(new MeasurementPair()
+                {
+                    ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[i][6].ToString()), VP = Convert.ToDouble(dt.Rows[i][7].ToString()) },
+                    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[i][11].ToString()), VP = Convert.ToDouble(dt.Rows[i][12].ToString()) }
+                });
+            
            // System.Threading.Thread.Sleep(10000);
         }
         

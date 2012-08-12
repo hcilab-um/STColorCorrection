@@ -15,12 +15,12 @@
       <StackPanel Orientation="Vertical" Height="793">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
           <StackPanel Orientation="Vertical" Height="79">
-            <Label>Color To Show</Label>
+            <Label>Color Displayed</Label>
             <Rectangle Name="rec_shown" Width="50" Height="50" Fill="Blue" Stroke="White"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
           <StackPanel Orientation="Vertical" Height="77">
-            <Label>Color Captured</Label>
+            <Label>Last Color Capture</Label>
             <Rectangle Name="Rectangle_Captured" Width="50" Height="50" Fill="Red" Stroke="Black"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
