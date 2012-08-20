@@ -31,6 +31,7 @@ namespace STColorPerception
   /// </summary>
   public partial class MainWindow : Window, INotifyPropertyChanged
   {
+      
     // color class object
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
@@ -159,9 +160,11 @@ namespace STColorPerception
 
     public MainWindow()
     {
-      InitializeComponent();
-      captureDevice = new Capture();
 
+      InitializeComponent();
+       
+      captureDevice = new Capture();
+        
       PopulateGrid();
 
       ColorToShow = new PerceptionLib.Color();
@@ -372,6 +375,8 @@ namespace STColorPerception
                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[i][6].ToString()), VP = Convert.ToDouble(dt.Rows[i][7].ToString()) },
                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[i][11].ToString()), VP = Convert.ToDouble(dt.Rows[i][12].ToString()) }
                 });
+
+            dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
             
            // System.Threading.Thread.Sleep(10000);
         }
@@ -522,6 +527,12 @@ namespace STColorPerception
         colorDifference.V = ColorToShow.V - ColorMeasured.V;
         colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
         colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
+    }
+
+    private void dtgrid_corrDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        
+
     }
 
    
