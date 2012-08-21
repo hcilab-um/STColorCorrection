@@ -37,10 +37,16 @@ namespace STColorPerception
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
     private PerceptionLib.Color correctedcolor;
+    private PerceptionLib.Color bgcolour;
+    private PerceptionLib.Color mixedcolor;
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
-    private byte r, g, b, mr, mg, mb;
+      //  rbg is input rgb which is displayed
+      //  mr mg mb measured displyed colour
+      //  bgr bgg bgb measured background color 
+      //  mcr mcb mcg measured nacground colour
+    private byte r, g, b, mr, mg, mb,bgr,bgg,bgb,mcr,mcg,mcb;
 
     //EMGU CV objects
     private Image<Bgr, Byte> captureImage;
@@ -95,6 +101,31 @@ namespace STColorPerception
       }
     }
 
+    public PerceptionLib.Color BgColor
+    {
+        get { return bgcolour; }
+        set
+        {
+            bgcolour = value;
+            OnPropertyChanged("BgColor");
+        }
+    }
+
+    public PerceptionLib.Color MixedColor
+    {
+        get { return mixedcolor; }
+        set
+        {
+            mixedcolor = value;
+            OnPropertyChanged("MixedColor");
+        }
+    }
+
+    //  rbg is input rgb which is displayed
+    //  mr mg mb measured displyed colour
+    //  bgr bgg bgb measured background color 
+    //  mcr mcb mcg measured nacground colour
+
     //Displayed RGB
     public byte R
     {
@@ -124,6 +155,67 @@ namespace STColorPerception
         b = value;
         OnPropertyChanged("B");
       }
+    }
+   
+   // measured background   
+   public byte BgR
+    {
+        get { return bgr; }
+        set
+        {
+            bgr = value;
+            OnPropertyChanged("BgR");
+        }
+    }
+
+    public byte BgG
+    {
+        get { return bgg; }
+        set
+        {
+            bgg = value;
+            OnPropertyChanged("BgG");
+        }
+    }
+
+    public byte BgB
+    {
+        get { return bgb; }
+        set
+        {
+            bgb = value;
+            OnPropertyChanged("BgB");
+        }
+    }
+
+    public byte McR
+    {
+        get { return mcr; }
+        set
+        {
+            mcr = value;
+            OnPropertyChanged("McR");
+        }
+    }
+
+    public byte McG
+    {
+        get { return mcg; }
+        set
+        {
+            mcg = value;
+            OnPropertyChanged("McG");
+        }
+    }
+
+    public byte McB
+    {
+        get { return mcb; }
+        set
+        {
+            mcb = value;
+            OnPropertyChanged("McB");
+        }
     }
 
 
@@ -165,7 +257,7 @@ namespace STColorPerception
        
       captureDevice = new Capture();
         
-      PopulateGrid();
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
 
       ColorToShow = new PerceptionLib.Color();
       pairs = new MTObservableCollection<MeasurementPair>();
@@ -174,9 +266,10 @@ namespace STColorPerception
       PropertyChanged += new PropertyChangedEventHandler(MainWindow_PropertyChanged);
     }
 
-    private void PopulateGrid()
+    private void PopulateGrid(string fileName)
     {
-        DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
+        //DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
+        DataTable table = CSV.GetDataTableFromCSV(@fileName);
       if (table.Columns.Count == 0)
        System.Windows.MessageBox.Show("Error!");
       else
@@ -254,8 +347,6 @@ namespace STColorPerception
       // to enable measurement check
       btn_CheckMeasurment.IsEnabled = true;
       startCapture();
-    
-
     }
 
   
@@ -321,13 +412,7 @@ namespace STColorPerception
         DataTable new_dt = new DataTable();
                   
         dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-        //mainW.R = Convert.ToByte(dt.Rows[0][0].ToString());
-        //mainW.G = Convert.ToByte(dt.Rows[0][1].ToString());
-        //mainW.B = Convert.ToByte(dt.Rows[0][2].ToString());
-        //ColorCapturedUpdate();
-        //System.Windows.Forms.Application.DoEvents();
-
-        
+               
         //for (int i = 1; i < dt.Rows.Count; i++)
         for (int i = 0; i < dt.Rows.Count-1; i++)
         {
@@ -339,8 +424,6 @@ namespace STColorPerception
 
             //NoArgDelegate fetcher = new NoArgDelegate(
             //        this.ColorCapturedUpdate);
-            
-
             //Dispatcher.BeginInvoke();
 
             
@@ -395,8 +478,7 @@ namespace STColorPerception
                 ColorCaptured = new PerceptionLib.Color() { L = 0, UP =  Convert.ToDouble(dt.Rows[i][11].ToString()), VP =  Convert.ToDouble(dt.Rows[i][12].ToString()) }
             });
         }
-
-
+        
         //dtgrid_corrDisplay.ItemsSource=
     }
 
@@ -408,8 +490,6 @@ namespace STColorPerception
         rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
     }
-
-
 
     private void startCapture()
     {
@@ -515,8 +595,6 @@ namespace STColorPerception
         //    ColorToShow = new PerceptionLib.Color() { L = 0, UP = colorToShow.UP, VP = colorToShow.VP },
         //    ColorCaptured = new PerceptionLib.Color() { L = 0, UP = colorMeasured.UP, VP = colorMeasured.VP }
         //});
-
-
     }
 
     private void DifferenceCalculation()
@@ -535,9 +613,138 @@ namespace STColorPerception
 
     }
 
-   
+    private void Btn_MixedColour_Click(object sender, RoutedEventArgs e)
+    {
+        PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\ColorMixing.txt");
+        btn_StartMeasurment.IsEnabled = false;
+        txt_R.IsEnabled = false;
+        txt_G.IsEnabled = false;
+        txt_B.IsEnabled = false;
+        DataTable dt = new DataTable();
+       // DataTable new_dt = new DataTable();
+        DataRow newRow;
+        dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+        // to create a random number
+        Random rnd = new Random();
+        // to form byte number for bg and fg color
+        Byte[] b = new Byte[3];
+        Byte[] rgb = new Byte[3];
+
+        // this loop is too changfe the bg color
+        for (int i = 0; i < 5; i++)
+        {
+            // for the first set of vaule it tahes balck as the bg colour
+            if (i == 0)
+            {
+                BgR = 0;
+                BgG = 0;
+                BgB = 0;
+            }
+            // then it tahes randndom value for BG
+            else
+            {
+                rnd.NextBytes(b);
+                BgR = b[0];
+                BgG = b[1];
+                BgB = b[2];
+            }
+
+            for (int j = 0; j < 10; j++)
+            {
+                if (i == 0)
+                {
+                    rnd.NextBytes(rgb);
+
+                    R = rgb[0];
+                    G = rgb[1];
+                    B = rgb[2];
+                }
+                else
+                {
+                    mainW.R = Convert.ToByte(dt.Rows[j][0].ToString());
+                    mainW.G = Convert.ToByte(dt.Rows[j][1].ToString());
+                    mainW.B = Convert.ToByte(dt.Rows[j][2].ToString());
+                }
 
 
+                if (i != 0)
+                    System.Threading.Thread.Sleep(500);
+                ColorCaptureWithBG();
+                System.Windows.Forms.Application.DoEvents();
 
+                //does all the caputure and difference calculations
+                //System.Threading.Thread.Sleep(500);
+                startCaptureWithBG();
+
+
+                newRow = dt.NewRow();
+
+                newRow[0] = R.ToString();
+                newRow[1] = G.ToString();
+                newRow[2] = B.ToString();
+
+                newRow[19] = BgR.ToString();
+                newRow[20] = BgG.ToString();
+                newRow[21] = BgB.ToString();
+
+                dt.Rows.Add(newRow);
+
+                dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+
+            }
+        }
+    }
+        
+
+     private void ColorCaptureWithBG()
+    {
+        // to measure LUV from Color class
+        ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+
+        rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        rec_BgColor.Fill= new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
+    }
+
+     private void startCaptureWithBG()
+     {
+         // temp int cariables to do the calculations for AVG rgb from the cropped pics
+         int tempMr = 0, tempMg = 0, tempMb = 0;
+         for (int i = 0; i < 6; i++)
+         {
+
+             GetImage();
+             CropImage();
+             if (i == 0)
+             {
+                 tempMr = 0;
+                 tempMg = 0;
+                 tempMb = 0;
+
+             }
+
+             tempMr = (int)(tempMr + avgRGB.Red);
+             tempMg = (int)(tempMg + avgRGB.Green);
+             tempMb = (int)(tempMb + avgRGB.Blue);
+         }
+
+         // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
+         tempMr = tempMr / 5;
+         tempMg = tempMg / 5;
+         tempMb = tempMb / 5;
+
+         // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
+         MR = (byte)(tempMr);
+         MG = (byte)(tempMg);
+         MB = (byte)(tempMb);
+
+         DisplayMeasuredValues();
+         DifferenceCalculation();
+     }
   }
-}
+
+
+ }
+  
+

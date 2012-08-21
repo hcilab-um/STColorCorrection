@@ -76,9 +76,6 @@
     <Compile Include="Util\NullVisibilityConverter.cs" />
     <Compile Include="Util\ScaleCompensationConverter.cs" />
     <Compile Include="Util\ToImageSourceConverter.cs" />
-    <Compile Include="ColorWindow.xaml.cs">
-      <DependentUpon>ColorWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="BackgroundWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,10 +102,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ColorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
