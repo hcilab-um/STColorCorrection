@@ -4,7 +4,7 @@
         xmlns:perception="clr-namespace:STColorPerception"
         xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
         xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
-        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="820" Width="2000" Loaded="Window_Loaded">
+        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="1300" Width="6000" Loaded="Window_Loaded">
 
   <Grid>
     <Grid.RowDefinitions>
@@ -101,9 +101,11 @@
           </StackPanel>
         </StackPanel>
       </StackPanel>
-    
-      <Rectangle Name="rec_displayColor" Width="884" Height="777" Stroke="White"/>
-      </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="400,0,0,0">
+                <Rectangle Name="rec_displayColor" Width="2035" Height="1248" Stroke="Black" Margin="0,0,0,0"/>
+                <Rectangle Name="rec_digitalColor" Width="2490" Height="1248" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
+            </StackPanel>
+        </StackPanel>
     
     
 
