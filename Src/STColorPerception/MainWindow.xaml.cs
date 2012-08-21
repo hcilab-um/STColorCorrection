@@ -287,33 +287,34 @@ namespace STColorPerception
      // btn_CheckMeasurment.IsEnabled = false;
 
 
-   //   // initial xy plots to cross verify the graph's accuracy 
-   ////   MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
-   //   pairs.Add(new MeasurementPair()
-   //   {
-   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
-   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 }
-   //   });
+      // initial xy plots to cross verify the graph's accuracy 
+   //   MTObservableCollection<MeasurementPair> pairs = new MTObservableCollection<MeasurementPair>();
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.2 },
+        BgColor = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0 }
+      });
 
 
-   //   pairs.Add(new MeasurementPair()
-   //   {
-   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
-   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
-   //   });
-   //   pairs.Add(new MeasurementPair()
-   //   {
-   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
-   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
-   //   });
-   //   pairs.Add(new MeasurementPair()
-   //   {
-   //     ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
-   //     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
-   //   });
-   //   pairs.Add(new MeasurementPair());
-   //   pairs.Add(new MeasurementPair() { ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
-   //   cie1976C.DataContext = pairs;
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.1 }
+      });
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0, VP = 0.6 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.1, VP = 0.5 }
+      });
+      pairs.Add(new MeasurementPair()
+      {
+        ColorToShow = new PerceptionLib.Color() { L = 0, UP = 0.6, VP = 0.6 },
+        ColorCaptured = new PerceptionLib.Color() { L = 0, UP = 0.5, VP = 0.5 }
+      });
+      pairs.Add(new MeasurementPair());
+      pairs.Add(new MeasurementPair() { BgColor = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
+      cie1976C.DataContext = pairs;
     }
 
 
@@ -679,14 +680,90 @@ namespace STColorPerception
 
 
                 newRow = dt.NewRow();
+                if (i == 0)
+                {
+                    newRow[0] = R.ToString();
+                    newRow[1] = G.ToString();
+                    newRow[2] = B.ToString();
+                    newRow[3] = colorToShow.L.ToString();
+                    newRow[4] = colorToShow.U.ToString();
+                    newRow[5] = colorToShow.V.ToString();
+                    newRow[6] = colorToShow.UP.ToString();
+                    newRow[7] = colorToShow.VP.ToString();
+                    newRow[8] = ColorMeasured.L.ToString();
+                    newRow[9] = ColorMeasured.U.ToString();
+                    newRow[10] = ColorMeasured.V.ToString();
+                    newRow[11] = ColorMeasured.UP.ToString();
+                    newRow[12] = ColorMeasured.VP.ToString();
+                    newRow[13] = MR.ToString();
+                    newRow[14] = MG.ToString();
+                    newRow[15] = MB.ToString();
+                    newRow[16] = colorDifference.L.ToString();
+                    newRow[17] = colorDifference.U.ToString();
+                    newRow[18] = colorDifference.V.ToString();
+                    newRow[19] = BgR.ToString();
+                    newRow[20] = BgG.ToString();
+                    newRow[21] = BgB.ToString();
+                    newRow[22] = 0;
+                    newRow[23] = 0;
+                    newRow[24] = 0;
+                    newRow[25] = 0;
+                    newRow[26] = 0;
+                    newRow[27] = 0;
+                    newRow[28] = 0;
+                    newRow[29] = 0;
+                    newRow[30] = 0;
+                    newRow[31] = 0;
+                    newRow[32] = 0;
+                    newRow[33] = 0;
+                    newRow[34] = 0;
+                    newRow[35] = 0;
+                    newRow[36] = 0;
+                    newRow[37] = 0;
+                }
+                else 
+                {
 
-                newRow[0] = R.ToString();
-                newRow[1] = G.ToString();
-                newRow[2] = B.ToString();
+                    newRow[0] = R.ToString();
+                    newRow[1] = G.ToString();
+                    newRow[2] = B.ToString();
+                    newRow[3] = colorToShow.L.ToString();
+                    newRow[4] = colorToShow.U.ToString();
+                    newRow[5] = colorToShow.V.ToString();
+                    newRow[6] = colorToShow.UP.ToString();
+                    newRow[7] = colorToShow.VP.ToString();
+                    newRow[8] = 0;
+                    newRow[9] = 0;
+                    newRow[10] = 0;
+                    newRow[11] = 0;
+                    newRow[12] = 0;
+                    newRow[13] = 0;
+                    newRow[14] = 0;
+                    newRow[15] = 0;
+                    newRow[16] = colorDifference.L.ToString();
+                    newRow[17] = colorDifference.U.ToString();
+                    newRow[18] = colorDifference.V.ToString();
+                    newRow[19] = BgR.ToString();
+                    newRow[20] = BgG.ToString();
+                    newRow[21] = BgB.ToString();
+                    newRow[22] = 0;
+                    newRow[23] = 0;
+                    newRow[24] = 0;
+                    newRow[25] = 0;
+                    newRow[26] = 0;
+                    newRow[27] = 0;
+                    newRow[28] = 0;
+                    newRow[29] = 0;
+                    newRow[30] = ColorMeasured.L.ToString();
+                    newRow[31] = ColorMeasured.U.ToString();
+                    newRow[32] = ColorMeasured.V.ToString();
+                    newRow[33] = ColorMeasured.UP.ToString();
+                    newRow[34] = ColorMeasured.VP.ToString();
+                    newRow[35] = MR.ToString();
+                    newRow[36] = MG.ToString();
+                    newRow[37] = MB.ToString();
 
-                newRow[19] = BgR.ToString();
-                newRow[20] = BgG.ToString();
-                newRow[21] = BgB.ToString();
+                }
 
                 dt.Rows.Add(newRow);
 

@@ -102,10 +102,35 @@
                   </StackPanel>
                 </ToolTip>
               </Ellipse.ToolTip>
-            </Ellipse>
+                        </Ellipse>
+                    <Ellipse x:Name="bgColor" Width="10" Height="10" Fill="Black" Stroke="Black" StrokeThickness="1.5"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Visibility="{Binding Path=BgColor, Converter={StaticResource ResourceKey=nvConverter}}">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="{Binding ElementName=bgColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                Y="{Binding ElementName=bgColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                        </Ellipse.RenderTransform>
+                        <Ellipse.Margin>
+                            <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                                    <Binding Path="BgColor.UP" />
+                                    <Binding Path="BgColor.VP" />
+                                <Binding ElementName="cie1976" Path="ActualWidth"/>
+                                <Binding ElementName="cie1976" Path="ActualHeight"/>
+                            </MultiBinding>
+                        </Ellipse.Margin>
+                        <Ellipse.ToolTip>
+                            <ToolTip>
+                                <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=BgColor.UP}"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=BgColor.VP}"/>
+                                </StackPanel>
+                            </ToolTip>
+                        </Ellipse.ToolTip>
+                    </Ellipse>
+
             <Ellipse x:Name="cColor" Width="10" Height="10" Fill="Blue" Stroke="White" StrokeThickness="1.5"
-                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                     Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}">
+                VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}">
               <Ellipse.RenderTransform>
                 <TranslateTransform X="{Binding ElementName=cColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
                                     Y="{Binding ElementName=cColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
