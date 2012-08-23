@@ -36,9 +36,9 @@ namespace STColorPerception
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
-    //private PerceptionLib.Color correctedcolor;
-    //private PerceptionLib.Color bgcolour;
-    //private PerceptionLib.Color mixedcolor;
+    private PerceptionLib.Color correctedcolor;
+    private PerceptionLib.Color bgcolour;
+    private PerceptionLib.Color mixedcolor;
     private MTObservableCollection<MeasurementPair> pairs;
 
     //input values
@@ -92,35 +92,35 @@ namespace STColorPerception
       }
     }
 
-    //public PerceptionLib.Color Correctedcolor
-    //{
-    //  get { return correctedcolor; }
-    //  set
-    //  {
-    //    colorToShow = value;
-    //    OnPropertyChanged("Correctedcolor");
-    //  }
-    //}
+    public PerceptionLib.Color Correctedcolor
+    {
+        get { return correctedcolor; }
+        set
+        {
+            colorToShow = value;
+            OnPropertyChanged("Correctedcolor");
+        }
+    }
 
-    //public PerceptionLib.Color BgColor
-    //{
-    //    get { return bgcolour; }
-    //    set
-    //    {
-    //        bgcolour = value;
-    //        OnPropertyChanged("BgColor");
-    //    }
-    //}
+    public PerceptionLib.Color BgColor
+    {
+        get { return bgcolour; }
+        set
+        {
+            bgcolour = value;
+            OnPropertyChanged("BgColor");
+        }
+    }
 
-    //public PerceptionLib.Color MixedColor
-    //{
-    //    get { return mixedcolor; }
-    //    set
-    //    {
-    //        mixedcolor = value;
-    //        OnPropertyChanged("MixedColor");
-    //    }
-    //}
+    public PerceptionLib.Color MixedColor
+    {
+        get { return mixedcolor; }
+        set
+        {
+            mixedcolor = value;
+            OnPropertyChanged("MixedColor");
+        }
+    }
 
     //  rbg is input rgb which is displayed
     //  mr mg mb measured displyed colour
@@ -358,6 +358,11 @@ namespace STColorPerception
             rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
             rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         }
+        if ("BgR".Equals(e.PropertyName) || "BgG".Equals(e.PropertyName) || "BgB".Equals(e.PropertyName))
+        {
+
+            Rectangle_Bg.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
+        }
      if ("BgNo".Equals(e.PropertyName))
      {
          cmb_graph.Items.Clear();
@@ -366,11 +371,12 @@ namespace STColorPerception
          {
              if(i==0)
              cmb_graph.Items.Add("No_background");
-             else if(i< bgNo+1)
+             else if(i< bgNo)
              cmb_graph.Items.Add("Background_No:"+i);
-             else
+             else if (i < bgNo + 1)
              cmb_graph.Items.Add("White_Points");
-
+             else
+             cmb_graph.Items.Add("All_Data");
          }
      }
     }
@@ -386,6 +392,7 @@ namespace STColorPerception
         // to enable measurement check
         //btn_CheckMeasurment.IsEnabled = true;
         startCapture();
+        //dtgrid_corrDisplay.ClearValue();
     }
 
   
@@ -528,6 +535,7 @@ namespace STColorPerception
 
         rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        Rectangle_Bg.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
     }
 
     private void startCapture()
@@ -703,13 +711,13 @@ namespace STColorPerception
                 }
 
 
-                if (i != 0)
+                //if (i != 0)
                     System.Threading.Thread.Sleep(500);
                 ColorCaptureWithBG();
                 System.Windows.Forms.Application.DoEvents();
 
                 //does all the caputure and difference calculations
-                //System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(500);
                 startCapture();
 
 
@@ -738,7 +746,7 @@ namespace STColorPerception
                     newRow[19] = BgR.ToString();
                     newRow[20] = BgG.ToString();
                     newRow[21] = BgB.ToString();
-                    newRow[22] = 0;
+                    newRow[22] = 0;   
                     newRow[23] = 0;
                     newRow[24] = 0;
                     newRow[25] = 0;
@@ -807,6 +815,7 @@ namespace STColorPerception
                     newRow[36] = MG.ToString();
                     newRow[37] = MB.ToString();
 
+                    MixedColor = ColorMeasured;
                     pairs.Clear();
                     pairs.Add(new MeasurementPair()
                     {
@@ -816,8 +825,8 @@ namespace STColorPerception
                     });
 
                 }
-                             
-               
+
+                R = 0; G = 0; B = 0;
                 dt.Rows.Add(newRow);
 
                 dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
@@ -884,7 +893,7 @@ namespace STColorPerception
             System.Threading.Thread.Sleep(500);
             startCapture();
 
-
+            //just bg capture
             newRow = dt.NewRow();
             if (i < BgNo)
             {
@@ -929,11 +938,14 @@ namespace STColorPerception
                 newRow[37] = 0;
            
                 pairs.Clear();
+
+                BgColor = ColorMeasured;
                 pairs.Add(new MeasurementPair()
                 {//THE COLOUR DISPLAYED HERE ARE THE BG COLOUR CAPTURED
                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
                 });
             }
+            //white point capture
             else
             {
                 newRow[0] = R.ToString();
@@ -987,26 +999,34 @@ namespace STColorPerception
             R = 10;
             dt.Rows.Add(newRow);
 
-           dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+         dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
         
         }
 
+        //taking back the measured value of bg to all the data set
+        int totalRow = BgNo * FgNo;
         for (int i = 1; i < BgNo; i++)
         {
-            for (int j = 0; j < FgNo; j++)
+
+            for (int j = 0; j < fgNo; j++)
             {
-                dt.Rows[j][22] = dt.Rows[(BgNo * FgNo) + i][22].ToString();
-                dt.Rows[j][23] = dt.Rows[(BgNo * FgNo) + i][23].ToString();
-                dt.Rows[j][24] = dt.Rows[(BgNo * FgNo) + i][24].ToString();
-                dt.Rows[j][25] = dt.Rows[(BgNo * FgNo) + i][25].ToString();
-                dt.Rows[j][26] = dt.Rows[(BgNo * FgNo) + i][26].ToString();
-                dt.Rows[j][27] = dt.Rows[(BgNo * FgNo) + i][27].ToString();
-                dt.Rows[j][28] = dt.Rows[(BgNo * FgNo) + i][28].ToString();
-                dt.Rows[j][29] = dt.Rows[(BgNo * FgNo) + i][29].ToString();
+                int rowNo = (i * FgNo) + j;
+                // i am doing -1 cos the data set starts from 0 ,.. so in the first one it will still b e bg*fg but i value will be 0
+                dt.Rows[rowNo][22] = dt.Rows[(totalRow) + i-1][22].ToString();
+                dt.Rows[rowNo][23] = dt.Rows[(totalRow) + i-1][23].ToString();
+                dt.Rows[rowNo][24] = dt.Rows[(totalRow) + i - 1][24].ToString();
+                dt.Rows[rowNo][25] = dt.Rows[(totalRow) + i - 1][25].ToString();
+                dt.Rows[rowNo][26] = dt.Rows[(totalRow) + i - 1][26].ToString();
+                dt.Rows[rowNo][27] = dt.Rows[(totalRow) + i - 1][27].ToString();
+                dt.Rows[rowNo][28] = dt.Rows[(totalRow) + i - 1][28].ToString();
+                dt.Rows[rowNo][29] = dt.Rows[(totalRow) + i - 1][29].ToString();
+              
+
             }
         }
 
         dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+       
         dataTable = dt;
         cmb_graph.IsEnabled = true;
           
@@ -1040,12 +1060,71 @@ namespace STColorPerception
 
      private void cmb_graph_SelectionChanged(object sender, SelectionChangedEventArgs e)
      {
+         DataTable dt = new DataTable();
+         //dt=dataTable;
+         DataRow newRow;
+         newRow = dt.NewRow();
          int selectedItem = cmb_graph.SelectedIndex;
+         int totalRow = BgNo * FgNo;
 
-         
-         
+         if (selectedItem == 0)
+         {
+             pairs.Clear();
+             for (int i = 0; i < FgNo; i++)
+             {
+                 pairs.Add(new MeasurementPair()
+                 {
+                     // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 
+                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
+                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) }
+                 });
 
-         
+                 //newRow[i] = dataTable.Rows[i];
+              }
+             //dt.Rows.Add(newRow);
+             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
+                          
+          }
+
+         else if (selectedItem == BgNo )
+         {
+             pairs.Clear();
+             for (int i = totalRow + BgNo-1; i < (totalRow + BgNo + 3); i++)
+             {
+                 pairs.Add(new MeasurementPair()
+                 {
+                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) }
+                 });
+
+                 //newRow[i] = dataTable.Rows[i];
+             }
+             //dt.Rows.Add(newRow);
+             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
+
+         }
+         else
+         {
+             int startPoint=selectedItem*FgNo;
+             int endPoint =(selectedItem*FgNo)+(FgNo);
+             pairs.Clear();
+          
+             for (int i = selectedItem*FgNo ; i < endPoint; i++)
+             {
+
+                 pairs.Add(new MeasurementPair()
+                 {
+                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
+                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) },
+                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][28].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][29].ToString()) }
+                 });
+
+                 //newRow[i] = dataTable.Rows[i];
+             }
+
+         }
+
+                 
+                   
      }
 
     

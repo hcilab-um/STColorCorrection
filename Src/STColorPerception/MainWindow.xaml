@@ -4,7 +4,7 @@
         xmlns:perception="clr-namespace:STColorPerception"
         xmlns:data="clr-namespace:PerceptionLib;assembly=PerceptionLib"
         xmlns:hacks="clr-namespace:PerceptionLib.Hacks;assembly=PerceptionLib"
-        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="1300" Width="6000" Loaded="Window_Loaded">
+        Title="See-Through Color Perception - Experiment 1: Background Color Capture" Height="1300" Width="6150" Loaded="Window_Loaded">
 
   <Grid>
     <Grid.RowDefinitions>
@@ -19,12 +19,18 @@
             <Rectangle Name="rec_shown" Width="50" Height="50" Fill="Blue" Stroke="White"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
-          <StackPanel Orientation="Vertical" Height="77">
+                    <StackPanel Orientation="Vertical" Height="77">
+                        <Label>Current BG</Label>
+                        <Rectangle Name="Rectangle_Bg" Width="50" Height="50" Fill="Black" Stroke="Black"/>
+                        <Label>{L,u,v} - {RGB}</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Height="77">
             <Label>Last Color Capture</Label>
             <Rectangle Name="Rectangle_Captured" Width="50" Height="50" Fill="Red" Stroke="Black"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
-        </StackPanel>
+      
+                </StackPanel>
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="500" Width="494"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
         <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="392" Height="202">
@@ -90,31 +96,31 @@
           <Label Name="lbl_MVP" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorMeasured.VP}"/>
         </StackPanel>
           <StackPanel Orientation="Horizontal" Height="206">
-            <StackPanel Orientation="Vertical" Width="340" Height="204" Margin="0,0,0,0">
+            <StackPanel Orientation="Vertical" Width="340" Height="204" Margin="180,0,0,0">
             <Label Height="30">Background Color:</Label>
             <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">
                 <Label Name="lBgR" Width="20" Height="24" Margin="0,10,0,0">R:</Label>
-                <Label Name="lbl_BgR" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.L}"/>
+                            <Label Name="lbl_BgR" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.L}"/>
                 <Label Name="lBgG" Width="20" Height="24" Margin="0,10,0,0">G:</Label>
-                <Label Name="lbl_BgG" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.U}"/>
+                            <Label Name="lbl_BgG" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.U}"/>
                 <Label Name="lBgB" Width="20" Height="24" Margin="0,10,0,0">B:</Label>
-                <Label Name="lbl_BgB" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.V}"/>
+                            <Label Name="lbl_BgB" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.V}"/>
             </StackPanel>
                 
             <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">
                 <Label Name="BgL" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
-                <Label Name="lbl_BgL" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.L}"/>
+                            <Label Name="lbl_BgL" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.L}"/>
                 <Label Name="BgU" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
-                <Label Name="lbl_BgU" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.U}"/>
+                            <Label Name="lbl_BgU" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.U}"/>
                 <Label Name="BgV" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
-                <Label Name="lbl_BgV" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.V}"/>
+                            <Label Name="lbl_BgV" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.V}"/>
                 </StackPanel>
                
                 <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="0,0,10,10">
                 <Label Name="BgUP" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
-                <Label Name="lbl_BgUP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.UP}"/>
+                            <Label Name="lbl_BgUP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.UP}"/>
                 <Label Name="BgVP" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
-                <Label Name="lbl_BgVP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.VP}"/>
+                            <Label Name="lbl_BgVP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=BgColor.VP}"/>
             </StackPanel>
 
         </StackPanel>
@@ -122,27 +128,27 @@
             <Label Height="30">Mixed Color:</Label>
             <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">
                 <Label Name="MixedR" Width="20" Height="24" Margin="0,10,0,0">R:</Label>
-                <Label Name="lbl_MixedR" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.L}"/>
+                            <Label Name="lbl_MixedR" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.L}"/>
                 <Label Name="MixedG" Width="20" Height="24" Margin="0,10,0,0">G:</Label>
-                <Label Name="lbl_MixedG" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.U}"/>
+                            <Label Name="lbl_MixedG" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.U}"/>
                 <Label Name="MixedB" Width="20" Height="24" Margin="0,10,0,0">B:</Label>
-                <Label Name="lbl_MixedB" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.V}"/>
+                            <Label Name="lbl_MixedB" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.V}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">
                 <Label Name="MixedL" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
-                <Label Name="lbl_MixedL" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.L}"/>
+                            <Label Name="lbl_MixedL" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.L}"/>
                 <Label Name="MixedU" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
-                <Label Name="lbl_MixedU" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.U}"/>
+                            <Label Name="lbl_MixedU" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.U}"/>
                 <Label Name="MixedV" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
-                <Label Name="lbl_MixedV" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.V}"/>
+                            <Label Name="lbl_MixedV" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.V}"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="0,0,10,10">
+            <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">
                 <Label Name="MixedUP" Width="20" Height="24" Margin="0,10,0,0">U*:</Label>
-                <Label Name="lbl_MixedUP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.UP}"/>
+                            <Label Name="lbl_MixedUP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.UP}"/>
                 <Label Name="MixedVP" Width="20" Height="24" Margin="0,10,0,0">V*:</Label>
-                <Label Name="lbl_MixedVP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=ColorDifference.VP}"/>
+                            <Label Name="lbl_MixedVP" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MixedColor.VP}"/>
             </StackPanel>
 
         </StackPanel>
@@ -169,7 +175,7 @@
         
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
           <Rectangle Name="rec_displayColor" Width="2035" Height="1248" Stroke="Black" Margin="0,0,0,0"/>
-          <Rectangle Name="rec_BgColor" Width="2345" Height="1248" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
+          <Rectangle Name="rec_BgColor" Width="2540" Height="1248" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
       </StackPanel>
         </StackPanel>
     
