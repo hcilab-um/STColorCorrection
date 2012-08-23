@@ -277,7 +277,7 @@ namespace STColorPerception
 
       InitializeComponent();
        
-      captureDevice = new Capture();
+     // captureDevice = new Capture();
         
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
 
@@ -306,8 +306,8 @@ namespace STColorPerception
     {
       //Btn_Load_File.IsEnabled = false;
       //btn_StartMeasurment.IsEnabled = false;
-      
-     // btn_CheckMeasurment.IsEnabled = false;
+      // btn_CheckMeasurment.IsEnabled = false;
+        cmb_graph.IsEnabled = false;
 
 
       // initial xy plots to cross verify the graph's accuracy 
@@ -348,16 +348,31 @@ namespace STColorPerception
     /// <param name="e"></param>
     void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-     if ("R".Equals(e.PropertyName) || "G".Equals(e.PropertyName) || "B".Equals(e.PropertyName))
-      {
-        //btn_StartMeasurment.IsEnabled = true;
+        if ("R".Equals(e.PropertyName) || "G".Equals(e.PropertyName) || "B".Equals(e.PropertyName))
+        {
+            //btn_StartMeasurment.IsEnabled = true;
 
-        // to measure LUV from Color class
-        ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+            // to measure LUV from Color class
+            ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
 
-        rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
-        rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
-      }
+            rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+            rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        }
+     if ("BgNo".Equals(e.PropertyName))
+     {
+         cmb_graph.Items.Clear();
+
+         for (int i = 0; i <= bgNo+1; i++)
+         {
+             if(i==0)
+             cmb_graph.Items.Add("No_background");
+             else if(i< bgNo+1)
+             cmb_graph.Items.Add("Background_No:"+i);
+             else
+             cmb_graph.Items.Add("White_Points");
+
+         }
+     }
     }
     
     /// <summary>
@@ -366,12 +381,12 @@ namespace STColorPerception
     /// <param name="sender"></param>
     /// 
     /// <param name="e"></param>
-    //private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
-    //{
-    //  // to enable measurement check
-    //  btn_CheckMeasurment.IsEnabled = true;
-    //  startCapture();
-    //}
+    private void Btn_StartMeasurment_Click(object sender, RoutedEventArgs e)
+    {
+        // to enable measurement check
+        //btn_CheckMeasurment.IsEnabled = true;
+        startCapture();
+    }
 
   
 
@@ -592,7 +607,7 @@ namespace STColorPerception
 
         captureImage.Dispose();
         croppedImage.Dispose();
-        //// captureDevice.Dispose();
+        //captureDevice.Dispose();
 
         //((IDisposable)captureDevice).Dispose();
         //((IDisposable)croppedImage).Dispose();
@@ -631,12 +646,7 @@ namespace STColorPerception
         colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
     }
 
-    private void dtgrid_corrDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        
-
-    }
-
+ 
     private void Btn_MixedColour_Click(object sender, RoutedEventArgs e)
     {
         PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\ColorMixing.txt");
@@ -700,7 +710,7 @@ namespace STColorPerception
 
                 //does all the caputure and difference calculations
                 //System.Threading.Thread.Sleep(500);
-                startCaptureWithBG();
+                startCapture();
 
 
                 newRow = dt.NewRow();
@@ -806,16 +816,16 @@ namespace STColorPerception
                     });
 
                 }
-
+                             
                
-
                 dt.Rows.Add(newRow);
 
                 dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
 
             }
         }
-        // for caluclating just bg colour with  fg & bg white conditions so this for loop should be 3 more than loop for bg color change
+      
+        // for caluclating just bg colour,.. with  fg & bg white conditions so this for loop should be 3 more than loop for bg color change
         for (int i = 1; i < BgNo+3; i++)
         {
             if (i < BgNo)
@@ -865,14 +875,14 @@ namespace STColorPerception
             }
 
           
-            if (i != 0)
-                System.Threading.Thread.Sleep(500);
-            ColorCaptureWithBG();
+            //if (i != 0)
+            System.Threading.Thread.Sleep(500);
+            ColorCaptureJustBG();
             System.Windows.Forms.Application.DoEvents();
 
             //does all the caputure and difference calculations
-            //System.Threading.Thread.Sleep(500);
-            startCaptureWithBG();
+            System.Threading.Thread.Sleep(500);
+            startCapture();
 
 
             newRow = dt.NewRow();
@@ -917,6 +927,7 @@ namespace STColorPerception
                 newRow[35] = 0;
                 newRow[36] = 0;
                 newRow[37] = 0;
+           
                 pairs.Clear();
                 pairs.Add(new MeasurementPair()
                 {//THE COLOUR DISPLAYED HERE ARE THE BG COLOUR CAPTURED
@@ -969,16 +980,37 @@ namespace STColorPerception
                     // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 33 AND 34 ARE MIXED COLOURS
                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
                 });
+
+               
             }
 
+            R = 10;
             dt.Rows.Add(newRow);
 
-            dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+           dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
         
         }
 
+        for (int i = 1; i < BgNo; i++)
+        {
+            for (int j = 0; j < FgNo; j++)
+            {
+                dt.Rows[j][22] = dt.Rows[(BgNo * FgNo) + i][22].ToString();
+                dt.Rows[j][23] = dt.Rows[(BgNo * FgNo) + i][23].ToString();
+                dt.Rows[j][24] = dt.Rows[(BgNo * FgNo) + i][24].ToString();
+                dt.Rows[j][25] = dt.Rows[(BgNo * FgNo) + i][25].ToString();
+                dt.Rows[j][26] = dt.Rows[(BgNo * FgNo) + i][26].ToString();
+                dt.Rows[j][27] = dt.Rows[(BgNo * FgNo) + i][27].ToString();
+                dt.Rows[j][28] = dt.Rows[(BgNo * FgNo) + i][28].ToString();
+                dt.Rows[j][29] = dt.Rows[(BgNo * FgNo) + i][29].ToString();
+            }
+        }
+
+        dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
         dataTable = dt;
-      
+        cmb_graph.IsEnabled = true;
+          
+
     }
 
 
@@ -987,45 +1019,33 @@ namespace STColorPerception
         // to measure LUV from Color class
         ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
 
-        rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        //rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+
         rec_BgColor.Fill= new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
     }
 
-     private void startCaptureWithBG()
+    private void ColorCaptureJustBG()
+    {
+        // to measure LUV from Color class
+        //ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+
+        //rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+        rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
+
+        rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
+    }
+
+
+
+     private void cmb_graph_SelectionChanged(object sender, SelectionChangedEventArgs e)
      {
-         // temp int cariables to do the calculations for AVG rgb from the cropped pics
-         int tempMr = 0, tempMg = 0, tempMb = 0;
-         for (int i = 0; i < 6; i++)
-         {
+         int selectedItem = cmb_graph.SelectedIndex;
 
-             GetImage();
-             CropImage();
-             if (i == 0)
-             {
-                 tempMr = 0;
-                 tempMg = 0;
-                 tempMb = 0;
+         
+         
 
-             }
-
-             tempMr = (int)(tempMr + avgRGB.Red);
-             tempMg = (int)(tempMg + avgRGB.Green);
-             tempMb = (int)(tempMb + avgRGB.Blue);
-         }
-
-         // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
-         tempMr = tempMr / 5;
-         tempMg = tempMg / 5;
-         tempMb = tempMb / 5;
-
-         // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
-         MR = (byte)(tempMr);
-         MG = (byte)(tempMg);
-         MB = (byte)(tempMb);
-
-         DisplayMeasuredValues();
-         DifferenceCalculation();
+         
      }
 
     

@@ -36,9 +36,9 @@
       </StackPanel>
       <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1075" Height="1258">
         <Label>Color List</Label>
-        <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" SelectionChanged="dtgrid_corrDisplay_SelectionChanged"></DataGrid>
+        <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" ></DataGrid>
         <StackPanel Orientation="Horizontal" Width="934" Height="26" Margin="10,10,10,10 ">  
-          <!--<Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>-->
+          <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
         <!--<Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Use GridData</Button>-->
         <Label Name="lbl_BgNo" Width="100" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
@@ -47,7 +47,7 @@
         <TextBox Name="txt_FgNo" Width="43" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=FgNo}"/>
         <Button Width="151" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
         <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
-        <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG"/>
+        <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
           <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>
