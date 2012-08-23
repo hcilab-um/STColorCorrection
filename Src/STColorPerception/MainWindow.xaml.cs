@@ -1069,6 +1069,7 @@ namespace STColorPerception
 
          if (selectedItem == 0)
          {
+             LBL_GraphText.Content = "Red is the Colour to be shown by the display, Blue is what the camera caputerd";
              pairs.Clear();
              for (int i = 0; i < FgNo; i++)
              {
@@ -1088,6 +1089,7 @@ namespace STColorPerception
 
          else if (selectedItem == BgNo )
          {
+
              pairs.Clear();
              for (int i = totalRow + BgNo-1; i < (totalRow + BgNo + 3); i++)
              {
@@ -1104,6 +1106,7 @@ namespace STColorPerception
          }
          else
          {
+             LBL_GraphText.Content = "Red is displayed colour captured with noBG condition, Blue is what the camera caputerd with the BG and Black is the BG:"+selectedItem;
              int startPoint=selectedItem*FgNo;
              int endPoint =(selectedItem*FgNo)+(FgNo);
              pairs.Clear();
