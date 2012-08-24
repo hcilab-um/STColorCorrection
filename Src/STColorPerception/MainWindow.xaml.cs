@@ -391,7 +391,7 @@ namespace STColorPerception
     {
         // to enable measurement check
         //btn_CheckMeasurment.IsEnabled = true;
-        startCapture();
+        StartCapture();
         //dtgrid_corrDisplay.ClearValue();
     }
 
@@ -538,7 +538,7 @@ namespace STColorPerception
         Rectangle_Bg.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
     }
 
-    private void startCapture()
+    private void StartCapture()
     {
         // temp int cariables to do the calculations for AVG rgb from the cropped pics
         int tempMr = 0, tempMg = 0, tempMb = 0;
@@ -713,12 +713,12 @@ namespace STColorPerception
 
                 //if (i != 0)
                     System.Threading.Thread.Sleep(500);
-                ColorCaptureWithBG();
+                ColorUpdateOnScreenWithBG();
                 System.Windows.Forms.Application.DoEvents();
 
                 //does all the caputure and difference calculations
                 System.Threading.Thread.Sleep(500);
-                startCapture();
+                StartCapture();
 
 
                 newRow = dt.NewRow();
@@ -891,7 +891,7 @@ namespace STColorPerception
 
             //does all the caputure and difference calculations
             System.Threading.Thread.Sleep(500);
-            startCapture();
+            StartCapture();
 
             //just bg capture
             newRow = dt.NewRow();
@@ -1034,7 +1034,7 @@ namespace STColorPerception
     }
 
 
-    private void ColorCaptureWithBG()
+    private void ColorUpdateOnScreenWithBG()
     {
         // to measure LUV from Color class
         ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
