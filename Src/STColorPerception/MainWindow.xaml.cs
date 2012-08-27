@@ -22,7 +22,7 @@ using Emgu.CV.Structure;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
-using System.ComponentModel;
+
 
 
 
@@ -38,13 +38,13 @@ namespace STColorPerception
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
-    private PerceptionLib.Color correctedcolor;
+  
     private PerceptionLib.Color bgcolour;
     private PerceptionLib.Color mixedcolor;
     private MTObservableCollection<MeasurementPair> pairs;
 
-    private BackgroundWorker ColourcaputreWorker;
-    public delegate void ColorFromGrid(PerceptionLib.Color cM);
+   
+    
     
       //input values
       //  rbg is input rgb which is displayed
@@ -98,15 +98,7 @@ namespace STColorPerception
       }
     }
 
-    public PerceptionLib.Color Correctedcolor
-    {
-        get { return correctedcolor; }
-        set
-        {
-            colorToShow = value;
-            OnPropertyChanged("Correctedcolor");
-        }
-    }
+    
 
     public PerceptionLib.Color BgColor
     {
@@ -957,7 +949,7 @@ namespace STColorPerception
                     dt.Rows.Add(newRow);
 
                     Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
-                   
+                    Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
                 }
             }
@@ -1140,7 +1132,7 @@ namespace STColorPerception
             dt.Rows.Add(newRow);
 
             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
-
+            Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
         }
    
 
@@ -1168,7 +1160,7 @@ namespace STColorPerception
         }
 
         Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
-      
+        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
         dataTable = dt;
         });
         cmb_graph.IsEnabled = true;
