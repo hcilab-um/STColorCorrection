@@ -47,7 +47,7 @@
         <StackPanel Orientation="Horizontal" Width="934" Height="26" Margin="10,10,10,10 ">  
           <!--<Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>-->
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
-                    <!--<Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Standard Colors</Button>-->
+                    <Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Gamut calculation</Button>
                     <Button Width="104" Name="btn_StdColorData" Margin="10,0,0,0" Click="Btn_StdColorData_Click">Standard Colors</Button>
                     <Label Name="lbl_BgNo" Width="100" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
         <TextBox Name="txt_BgNo" Width="36" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=BgNo}"/>
@@ -178,7 +178,7 @@
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
         <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1078">
-        <Rectangle Name="rec_displayColor" Width="300" Height="300" VerticalAlignment="Top" Fill="White" Stroke="Black" Margin="0,250,0,0" />
+        <Rectangle Name="rec_displayColor" Width="566" Height="449" VerticalAlignment="Top" Fill="White" Stroke="Black" Margin="0,250,0,0" />
          </Border>
         <!--</Rectangle>-->
         <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
