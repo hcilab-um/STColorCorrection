@@ -38,6 +38,9 @@ namespace STColorPerception
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
+
+    private PerceptionLib.CIEXYZ colorToShowXYZ;
+    private PerceptionLib.CIEXYZ colorMeasuredXYZ;
   
     private PerceptionLib.Color bgcolour;
     private PerceptionLib.Color mixedcolor;
@@ -86,6 +89,26 @@ namespace STColorPerception
         colorMeasured = value;
         OnPropertyChanged("ColorMeasured");
       }
+    }
+
+    public PerceptionLib.CIEXYZ ColorToShowXYZ
+    {
+        get { return colorToShowXYZ; }
+        set
+        {
+            colorToShowXYZ = value;
+            OnPropertyChanged("ColorToShowXYZ");
+        }
+    }
+
+    public PerceptionLib.CIEXYZ ColorMeasuredXYZ
+    {
+        get { return colorMeasuredXYZ; }
+        set
+        {
+            colorMeasuredXYZ = value;
+            OnPropertyChanged("colorMeasuredXYZ");
+        }
     }
 
     public PerceptionLib.Color ColorDifference
@@ -280,6 +303,8 @@ namespace STColorPerception
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
 
       ColorToShow = new PerceptionLib.Color();
+      ColorToShowXYZ = new PerceptionLib.CIEXYZ(0,0,0);
+
       pairs = new MTObservableCollection<MeasurementPair>();
       cie1976C.DataContext = pairs;
 
@@ -396,6 +421,7 @@ namespace STColorPerception
         //btn_CheckMeasurment.IsEnabled = true;
         
         ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+        ColorToShowXYZ = Util.ColorSpaceConverter.ToGetXYZ(R, G, B);
 
         rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
@@ -471,6 +497,7 @@ namespace STColorPerception
     {
         // to measure LUV from Color class
         ColorToShow = Util.ColorSpaceConverter.ToGetLUV(R, G, B);
+        ColorToShowXYZ = Util.ColorSpaceConverter.ToGetXYZ(R, G, B);
 
         rec_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(R, G, B));
@@ -531,7 +558,7 @@ namespace STColorPerception
         //System.Windows.Threading.Dispatcher captureNow = mainW.Dispatcher;
         // temp int cariables to do the calculations for AVG rgb from the cropped pics
         int tempMr = 0, tempMg = 0, tempMb = 0;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 10; i++)
         {
 
             //Imagecaputre.DoWork += delegate(object s, DoWorkEventArgs args)
@@ -555,9 +582,9 @@ namespace STColorPerception
         }
 
         // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
-        tempMr = tempMr / 5;
-        tempMg = tempMg / 5;
-        tempMb = tempMb / 5;
+        tempMr = tempMr / 10;
+        tempMg = tempMg / 10;
+        tempMb = tempMb / 10;
 
         // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
         MR = (byte)(tempMr);
@@ -594,7 +621,7 @@ namespace STColorPerception
         avgRGB = new Bgr();
 
         //croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 100, 100);
-        croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 50, 50);
+        croppedImage.ROI = new System.Drawing.Rectangle(Center_x, Center_y, 5, 5);
         avgRGB = croppedImage.GetAverage();
 
        
@@ -662,6 +689,7 @@ namespace STColorPerception
     private void DisplayMeasuredValues()
     {
         ColorMeasured = Util.ColorSpaceConverter.ToGetLUV(MR, MG, MB);
+        ColorMeasuredXYZ = Util.ColorSpaceConverter.ToGetXYZ(MR, MG, MB);
         //to display the color in the rectangle 
 
         Rectangle_Captured.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(MR, MG, MB));
@@ -1696,7 +1724,7 @@ namespace STColorPerception
          {
 
              //for (int i = 1; i < dt.Rows.Count; i++)
-             for (int i = 0; i < dt.Rows.Count - 1; i++)
+             for (int i = 0; i < dt.Rows.Count ; i++)
              {
                  mainW.R = Convert.ToByte(dt.Rows[i][0].ToString());
                  mainW.G = Convert.ToByte(dt.Rows[i][1].ToString());
@@ -1733,6 +1761,30 @@ namespace STColorPerception
                  dt.Rows[i][13] = ColorDifference.L.ToString();
                  dt.Rows[i][14] = ColorDifference.U.ToString();
                  dt.Rows[i][15] = ColorDifference.V.ToString();
+                 
+                 ////
+
+                 dt.Rows[i][16] = colorToShow.LA.ToString();
+                 dt.Rows[i][17] = colorToShow.A.ToString();
+                 dt.Rows[i][18] = colorToShow.B.ToString();
+                 dt.Rows[i][19] = ColorMeasured.LA.ToString();
+                 dt.Rows[i][20] = ColorMeasured.A.ToString();
+                 dt.Rows[i][21] = ColorMeasured.B.ToString();
+                 
+                 //
+                 
+                 dt.Rows[i][22] = PerceptionLib.Color.ColorDistanceCal(colorToShow, ColorMeasured).ToString();
+                 //
+                 dt.Rows[i][23] = ColorToShowXYZ.X.ToString();
+                 dt.Rows[i][24] = ColorToShowXYZ.Y.ToString();
+                 dt.Rows[i][25] = ColorToShowXYZ.Z.ToString();
+                 dt.Rows[i][26] = ColorMeasuredXYZ.X.ToString();
+                 dt.Rows[i][27] = ColorMeasuredXYZ.Y.ToString();
+                 dt.Rows[i][28] = ColorMeasuredXYZ.Z.ToString();
+
+                 dt.Rows[i][29] = MR.ToString();
+                 dt.Rows[i][30] = MG.ToString();
+                 dt.Rows[i][31] = MB.ToString();
 
                  pairs.Clear();
                  pairs.Add(new MeasurementPair()
@@ -1756,7 +1808,7 @@ namespace STColorPerception
              // to show all the pairs in cie graph
              pairs.Clear();
 
-             for (int i = 0; i < dt.Rows.Count - 1; i++)
+             for (int i = 0; i < dt.Rows.Count ; i++)
              {
                  pairs.Add(new MeasurementPair()
                  {
@@ -1765,7 +1817,7 @@ namespace STColorPerception
                  });
              }
          });
-
+         btn_ExportGrid.IsEnabled = true;
 
         
 

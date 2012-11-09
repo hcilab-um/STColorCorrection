@@ -28,6 +28,14 @@ namespace STColorPerception.Util
       return colorObject;
     }
 
+    public static PerceptionLib.CIEXYZ ToGetXYZ(int r, int g, int b)
+    {
+        System.Drawing.Color mRGB = ToGetRGB(r, g, b);
+        PerceptionLib.CIEXYZ colorObject = PerceptionLib.Color.RGBToXYZ(mRGB);
+        return colorObject;
+    }
+
+   
    
 
 

@@ -5,11 +5,16 @@ using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 
+
+
 namespace PerceptionLib
 {
-  // class to get RBG 
+    
+    
+      // class to get RBG 
   public class RGBValue
   {
+      
     private byte r, g, b;
 
     public byte R
@@ -47,8 +52,10 @@ namespace PerceptionLib
         this.b = value;
       }
     }
-
+      // dynamic array to caluclate RGB values
+   
   }
+    
 
   /// <summary>
   /// to define CIE XYZ.
@@ -67,6 +74,8 @@ namespace PerceptionLib
     // the new D65 XYZ as provided by David and also cross verified with wikipedia
     public static readonly CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
 
+
+    
     private double x;
     private double y;
     private double z;
@@ -130,9 +139,10 @@ namespace PerceptionLib
   
   public class Color : INotifyPropertyChanged
   {
+       
 
     private double u, v, uR, vR;
-    private double l, uP, vP;
+    private double l, uP, vP,la,a,b;
 
     public double L
     {
@@ -142,6 +152,33 @@ namespace PerceptionLib
         l = value;
         OnPropertyChanged("L");
       }
+    }
+    public double LA
+    {
+        get { return la; }
+        set
+        {
+            la = value;
+            OnPropertyChanged("LA");
+        }
+    }
+    public double A
+    {
+        get { return a; }
+        set
+        {
+            a = value;
+            OnPropertyChanged("A");
+        }
+    }
+    public double B
+    {
+        get { return b; }
+        set
+        {
+            b = value;
+            OnPropertyChanged("B");
+        }
     }
 
     public double UP
@@ -203,11 +240,16 @@ namespace PerceptionLib
     }
 
     
-
+      /// <summary>
+      /// funtion to convert to luv
+      /// </summary>
+      /// <param name="cRGB"></param>
+      /// <returns></returns>
 
     public static Color ToLUV(System.Drawing.Color cRGB)
     {
       Color rColor = new Color();
+      Color rColorlab = new Color();
       CIEXYZ xyz = RGBToXYZ(cRGB);
 
       rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
@@ -220,15 +262,52 @@ namespace PerceptionLib
       rColor.L = Lxyz(yr);
       rColor.U = (13 * rColor.L) * (rColor.UP - rColor.UR);
       rColor.V = (13 * rColor.L) * (rColor.VP - rColor.VR);
+      rColorlab = ToLAB(cRGB);
+      rColor.LA = rColorlab.LA;
+      rColor.A = rColorlab.A;
+      rColor.B = rColorlab.B;
       return rColor;
     }
-    
     private static double Lxyz(double e)
     {
-      return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
+        return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
     }
 
-    private static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
+      /// <summary>
+      /// function to capture LAB from RGB
+      /// </summary>
+      /// <param name="cRGB"></param>
+      /// <returns></returns>
+   
+    public static Color ToLAB(System.Drawing.Color cRGB)
+    {
+        double Fx, Fy, Fz;
+        Color rColor = new Color();
+        CIEXYZ xyz = RGBToXYZ(cRGB);
+
+        double yr = xyz.Y / CIEXYZ.D65.Y;
+        double xr = xyz.X / CIEXYZ.D65.X;
+        double zr = xyz.Z / CIEXYZ.D65.Z;
+
+        Fx = FX(xr);
+        Fy = FX(yr);
+        Fz = FX(zr);
+
+        rColor.LA = Lxyz(yr);
+        rColor.A = 500 * (Fx - Fy);
+        rColor.B = 200 * (Fy - Fz);
+
+        return rColor;
+    }
+
+    private static double FX(double e)
+    {
+        return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e+16)/116));
+    }
+    
+
+    
+    public static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
     {
       // by the formula given the the web page http://www.brucelindbloom.com/index.html [XYZ]=[M][RGB]
       //In order to properly use this matrix, the RGB values must be linear and in the nominal range [0.0, 1.0].
@@ -324,6 +403,92 @@ namespace PerceptionLib
     private static double GetY(double l)
     {
       return (l > (0.008856 * 903.3)) ? Math.Pow(((l + 16.0) / 116.0),3.0) : (l/903.3);
+    }
+      
+      
+      
+      /// <summary>
+      /// function to find the Delta e the color difference
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+    public double DistanceCal1(RGBValue c1 ,RGBValue  c2)
+    {
+        // converting color RGB rep to suit previously written TOLUV function
+        System.Drawing.Color C1 = new System.Drawing.Color();
+        C1 = System.Drawing.Color.FromArgb((int)c1.R, (int)c1.G, (int)c1.B);
+        System.Drawing.Color C2 = new System.Drawing.Color();
+        C2 = System.Drawing.Color.FromArgb((int)c2.R, (int)c2.G, (int)c2.B);
+     
+        Color Color1 = new Color();
+        Color Color2 = new Color();
+        
+        //c1 & c2's LUV values
+        Color1 = ToLUV(C1);
+        Color2 = ToLUV(C2);
+        
+       double ΔEuv = Math.Pow((Math.Pow((Color1.L-Color2.L),2)+Math.Pow((Color1.U-Color2.U),2)+Math.Pow((Color1.V-Color2.V),2)),(1.0/2.0));
+       return ΔEuv;
+        //bool result;
+        //if (ΔEuv>10)
+        //    result=false;
+        //else
+        //    result=true;
+
+        //return result;
+    }
+   
+      
+    /// <summary>
+    /// function to cal ΔE
+    /// </summary>
+    /// <param name="Color1"></param>
+    /// <param name="Color2"></param>
+    /// <returns></returns>
+    public static double ColorDistanceCal(Color Color1, Color Color2)
+    {
+        double l, u, v,result;
+        l = Color1.L - Color2.L;
+        u = Color1.U - Color2.U;
+        v = Color1.V - Color2.V;
+        l = l * l;
+        u = u * u;
+        v = v * v;
+        result = l + u + v;
+
+        double Euv = Math.Pow(result, (1.0 / 2.0));
+       // double Euv = Math.Pow(Math.Pow((Color1.L - Color2.L), 2) + Math.Pow((Color1.U - Color2.U), 2) + Math.Pow((Color1.V - Color2.V), 2), 1 / 2);
+        return Euv;
+     }
+
+
+    public RGBValue gammut(RGBValue cRGB)
+    {
+        // color 1
+        RGBValue Color1 = new RGBValue();
+        //color2
+        RGBValue Color2 = new RGBValue();
+
+        Color1.R = 0;
+        Color1.G = 0;
+        Color1.B = 0;
+
+        List<RGBValue> PerceptuallyDiffRGBs = new List<RGBValue>();
+
+        PerceptuallyDiffRGBs.Add(Color1);
+        if (PerceptuallyDiffRGBs.Count>=1)
+        { 
+
+            Color2.R = (byte)(Color1.R+1);
+            Color2.G = Color1.G;
+            Color2.B = Color1.B;
+        }
+
+
+        
+
+        return null;
     }
      
 

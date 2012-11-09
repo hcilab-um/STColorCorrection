@@ -33,12 +33,12 @@
                 </StackPanel>
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="500" Width="494"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
-        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="538" Height="202">
+        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="538" Height="380">
         <Label Name="LBL_GraphText" Width="520" Height="44" Margin="0,0,0,0" ></Label>
         <Label Name="LBL_Camera" Width="90" Height="25" Margin="0,0,0,0" >Camera Image</Label>
           <Image Name="Image_Camera" Stretch="Fill" Width="157" Height="66" Margin="10,0,10,0" />
           <Label Name="LBL_Crop" Width="92" Height="25" Margin="0,0,0,0">Cropped Image</Label>
-          <Image Height="61" Name="Image_Croped" Stretch="Fill" Width="99" Margin="10,0,10,10" />
+          <Image Height="191" Name="Image_Croped" Stretch="Fill" Width="276" Margin="10,0,10,10" />
         </StackPanel>
       </StackPanel>
       <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1080" Height="1258">
@@ -178,7 +178,7 @@
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
         <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1078">
-        <Rectangle Name="rec_displayColor" Width="566" Height="449" VerticalAlignment="Top" Fill="White" Stroke="Black" Margin="0,250,0,0" />
+        <Rectangle Name="rec_displayColor" Width="798" Height="620" VerticalAlignment="Top" Fill="White" Stroke="Black" Margin="0,250,0,0" />
          </Border>
         <!--</Rectangle>-->
         <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
