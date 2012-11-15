@@ -370,11 +370,26 @@ namespace PerceptionLib
 
       // convert to a sRGB form
 
-      double r =  Math.Pow((rLinear ), 2.2) ;
-      double g =  Math.Pow((gLinear ), 2.2) ;
-      double b = Math.Pow((bLinear ), 2.2) ;
+      //double r =  Math.Pow((rLinear ), 2.2) ;
+      //double g =  Math.Pow((gLinear ), 2.2) ;
+      //double b = Math.Pow((bLinear ), 2.2) ;
+         double r,g,b;
+   
+        if ( rLinear > 0.04045 )
+               r =  Math.Pow(((rLinear+ 0.055 ) / 1.055 ) , 2.2) ;
+        else
+                r=rLinear / 12.92;
 
+        if (gLinear > 0.04045)
+            g = Math.Pow(((gLinear + 0.055) / 1.055), 2.2);
+        else
+            g = gLinear / 12.92;
 
+        if (bLinear > 0.04045)
+            b = Math.Pow(((bLinear + 0.055) / 1.055), 2.2);
+        else
+            b = bLinear / 12.92;      
+        
 
       return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
                          (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
@@ -420,33 +435,91 @@ namespace PerceptionLib
    
       public static RGBValue ToRBG(CIEXYZ xyz)
     {
-        int tempr, tempg, tempb;
+        double tempr, tempg, tempb;
         //CIEXYZ xyz = LUVToXYZ(PassedLUV);
 
 
         RGBValue rgb = new RGBValue();
 
         double[] Clinear = new double[3];
+        double[] linear = new double[3];
 
-        Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
-        Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
-        Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
+        Clinear[0] = (xyz.X) * 3.2404542 - (xyz.Y) * 1.5371385 - (xyz.Z) * 0.4985314; // red
+        Clinear[1] = -(xyz.X) * 0.9692660 + (xyz.Y) * 1.8760108 + (xyz.Z) * 0.0415560; // green
+        Clinear[2] = (xyz.X) * 0.0556434 - (xyz.Y) * 0.2040259 + (xyz.Z) * 1.0572252; // blue
 
-        //gamma companding
-        for (int i = 0; i < 3; i++)
+
+        //  if ( var_R > 0.0031308 ) var_R = 1.055 * ( var_R ^ ( 1 / 2.4 ) ) - 0.055
+        //else                     var_R = 12.92 * var_R
+        //if ( var_G > 0.0031308 ) var_G = 1.055 * ( var_G ^ ( 1 / 2.4 ) ) - 0.055
+        //else                     var_G = 12.92 * var_G
+        //if ( var_B > 0.0031308 ) var_B = 1.055 * ( var_B ^ ( 1 / 2.4 ) ) - 0.055
+        //else                     var_B = 12.92 * var_B
+
+
+
+        if (Clinear[0] > 0.0031308)
+            Clinear[0] = 1.055 * Math.Pow(Clinear[0], (1 / (2.2))) - 0.055;
+        else
+            Clinear[0] = 12.92 * Clinear[0];
+
+        if (Clinear[1] > 0.0031308)
+            Clinear[1] = 1.055 * Math.Pow(Clinear[1], (1 / (2.2))) - 0.055;
+        else
+            Clinear[1] = 12.92 * Clinear[1];
+        if (Clinear[2] > 0.0031308)
+            Clinear[2] = 1.055 * Math.Pow(Clinear[2], (1 / (2.2))) - 0.055;
+        else
+            Clinear[2] = 12.92 * Clinear[2];
+         
+
+        ////gamma companding
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    if (Clinear[i] <= 0.0031308)
+        //    {
+        //        linear[i] = Clinear[i] * 12.92;
+        //    }
+
+        //    else
+        //    {
+        //        linear[i] = (1.055 * Math.Pow(Clinear[i], (1.0 / 2.2))) - 0.055;
+        //        //linear[i] = ( Math.Pow((Clinear[i]), (1.0 / 2.2)));
+                
+        //    }
+        //}
+
+        tempr = (Math.Round(Clinear[0] * 255));
+        tempg = (Math.Round(Clinear[1] * 255));
+        tempb = (Math.Round(Clinear[2] * 255));
+
+        if (tempr > 255)
         {
-
-            Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
+            tempr = 255;
         }
-
-        tempr = (int)Math.Round(Clinear[0] * 255.0);
-        tempg = (int)Math.Round(Clinear[1] * 255.0);
-        tempb = (int)Math.Round(Clinear[2] * 255.0);
-
-
-        rgb.R = (byte)tempr;
-        rgb.G = (byte)tempg;
-        rgb.B = (byte)tempb;
+        if (tempg > 255)
+        {
+            tempg = 255;
+        }
+        if (tempb > 255)
+        {
+            tempb = 255;
+        }
+        if (tempr < 0)
+        {
+            tempr = 0;
+        }
+        if (tempg < 0)
+        {
+            tempg = 0;
+        }
+        if (tempb < 0)
+        {
+            tempb = 0;
+        }
+        rgb.R = (byte)(tempr);
+        rgb.G = (byte)(tempg);
+        rgb.B = (byte)(tempb);
         return rgb;
     }
     

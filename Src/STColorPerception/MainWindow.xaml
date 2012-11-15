@@ -33,17 +33,47 @@
                 </StackPanel>
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="500" Width="494"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
-        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="538" Height="380">
-        <Label Name="LBL_GraphText" Width="520" Height="44" Margin="0,0,0,0" ></Label>
+        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="538" Height="654">
+        <Label Name="LBL_GraphText" Width="520" Height="31" Margin="0,0,0,0" ></Label>
         <Label Name="LBL_Camera" Width="90" Height="25" Margin="0,0,0,0" >Camera Image</Label>
           <Image Name="Image_Camera" Stretch="Fill" Width="157" Height="66" Margin="10,0,10,0" />
           <Label Name="LBL_Crop" Width="92" Height="25" Margin="0,0,0,0">Cropped Image</Label>
-          <Image Height="191" Name="Image_Croped" Stretch="Fill" Width="276" Margin="10,0,10,10" />
+          <Image Height="80" Name="Image_Croped" Stretch="Fill" Width="276" Margin="10,0,10,10" />
+        
+        <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Height="125">
+        <StackPanel Orientation="Vertical" Height="79" Width="79">
+            <Label>Color Displayed</Label>
+            <Rectangle Name="rect_shown" Width="50" Height="50" Fill="White" Stroke="White"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical" Height="79">
+            <Label>Color Captured</Label>
+            <Rectangle Name="rect_Seen" Width="50" Height="50" Fill="White" Stroke="White"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Height="79">
+            <Label> Brad Color</Label>
+            <Rectangle Name="rect_Brad" Width="50" Height="50" Fill="White" Stroke="White"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Height="79" Width="72">
+            <Label>Von Color</Label>
+            <Rectangle Name="rect_Von" Width="48" Height="50" Fill="White" Stroke="White"/>
+        </StackPanel>
+        
+         <StackPanel Orientation="Vertical" Height="79" Width="72">
+            <Label>Scale Color</Label>
+            <Rectangle Name="rect_Scaling" Width="48" Height="50" Fill="White" Stroke="White"/>
+        </StackPanel>
+
+         
+           </StackPanel>
         </StackPanel>
       </StackPanel>
-      <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1080" Height="1258">
+            
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1080" Height="1258">
         <Label>Color List</Label>
-        <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" ></DataGrid>
+        <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" SelectionChanged="dtgrid_corrDisplay_SelectionChanged"></DataGrid>
         <StackPanel Orientation="Horizontal" Width="1059" Height="26" Margin="10,10,10,10 ">  
           <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
@@ -56,7 +86,8 @@
         <TextBox Name="txt_FgNo" Width="43" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=FgNo}"/>
         <Button Width="64" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
         <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
-        <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
+                    <Button Width="104" Name="btn_ImportGrid" Margin="10,0,0,0" Click="Btn_ImportGrid_Click">Import DataGrid</Button>
+                    <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
           <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>

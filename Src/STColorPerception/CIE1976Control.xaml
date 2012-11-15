@@ -97,6 +97,7 @@
               <Ellipse.ToolTip>
                 <ToolTip>
                   <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="CI"/>
                     <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorToShow.UP}"/>
                     <TextBlock FontWeight="Bold" Text="{Binding  Path=ColorToShow.VP}"/>
                   </StackPanel>
@@ -121,14 +122,90 @@
                         <Ellipse.ToolTip>
                             <ToolTip>
                                 <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="CBg"/>
                                         <TextBlock FontWeight="Bold" Text="{Binding  Path=BgColor.UP}"/>
                                         <TextBlock FontWeight="Bold" Text="{Binding  Path=BgColor.VP}"/>
                                 </StackPanel>
                             </ToolTip>
                         </Ellipse.ToolTip>
                     </Ellipse>
+                        <Ellipse x:Name="BradColor" Width="10" Height="10" Fill="Cyan" Stroke="Black" StrokeThickness="1.5"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Visibility="{Binding Path=BradColor, Converter={StaticResource ResourceKey=nvConverter}}">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform X="{Binding ElementName=Bradcolor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                Y="{Binding ElementName=BradColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Margin>
+                                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                                    <Binding Path="BradColor.UP" />
+                                    <Binding Path="BradColor.VP" />
+                                    <Binding ElementName="cie1976" Path="ActualWidth"/>
+                                    <Binding ElementName="cie1976" Path="ActualHeight"/>
+                                </MultiBinding>
+                            </Ellipse.Margin>
+                            <Ellipse.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="CBrd"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=BradColor.UP}"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=BradColor.VP}"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Ellipse.ToolTip>
+                        </Ellipse>
+                        <Ellipse x:Name="VonColor" Width="10" Height="10" Fill="Pink" Stroke="Black" StrokeThickness="1.5"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Visibility="{Binding Path=VonColor, Converter={StaticResource ResourceKey=nvConverter}}">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform X="{Binding ElementName=VonColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                Y="{Binding ElementName=VonColor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Margin>
+                                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                                    <Binding Path="VonColor.UP" />
+                                    <Binding Path="VonColor.VP" />
+                                    <Binding ElementName="cie1976" Path="ActualWidth"/>
+                                    <Binding ElementName="cie1976" Path="ActualHeight"/>
+                                </MultiBinding>
+                            </Ellipse.Margin>
+                            <Ellipse.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="CVon"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=VonColor.UP}"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=VonColor.VP}"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Ellipse.ToolTip>
+                        </Ellipse>
+                        <Ellipse x:Name="Scalingcolor" Width="10" Height="10" Fill="YellowGreen" Stroke="Black" StrokeThickness="1.5"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Visibility="{Binding Path=Scalingcolor, Converter={StaticResource ResourceKey=nvConverter}}">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform X="{Binding ElementName=Scalingcolor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                Y="{Binding ElementName=Scalingcolor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Margin>
+                                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                                    <Binding Path="Scalingcolor.UP" />
+                                    <Binding Path="Scalingcolor.VP" />
+                                    <Binding ElementName="cie1976" Path="ActualWidth"/>
+                                    <Binding ElementName="cie1976" Path="ActualHeight"/>
+                                </MultiBinding>
+                            </Ellipse.Margin>
+                            <Ellipse.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="CScl"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=Scalingcolor.UP}"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=Scalingcolor.VP}"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Ellipse.ToolTip>
+                        </Ellipse>
 
-            <Ellipse x:Name="cColor" Width="10" Height="10" Fill="Blue" Stroke="White" StrokeThickness="1.5"
+                        <Ellipse x:Name="cColor" Width="10" Height="10" Fill="Blue" Stroke="White" StrokeThickness="1.5"
                 VerticalAlignment="Bottom" HorizontalAlignment="Left"
                 Visibility="{Binding Path=ColorCaptured, Converter={StaticResource ResourceKey=nvConverter}}">
               <Ellipse.RenderTransform>

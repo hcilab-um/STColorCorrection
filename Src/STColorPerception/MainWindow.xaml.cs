@@ -58,6 +58,10 @@ namespace STColorPerception
     private PerceptionLib.Color mixedcolor;
     private MTObservableCollection<MeasurementPair> pairs;
 
+    private PerceptionLib.RGBValue bradRGB;
+    private PerceptionLib.RGBValue VonRGB;
+    private PerceptionLib.RGBValue scalingRGB;
+    private PerceptionLib.RGBValue CalRGB;
    
     
     
@@ -132,9 +136,6 @@ namespace STColorPerception
         OnPropertyChanged("ColorDifference");
       }
     }
-
-    
-
     public PerceptionLib.Color BgColor
     {
         get { return bgcolour; }
@@ -144,7 +145,6 @@ namespace STColorPerception
             OnPropertyChanged("BgColor");
         }
     }
-
     public PerceptionLib.Color MixedColor
     {
         get { return mixedcolor; }
@@ -374,6 +374,9 @@ namespace STColorPerception
       ColorToShow = new PerceptionLib.Color();
       ColorToShowXYZ = new PerceptionLib.CIEXYZ(0,0,0);
 
+     
+
+
       pairs = new MTObservableCollection<MeasurementPair>();
       cie1976C.DataContext = pairs;
 
@@ -434,6 +437,10 @@ namespace STColorPerception
       });
       pairs.Add(new MeasurementPair());
       pairs.Add(new MeasurementPair() { BgColor = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.3 } });
+
+      pairs.Add(new MeasurementPair() { BradColor = new PerceptionLib.Color() { L = 0, UP = 0.4, VP = 0.4 } });
+      pairs.Add(new MeasurementPair() { VonColor = new PerceptionLib.Color() { L = 0, UP = 0.3, VP = 0.5 } });
+      pairs.Add(new MeasurementPair() { Scalingcolor = new PerceptionLib.Color() { L = 0, UP = 0.4, VP = 0.2 } });
       cie1976C.DataContext = pairs;
     }
 
@@ -559,6 +566,32 @@ namespace STColorPerception
         else
             System.Windows.MessageBox.Show("Success!");
     }
+
+    private void Btn_ImportGrid_Click(object sender, RoutedEventArgs e)
+    {
+        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+        dlg.FileName = "Document"; // Default file name 
+        dlg.DefaultExt = ".CSV"; // Default file extension 
+        dlg.Filter = "Text documents (.csv)|*.CSV"; // Filter files by extension 
+
+        // Show open file dialog box 
+        Nullable<bool> result = dlg.ShowDialog();
+        string filename;
+        // Process open file dialog box results 
+        if (result == true)
+        {
+            // Open document 
+            filename = dlg.FileName;
+            PopulateGrid(filename);
+        }
+        else
+        {
+            System.Windows.MessageBox.Show("File not loaded!");
+        }
+
+        
+    }
+
 
   
 
@@ -1781,7 +1814,8 @@ namespace STColorPerception
 
      private void Btn_UseGridData_Click(object sender, RoutedEventArgs e)
      {
-         PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
+         PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\1color.txt");
+         dtgrid_corrDisplay.IsEnabled = false;
          
          btn_StartMeasurment.IsEnabled = false;
          txt_R.IsEnabled = false;
@@ -1868,6 +1902,14 @@ namespace STColorPerception
                  Voncolor = PerceptionLib.Color.ToLUV(VonXYZ);
                  Scalingcolor = PerceptionLib.Color.ToLUV(ScalingXYZ);
 
+                
+                 bradRGB = PerceptionLib.Color.ToRBG(BradXYZ);
+                 VonRGB = PerceptionLib.Color.ToRBG(VonXYZ);
+                 scalingRGB = PerceptionLib.Color.ToRBG(ScalingXYZ);
+
+                 CalRGB = PerceptionLib.Color.ToRBG(ColorMeasuredXYZ);
+
+
                  dt.Rows[i][30] = BradXYZ.X.ToString();
                  dt.Rows[i][31] = BradXYZ.Y.ToString();
                  dt.Rows[i][32] = BradXYZ.Z.ToString();
@@ -1886,7 +1928,30 @@ namespace STColorPerception
                  dt.Rows[i][43] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Scalingcolor).ToString();
                  dt.Rows[i][44] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Scalingcolor).ToString();
 
-                
+                 dt.Rows[i][45] = bradRGB.R.ToString();
+                 dt.Rows[i][46] = bradRGB.G.ToString();
+                 dt.Rows[i][47] = bradRGB.B.ToString();
+
+                 dt.Rows[i][48] = VonRGB.R.ToString();
+                 dt.Rows[i][49] = VonRGB.G.ToString();
+                 dt.Rows[i][50] = VonRGB.B.ToString();
+
+                 dt.Rows[i][51] = scalingRGB.R.ToString();
+                 dt.Rows[i][52] = scalingRGB.G.ToString();
+                 dt.Rows[i][53] = scalingRGB.B.ToString();
+
+                 dt.Rows[i][54] = CalRGB.R.ToString();
+                 dt.Rows[i][55] = CalRGB.G.ToString();
+                 dt.Rows[i][56] = CalRGB.B.ToString();
+
+                 dt.Rows[i][57] = Bradcolor.UP.ToString();
+                 dt.Rows[i][58] = Bradcolor.VP.ToString();
+
+                 dt.Rows[i][59] = Voncolor.UP.ToString();
+                 dt.Rows[i][60] = Voncolor.VP.ToString();
+
+                 dt.Rows[i][61] = Scalingcolor.UP.ToString();
+                 dt.Rows[i][62] = Scalingcolor.VP.ToString();
 
 
                  pairs.Clear();
@@ -1922,79 +1987,10 @@ namespace STColorPerception
          });
          btn_ExportGrid.IsEnabled = true;
 
+         dtgrid_corrDisplay.IsEnabled = true;
+         dataTable = dt;
+
         
-
-     }
-
-     private void cmb_graph_SelectionChanged(object sender, SelectionChangedEventArgs e)
-     {
-         DataTable dt = new DataTable();
-         //dt=dataTable;
-         DataRow newRow;
-         newRow = dt.NewRow();
-         int selectedItem = cmb_graph.SelectedIndex;
-         int totalRow = BgNo * FgNo;
-
-         if (selectedItem == 0)
-         {
-             LBL_GraphText.Content = "Red is the Colour to be shown by the display, Blue is what the camera caputerd";
-             pairs.Clear();
-             for (int i = 0; i < FgNo; i++)
-             {
-                 pairs.Add(new MeasurementPair()
-                 {
-                     // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 
-                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
-                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) }
-                 });
-
-                 //newRow[i] = dataTable.Rows[i];
-             }
-             //dt.Rows.Add(newRow);
-             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
-
-         }
-
-         else if (selectedItem == BgNo)
-         {
-
-             pairs.Clear();
-             for (int i = totalRow + BgNo - 1; i < (totalRow + BgNo + 2); i++)
-             {
-                 pairs.Add(new MeasurementPair()
-                 {
-                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) }
-                 });
-
-                 //newRow[i] = dataTable.Rows[i];
-             }
-             //dt.Rows.Add(newRow);
-             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
-
-         }
-         else
-         {
-             LBL_GraphText.Content = "Red is displayed colour captured with noBG condition, Blue is what the camera caputerd with the BG and Black is the BG:" + selectedItem;
-             int startPoint = selectedItem * FgNo;
-             int endPoint = (selectedItem * FgNo) + (FgNo);
-             pairs.Clear();
-
-             for (int i = selectedItem * FgNo; i < endPoint; i++)
-             {
-
-                 pairs.Add(new MeasurementPair()
-                 {
-                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
-                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) },
-                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][28].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][29].ToString()) }
-                 });
-
-                 //newRow[i] = dataTable.Rows[i];
-             }
-
-         }
-
-
 
      }
 
@@ -2559,6 +2555,113 @@ namespace STColorPerception
          // captureDevice.Dispose();
      }
 
+     private void cmb_graph_SelectionChanged(object sender, SelectionChangedEventArgs e)
+     {
+         DataTable dt = new DataTable();
+         //dt=dataTable;
+         DataRow newRow;
+         newRow = dt.NewRow();
+         int selectedItem = cmb_graph.SelectedIndex;
+         int totalRow = BgNo * FgNo;
+
+         if (selectedItem == 0)
+         {
+             LBL_GraphText.Content = "Red is the Colour to be shown by the display, Blue is what the camera caputerd";
+             pairs.Clear();
+             for (int i = 0; i < FgNo; i++)
+             {
+                 pairs.Add(new MeasurementPair()
+                 {
+                     // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 
+                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
+                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) }
+                 });
+
+                 //newRow[i] = dataTable.Rows[i];
+             }
+             //dt.Rows.Add(newRow);
+             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
+
+         }
+
+         else if (selectedItem == BgNo)
+         {
+
+             pairs.Clear();
+             for (int i = totalRow + BgNo - 1; i < (totalRow + BgNo + 2); i++)
+             {
+                 pairs.Add(new MeasurementPair()
+                 {
+                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) }
+                 });
+
+                 //newRow[i] = dataTable.Rows[i];
+             }
+             //dt.Rows.Add(newRow);
+             //dtgrid_corrDisplay.ItemsSource = dt.DefaultView; 
+
+         }
+         else
+         {
+             LBL_GraphText.Content = "Red is displayed colour captured with noBG condition, Blue is what the camera caputerd with the BG and Black is the BG:" + selectedItem;
+             int startPoint = selectedItem * FgNo;
+             int endPoint = (selectedItem * FgNo) + (FgNo);
+             pairs.Clear();
+
+             for (int i = selectedItem * FgNo; i < endPoint; i++)
+             {
+
+                 pairs.Add(new MeasurementPair()
+                 {
+                     ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
+                     ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][33].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][34].ToString()) },
+                     BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][28].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][29].ToString()) }
+                 });
+
+                 //newRow[i] = dataTable.Rows[i];
+             }
+
+         }
+
+
+
+     }
+
+    
+
+     private void dtgrid_corrDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+     {
+         if (dtgrid_corrDisplay.SelectedItem != null)
+         {
+             int i = dtgrid_corrDisplay.SelectedIndex;
+
+             rect_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb( Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
+
+             rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][27].ToString()), Convert.ToByte(dataTable.Rows[i][28].ToString()), Convert.ToByte((dataTable.Rows[i][29]).ToString())));
+
+             rect_Brad.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][45].ToString()), Convert.ToByte(dataTable.Rows[i][46].ToString()), Convert.ToByte((dataTable.Rows[i][47]).ToString())));
+             
+             rect_Von.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][48].ToString()), Convert.ToByte(dataTable.Rows[i][49].ToString()), Convert.ToByte((dataTable.Rows[i][50]).ToString())));
+
+             rect_Scaling.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][51].ToString()), Convert.ToByte(dataTable.Rows[i][52].ToString()), Convert.ToByte((dataTable.Rows[i][53]).ToString())));
+
+
+
+             pairs.Clear();
+             pairs.Add(new MeasurementPair()
+             {
+                 ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
+                 ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
+                 BradColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][57].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][58].ToString()) },
+                 VonColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][59].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][60].ToString()) },
+                 Scalingcolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][61].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][62].ToString()) },
+             });
+
+         }
+
+     }
+
+    
     
   }
 
