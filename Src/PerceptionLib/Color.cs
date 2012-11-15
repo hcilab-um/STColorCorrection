@@ -268,6 +268,33 @@ namespace PerceptionLib
       rColor.B = rColorlab.B;
       return rColor;
     }
+      /// <summary>
+      /// same function as above but this does it from XYZ
+      /// </summary>
+      /// <param name="xyz"></param>
+      /// <returns></returns>
+    public static Color ToLUV(CIEXYZ xyz)
+    {
+        Color rColor = new Color();
+        Color rColorlab = new Color();
+        //CIEXYZ xyz = RGBToXYZ(cRGB);
+
+        rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+        rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+
+        //rColor.UR = (4 * CIEXYZ.D65.X) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
+        //rColor.VR = (9 * CIEXYZ.D65.Y) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
+
+        double yr = xyz.Y / CIEXYZ.D65.Y;
+        rColor.L = Lxyz(yr);
+        rColor.U = (13 * rColor.L) * (rColor.UP - rColor.UR);
+        rColor.V = (13 * rColor.L) * (rColor.VP - rColor.VR);
+        rColorlab = ToLAB(xyz);
+        rColor.LA = rColorlab.LA;
+        rColor.A = rColorlab.A;
+        rColor.B = rColorlab.B;
+        return rColor;
+    }
     private static double Lxyz(double e)
     {
         return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
@@ -284,6 +311,26 @@ namespace PerceptionLib
         double Fx, Fy, Fz;
         Color rColor = new Color();
         CIEXYZ xyz = RGBToXYZ(cRGB);
+
+        double yr = xyz.Y / CIEXYZ.D65.Y;
+        double xr = xyz.X / CIEXYZ.D65.X;
+        double zr = xyz.Z / CIEXYZ.D65.Z;
+
+        Fx = FX(xr);
+        Fy = FX(yr);
+        Fz = FX(zr);
+
+        rColor.LA = Lxyz(yr);
+        rColor.A = 500 * (Fx - Fy);
+        rColor.B = 200 * (Fy - Fz);
+
+        return rColor;
+    }
+    public static Color ToLAB(CIEXYZ xyz)
+    {
+        double Fx, Fy, Fz;
+        Color rColor = new Color();
+        //CIEXYZ xyz = RGBToXYZ(cRGB);
 
         double yr = xyz.Y / CIEXYZ.D65.Y;
         double xr = xyz.X / CIEXYZ.D65.X;
@@ -369,6 +416,38 @@ namespace PerceptionLib
       rgb.G = (byte)tempg;
       rgb.B = (byte)tempb;
       return rgb; 
+    }
+   
+      public static RGBValue ToRBG(CIEXYZ xyz)
+    {
+        int tempr, tempg, tempb;
+        //CIEXYZ xyz = LUVToXYZ(PassedLUV);
+
+
+        RGBValue rgb = new RGBValue();
+
+        double[] Clinear = new double[3];
+
+        Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
+        Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
+        Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
+
+        //gamma companding
+        for (int i = 0; i < 3; i++)
+        {
+
+            Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
+        }
+
+        tempr = (int)Math.Round(Clinear[0] * 255.0);
+        tempg = (int)Math.Round(Clinear[1] * 255.0);
+        tempb = (int)Math.Round(Clinear[2] * 255.0);
+
+
+        rgb.R = (byte)tempr;
+        rgb.G = (byte)tempg;
+        rgb.B = (byte)tempb;
+        return rgb;
     }
     
     /// <summary>
@@ -461,6 +540,22 @@ namespace PerceptionLib
        // double Euv = Math.Pow(Math.Pow((Color1.L - Color2.L), 2) + Math.Pow((Color1.U - Color2.U), 2) + Math.Pow((Color1.V - Color2.V), 2), 1 / 2);
         return Euv;
      }
+
+    public static double ColorDistanceCalAB(Color Color1, Color Color2)
+    {
+        double l, u, v, result;
+        l = Color1.L - Color2.L;
+        u = Color1.A - Color2.A;
+        v = Color1.B - Color2.B;
+        l = l * l;
+        u = u * u;
+        v = v * v;
+        result = l + u + v;
+
+        double Euv = Math.Pow(result, (1.0 / 2.0));
+        // double Euv = Math.Pow(Math.Pow((Color1.L - Color2.L), 2) + Math.Pow((Color1.U - Color2.U), 2) + Math.Pow((Color1.V - Color2.V), 2), 1 / 2);
+        return Euv;
+    }
 
 
     public RGBValue gammut(RGBValue cRGB)

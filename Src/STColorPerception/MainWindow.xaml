@@ -44,16 +44,17 @@
       <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1080" Height="1258">
         <Label>Color List</Label>
         <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" ></DataGrid>
-        <StackPanel Orientation="Horizontal" Width="934" Height="26" Margin="10,10,10,10 ">  
-          <!--<Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>-->
+        <StackPanel Orientation="Horizontal" Width="1059" Height="26" Margin="10,10,10,10 ">  
+          <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
                     <Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Gamut calculation</Button>
                     <Button Width="104" Name="btn_StdColorData" Margin="10,0,0,0" Click="Btn_StdColorData_Click">Standard Colors</Button>
-                    <Label Name="lbl_BgNo" Width="100" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
+                    <Button Width="74" Name="btn_ColorPredictor" Margin="10,0,0,0" Click="Btn_ColorPredictor_Click">Predictor</Button>
+                    <Label Name="lbl_BgNo" Width="59" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
         <TextBox Name="txt_BgNo" Width="36" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=BgNo}"/>
-        <Label Name="lbl_FgNo" Width="100" Height="26" Margin="10,0,0,0">No of FG_Colour:</Label>
+        <Label Name="lbl_FgNo" Width="59" Height="26" Margin="10,0,0,0">No of FG_Colour:</Label>
         <TextBox Name="txt_FgNo" Width="43" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=FgNo}"/>
-        <Button Width="151" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
+        <Button Width="64" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
         <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
         <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
@@ -97,7 +98,22 @@
           <Label Name="MVP" Width="20" Height="24" Margin="10,10,0,0">V':</Label>
           <Label Name="lbl_MVP" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorMeasured.VP}"/>
         </StackPanel>
-          <StackPanel Orientation="Horizontal" Height="206">
+        <StackPanel Orientation="Horizontal" Width="635" Height="41" Margin="10,0,10,5">
+            <Label Content="X:" Height="24" Name="label1" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorToShowXYZ.X}" Height="26" Name="label2" Width="50" />
+            <Label Content="Y:" Height="24" Name="label3" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorToShowXYZ.Y}" Height="26" Name="label4" Width="50" />
+            <Label Content="Z:" Height="24" Name="label5" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorToShowXYZ.Z}" Height="26" Name="label6" Width="50" />
+             <Label Content="Measured" Height="26" Name="label7" Width="64"  Margin="50,10,0,0" />
+            <Label Content="X" Height="24" Name="label8" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorMeasuredXYZ.X}" Height="26" Name="label9" Width="50" />
+            <Label Content="Y:" Height="24" Name="label10" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorMeasuredXYZ.Y}" Height="26" Name="label11" Width="50" />
+            <Label Content="Z:" Height="24" Name="label12" Width="20" />
+                    <Label Content="{Binding ElementName=mainW, Path=ColorMeasuredXYZ.Z}" Height="26" Name="label13" Width="50" />
+          </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="206">
             <StackPanel Orientation="Vertical" Width="340" Height="204" Margin="180,0,0,0">
             <Label Height="30">Background Color:</Label>
             <StackPanel Orientation="Horizontal" Width="267" Height="41" VerticalAlignment="Top" Margin="10,0,10,10">

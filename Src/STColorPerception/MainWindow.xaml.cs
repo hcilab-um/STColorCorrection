@@ -38,9 +38,21 @@ namespace STColorPerception
     private PerceptionLib.Color colorToShow;
     private PerceptionLib.Color colorMeasured;
     private PerceptionLib.Color colorDifference;
-
+    
     private PerceptionLib.CIEXYZ colorToShowXYZ;
     private PerceptionLib.CIEXYZ colorMeasuredXYZ;
+    
+      /// <summary>
+      /// for CAT
+      /// </summary>
+    private PerceptionLib.CIEXYZ bradXYZ;
+    private PerceptionLib.CIEXYZ vonXYZ;
+    private PerceptionLib.CIEXYZ scalingXYZ;
+
+    private PerceptionLib.Color bradcolor;
+    private PerceptionLib.Color voncolor;
+    private PerceptionLib.Color scalingcolor;
+    
   
     private PerceptionLib.Color bgcolour;
     private PerceptionLib.Color mixedcolor;
@@ -140,6 +152,63 @@ namespace STColorPerception
         {
             mixedcolor = value;
             OnPropertyChanged("MixedColor");
+        }
+    }
+
+    public PerceptionLib.Color Bradcolor
+    {
+        get { return bradcolor; }
+        set
+        {
+            bradcolor = value;
+            OnPropertyChanged("Bradcolor");
+        }
+    }
+    public PerceptionLib.Color Voncolor
+    {
+        get { return voncolor; }
+        set
+        {
+            voncolor = value;
+            OnPropertyChanged("voncolor");
+        }
+    }
+    public PerceptionLib.Color Scalingcolor
+    {
+        get { return scalingcolor; }
+        set
+        {
+            scalingcolor = value;
+            OnPropertyChanged("Scalingcolor");
+        }
+    }
+
+
+    public PerceptionLib.CIEXYZ BradXYZ
+    {
+        get { return bradXYZ; }
+        set
+        {
+            bradXYZ = value;
+            OnPropertyChanged("BradXYZ");
+        }
+    }
+    public PerceptionLib.CIEXYZ VonXYZ
+    {
+        get { return vonXYZ; }
+        set
+        {
+            vonXYZ = value;
+            OnPropertyChanged("VonXYZ");
+        }
+    }
+    public PerceptionLib.CIEXYZ ScalingXYZ
+    {
+        get { return scalingXYZ; }
+        set
+        {
+            scalingXYZ = value;
+            OnPropertyChanged("ScalingXYZ");
         }
     }
 
@@ -513,7 +582,7 @@ namespace STColorPerception
         //System.Windows.Threading.Dispatcher captureNow = mainW.Dispatcher;
         // temp int cariables to do the calculations for AVG rgb from the cropped pics
         int tempMr = 0, tempMg = 0, tempMb = 0;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 10; i++)
         {
 
             //Imagecaputre.DoWork += delegate(object s, DoWorkEventArgs args)
@@ -537,9 +606,9 @@ namespace STColorPerception
         }
 
         // since the first img the cam captures is black for some reason we are ommiting it and calculating for the rest
-        tempMr = tempMr / 5;
-        tempMg = tempMg / 5;
-        tempMb = tempMb / 5;
+        tempMr = tempMr / 10;
+        tempMg = tempMg / 10;
+        tempMb = tempMb / 10;
 
         // getting the avg values as int for calculation then changing them to bye for passing into system.darawing.color obj's
         MR = (byte)(tempMr);
@@ -720,6 +789,8 @@ namespace STColorPerception
         colorDifference.UP = ColorToShow.UP - ColorMeasured.UP;
         colorDifference.VP = ColorToShow.VP - ColorMeasured.VP;
     }
+
+    
   
     private void ColorUpdateOnScreenWithBG()
     {
@@ -1712,7 +1783,7 @@ namespace STColorPerception
      {
          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
          
-         // btn_StartMeasurment.IsEnabled = false;
+         btn_StartMeasurment.IsEnabled = false;
          txt_R.IsEnabled = false;
          txt_G.IsEnabled = false;
          txt_B.IsEnabled = false;
@@ -1746,6 +1817,8 @@ namespace STColorPerception
                  Dispatcher.Invoke(new Action(() => DisplayMeasuredValues()));
 
                  DifferenceCalculation();
+                 
+                 //bradcolor=
 
                  // assignes the data to a the datatable 
                  dt.Rows[i][3] = colorToShow.L.ToString();
@@ -1758,33 +1831,63 @@ namespace STColorPerception
                  dt.Rows[i][10] = ColorMeasured.V.ToString();
                  dt.Rows[i][11] = ColorMeasured.UP.ToString();
                  dt.Rows[i][12] = ColorMeasured.VP.ToString();
-                 dt.Rows[i][13] = ColorDifference.L.ToString();
-                 dt.Rows[i][14] = ColorDifference.U.ToString();
-                 dt.Rows[i][15] = ColorDifference.V.ToString();
+                 //dt.Rows[i][13] = ColorDifference.L.ToString();
+                 //dt.Rows[i][14] = ColorDifference.U.ToString();
+                 //dt.Rows[i][15] = ColorDifference.V.ToString();
                  
                  ////
 
-                 dt.Rows[i][16] = colorToShow.LA.ToString();
-                 dt.Rows[i][17] = colorToShow.A.ToString();
-                 dt.Rows[i][18] = colorToShow.B.ToString();
-                 dt.Rows[i][19] = ColorMeasured.LA.ToString();
-                 dt.Rows[i][20] = ColorMeasured.A.ToString();
-                 dt.Rows[i][21] = ColorMeasured.B.ToString();
+                 dt.Rows[i][13] = colorToShow.LA.ToString();
+                 dt.Rows[i][14] = colorToShow.A.ToString();
+                 dt.Rows[i][15] = colorToShow.B.ToString();
+                 dt.Rows[i][16] = ColorMeasured.LA.ToString();
+                 dt.Rows[i][17] = ColorMeasured.A.ToString();
+                 dt.Rows[i][18] = ColorMeasured.B.ToString();
                  
                  //
                  
-                 dt.Rows[i][22] = PerceptionLib.Color.ColorDistanceCal(colorToShow, ColorMeasured).ToString();
+                 dt.Rows[i][19] = PerceptionLib.Color.ColorDistanceCal(colorToShow, ColorMeasured).ToString();
+                 dt.Rows[i][20] = PerceptionLib.Color.ColorDistanceCalAB(colorToShow, ColorMeasured).ToString();
                  //
-                 dt.Rows[i][23] = ColorToShowXYZ.X.ToString();
-                 dt.Rows[i][24] = ColorToShowXYZ.Y.ToString();
-                 dt.Rows[i][25] = ColorToShowXYZ.Z.ToString();
-                 dt.Rows[i][26] = ColorMeasuredXYZ.X.ToString();
-                 dt.Rows[i][27] = ColorMeasuredXYZ.Y.ToString();
-                 dt.Rows[i][28] = ColorMeasuredXYZ.Z.ToString();
+                 dt.Rows[i][21] = ColorToShowXYZ.X.ToString();
+                 dt.Rows[i][22] = ColorToShowXYZ.Y.ToString();
+                 dt.Rows[i][23] = ColorToShowXYZ.Z.ToString();
+                 dt.Rows[i][24] = ColorMeasuredXYZ.X.ToString();
+                 dt.Rows[i][25] = ColorMeasuredXYZ.Y.ToString();
+                 dt.Rows[i][26] = ColorMeasuredXYZ.Z.ToString();
 
-                 dt.Rows[i][29] = MR.ToString();
-                 dt.Rows[i][30] = MG.ToString();
-                 dt.Rows[i][31] = MB.ToString();
+                 dt.Rows[i][27] = MR.ToString();
+                 dt.Rows[i][28] = MG.ToString();
+                 dt.Rows[i][29] = MB.ToString();
+
+                 BradXYZ = Util.CATCalulation.bradford(ColorToShowXYZ);
+                 VonXYZ = Util.CATCalulation.VonKries(ColorToShowXYZ);
+                 ScalingXYZ = Util.CATCalulation.XYZScaling(ColorToShowXYZ);
+
+                 Bradcolor = PerceptionLib.Color.ToLUV(BradXYZ);
+                 Voncolor = PerceptionLib.Color.ToLUV(VonXYZ);
+                 Scalingcolor = PerceptionLib.Color.ToLUV(ScalingXYZ);
+
+                 dt.Rows[i][30] = BradXYZ.X.ToString();
+                 dt.Rows[i][31] = BradXYZ.Y.ToString();
+                 dt.Rows[i][32] = BradXYZ.Z.ToString();
+                 dt.Rows[i][33] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Bradcolor).ToString();
+                 dt.Rows[i][34] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Bradcolor).ToString();
+
+                 dt.Rows[i][35] = VonXYZ.X.ToString();
+                 dt.Rows[i][36] = VonXYZ.Y.ToString();
+                 dt.Rows[i][37] = VonXYZ.Z.ToString();
+                 dt.Rows[i][38] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Voncolor).ToString();
+                 dt.Rows[i][39] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Voncolor).ToString();
+
+                 dt.Rows[i][40] = ScalingXYZ.X.ToString();
+                 dt.Rows[i][41] = ScalingXYZ.Y.ToString();
+                 dt.Rows[i][42] = ScalingXYZ.Z.ToString();
+                 dt.Rows[i][43] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Scalingcolor).ToString();
+                 dt.Rows[i][44] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Scalingcolor).ToString();
+
+                
+
 
                  pairs.Clear();
                  pairs.Add(new MeasurementPair()
@@ -1893,6 +1996,567 @@ namespace STColorPerception
 
 
 
+     }
+
+     private void Btn_ColorPredictor_Click(object sender, RoutedEventArgs e)
+     {
+         //  PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\StdColor.txt");
+         PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\StdColortriangle.txt");
+         txt_R.IsEnabled = false;
+         txt_G.IsEnabled = false;
+         txt_B.IsEnabled = false;
+         txt_BgNo.IsEnabled = false;
+         txt_FgNo.IsEnabled = false;
+         btn_MixedColour.IsEnabled = false;
+         DataTable dt = new DataTable();
+         // DataTable new_dt = new DataTable();
+         DataRow newRow;
+         dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+         // to create a random number
+         //BgNo = 5;
+         BgNo = 20;
+         //FgNo = 27;
+         FgNo = 61;
+
+
+
+         // this loop is too changfe the bg color
+         //  for (int i = 0; i < 5; i++)
+         ThreadPool.QueueUserWorkItem(ignored =>
+         {
+             PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
+             for (int i = 0; i < BgNo; i++)
+             {
+
+                 // for the first set of vaule it tahes balck as the bg colour
+                 switch (i)
+                 {
+                     // black bg
+                     case 0:
+                         BgR = 0;
+                         BgG = 0;
+                         BgB = 0;
+                         break;
+                     //Brick
+                     case 1:
+                         BgColor = new PerceptionLib.Color();
+                         bgcolour.L = 65;
+                         bgcolour.UP = 0.275;
+                         bgcolour.VP = 0.485;
+                         bgcolour.U = (13 * bgcolour.L) * (bgcolour.UP - bgcolour.UR);
+                         bgcolour.V = (13 * bgcolour.L) * (bgcolour.VP - bgcolour.VR);
+
+
+                         rgb = PerceptionLib.Color.ToRBG(bgcolour);
+                         BgR = rgb.R;
+                         BgG = rgb.G;
+                         BgB = rgb.B;
+                         break;
+                     //Foliage
+                     case 2:
+                         BgColor = new PerceptionLib.Color();
+                         bgcolour.L = 65;
+                         bgcolour.UP = 0.123;
+                         bgcolour.VP = 0.531;
+                         bgcolour.U = (13 * bgcolour.L) * (bgcolour.UP - bgcolour.UR);
+                         bgcolour.V = (13 * bgcolour.L) * (bgcolour.VP - bgcolour.VR);
+
+                         rgb = PerceptionLib.Color.ToRBG(bgcolour);
+                         BgR = rgb.R;
+                         BgG = rgb.G;
+                         BgB = rgb.B;
+                         break;
+                     //Sidewalk
+                     case 3:
+                         BgColor = new PerceptionLib.Color();
+                         bgcolour.L = 65;
+                         bgcolour.UP = 0.211;
+                         bgcolour.VP = 0.489;
+                         bgcolour.U = (13 * bgcolour.L) * (bgcolour.UP - bgcolour.UR);
+                         bgcolour.V = (13 * bgcolour.L) * (bgcolour.VP - bgcolour.VR);
+
+                         rgb = PerceptionLib.Color.ToRBG(bgcolour);
+                         BgR = rgb.R;
+                         BgG = rgb.G;
+                         BgB = rgb.B;
+
+                         break;
+
+                     //Pavement
+                     case 4:
+                         BgColor = new PerceptionLib.Color();
+                         bgcolour.L = 65;
+                         bgcolour.UP = 0.203;
+                         bgcolour.VP = 0.470;
+                         bgcolour.U = (13 * bgcolour.L) * (bgcolour.UP - bgcolour.UR);
+                         bgcolour.V = (13 * bgcolour.L) * (bgcolour.VP - bgcolour.VR);
+
+                         rgb = PerceptionLib.Color.ToRBG(bgcolour);
+                         BgR = rgb.R;
+                         BgG = rgb.G;
+                         BgB = rgb.B;
+                         break;
+
+
+                     //vaiants of blue
+                     case 5:
+                         BgR = 0;
+                         BgG = 0;
+                         BgB = 255;
+                         break;
+
+                     case 6:
+                         BgR = 0;
+                         BgG = 0;
+                         BgB = 225;
+                         break;
+
+                     case 7:
+                         BgR = 100;
+                         BgG = 0;
+                         BgB = 255;
+                         break;
+
+                     case 8:
+                         BgR = 0;
+                         BgG = 100;
+                         BgB = 255;
+                         break;
+
+                     //variants of green
+
+                     case 9:
+                         BgR = 0;
+                         BgG = 255;
+                         BgB = 0;
+                         break;
+
+                     case 10:
+                         BgR = 0;
+                         BgG = 225;
+                         BgB = 0;
+                         break;
+
+                     case 11:
+                         BgR = 100;
+                         BgG = 255;
+                         BgB = 0;
+                         break;
+
+                     case 12:
+                         BgR = 0;
+                         BgG = 255;
+                         BgB = 100;
+                         break;
+
+                     //yellow
+
+                     case 13:
+                         BgR = 255;
+                         BgG = 255;
+                         BgB = 0;
+                         break;
+
+                     case 14:
+                         BgR = 200;
+                         BgG = 200;
+                         BgB = 0;
+                         break;
+
+                     case 15:
+                         BgR = 200;
+                         BgG = 255;
+                         BgB = 0;
+                         break;
+
+                     //red
+                     case 16:
+                         BgR = 255;
+                         BgG = 0;
+                         BgB = 0;
+                         break;
+
+                     case 17:
+                         BgR = 200;
+                         BgG = 0;
+                         BgB = 0;
+                         break;
+
+                     case 18:
+                         BgR = 255;
+                         BgG = 100;
+                         BgB = 0;
+                         break;
+
+                     case 19:
+                         BgR = 255;
+                         BgG = 0;
+                         BgB = 100;
+                         break;
+
+
+                 }
+
+
+                 for (int j = 0; j < FgNo; j++)
+                 {
+                     //if (i == 0)
+                     //{
+                     //    mainW.R = Convert.ToByte(dt.Rows[j][0].ToString());
+                     //    mainW.G = Convert.ToByte(dt.Rows[j][1].ToString());
+                     //    mainW.B = Convert.ToByte(dt.Rows[j][2].ToString());
+                     //}
+                     //else
+                     //{
+                     mainW.R = Convert.ToByte(dt.Rows[j][0].ToString());
+                     mainW.G = Convert.ToByte(dt.Rows[j][1].ToString());
+                     mainW.B = Convert.ToByte(dt.Rows[j][2].ToString());
+                     //}
+
+
+
+                     //if (i != 0)
+                     //               System.Threading.Thread.Sleep(500);
+                     Dispatcher.Invoke(new Action(() => ColorUpdateOnScreenWithBG()));
+                     //           System.Windows.Forms.Application.DoEvents();
+
+
+                     colorMeasured = StartCapture1();
+
+                     Dispatcher.Invoke(new Action(() => DisplayMeasuredValues()));
+
+                     DifferenceCalculation();
+
+
+
+                     if (i == 0)
+                     {
+                         dt.Rows[j][0] = R.ToString();
+                         dt.Rows[j][1] = G.ToString();
+                         dt.Rows[j][2] = B.ToString();
+                         dt.Rows[j][3] = colorToShow.L.ToString();
+                         dt.Rows[j][4] = colorToShow.U.ToString();
+                         dt.Rows[j][5] = colorToShow.V.ToString();
+                         dt.Rows[j][6] = colorToShow.UP.ToString();
+                         dt.Rows[j][7] = colorToShow.VP.ToString();
+                         dt.Rows[j][8] = ColorMeasured.L.ToString();
+                         dt.Rows[j][9] = ColorMeasured.U.ToString();
+                         dt.Rows[j][10] = ColorMeasured.V.ToString();
+                         dt.Rows[j][11] = ColorMeasured.UP.ToString();
+                         dt.Rows[j][12] = ColorMeasured.VP.ToString();
+                         dt.Rows[j][13] = MR.ToString();
+                         dt.Rows[j][14] = MG.ToString();
+                         dt.Rows[j][15] = MB.ToString();
+                         dt.Rows[j][16] = colorDifference.L.ToString();
+                         dt.Rows[j][17] = colorDifference.U.ToString();
+                         dt.Rows[j][18] = colorDifference.V.ToString();
+                         dt.Rows[j][19] = BgR.ToString();
+                         dt.Rows[j][20] = BgG.ToString();
+                         dt.Rows[j][21] = BgB.ToString();
+                         dt.Rows[j][22] = 0;
+                         dt.Rows[j][23] = 0;
+                         dt.Rows[j][24] = 0;
+                         dt.Rows[j][25] = 0;
+                         dt.Rows[j][26] = 0;
+                         dt.Rows[j][27] = 0;
+                         dt.Rows[j][28] = 0;
+                         dt.Rows[j][29] = 0;
+                         dt.Rows[j][30] = 0;
+                         dt.Rows[j][31] = 0;
+                         dt.Rows[j][32] = 0;
+                         dt.Rows[j][33] = 0;
+                         dt.Rows[j][34] = 0;
+                         dt.Rows[j][35] = 0;
+                         dt.Rows[j][36] = 0;
+                         dt.Rows[j][37] = 0;
+
+                         pairs.Clear();
+                         pairs.Add(new MeasurementPair()
+                         {
+                             ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(colorToShow.UP.ToString()), VP = Convert.ToDouble(colorToShow.VP.ToString()) },
+                             ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
+                         });
+
+                     }
+                     else
+                     {
+
+                         newRow = dt.NewRow();
+                         newRow[0] = R.ToString();
+                         newRow[1] = G.ToString();
+                         newRow[2] = B.ToString();
+                         newRow[3] = colorToShow.L.ToString();
+                         newRow[4] = colorToShow.U.ToString();
+                         newRow[5] = colorToShow.V.ToString();
+                         newRow[6] = colorToShow.UP.ToString();
+                         newRow[7] = colorToShow.VP.ToString();
+
+                         newRow[8] = dt.Rows[j][8].ToString();
+                         newRow[9] = dt.Rows[j][9].ToString();
+                         newRow[10] = dt.Rows[j][10].ToString();
+                         newRow[11] = dt.Rows[j][11].ToString();
+                         newRow[12] = dt.Rows[j][12].ToString();
+                         newRow[13] = dt.Rows[j][13].ToString();
+                         newRow[14] = dt.Rows[j][14].ToString();
+                         newRow[15] = dt.Rows[j][15].ToString();
+
+                         newRow[16] = colorDifference.L.ToString();
+                         newRow[17] = colorDifference.U.ToString();
+                         newRow[18] = colorDifference.V.ToString();
+                         newRow[19] = BgR.ToString();
+                         newRow[20] = BgG.ToString();
+                         newRow[21] = BgB.ToString();
+                         newRow[22] = 0;
+                         newRow[23] = 0;
+                         newRow[24] = 0;
+                         newRow[25] = 0;
+                         newRow[26] = 0;
+                         newRow[27] = 0;
+                         newRow[28] = 0;
+                         newRow[29] = 0;
+                         newRow[30] = ColorMeasured.L.ToString();
+                         newRow[31] = ColorMeasured.U.ToString();
+                         newRow[32] = ColorMeasured.V.ToString();
+                         newRow[33] = ColorMeasured.UP.ToString();
+                         newRow[34] = ColorMeasured.VP.ToString();
+                         newRow[35] = MR.ToString();
+                         newRow[36] = MG.ToString();
+                         newRow[37] = MB.ToString();
+
+                         MixedColor = ColorMeasured;
+                         pairs.Clear();
+                         pairs.Add(new MeasurementPair()
+                         {
+                             // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 33 AND 34 ARE MIXED COLOURS
+                             ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dt.Rows[j][11].ToString()), VP = Convert.ToDouble(dt.Rows[j][12].ToString()) },
+                             ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
+                         });
+                         dt.Rows.Add(newRow);
+
+                     }
+
+                     R = 0; G = 0; B = 0;
+                     //dt.Rows.Add(newRow);
+
+                     Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+                     Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+                 }
+             }
+
+             //   dtgrid_corrDisplay.ItemsSource = dt.DefaultView;
+             //dtgrid_corrDisplay.Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+             // for caluclating just bg colour,.. with  fg & bg white conditions so this for loop should be 3 more than loop for bg color change
+             for (int i = 1; i < BgNo + 3; i++)
+             {
+                 if (i < BgNo)
+                 {
+                     R = 0;
+                     G = 0;
+                     B = 0;
+
+                     BgR = Convert.ToByte(dt.Rows[i * FgNo][19].ToString());
+                     BgG = Convert.ToByte(dt.Rows[i * FgNo][20].ToString());
+                     BgB = Convert.ToByte(dt.Rows[i * FgNo][21].ToString());
+
+                 }
+                 // both white 
+                 else if (i == BgNo)
+                 {
+                     R = 255;
+                     G = 255;
+                     B = 255;
+
+                     BgR = 255;
+                     BgG = 255;
+                     BgB = 255;
+                 }
+                 // fg white
+                 else if (i == BgNo + 1)
+                 {
+                     R = 255;
+                     G = 255;
+                     B = 255;
+
+                     BgR = 0;
+                     BgG = 0;
+                     BgB = 0;
+                 }
+                 // bg white
+                 else
+                 {
+                     R = 0;
+                     G = 0;
+                     B = 0;
+
+                     BgR = 255;
+                     BgG = 255;
+                     BgB = 255;
+
+                 }
+
+
+                 ////if (i != 0)
+                 //System.Threading.Thread.Sleep(500);
+                 //ColorCaptureJustBG();
+                 //System.Windows.Forms.Application.DoEvents();
+
+                 ////does all the caputure and difference calculations
+                 //System.Threading.Thread.Sleep(500);
+                 //// StartCapture();
+
+                 Dispatcher.Invoke(new Action(() => ColorCaptureJustBG()));
+                 //           System.Windows.Forms.Application.DoEvents();
+
+
+                 colorMeasured = StartCapture1();
+
+                 Dispatcher.Invoke(new Action(() => DisplayMeasuredValues()));
+
+                 DifferenceCalculation();
+
+                 //just bg capture
+                 newRow = dt.NewRow();
+                 if (i < BgNo)
+                 {
+
+                     newRow[0] = R.ToString();
+                     newRow[1] = G.ToString();
+                     newRow[2] = B.ToString();
+                     newRow[3] = 0;
+                     newRow[4] = 0;
+                     newRow[5] = 0;
+                     newRow[6] = 0;
+                     newRow[7] = 0;
+                     newRow[8] = 0;
+                     newRow[9] = 0;
+                     newRow[10] = 0;
+                     newRow[11] = 0;
+                     newRow[12] = 0;
+                     newRow[13] = 0;
+                     newRow[14] = 0;
+                     newRow[15] = 0;
+                     newRow[16] = 0;
+                     newRow[17] = 0;
+                     newRow[18] = 0;
+                     newRow[19] = BgR.ToString();
+                     newRow[20] = BgG.ToString();
+                     newRow[21] = BgB.ToString();
+                     newRow[22] = MR.ToString();
+                     newRow[23] = MG.ToString();
+                     newRow[24] = MB.ToString();
+                     newRow[25] = ColorMeasured.L.ToString();
+                     newRow[26] = ColorMeasured.U.ToString();
+                     newRow[27] = ColorMeasured.V.ToString();
+                     newRow[28] = ColorMeasured.UP.ToString();
+                     newRow[29] = ColorMeasured.VP.ToString();
+                     newRow[30] = 0;
+                     newRow[31] = 0;
+                     newRow[32] = 0;
+                     newRow[33] = 0;
+                     newRow[34] = 0;
+                     newRow[35] = 0;
+                     newRow[36] = 0;
+                     newRow[37] = 0;
+
+                     pairs.Clear();
+
+                     BgColor = ColorMeasured;
+                     pairs.Add(new MeasurementPair()
+                     {//THE COLOUR DISPLAYED HERE ARE THE BG COLOUR CAPTURED
+                         BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
+                     });
+                 }
+                 //white point capture
+                 else
+                 {
+                     newRow[0] = R.ToString();
+                     newRow[1] = G.ToString();
+                     newRow[2] = B.ToString();
+                     newRow[3] = 0;
+                     newRow[4] = 0;
+                     newRow[5] = 0;
+                     newRow[6] = 0;
+                     newRow[7] = 0;
+                     newRow[8] = 0;
+                     newRow[9] = 0;
+                     newRow[10] = 0;
+                     newRow[11] = 0;
+                     newRow[12] = 0;
+                     newRow[13] = 0;
+                     newRow[14] = 0;
+                     newRow[15] = 0;
+                     newRow[16] = 0;
+                     newRow[17] = 0;
+                     newRow[18] = 0;
+                     newRow[19] = BgR.ToString();
+                     newRow[20] = BgG.ToString();
+                     newRow[21] = BgB.ToString();
+                     newRow[22] = 0;
+                     newRow[23] = 0;
+                     newRow[24] = 0;
+                     newRow[25] = 0;
+                     newRow[26] = 0;
+                     newRow[27] = 0;
+                     newRow[28] = 0;
+                     newRow[29] = 0;
+                     newRow[30] = ColorMeasured.L.ToString();
+                     newRow[31] = ColorMeasured.U.ToString();
+                     newRow[32] = ColorMeasured.V.ToString();
+                     newRow[33] = ColorMeasured.UP.ToString();
+                     newRow[34] = ColorMeasured.VP.ToString();
+                     newRow[35] = MR.ToString();
+                     newRow[36] = MG.ToString();
+                     newRow[37] = MB.ToString();
+
+                     pairs.Add(new MeasurementPair()
+                     {
+                         // HERE 11 AND 12 ARE THE COLOUR CATPTURED BY THE CAMERA FOR DISPLAY 33 AND 34 ARE MIXED COLOURS
+                         BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(ColorMeasured.UP.ToString()), VP = Convert.ToDouble(ColorMeasured.VP.ToString()) }
+                     });
+
+
+                 }
+
+                 R = 10;
+                 dt.Rows.Add(newRow);
+
+                 Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+                 Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+             }
+
+
+
+             //taking back the measured value of bg to all the data set
+             int totalRow = BgNo * FgNo;
+             for (int i = 1; i < BgNo; i++)
+             {
+
+                 for (int j = 0; j < fgNo; j++)
+                 {
+                     int rowNo = (i * FgNo) + j;
+                     // i am doing -1 cos the data set starts from 0 ,.. so in the first one it will still b e bg*fg but i value will be 0
+                     dt.Rows[rowNo][22] = dt.Rows[(totalRow) + i - 1][22].ToString();
+                     dt.Rows[rowNo][23] = dt.Rows[(totalRow) + i - 1][23].ToString();
+                     dt.Rows[rowNo][24] = dt.Rows[(totalRow) + i - 1][24].ToString();
+                     dt.Rows[rowNo][25] = dt.Rows[(totalRow) + i - 1][25].ToString();
+                     dt.Rows[rowNo][26] = dt.Rows[(totalRow) + i - 1][26].ToString();
+                     dt.Rows[rowNo][27] = dt.Rows[(totalRow) + i - 1][27].ToString();
+                     dt.Rows[rowNo][28] = dt.Rows[(totalRow) + i - 1][28].ToString();
+                     dt.Rows[rowNo][29] = dt.Rows[(totalRow) + i - 1][29].ToString();
+
+
+                 }
+             }
+
+             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+             dataTable = dt;
+         });
+         cmb_graph.IsEnabled = true;
+         btn_ExportGrid.IsEnabled = true;
+         // captureDevice.Dispose();
      }
 
     

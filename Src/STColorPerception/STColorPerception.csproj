@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Util\CATCalulation.cs" />
     <Compile Include="Util\ColorSpaceConverter.cs" />
     <Compile Include="Util\ColorMarginConverter.cs" />
     <Compile Include="Util\DivideByHalfConverter.cs" />
