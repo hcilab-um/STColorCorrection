@@ -104,7 +104,32 @@
                 </ToolTip>
               </Ellipse.ToolTip>
                         </Ellipse>
-                    <Ellipse x:Name="bgColor" Width="10" Height="10" Fill="Black" Stroke="Black" StrokeThickness="1.5"
+                        <Ellipse x:Name="aColor" Width="10" Height="10" Fill="Chocolate" Stroke="Black" StrokeThickness="1.5"
+                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                     Visibility="{Binding Path=Acolor, Converter={StaticResource ResourceKey=nvConverter}}">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform X="{Binding ElementName=sColor, Path=ActualWidth, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=4}" 
+                                    Y="{Binding ElementName=Acolor, Path=ActualHeight, Converter={StaticResource ResourceKey=dhConverter}, ConverterParameter=1}" />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Margin>
+                                <MultiBinding Converter="{StaticResource ResourceKey=cmConverter}">
+                                    <Binding Path="Acolor.UP" />
+                                    <Binding Path="Acolor.VP" />
+                                    <Binding ElementName="cie1976" Path="ActualWidth"/>
+                                    <Binding ElementName="cie1976" Path="ActualHeight"/>
+                                </MultiBinding>
+                            </Ellipse.Margin>
+                            <Ellipse.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="50">
+                                        <TextBlock FontWeight="Bold" Text="AC"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=Acolor.UP}"/>
+                                        <TextBlock FontWeight="Bold" Text="{Binding  Path=Acolor.VP}"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Ellipse.ToolTip>
+                        </Ellipse>
+                        <Ellipse x:Name="bgColor" Width="10" Height="10" Fill="Black" Stroke="Black" StrokeThickness="1.5"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     Visibility="{Binding Path=BgColor, Converter={StaticResource ResourceKey=nvConverter}}">
                         <Ellipse.RenderTransform>

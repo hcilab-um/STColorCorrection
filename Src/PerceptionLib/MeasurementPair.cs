@@ -13,7 +13,8 @@ namespace PerceptionLib
     public Color BgColor { get; set; }
     public Color BradColor { get; set; }
     public Color VonColor { get; set; }
-    public Color Scalingcolor { get; set; }   
+    public Color Scalingcolor { get; set; }
+    public Color Acolor { get; set; }   
  
   }
 

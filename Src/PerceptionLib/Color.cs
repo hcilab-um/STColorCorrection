@@ -17,6 +17,8 @@ namespace PerceptionLib
       
     private byte r, g, b;
 
+    public int gmt=0;
+
     public byte R
     {
       get
@@ -492,6 +494,10 @@ namespace PerceptionLib
         tempr = (Math.Round(Clinear[0] * 255));
         tempg = (Math.Round(Clinear[1] * 255));
         tempb = (Math.Round(Clinear[2] * 255));
+        if (tempr > 255 || tempg > 255 || tempb > 255)
+            rgb.gmt = 1;
+          else
+              rgb.gmt = 1;
 
         if (tempr > 255)
         {
