@@ -97,7 +97,8 @@ namespace STColorPerception
     private byte r, g, b, mr, mg, mb,bgr,bgg,bgb,mcr,mcg,mcb;
     int bgNo, fgNo;
 
-    int GMT=0;
+    double CiToCmDiff, ACToCiDiff, AcToCmDiff,BCmToCiDiff, BCmToCmDiff, VCmToCiDiff, VCmToCmDiff, SCmToCiDiff, SCmToCmDiff;
+    double CiToCmStd, ACToCiStd, AcToCmStd, BCmToCiStd, BCmToCmStd, VCmToCiStd, VCmToCmStd, SCmToCiStd, SCmToCmStd;
 
     //EMGU CV objects
     private Image<Bgr, Byte> captureImage;
@@ -692,8 +693,11 @@ namespace STColorPerception
         cmb_graph.IsEnabled = true;
         Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
         dlg.FileName = "Document"; // Default file name 
+        
         dlg.DefaultExt = ".CSV"; // Default file extension 
         dlg.Filter = "Text documents (.csv)|*.CSV"; // Filter files by extension 
+        //dlg.DefaultExt = ".xlsx"; // Default file extension 
+        //dlg.Filter = "Text documents (.xlsx)|*.XLSX"; // Filter files by extension 
 
         // Show open file dialog box 
         Nullable<bool> result = dlg.ShowDialog();
@@ -727,7 +731,7 @@ namespace STColorPerception
             }
         }
 
-        if (dataTable.Columns.Count == 182)
+        if (dataTable.Columns.Count == 183)
         {
             FgNo = 88;
 
@@ -3504,13 +3508,28 @@ namespace STColorPerception
                      //McolorBackGroundXYZ.Y = Convert.ToDouble(dt.Rows[rowNo][96].ToString());
                      //McolorBackGroundXYZ.Z = Convert.ToDouble(dt.Rows[rowNo][97].ToString());
 
-                     //  HERE I CHOSE TO USE COLOR MEASURED IN PLACES OF BG COLOR MEASURED!!
-                     ColorMeasured.L = Convert.ToDouble(dt.Rows[rowNo][87].ToString());
-                     ColorMeasured.U = Convert.ToDouble(dt.Rows[rowNo][88].ToString());
-                     ColorMeasured.V = Convert.ToDouble(dt.Rows[rowNo][89].ToString());
-                     ColorMeasured.LA = Convert.ToDouble(dt.Rows[rowNo][92].ToString());
-                     ColorMeasured.A = Convert.ToDouble(dt.Rows[rowNo][93].ToString());
-                     ColorMeasured.B = Convert.ToDouble(dt.Rows[rowNo][94].ToString());
+                     ColorToShow.L = Convert.ToDouble(dt.Rows[rowNo][3].ToString());
+                     ColorToShow.U = Convert.ToDouble(dt.Rows[rowNo][4].ToString());
+                     ColorToShow.V = Convert.ToDouble(dt.Rows[rowNo][5].ToString());
+                     ColorToShow.LA = Convert.ToDouble(dt.Rows[rowNo][8].ToString());
+                     ColorToShow.A = Convert.ToDouble(dt.Rows[rowNo][9].ToString());
+                     ColorToShow.B = Convert.ToDouble(dt.Rows[rowNo][10].ToString());
+
+                     ColorMeasured.L = Convert.ToDouble(dt.Rows[rowNo][17].ToString());
+                     ColorMeasured.U = Convert.ToDouble(dt.Rows[rowNo][18].ToString());
+                     ColorMeasured.V = Convert.ToDouble(dt.Rows[rowNo][19].ToString());
+                     ColorMeasured.LA = Convert.ToDouble(dt.Rows[rowNo][22].ToString());
+                     ColorMeasured.A = Convert.ToDouble(dt.Rows[rowNo][23].ToString());
+                     ColorMeasured.B = Convert.ToDouble(dt.Rows[rowNo][24].ToString());
+
+                     //  HERE I CHOSE TO USE  BG COLOR IN PLACES OF MEASURE COLOR !!
+                     BgColor.L = Convert.ToDouble(dt.Rows[rowNo][98].ToString());
+                     BgColor.U = Convert.ToDouble(dt.Rows[rowNo][99].ToString());
+                     BgColor.V = Convert.ToDouble(dt.Rows[rowNo][100].ToString());
+                     BgColor.LA = Convert.ToDouble(dt.Rows[rowNo][103].ToString());
+                     BgColor.A = Convert.ToDouble(dt.Rows[rowNo][104].ToString());
+                     BgColor.B = Convert.ToDouble(dt.Rows[rowNo][105].ToString());
+                
 
                      BradXYZ.X = Convert.ToDouble(dt.Rows[rowNo][36].ToString());
                      BradXYZ.Y = Convert.ToDouble(dt.Rows[rowNo][37].ToString());
@@ -3608,14 +3627,16 @@ namespace STColorPerception
                      dt.Rows[rowNo][170] = MbradRGB.gmt;
                      dt.Rows[rowNo][171] = MVonRGB.gmt;
                      dt.Rows[rowNo][172] = MscalingRGB.gmt;
-                     dt.Rows[rowNo][173] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Acolor).ToString();
-                     dt.Rows[rowNo][174] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Acolor).ToString();
-                     dt.Rows[rowNo][175] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Bradcolor).ToString();
-                     dt.Rows[rowNo][176] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Bradcolor).ToString();
-                     dt.Rows[rowNo][177] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Voncolor).ToString();
-                     dt.Rows[rowNo][178] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Voncolor).ToString();
-                     dt.Rows[rowNo][179] = PerceptionLib.Color.ColorDistanceCal(ColorMeasured, Scalingcolor).ToString();
-                     dt.Rows[rowNo][180] = PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, Scalingcolor).ToString();
+                     dt.Rows[rowNo][173] = PerceptionLib.Color.ColorDistanceCal(BgColor, Acolor).ToString();
+                     dt.Rows[rowNo][174] = PerceptionLib.Color.ColorDistanceCalAB(BgColor, Acolor).ToString();
+                     dt.Rows[rowNo][175] = PerceptionLib.Color.ColorDistanceCal(BgColor, Bradcolor).ToString();
+                     dt.Rows[rowNo][176] = PerceptionLib.Color.ColorDistanceCalAB(BgColor, Bradcolor).ToString();
+                     dt.Rows[rowNo][177] = PerceptionLib.Color.ColorDistanceCal(BgColor, Voncolor).ToString();
+                     dt.Rows[rowNo][178] = PerceptionLib.Color.ColorDistanceCalAB(BgColor, Voncolor).ToString();
+                     dt.Rows[rowNo][179] = PerceptionLib.Color.ColorDistanceCal(BgColor, Scalingcolor).ToString();
+                     dt.Rows[rowNo][180] = PerceptionLib.Color.ColorDistanceCalAB(BgColor, Scalingcolor).ToString();
+                     dt.Rows[rowNo][181] = PerceptionLib.Color.ColorDistanceCalAB(ColorToShow, ColorMeasured).ToString();
+                     dt.Rows[rowNo][182] = PerceptionLib.Color.ColorDistanceCalAB(BgColor, ColorMeasured).ToString();
 
                                     
                                     
@@ -3705,7 +3726,7 @@ namespace STColorPerception
             
          }
 
-         if (dataTable.Columns.Count == 181 || dataTable.Columns.Count == 182)
+         if (dataTable.Columns.Count == 182 || dataTable.Columns.Count == 183)
          {
 
              if (selectedItem == 0)
@@ -3773,8 +3794,6 @@ namespace STColorPerception
 
      }
 
-    
-
      private void dtgrid_corrDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
      {
          if (dtgrid_corrDisplay.SelectedItem != null)
@@ -3812,7 +3831,7 @@ namespace STColorPerception
                  }
              }
 
-             if (dataTable.Columns.Count == 181 || dataTable.Columns.Count == 182)
+             if (dataTable.Columns.Count == 182 || dataTable.Columns.Count == 183)
              {
                  int i = dtgrid_corrDisplay.SelectedIndex;
                  if (i != dataTable.Rows.Count)

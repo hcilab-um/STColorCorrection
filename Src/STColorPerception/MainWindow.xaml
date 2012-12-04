@@ -94,10 +94,74 @@
                     <Button Width="104" Name="btn_ImportGrid" Margin="10,0,0,0" Click="Btn_ImportGrid_Click">Import DataGrid</Button>
                     <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
-                <StackPanel Orientation="Horizontal" Width="1015" Height="155" Margin="10,10,10,10 ">
-                    
-                    
-                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal" Width="1035" Height="189" Margin="10,10,10,10 ">
+                    <StackPanel Orientation="Vertical"  Width="175" VerticalAlignment="Top" Height="160" Margin="10,10,10,10 " Background="{x:Null}" OpacityMask="{x:Null}" Opacity="3">
+                        <StackPanel Height="41" Orientation="Horizontal" Width="139" Margin="10">
+                            <Label Content="Ci To Cm RMS:" Height="25" Margin="0,0,0,0" Name="label14" VerticalAlignment="Center" Width="88" />
+                            <TextBox Height="24" Name="textBox2" Text="{Binding ElementName=mainW, Path=CiToCmDiff}" VerticalAlignment="Center" Width="42" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Orientation="Horizontal" Width="137">
+                            <Label Content="Ci To Cm Std:" Height="25" Margin="0,0,0,0" Name="label15" VerticalAlignment="Center" Width="88" />
+                            <TextBox Height="24" IsReadOnly="True" Name="textBox1" Text="{Binding ElementName=mainW, Path=CiToCmStd}" VerticalAlignment="Center" Width="41" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Height="169" Orientation="Vertical" Width="175"  Margin="10,10,10,10 ">
+                        <StackPanel Height="41" Orientation="Horizontal" Width="79" Margin="10" >
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label17" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox4" Text="{Binding ElementName=mainW, Path=ACToCiDiff}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Orientation="Horizontal" Width="79" Margin="0">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label18" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox5" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Orientation="Horizontal" Width="79" Margin="10" >
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label19" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox6" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Height="169" Orientation="Vertical" Width="175">
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label20" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox7" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="0" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label21" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox8" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label22" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox9" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Height="169" Orientation="Vertical" Width="175">
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label23" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox10" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="0" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label24" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox11" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label25" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox12" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" IsReadOnly="True" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Height="169" Orientation="Vertical" Width="175">
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label26" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox13" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="0" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label27" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox14" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" />
+                        </StackPanel>
+                        <StackPanel Height="41" Margin="10" Orientation="Horizontal" Width="79">
+                            <Label Content="G:" Height="25" Margin="0,0,0,0" Name="label28" VerticalAlignment="Center" Width="20" />
+                            <TextBox Height="24" Name="textBox15" Text="{Binding ElementName=mainW, Path=BgNo}" VerticalAlignment="Center" Width="36" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>-->
                 <StackPanel Orientation="Horizontal" Width="635" Height="46" Margin="10,0,10,10 ">
           <Label Name="lbl_R" Width="19" Height="26" Margin="0,10,0,0">R:</Label>
           <TextBox Name="txt_R" Width="43" Height="24" Margin="0,10,0,0" Text="{Binding ElementName=mainW, Path=R}"/>
