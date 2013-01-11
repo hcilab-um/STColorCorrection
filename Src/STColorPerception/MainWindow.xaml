@@ -84,7 +84,8 @@
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
                     <Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Gamut calculation</Button>
                     <Button Width="104" Name="btn_StdColorData" Margin="10,0,0,0" Click="Btn_StdColorData_Click">Standard Colors</Button>
-                    <Button Width="74" Name="btn_ColorPredictor" Margin="10,0,0,0" Click="Btn_ColorPredictor_Click">Predictor</Button>
+                    <Button Width="74" Name="btn_ColorPredictor" Margin="10,0,0,0" Click="Btn_BinColor_Click">BinColor</Button>
+                    <Button Width="74" Name="btn_BinColor" Margin="10,0,0,0" Click="Btn_ColorPredictor_Click">Predictor</Button>
                     <Label Name="lbl_BgNo" Width="59" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
         <TextBox Name="txt_BgNo" Width="36" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=BgNo}"/>
         <Label Name="lbl_FgNo" Width="59" Height="26" Margin="10,0,0,0">No of FG_Colour:</Label>

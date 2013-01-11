@@ -57,7 +57,22 @@ namespace PerceptionLib
       // dynamic array to caluclate RGB values
    
   }
-    
+
+  public class LABbin
+  {
+      public double L { get; set; }
+      public double A { get; set; }
+      public double B { get; set; }
+
+  }
+
+  public class RGBbin
+  {
+      public byte R { get; set; }
+      public byte G { get; set; }
+      public byte B { get; set; }
+
+  }
 
   /// <summary>
   /// to define CIE XYZ.
@@ -739,90 +754,118 @@ namespace PerceptionLib
     }
 
 
+
+
       /// <summary>
       /// funtion to get RGB data which are taken out from the LAB binning
       /// </summary>
       /// <returns></returns>
-    public static byte[][] RGBbinedData()
+    public static List<RGBbin> RGBbinedData()
     {
 
-        double[][] bin = binning();
+        List<LABbin> bin = binning();
         int count = bin.Count();
 
-        byte[][] BinRGB = new byte[count][];
+        List<RGBbin> BinRGB = new List<RGBbin>();
+       // byte[][] BinRGB = new byte[count][];
         
         RGBValue temp = new RGBValue();
         Color lab= new Color();
 
-        int binCount=0;
+       // int binCount=0;
 
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
-            lab.L=bin[i][1];
-            lab.A=bin[i][2];
-            lab.B=bin[i][3];
+                      
+                lab.L = bin[i].L;
+                lab.A = bin[i].A;
+                lab.B = bin[i].B;
 
-            temp = ToRBGFromLAB(lab);
 
-            if (temp.R < 0 || temp.R > 255 || temp.B < 0 || temp.B > 255 || temp.G < 0 || temp.G > 255)
-            {
-                continue;
-            }
-            else
-            {
-                BinRGB[binCount]=new byte[3]{(byte)temp.R,(byte)temp.G,(byte)temp.B};
-                binCount++;
-            }
-           
-            
+                temp = ToRBGFromLAB(lab);
+
+                if (temp.R < 0 || temp.R > 255 || temp.B < 0 || temp.B > 255 || temp.G < 0 || temp.G > 255)
+                {
+                    continue;
+                }
+                else
+                {
+                    //BinRGB[binCount].R = (byte)temp.R;
+                    //BinRGB[binCount].G= (byte)temp.G;
+                    //BinRGB[binCount].B= (byte)temp.B;
+                    //binCount++;
+
+                    BinRGB.Add(new RGBbin
+                    {
+                        R = (byte)temp.R,
+                        G= (byte)temp.G,
+                        B= (byte)temp.B
+
+                    });
+                }
+                     
         }
 
         return BinRGB;
 
     }
 
-
-    public static double[][] binning()
+      /// <summary>
+      /// funtion to bin lab values in a bin unit of 5
+      /// </summary>
+      /// <returns></returns>
+    public static List<LABbin> binning()
       {
-          double L, a=-100, b=-100;
-          int count = 0;
+          double l=0, a=-100, b=-100;
+          int cnt = 0;
 
           //Color bin = new Color();
-          double[][] binedLabValues = new double[33641][];
+         // double[][] binedLabValues = new double[33641][];
 
+          List<LABbin> binedLabValues = new List<LABbin>();
 
-          for (L = 0; L < 101; L = L + 5)
+          for (l = 0; l < 101; l = l + 10)
           {
-              if (L == 0 && a == -100 && b == -100)
+            
+              if (l == 0 && a == -100 && b == -100)
               {
                   //bin.L = L;
                   //bin.A = a;
                   //bin.B = b;
-                  binedLabValues[count] = new double[3] { L, a, b };
-                  count++;
+                  binedLabValues.Add(new LABbin
+                  {
+                      L=l,A=a,B=b
+                                      
+                  });
+                  
+                  
+                  
               }
               else
               {
-                  for (a = -100; a < 101; a = a + 5)
+                  for (a = -100; a < 101; a = a + 10)
                   {
-                      for (b = -100; b < 101; b = b + 5)
+                      for (b = -100; b < 101; b = b + 10)
                       {
                           //bin.L = L;
                           //bin.A = a;
                           //bin.B = b;
-                          binedLabValues[count] = new double[3] { L, a, b };
-                          count++;
+                          binedLabValues.Add(new LABbin
+                          {
+                              L = l,
+                              A = a,
+                              B = b
+
+                          });
                       }
                   }
 
               }
           }
 
-
           return binedLabValues;
       }
-
-     
+  
 
   }
 

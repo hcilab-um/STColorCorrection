@@ -85,6 +85,8 @@ namespace STColorPerception
     
 
     private PerceptionLib.RGBValue CalRGB;
+
+    private int dtgridClick=0;
    
     
     
@@ -2182,10 +2184,6 @@ namespace STColorPerception
          FgNo = dt.Rows.Count;
 
         
-
-
-
-
          // this loop is too changfe the bg color
          //  for (int i = 0; i < 5; i++)
          ThreadPool.QueueUserWorkItem(ignored =>
@@ -3653,6 +3651,104 @@ namespace STColorPerception
          // captureDevice.Dispose();
      }
 
+     private void Btn_BinColor_Click(object sender, RoutedEventArgs e)
+     {
+         PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bin.csv");
+         dtgridClick = 1;
+         txt_R.IsEnabled = false;
+         txt_G.IsEnabled = false;
+         txt_B.IsEnabled = false;
+         txt_BgNo.IsEnabled = false;
+         txt_FgNo.IsEnabled = false;
+         btn_MixedColour.IsEnabled = false;
+         DataTable dt = new DataTable();
+         // DataTable new_dt = new DataTable();
+         DataRow newRow;
+         dt = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+         List<RGBbin> binRGB = PerceptionLib.Color.RGBbinedData();
+
+         int count = binRGB.Count();
+         int rowcount = dt.Rows.Count;
+
+//         int temp = -1;
+
+         for (int i = 0; i < count; i++)
+         {
+
+             newRow = dt.NewRow();
+             newRow[0] = binRGB[i].R.ToString();
+             newRow[1] = binRGB[i].G.ToString();
+             newRow[2] = binRGB[i].B.ToString();
+             dt.Rows.Add(newRow);
+         }
+         DataView dv = new DataView(dt);
+         // set the output columns array of the destination dt 
+         string[] strColumns = { "R", "G", "B" };
+         // true = yes, i need distinct values. 
+         
+         dt = dv.ToTable(true, strColumns);
+         dv = new DataView(dt);
+
+
+         DataTable dt2 = dt.Clone();
+         dt2.Columns["R"].DataType = Type.GetType("System.Int32");
+         dt2.Columns["G"].DataType = Type.GetType("System.Int32");
+         dt2.Columns["B"].DataType = Type.GetType("System.Int32");
+
+         foreach (DataRow dr in dt.Rows)
+         {
+             dt2.ImportRow(dr);
+         }
+         dt2.AcceptChanges();
+         dv = dt2.DefaultView;
+         dv.Sort = "R,G,B";
+
+         dt = dv.ToTable();
+         dataTable = dt;
+
+             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+             // to check if the RGB value is previous aquried 
+             //for (int j = temp; j <= rowcount; j++)
+             //{
+
+             //    if (rowcount > 0)
+             //        if (dt.Rows[j][0].ToString() == binRGB[j].R.ToString() && dt.Rows[j][1].ToString() == binRGB[j].G.ToString() && dt.Rows[j][2].ToString() == binRGB[j].B.ToString())
+             //            continue;
+             //        else
+             //        {
+             //            newRow = dt.NewRow();
+             //            newRow[0] = binRGB[i].R.ToString();
+             //            newRow[1] = binRGB[i].G.ToString();
+             //            newRow[2] = binRGB[i].B.ToString();
+             //            dt.Rows.Add(newRow);
+             //            Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+             //            Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+             //            rowcount++;
+             //        }
+             //    else
+             //    {
+             //        newRow = dt.NewRow();
+             //        newRow[0] = binRGB[i].R.ToString();
+             //        newRow[1] = binRGB[i].G.ToString();
+             //        newRow[2] = binRGB[i].B.ToString();
+             //        dt.Rows.Add(newRow);
+             //        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt.DefaultView));
+             //        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+             //        rowcount++;
+             //        temp=0;
+             //    }
+                 
+             //}
+            
+         
+
+         
+
+     }
+
+
      private void cmb_graph_SelectionChanged(object sender, SelectionChangedEventArgs e)
      {
          DataTable dt = new DataTable();
@@ -3796,102 +3892,113 @@ namespace STColorPerception
 
      private void dtgrid_corrDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
      {
-         if (dtgrid_corrDisplay.SelectedItem != null)
+         if (dtgridClick == 0)
          {
-             //gamut button data has 63 coloms in it 
-             if (dataTable.Columns.Count == 64)
+
+             if (dtgrid_corrDisplay.SelectedItem != null)
              {
-                 int i = dtgrid_corrDisplay.SelectedIndex;
-                 if (i != dataTable.Rows.Count)
+                 //gamut button data has 63 coloms in it 
+                 if (dataTable.Columns.Count == 64)
                  {
-
-
-
-                     rect_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
-
-                     rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][27].ToString()), Convert.ToByte(dataTable.Rows[i][28].ToString()), Convert.ToByte((dataTable.Rows[i][29]).ToString())));
-
-                     rect_Brad.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][45].ToString()), Convert.ToByte(dataTable.Rows[i][46].ToString()), Convert.ToByte((dataTable.Rows[i][47]).ToString())));
-
-                     rect_Von.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][48].ToString()), Convert.ToByte(dataTable.Rows[i][49].ToString()), Convert.ToByte((dataTable.Rows[i][50]).ToString())));
-
-                     rect_Scaling.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][51].ToString()), Convert.ToByte(dataTable.Rows[i][52].ToString()), Convert.ToByte((dataTable.Rows[i][53]).ToString())));
-
-
-
-                     pairs.Clear();
-                     pairs.Add(new MeasurementPair()
+                     int i = dtgrid_corrDisplay.SelectedIndex;
+                     if (i != dataTable.Rows.Count)
                      {
-                         ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
-                         ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
-                         BradColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][57].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][58].ToString()) },
-                         VonColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][59].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][60].ToString()) },
-                         Scalingcolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][61].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][62].ToString()) },
-                     });
+
+
+
+                         rect_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
+
+                         rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][27].ToString()), Convert.ToByte(dataTable.Rows[i][28].ToString()), Convert.ToByte((dataTable.Rows[i][29]).ToString())));
+
+                         rect_Brad.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][45].ToString()), Convert.ToByte(dataTable.Rows[i][46].ToString()), Convert.ToByte((dataTable.Rows[i][47]).ToString())));
+
+                         rect_Von.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][48].ToString()), Convert.ToByte(dataTable.Rows[i][49].ToString()), Convert.ToByte((dataTable.Rows[i][50]).ToString())));
+
+                         rect_Scaling.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][51].ToString()), Convert.ToByte(dataTable.Rows[i][52].ToString()), Convert.ToByte((dataTable.Rows[i][53]).ToString())));
+
+
+
+                         pairs.Clear();
+                         pairs.Add(new MeasurementPair()
+                         {
+                             ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
+                             ColorCaptured = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][11].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][12].ToString()) },
+                             BradColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][57].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][58].ToString()) },
+                             VonColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][59].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][60].ToString()) },
+                             Scalingcolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][61].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][62].ToString()) },
+                         });
+                     }
                  }
-             }
 
-             if (dataTable.Columns.Count == 182 || dataTable.Columns.Count == 183)
-             {
-                 int i = dtgrid_corrDisplay.SelectedIndex;
-                 if (i != dataTable.Rows.Count)
+                 if (dataTable.Columns.Count == 182 || dataTable.Columns.Count == 183)
                  {
-
-                     rect_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
-                    
-                     rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][84].ToString()), Convert.ToByte(dataTable.Rows[i][85].ToString()), Convert.ToByte((dataTable.Rows[i][86]).ToString())));
-                     
-                     if (i > FgNo+1)
+                     int i = dtgrid_corrDisplay.SelectedIndex;
+                     if (i != dataTable.Rows.Count)
                      {
+
+                         rect_shown.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
+
                          rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][84].ToString()), Convert.ToByte(dataTable.Rows[i][85].ToString()), Convert.ToByte((dataTable.Rows[i][86]).ToString())));
 
-                         rect_Brad.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][137].ToString()), Convert.ToByte(dataTable.Rows[i][138].ToString()), Convert.ToByte((dataTable.Rows[i][139]).ToString())));
+                         if (i > FgNo + 1)
+                         {
+                             rect_Seen.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][84].ToString()), Convert.ToByte(dataTable.Rows[i][85].ToString()), Convert.ToByte((dataTable.Rows[i][86]).ToString())));
 
-                         rect_Von.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][151].ToString()), Convert.ToByte(dataTable.Rows[i][152].ToString()), Convert.ToByte((dataTable.Rows[i][153]).ToString())));
+                             rect_Brad.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][137].ToString()), Convert.ToByte(dataTable.Rows[i][138].ToString()), Convert.ToByte((dataTable.Rows[i][139]).ToString())));
 
-                         rect_Scaling.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][165].ToString()), Convert.ToByte(dataTable.Rows[i][166].ToString()), Convert.ToByte((dataTable.Rows[i][167]).ToString())));
+                             rect_Von.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][151].ToString()), Convert.ToByte(dataTable.Rows[i][152].ToString()), Convert.ToByte((dataTable.Rows[i][153]).ToString())));
 
-                         rect_Acolor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][123].ToString()), Convert.ToByte(dataTable.Rows[i][124].ToString()), Convert.ToByte((dataTable.Rows[i][125]).ToString())));
+                             rect_Scaling.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][165].ToString()), Convert.ToByte(dataTable.Rows[i][166].ToString()), Convert.ToByte((dataTable.Rows[i][167]).ToString())));
 
-                         rect_bg.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][70].ToString()), Convert.ToByte(dataTable.Rows[i][71].ToString()), Convert.ToByte((dataTable.Rows[i][72]).ToString())));
-                     }
+                             rect_Acolor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][123].ToString()), Convert.ToByte(dataTable.Rows[i][124].ToString()), Convert.ToByte((dataTable.Rows[i][125]).ToString())));
 
-                     double U, V;
+                             rect_bg.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][70].ToString()), Convert.ToByte(dataTable.Rows[i][71].ToString()), Convert.ToByte((dataTable.Rows[i][72]).ToString())));
+                         }
 
-                     if (i < FgNo+1)
-                     {
-                         U=Convert.ToDouble(dataTable.Rows[i][20].ToString());
-                         V=Convert.ToDouble(dataTable.Rows[i][21].ToString());
-                     }
-                     else
-                     {
-                         U=Convert.ToDouble(dataTable.Rows[i][101].ToString());
-                         V=Convert.ToDouble(dataTable.Rows[i][102].ToString());
-                     }
+                         double U, V;
 
-                     pairs.Clear();
-                     pairs.Add(new MeasurementPair()
-                     {
-                         ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
-                         ColorCaptured = new PerceptionLib.Color() { L = 0, UP = U , VP = V },                                           
+                         if (i < FgNo + 1)
+                         {
+                             U = Convert.ToDouble(dataTable.Rows[i][20].ToString());
+                             V = Convert.ToDouble(dataTable.Rows[i][21].ToString());
+                         }
+                         else
+                         {
+                             U = Convert.ToDouble(dataTable.Rows[i][101].ToString());
+                             V = Convert.ToDouble(dataTable.Rows[i][102].ToString());
+                         }
 
-                             Acolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][115].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][116].ToString()) },             
+                         pairs.Clear();
+                         pairs.Add(new MeasurementPair()
+                         {
+                             ColorToShow = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][6].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][7].ToString()) },
+                             ColorCaptured = new PerceptionLib.Color() { L = 0, UP = U, VP = V },
+
+                             Acolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][115].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][116].ToString()) },
                              BgColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][76].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][77].ToString()) },
                              BradColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][129].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][130].ToString()) },
                              VonColor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][143].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][144].ToString()) },
                              Scalingcolor = new PerceptionLib.Color() { L = 0, UP = Convert.ToDouble(dataTable.Rows[i][157].ToString()), VP = Convert.ToDouble(dataTable.Rows[i][158].ToString()) }
-                             
-                      });
-                    
+
+                         });
+
+                     }
+
                  }
 
              }
 
          }
 
+         else
+         {
+             int i = dtgrid_corrDisplay.SelectedIndex;
+             rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
+         }
      }
 
-    
+
+      
     
   }
 
