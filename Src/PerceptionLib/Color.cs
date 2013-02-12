@@ -57,7 +57,22 @@ namespace PerceptionLib
       // dynamic array to caluclate RGB values
    
   }
-    
+
+  public class LABbin
+  {
+      public double L { get; set; }
+      public double A { get; set; }
+      public double B { get; set; }
+
+  }
+
+  public class RGBbin
+  {
+      public byte R { get; set; }
+      public byte G { get; set; }
+      public byte B { get; set; }
+
+  }
 
   /// <summary>
   /// to define CIE XYZ.
@@ -434,6 +449,43 @@ namespace PerceptionLib
       rgb.B = (byte)tempb;
       return rgb; 
     }
+
+/// <summary>
+/// funtion for LAb To RGB
+/// </summary>
+/// <param name="PassedLab"></param>
+/// <returns></returns>
+    public static RGBValue ToRBGFromLAB(Color PassedLab)
+    {
+        int tempr, tempg, tempb;
+        CIEXYZ xyz = LABToXYZ(PassedLab);
+
+
+        RGBValue rgb = new RGBValue();
+
+        double[] Clinear = new double[3];
+
+        Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
+        Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
+        Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
+
+        //gamma companding
+        for (int i = 0; i < 3; i++)
+        {
+
+            Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
+        }
+
+        tempr = (int)Math.Round(Clinear[0] * 255.0);
+        tempg = (int)Math.Round(Clinear[1] * 255.0);
+        tempb = (int)Math.Round(Clinear[2] * 255.0);
+
+
+        rgb.R = (byte)tempr;
+        rgb.G = (byte)tempg;
+        rgb.B = (byte)tempb;
+        return rgb;
+    }
    
       public static RGBValue ToRBG(CIEXYZ xyz)
     {
@@ -557,14 +609,52 @@ namespace PerceptionLib
       return xyz ;
     }
 
+
+
     // function to get y value
     private static double GetY(double l)
     {
       return (l > (0.008856 * 903.3)) ? Math.Pow(((l + 16.0) / 116.0),3.0) : (l/903.3);
     }
+      /// <summary>
+      /// Funtion to convert Lab To XYZ
+      /// </summary>
+      /// <param name="passedLAB"></param>
+      /// <returns></returns>
+    private static CIEXYZ LABToXYZ(Color passedLAB)
+    {
+        double X, Y, Z, xr, yr, zr, Xr, Yr, Zr, Fx, Fy, Fz;
+
+        Fy = (double)((double)(passedLAB.L + 16)) / 116;
+
+        Fx = (double)((double)(passedLAB.A / 500)) + Fy;
+
+        Fz = (double) Fy-((double)(passedLAB.B / 200));
+
+        xr = (Math.Pow(Fx, 3) > (0.008856)) ? Math.Pow(Fx, 3) : ((double)((double)(116 * Fx - 16) / 903.3));
+
+        yr = (passedLAB.L > (0.008856 * 903.3)) ? Math.Pow(Fy, 3) : ((double)(passedLAB.L/ 903.3));
+
+        zr = (Math.Pow(Fz, 3) > (0.008856)) ? Math.Pow(Fz, 3) : ((double)((double)(116 * Fz - 16) / 903.3));
+
+       //for D65
+        Xr = 0.9504;
+
+        Yr = 1;
+
+        Zr = 1.0888;
+
+        X = (double)xr * Xr;
+        Y = (double)yr * Yr;
+        Z = (double)zr * Zr;
+
+        CIEXYZ xyz = new CIEXYZ(X, Y, Z);
+
+        return xyz;
+    }
+
       
-      
-      
+            
       /// <summary>
       /// function to find the Delta e the color difference
       /// </summary>
@@ -658,13 +748,124 @@ namespace PerceptionLib
             Color2.G = Color1.G;
             Color2.B = Color1.B;
         }
-
-
-        
+                     
 
         return null;
     }
-     
+
+
+
+
+      /// <summary>
+      /// funtion to get RGB data which are taken out from the LAB binning
+      /// </summary>
+      /// <returns></returns>
+    public static List<RGBbin> RGBbinedData()
+    {
+
+        List<LABbin> bin = binning();
+        int count = bin.Count();
+
+        List<RGBbin> BinRGB = new List<RGBbin>();
+       // byte[][] BinRGB = new byte[count][];
+        
+        RGBValue temp = new RGBValue();
+        Color lab= new Color();
+
+       // int binCount=0;
+
+        for (int i = 0; i < count; i++)
+        {
+                      
+                lab.L = bin[i].L;
+                lab.A = bin[i].A;
+                lab.B = bin[i].B;
+
+
+                temp = ToRBGFromLAB(lab);
+
+                if (temp.R < 0 || temp.R > 255 || temp.B < 0 || temp.B > 255 || temp.G < 0 || temp.G > 255)
+                {
+                    continue;
+                }
+                else
+                {
+                    //BinRGB[binCount].R = (byte)temp.R;
+                    //BinRGB[binCount].G= (byte)temp.G;
+                    //BinRGB[binCount].B= (byte)temp.B;
+                    //binCount++;
+
+                    BinRGB.Add(new RGBbin
+                    {
+                        R = (byte)temp.R,
+                        G= (byte)temp.G,
+                        B= (byte)temp.B
+
+                    });
+                }
+                     
+        }
+
+        return BinRGB;
+
+    }
+
+      /// <summary>
+      /// funtion to bin lab values in a bin unit of 5
+      /// </summary>
+      /// <returns></returns>
+    public static List<LABbin> binning()
+      {
+          double l=0, a=-100, b=-100;
+          int cnt = 0;
+
+          //Color bin = new Color();
+         // double[][] binedLabValues = new double[33641][];
+
+          List<LABbin> binedLabValues = new List<LABbin>();
+
+          for (l = 0; l < 101; l = l + 10)
+          {
+            
+              if (l == 0 && a == -100 && b == -100)
+              {
+                  //bin.L = L;
+                  //bin.A = a;
+                  //bin.B = b;
+                  binedLabValues.Add(new LABbin
+                  {
+                      L=l,A=a,B=b
+                                      
+                  });
+                  
+                  
+                  
+              }
+              else
+              {
+                  for (a = -100; a < 101; a = a + 10)
+                  {
+                      for (b = -100; b < 101; b = b + 10)
+                      {
+                          //bin.L = L;
+                          //bin.A = a;
+                          //bin.B = b;
+                          binedLabValues.Add(new LABbin
+                          {
+                              L = l,
+                              A = a,
+                              B = b
+
+                          });
+                      }
+                  }
+
+              }
+          }
+
+          return binedLabValues;
+      }
+  
 
   }
 
