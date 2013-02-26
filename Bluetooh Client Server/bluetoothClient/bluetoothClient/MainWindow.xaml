@@ -1,0 +1,9 @@
+﻿<Window x:Class="bluetoothClient.MainWindow" x:Name="cWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="183,105,0,0" Name="txtB_color" VerticalAlignment="Top" Width="120" Text="{Binding ElementName=cWindowm, Path=HexColor}"/>
+        <Button Content="Connect" Height="23" HorizontalAlignment="Left" Margin="206,157,0,0" Name="Connect" VerticalAlignment="Top" Width="75" Click="Connect_Click" />
+    </Grid>
+</Window>

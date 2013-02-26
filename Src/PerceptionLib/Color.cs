@@ -5,8 +5,6 @@ using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 
-
-
 namespace PerceptionLib
 {
     
@@ -160,7 +158,7 @@ namespace PerceptionLib
 
     private double u, v, uR, vR;
     private double l, uP, vP,la,a,b;
-
+                        
     public double L
     {
       get { return l; }
@@ -322,7 +320,6 @@ namespace PerceptionLib
       /// </summary>
       /// <param name="cRGB"></param>
       /// <returns></returns>
-   
     public static Color ToLAB(System.Drawing.Color cRGB)
     {
         double Fx, Fy, Fz;
@@ -343,6 +340,7 @@ namespace PerceptionLib
 
         return rColor;
     }
+  
     public static Color ToLAB(CIEXYZ xyz)
     {
         double Fx, Fy, Fz;
@@ -368,9 +366,7 @@ namespace PerceptionLib
     {
         return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e+16)/116));
     }
-    
-
-    
+      
     public static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
     {
       // by the formula given the the web page http://www.brucelindbloom.com/index.html [XYZ]=[M][RGB]
@@ -486,8 +482,8 @@ namespace PerceptionLib
         rgb.B = (byte)tempb;
         return rgb;
     }
-   
-      public static RGBValue ToRBG(CIEXYZ xyz)
+  
+    public static RGBValue ToRBG(CIEXYZ xyz)
     {
         double tempr, tempg, tempb;
         //CIEXYZ xyz = LUVToXYZ(PassedLUV);
@@ -608,9 +604,6 @@ namespace PerceptionLib
              
       return xyz ;
     }
-
-
-
     // function to get y value
     private static double GetY(double l)
     {
@@ -652,8 +645,6 @@ namespace PerceptionLib
 
         return xyz;
     }
-
-      
             
       /// <summary>
       /// function to find the Delta e the color difference
@@ -686,8 +677,7 @@ namespace PerceptionLib
 
         //return result;
     }
-   
-      
+     
     /// <summary>
     /// function to cal ΔE
     /// </summary>
@@ -726,7 +716,6 @@ namespace PerceptionLib
         return Euv;
     }
 
-
     public RGBValue gammut(RGBValue cRGB)
     {
         // color 1
@@ -752,10 +741,6 @@ namespace PerceptionLib
 
         return null;
     }
-
-
-
-
       /// <summary>
       /// funtion to get RGB data which are taken out from the LAB binning
       /// </summary>
@@ -865,8 +850,17 @@ namespace PerceptionLib
 
           return binedLabValues;
       }
-  
 
+      /// <summary>
+      /// function to create Hexdecimal values from RGB
+      /// </summary>
+      /// <param name="cRGB"></param>
+      /// <returns></returns>
+    public String RGBtoHEX(System.Drawing.Color cRGB)
+    {
+        return ColorTranslator.FromHtml(String.Format("#{0:X2}{1:X2}{2:X2}", cRGB.R, cRGB.G, cRGB.B)).Name.Remove(0, 2);
+
+    }
   }
 
 }
