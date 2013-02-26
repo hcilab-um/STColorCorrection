@@ -7,38 +7,46 @@ using InTheHand.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.ComponentModel;
+using System.IO.Ports;
 
 namespace server_bluetoothexample
 {
   class Bluetooth
   {
-    private BluetoothClient client = null;
-    private BluetoothListener serverSocket = null;
-    private BinaryWriter bWriter = null;
-    //  private BinaryReader bReader = null;
+
+    //private BluetoothClient client = null;
+    //private BluetoothListener serverSocket = null;
+    //private BinaryWriter bWriter = null;
+    //private BinaryReader bReader = null;
+
+    private SerialPort port;
 
     private MainWindow mwObject = null;
     private BackgroundWorker serverWorker = null;
-
-
     
     public Boolean IsConnected
     {
       get
       {
-        if (client == null)
+        //if (client == null)
+        //  return false;
+        //return client.Connected;
+
+        if (port == null)
           return false;
-        return client.Connected;
+        return port.IsOpen;
       }
     }
 
     public Bluetooth(Guid applicationGuid, MainWindow mwObject)
     {
-      serverSocket = new BluetoothListener(applicationGuid);
-      serverSocket.Start();
+      //serverSocket = new BluetoothListener(applicationGuid);
+      //serverSocket.Start();
+
+      port = new SerialPort("COM7", 9600);
+      port.Open();
 
       serverWorker = new BackgroundWorker();
-
       this.mwObject = mwObject;
     }
 
@@ -55,9 +63,12 @@ namespace server_bluetoothexample
     {
       try
       {
-        client = serverSocket.AcceptBluetoothClient();
-        Stream peerStream = client.GetStream();
-        bWriter = new BinaryWriter(peerStream, Encoding.ASCII);
+        port.WriteLine("Hello Sri!Z");
+        port.BaseStream.Flush();
+
+        //client = serverSocket.AcceptBluetoothClient();
+        //Stream peerStream = client.GetStream();
+        //bWriter = new BinaryWriter(peerStream, Encoding.ASCII);
         e.Result = true;
       }
       catch (Exception exception)
@@ -79,14 +90,12 @@ namespace server_bluetoothexample
 
     public void SendRGB(string color_string)
     {
-
-      bWriter.Write(color_string);
-      bWriter.Flush();
+      //bWriter.Write(color_string);
+      //bWriter.Flush();
       //sample 2nd string being passed for testing !!
       string temp = "FFFFFF";
-      
-      bWriter.Write(temp);
-      bWriter.Flush();
+      //bWriter.Write(temp);
+      //bWriter.Flush();
     }
 
     ///// <summary>
@@ -110,7 +119,7 @@ namespace server_bluetoothexample
       try
       {
         isRunning = false;
-        serverSocket.Stop();
+        //serverSocket.Stop();
       }
       catch (Exception exception)
       { }

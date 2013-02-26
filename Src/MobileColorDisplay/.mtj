@@ -8,8 +8,8 @@
       <configuration active="true" name="ClamshellJavaMEPhone1">
          <device group="Oracle Java(TM) Platform Micro Edition SDK 3.2" name="ClamshellJavaMEPhone1"/>
          <symbolSet name="ClamshellJavaMEPhone1">
-            <symbol name="screen.isColor" value="true"/>
             <symbol name="MMAPI" value="1.2"/>
+            <symbol name="screen.isColor" value="true"/>
             <symbol name="descriptor" value="Clamshell Java ME CLDC emulator"/>
             <symbol name="screen.bitDepth" value="16"/>
             <symbol name="JSR82" value="1.1"/>
