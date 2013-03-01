@@ -122,6 +122,7 @@ public class colorOLED extends MIDlet implements CommandListener {
 
 	public void FindDevices() {
 		int comma = -1, lenght = -1;
+		InputStream is = null;
 		String ports = "empty", port1 = "empty", port2 = "empty";
 		try {
 			ports = System.getProperty("microedition.commports");
@@ -141,123 +142,130 @@ public class colorOLED extends MIDlet implements CommandListener {
 //
 //			do_alert("Flag 0", 10000);
 			
-			CommConnection cc = (CommConnection) Connector.open("comm:Com2;baudrate=9600");
-			do_alert("Flag 1", 10000);
+			CommConnection cc = (CommConnection) Connector.open("comm:Com2",Connector.READ);
+			//;blocking=off;autocts=off;autorts=off");
+			cc.setBaudRate(cc.getBaudRate());
+			
+			//do_alert("Flag 1", 1000);
 
-			int baudrate = cc.getBaudRate();
-			do_alert("Flag 2", 10000);
-
-			InputStream is = cc.openInputStream();
-			do_alert("Flag 3", 10000);
+			//int baudrate = cc.getBaudRate();
+			//do_alert("Flag 2", 1000);
+			
+			//if(cc.openDataInputStream())
+			
+			//is= cc.openInputStream();
+			//do_alert("Flag 3", 1000);
 
 			// OutputStream os = cc.openOutputStream();
-
-			StringBuffer buffer = new StringBuffer();
-			int ch = 0;
-			while (ch != 'Z') {
-				do_alert("Entered", 10000);
-				ch = is.read();
-				buffer.append((char) ch);
-				do_alert(buffer.toString(), 10000);
-			}
-			do_alert("Left", 10000);
-
-			is.close();
-			// os.close();
-			cc.close();
+//
+//			StringBuffer buffer = new StringBuffer();
+//			int ch = 0;
+//		
+//			while (ch != 'Z') {
+//				do_alert("Entered", 1000);
+//				ch = is.read();
+//				buffer.append((char) ch);
+//				do_alert(buffer.toString(), 1000);
+//			}
+//			do_alert("Left", 1000);
+//
+//			is.close();
+//			// os.close();
+//			cc.close();
 
 		} catch (Exception e) {
 			this.do_alert(e.getMessage() + ";" + ports + ";" + port1 + ";" + comma + ";" + lenght + ";" + port2, 10000);
 		}
 	}
 
-	public void FindServices(RemoteDevice device) {
-		try {
-			UUID[] uuids = new UUID[1];
-			uuids[0] = new UUID("a0000000-a000-a000-a000-a00000000000", false); // The
-																				// UUID
-																				// of
-																				// the
-																				// service
-			local = LocalDevice.getLocalDevice();
-			agent = local.getDiscoveryAgent();
-			agent.searchServices(null, uuids, device, (DiscoveryListener) this);
-		} catch (Exception e) {
-			this.do_alert("Erron in initiating search", 4000);
-		}
-	}
-
-	public void deviceDiscovered(RemoteDevice remoteDevice,
-			DeviceClass deviceClass) {
-		devices.addElement(remoteDevice);
-	}
-
-	public void servicesDiscovered(int transID, ServiceRecord[] serviceRecord) {
-		for (int x = 0; x < serviceRecord.length; x++)
-			services.addElement(serviceRecord[x]);
-		try {
-			// dev_list.append(((RemoteDevice)devices.elementAt(currentDevice)).
-			// getFriendlyName(false),null);
-		} catch (Exception e) {
-			this.do_alert("Erron in initiating search", 4000);
-		}
-	}
-
-	public void inquiryCompleted(int param) {
-		switch (param) {
-		case DiscoveryListener.INQUIRY_COMPLETED: // Inquiry completed normally
-			if (devices.size() > 0) { // Atleast one device has been found
-				services = new java.util.Vector();
-				this.FindServices((RemoteDevice) devices.elementAt(0)); // Check
-																		// if
-																		// the
-																		// first
-																		// device
-																		// offers
-																		// the
-																		// service
-			} else
-				do_alert("No device found in range", 4000);
-			break;
-		case DiscoveryListener.INQUIRY_ERROR: // Error during inquiry
-			this.do_alert("Inqury error", 4000);
-			break;
-		case DiscoveryListener.INQUIRY_TERMINATED: // Inquiry terminated by
-													// agent.cancelInquiry()
-			this.do_alert("Inqury Canceled", 4000);
-			break;
-		}
-	}
-
-	public void serviceSearchCompleted(int transID, int respCode) {
-		switch (respCode) {
-		case DiscoveryListener.SERVICE_SEARCH_COMPLETED:
-			if (currentDevice == devices.size() - 1) { // all devices have been
-														// searched
-				if (services.size() > 0) {
-					// display.setCurrent(dev_list);
-				} else
-					do_alert("The service was not found", 4000);
-			} else { // search next device
-				currentDevice++;
-				this.FindServices((RemoteDevice) devices
-						.elementAt(currentDevice));
-			}
-			break;
-		case DiscoveryListener.SERVICE_SEARCH_DEVICE_NOT_REACHABLE:
-			this.do_alert("Device not Reachable", 4000);
-			break;
-		case DiscoveryListener.SERVICE_SEARCH_ERROR:
-			this.do_alert("Service serch error", 4000);
-			break;
-		case DiscoveryListener.SERVICE_SEARCH_NO_RECORDS:
-			this.do_alert("No records returned", 4000);
-			break;
-		case DiscoveryListener.SERVICE_SEARCH_TERMINATED:
-			this.do_alert("Inqury Cancled", 4000);
-			break;
-		}
-	}
+//	public void FindServices(RemoteDevice device) {
+//		try {
+//			UUID[] uuids = new UUID[1];
+//			uuids[0] = new UUID("a0000000-a000-a000-a000-a00000000000", false); // The
+//			
+//																				// UUID
+//																				// of
+//																				// the
+//																				// service
+//			local = LocalDevice.getLocalDevice();
+//			agent = local.getDiscoveryAgent();
+//			agent.searchServices(null, uuids, device, (DiscoveryListener) this);
+//		} catch (Exception e) {
+//			this.do_alert("Erron in initiating search", 4000);
+//		}
+//	}
+//
+//	public void deviceDiscovered(RemoteDevice remoteDevice,
+//			DeviceClass deviceClass) {
+//		devices.addElement(remoteDevice);
+//	}
+//
+//	public void servicesDiscovered(int transID, ServiceRecord[] serviceRecord) {
+//		for (int x = 0; x < serviceRecord.length; x++)
+//			services.addElement(serviceRecord[x]);
+//		try {
+//			// dev_list.append(((RemoteDevice)devices.elementAt(currentDevice)).
+//			// getFriendlyName(false),null);
+//		} catch (Exception e) {
+//			this.do_alert("Erron in initiating search", 4000);
+//		}
+//	}
+//
+//	public void inquiryCompleted(int param) {
+//		switch (param) {
+//		case DiscoveryListener.INQUIRY_COMPLETED: // Inquiry completed normally
+//			if (devices.size() > 0) { // Atleast one device has been found
+//				services = new java.util.Vector();
+//				this.FindServices((RemoteDevice) devices.elementAt(0)); // Check
+//																		// if
+//																		// the
+//																		// first
+//																		// device
+//																		// offers
+//																		// the
+//																		// service
+//			} else
+//				do_alert("No device found in range", 4000);
+//			break;
+//		case DiscoveryListener.INQUIRY_ERROR: // Error during inquiry
+//			this.do_alert("Inqury error", 4000);
+//			break;
+//		case DiscoveryListener.INQUIRY_TERMINATED: // Inquiry terminated by
+//													// agent.cancelInquiry()
+//			this.do_alert("Inqury Canceled", 4000);
+//			break;
+//		}
+//	}
+//
+//	public void serviceSearchCompleted(int transID, int respCode) {
+//		switch (respCode) {
+//		case DiscoveryListener.SERVICE_SEARCH_COMPLETED:
+//			if (currentDevice == devices.size() - 1) { // all devices have been
+//														// searched
+//				if (services.size() > 0) {
+//					// display.setCurrent(dev_list);
+//				} else
+//					do_alert("The service was not found", 4000);
+//			} else { // search next device
+//				currentDevice++;
+//				this.FindServices((RemoteDevice) devices
+//						.elementAt(currentDevice));
+//			}
+//			break;
+//		case DiscoveryListener.SERVICE_SEARCH_DEVICE_NOT_REACHABLE:
+//			this.do_alert("Device not Reachable", 4000);
+//			break;
+//		case DiscoveryListener.SERVICE_SEARCH_ERROR:
+//			this.do_alert("Service serch error", 4000);
+//			break;
+//		case DiscoveryListener.SERVICE_SEARCH_NO_RECORDS:
+//			this.do_alert("No records returned", 4000);
+//			break;
+//		case DiscoveryListener.SERVICE_SEARCH_TERMINATED:
+//			this.do_alert("Inqury Cancled", 4000);
+//			break;
+//		}
+//	}
 
 	public void do_alert(String msg, int time_out) {
 		if (display.getCurrent() instanceof Alert) {
