@@ -13,13 +13,13 @@ namespace STColorPerception.Util
             //       b1 = -0.00599909318707803, b2 = 1.23251321283751, b3 = 0.000563974739215607,
             //       c1 = -0.0229710501639069, c2 = 0.109301363961475, c3 = 1.22235691025888;
 
-            double a1 = 1.94670801288840, a2 = 0.387347790817122, a3 = -0.0248409510410495,
+          double a1 = 3.374472220868991, a2 = 0.085485685361869, a3 = -0.032758371560013,
 
 
-                  b1 = 0.0176272423311252, b2 = 2.13563606074240, b3 = -0.0141067590583479,
+                  b1 = 0.097671568931342, b2 = 3.251025754964780, b3 = -0.018602929250869,
 
 
-                  c1 = -2.02741583261552, c2 = 1.84794945404951, c3 = 2.15647964603646;
+                  c1 = -1.211260049676426, c2 = -0.138140631633149, c3 = 3.40957150182085;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0,0,0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
@@ -36,12 +36,12 @@ namespace STColorPerception.Util
 
 
 
-            double a1 = 2.17967337842881, a2 = 0.144706753178677, a3 = 0.0169629426377413,
+          double a1 = 3.395618451402162, a2 = 0.268645747557392, a3 = -0.174817553945508,
 
 
-                   b1 = 0.0158950104832374, b2 = 2.12592426697082, b3 = -0.00321023413306597,
+                   b1 = 0.029508829960613, b2 = 3.295834095033191, b3 = -0.005953770833077,
 
-                   c1 = 0, c2 = 0, c3 = 2.26367983367983;
+                   c1 = 0, c2 = 0, c3 = 2.529809479553904;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
@@ -56,9 +56,9 @@ namespace STColorPerception.Util
             //       b1 = 0, b2 = 1.22740048850539, b3 = 0,
             //       c1 = 0, c2 = 0, c3 = 1.30801388705357;
 
-            double a1 = 2.36883162197189, a2 = 0, a3 = 0,
-                   b1 = 0, b2 = 2.13625002670313, b3 = 0,
-                   c1 = 0, c2 = 0, c3 = 2.26367983367983;
+          double a1 = 3.416498921639109, a2 = 0, a3 = 0,
+                   b1 = 0, b2 = 3.314550878355983, b3 = 0,
+                   c1 = 0, c2 = 0, c3 = 2.529809479553904;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);

@@ -6,10 +6,25 @@ using System.Drawing;
 using System.ComponentModel;
 
 namespace PerceptionLib
-{
-    
-    
+{     
       // class to get RBG 
+
+  public class HexRGB
+  {
+    public string hexcolor;
+
+    public string Hexcolor
+    {
+      get
+      {
+        return this.hexcolor;
+      }
+      set
+      {
+        this.hexcolor = value;
+      }
+    }
+  }
   public class RGBValue
   {
       
@@ -89,13 +104,9 @@ namespace PerceptionLib
     // the new D65 XYZ as provided by David and also cross verified with wikipedia
     public static readonly CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
 
-
-    
     private double x;
     private double y;
     private double z;
-
-
 
     /// <summary>
     /// Gets or sets X component.
@@ -150,13 +161,10 @@ namespace PerceptionLib
     }
   }
  
-  
-  
   public class Color : INotifyPropertyChanged
   {
        
-
-    private double u, v, uR, vR;
+    private double u, v, uR, vR, xi,yi,lv;
     private double l, uP, vP,la,a,b;
                         
     public double L
@@ -168,6 +176,7 @@ namespace PerceptionLib
         OnPropertyChanged("L");
       }
     }
+    
     public double LA
     {
         get { return la; }
@@ -195,7 +204,6 @@ namespace PerceptionLib
             OnPropertyChanged("B");
         }
     }
-
     public double UP
     {
       get { return uP; }
@@ -247,20 +255,49 @@ namespace PerceptionLib
       }
     }
 
+    public double Lv
+    {
+      get { return lv; }
+      set
+      {
+        lv = value;
+        OnPropertyChanged("Lv");
+      }
+    }
+
+    public double x
+    {
+      get { return xi; }
+      set
+      {
+        xi = value;
+        OnPropertyChanged("x");
+      }
+    }
+
+    public double y
+    {
+      get { return yi; }
+      set
+      {
+        yi = value;
+        OnPropertyChanged("y");
+      }
+    }
+    
     public event PropertyChangedEventHandler PropertyChanged;
+    
     private void OnPropertyChanged(String name)
     {
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
-
-    
-      /// <summary>
+        
+    /// <summary>
       /// funtion to convert to luv
       /// </summary>
       /// <param name="cRGB"></param>
       /// <returns></returns>
-
     public static Color ToLUV(System.Drawing.Color cRGB)
     {
       Color rColor = new Color();
@@ -283,7 +320,8 @@ namespace PerceptionLib
       rColor.B = rColorlab.B;
       return rColor;
     }
-      /// <summary>
+    
+    /// <summary>
       /// same function as above but this does it from XYZ
       /// </summary>
       /// <param name="xyz"></param>
@@ -310,12 +348,13 @@ namespace PerceptionLib
         rColor.B = rColorlab.B;
         return rColor;
     }
+    
     private static double Lxyz(double e)
     {
         return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
     }
 
-      /// <summary>
+    /// <summary>
       /// function to capture LAB from RGB
       /// </summary>
       /// <param name="cRGB"></param>
@@ -367,86 +406,7 @@ namespace PerceptionLib
         return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e+16)/116));
     }
       
-    public static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
-    {
-      // by the formula given the the web page http://www.brucelindbloom.com/index.html [XYZ]=[M][RGB]
-      //In order to properly use this matrix, the RGB values must be linear and in the nominal range [0.0, 1.0].
-      // RGB values may first need conversion (for example, dividing by 255 and then raising them to a power)
-      // Where M for D65:	 0.4124564  0.3575761  0.1804375
-      //0.2126729  0.7151522  0.0721750
-      //0.0193339  0.1191920  0.9503041
-
-      //// to make rgb values linear red, green, blue values
-      double rLinear = (double)cRGB.R / 255.0;
-      double gLinear = (double)cRGB.G / 255.0;
-      double bLinear = (double)cRGB.B / 255.0;
-
-      // convert to a sRGB form
-
-      //double r =  Math.Pow((rLinear ), 2.2) ;
-      //double g =  Math.Pow((gLinear ), 2.2) ;
-      //double b = Math.Pow((bLinear ), 2.2) ;
-         double r,g,b;
-   
-        if ( rLinear > 0.04045 )
-               r =  Math.Pow(((rLinear+ 0.055 ) / 1.055 ) , 2.2) ;
-        else
-                r=rLinear / 12.92;
-
-        if (gLinear > 0.04045)
-            g = Math.Pow(((gLinear + 0.055) / 1.055), 2.2);
-        else
-            g = gLinear / 12.92;
-
-        if (bLinear > 0.04045)
-            b = Math.Pow(((bLinear + 0.055) / 1.055), 2.2);
-        else
-            b = bLinear / 12.92;      
-        
-
-      return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
-                         (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
-                         (r * 0.0193339 + g * 0.1191920 + b * 0.9503041));
-    }
-
     /// <summary>
-    /// Function to go from LUV to RGB
-    /// </summary>
-    /// <param name="a"></param>
-    /// <returns></returns>
-    public static RGBValue ToRBG(Color PassedLUV)
-    {
-        int tempr,tempg,tempb;
-      CIEXYZ xyz = LUVToXYZ(PassedLUV);
-      
-
-      RGBValue rgb = new RGBValue();
-
-      double[] Clinear = new double[3];
-     
-      Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
-      Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
-      Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
-
-      //gamma companding
-      for (int i = 0; i < 3; i++)
-      {
-
-        Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
-      }          
-        
-        tempr=(int)Math.Round(Clinear[0] * 255.0);
-        tempg = (int)Math.Round(Clinear[1] * 255.0);
-        tempb = (int)Math.Round(Clinear[2] * 255.0);
-
-
-      rgb.R = (byte)tempr;
-      rgb.G = (byte)tempg;
-      rgb.B = (byte)tempb;
-      return rgb; 
-    }
-
-/// <summary>
 /// funtion for LAb To RGB
 /// </summary>
 /// <param name="PassedLab"></param>
@@ -481,6 +441,43 @@ namespace PerceptionLib
         rgb.G = (byte)tempg;
         rgb.B = (byte)tempb;
         return rgb;
+    }
+    
+    /// <summary>
+    /// Function to go from LUV to RGB
+    /// </summary>
+    /// <param name="a"></param>
+    /// <returns></returns>
+    public static RGBValue ToRBG(Color PassedLUV)
+    {
+      int tempr, tempg, tempb;
+      CIEXYZ xyz = LUVToXYZ(PassedLUV);
+
+
+      RGBValue rgb = new RGBValue();
+
+      double[] Clinear = new double[3];
+
+      Clinear[0] = xyz.X * 3.2404542 - xyz.Y * 1.5371385 - xyz.Z * 0.4985314; // red
+      Clinear[1] = -xyz.X * 0.9692660 + xyz.Y * 1.8760108 + xyz.Z * 0.0415560; // green
+      Clinear[2] = xyz.X * 0.0556434 - xyz.Y * 0.2040259 + xyz.Z * 1.0572252; // blue
+
+      //gamma companding
+      for (int i = 0; i < 3; i++)
+      {
+
+        Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
+      }
+
+      tempr = (int)Math.Round(Clinear[0] * 255.0);
+      tempg = (int)Math.Round(Clinear[1] * 255.0);
+      tempb = (int)Math.Round(Clinear[2] * 255.0);
+
+
+      rgb.R = (byte)tempr;
+      rgb.G = (byte)tempg;
+      rgb.B = (byte)tempb;
+      return rgb;
     }
   
     public static RGBValue ToRBG(CIEXYZ xyz)
@@ -546,35 +543,77 @@ namespace PerceptionLib
             rgb.gmt = 1;
           else
               rgb.gmt = 1;
-
-        if (tempr > 255)
-        {
-            tempr = 255;
-        }
-        if (tempg > 255)
-        {
-            tempg = 255;
-        }
-        if (tempb > 255)
-        {
-            tempb = 255;
-        }
-        if (tempr < 0)
-        {
-            tempr = 0;
-        }
-        if (tempg < 0)
-        {
-            tempg = 0;
-        }
-        if (tempb < 0)
-        {
-            tempb = 0;
-        }
+      // make sure rgb is not over 255
+        //if (tempr > 255)
+        //{
+        //    tempr = 255;
+        //}
+        //if (tempg > 255)
+        //{
+        //    tempg = 255;
+        //}
+        //if (tempb > 255)
+        //{
+        //    tempb = 255;
+        //}
+        //if (tempr < 0)
+        //{
+        //    tempr = 0;
+        //}
+        //if (tempg < 0)
+        //{
+        //    tempg = 0;
+        //}
+        //if (tempb < 0)
+        //{
+        //    tempb = 0;
+        //}
         rgb.R = (byte)(tempr);
         rgb.G = (byte)(tempg);
         rgb.B = (byte)(tempb);
         return rgb;
+    }
+
+    public static CIEXYZ RGBToXYZ(System.Drawing.Color cRGB)
+    {
+      // by the formula given the the web page http://www.brucelindbloom.com/index.html [XYZ]=[M][RGB]
+      //In order to properly use this matrix, the RGB values must be linear and in the nominal range [0.0, 1.0].
+      // RGB values may first need conversion (for example, dividing by 255 and then raising them to a power)
+      // Where M for D65:	 0.4124564  0.3575761  0.1804375
+      //0.2126729  0.7151522  0.0721750
+      //0.0193339  0.1191920  0.9503041
+
+      //// to make rgb values linear red, green, blue values
+      double rLinear = (double)cRGB.R / 255.0;
+      double gLinear = (double)cRGB.G / 255.0;
+      double bLinear = (double)cRGB.B / 255.0;
+
+      // convert to a sRGB form
+
+      //double r =  Math.Pow((rLinear ), 2.2) ;
+      //double g =  Math.Pow((gLinear ), 2.2) ;
+      //double b = Math.Pow((bLinear ), 2.2) ;
+      double r, g, b;
+
+      if (rLinear > 0.04045)
+        r = Math.Pow(((rLinear + 0.055) / 1.055), 2.2);
+      else
+        r = rLinear / 12.92;
+
+      if (gLinear > 0.04045)
+        g = Math.Pow(((gLinear + 0.055) / 1.055), 2.2);
+      else
+        g = gLinear / 12.92;
+
+      if (bLinear > 0.04045)
+        b = Math.Pow(((bLinear + 0.055) / 1.055), 2.2);
+      else
+        b = bLinear / 12.92;
+
+
+      return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
+                         (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
+                         (r * 0.0193339 + g * 0.1191920 + b * 0.9503041));
     }
     
     /// <summary>
@@ -605,11 +644,13 @@ namespace PerceptionLib
       return xyz ;
     }
     // function to get y value
+    
     private static double GetY(double l)
     {
       return (l > (0.008856 * 903.3)) ? Math.Pow(((l + 16.0) / 116.0),3.0) : (l/903.3);
     }
-      /// <summary>
+    
+    /// <summary>
       /// Funtion to convert Lab To XYZ
       /// </summary>
       /// <param name="passedLAB"></param>
@@ -645,8 +686,33 @@ namespace PerceptionLib
 
         return xyz;
     }
+
+    /// <summary>
+    /// function to convert Yxy to XYZ
+    /// </summary>
+    /// <param name="passedYxy"></param>
+    /// <returns></returns>
+    public static CIEXYZ YxyToXYZ(Color passedYxy)
+    {
+      double X, Y, Z;
+
+      if (passedYxy.Lv > 0)
+      {
+        X = (double)(passedYxy.x * passedYxy.Lv) / passedYxy.y;
+        Y = (double)passedYxy.lv;
+        Z = (double)((1 - passedYxy.x - passedYxy.y) * passedYxy.Lv) / passedYxy.y;
+      }
+      else
+      {
+        X = Y = Z = 0;
+      }
+
+      CIEXYZ xyz = new CIEXYZ(X, Y, Z);
+
+      return xyz;
+    }
             
-      /// <summary>
+    /// <summary>
       /// function to find the Delta e the color difference
       /// </summary>
       /// <param name="c1"></param>
@@ -741,7 +807,8 @@ namespace PerceptionLib
 
         return null;
     }
-      /// <summary>
+    
+    /// <summary>
       /// funtion to get RGB data which are taken out from the LAB binning
       /// </summary>
       /// <returns></returns>
@@ -795,7 +862,7 @@ namespace PerceptionLib
 
     }
 
-      /// <summary>
+    /// <summary>
       /// funtion to bin lab values in a bin unit of 5
       /// </summary>
       /// <returns></returns>
@@ -809,7 +876,7 @@ namespace PerceptionLib
 
           List<LABbin> binedLabValues = new List<LABbin>();
 
-          for (l = 0; l < 101; l = l + 10)
+          for (l = 0; l < 101; l = l + 5)
           {
             
               if (l == 0 && a == -100 && b == -100)
@@ -828,9 +895,9 @@ namespace PerceptionLib
               }
               else
               {
-                  for (a = -100; a < 101; a = a + 10)
+                  for (a = -100; a < 101; a = a + 5)
                   {
-                      for (b = -100; b < 101; b = b + 10)
+                      for (b = -100; b < 101; b = b + 5)
                       {
                           //bin.L = L;
                           //bin.A = a;
@@ -851,16 +918,23 @@ namespace PerceptionLib
           return binedLabValues;
       }
 
-      /// <summary>
+    /// <summary>
       /// function to create Hexdecimal values from RGB
       /// </summary>
       /// <param name="cRGB"></param>
       /// <returns></returns>
-    public String RGBtoHEX(System.Drawing.Color cRGB)
+    public static HexRGB RGBtoHEX(byte R, byte G,byte B)
     {
-        return ColorTranslator.FromHtml(String.Format("#{0:X2}{1:X2}{2:X2}", cRGB.R, cRGB.G, cRGB.B)).Name.Remove(0, 2);
+      string retn=ColorTranslator.FromHtml(String.Format("#{0:X2}{1:X2}{2:X2}", R, G, B)).Name.Remove(0, 2);
+
+      HexRGB obj = new HexRGB();
+      obj.Hexcolor=retn;
+      return obj;
+     
 
     }
+
+    
   }
 
 }

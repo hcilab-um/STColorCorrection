@@ -26,8 +26,19 @@ namespace Cs200Demo
 
     [DllImport("Kmsecs200.dll", CharSet = CharSet.Unicode)]
     public static extern int write64_usb(int index, [MarshalAs(UnmanagedType.LPStr)]string cmd, int timeout, int writeLen);
+       
+    [DllImport("Kmsecs200.dll", CharSet = CharSet.Unicode)]
+    public static extern int read64_usb(int index, [MarshalAs(UnmanagedType.LPStr)] StringBuilder dat, int timeout, int readLen);
 
-    [DllImport("Kmsecs200.dll")]//, EntryPoint="read64_usb", CharSet = CharSet.Unicode)]
-    public static extern int read64_usb(int index, [MarshalAs(UnmanagedType.LPStr)]string dat, int timeout, int readLen); }
+    
+    //[DllImport("Kmsecs200.dll", CallingConvention = CallingConvention.Cdecl)]
+    //public static extern int write64_usb(int index, System.IntPtr cmd, int timeout, int writeLen);
+
+    
+    // public static extern int read64_usb(int index, [MarshalAs(UnmanagedType.LPStr)] string dat, int timeout, int readLen);
+
+    //[DllImport("Kmsecs200.dll", CallingConvention = CallingConvention.Cdecl)]
+    //public static extern int read64_usb(int index, System.IntPtr dat, int timeout, int readLen);
+  }
 }
 
