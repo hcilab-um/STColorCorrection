@@ -99,8 +99,8 @@
                     <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
 
                         <Button Width="104" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
-                        <!--<Button Width="132" Name="btn_CSBackground" Margin="10,0,0,0" Click="Btn_CSBackground_Click">CSBackgroundColor</Button>
-                        <Button Width="132" Name="btn_CSMixedColor" Margin="10,0,0,0" Click="Btn_CSMixedColor_Click">CSMixedColorColor</Button>-->
+                        <Button Width="132" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
+                        <!--<Button Width="132" Name="btn_CSMixedColor" Margin="10,0,0,0" Click="Btn_CSMixedColor_Click">CSMixedColorColor</Button>-->
                         
                     </StackPanel>
                 </StackPanel>
