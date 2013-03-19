@@ -527,18 +527,35 @@ namespace PerceptionLib
 
 
       if (Clinear[0] > 0.0031308)
+      {
         Clinear[0] = 1.055 * Math.Pow(Clinear[0], (1 / (2.2))) - 0.055;
+        rgb.gmt = 1;
+      }
       else
+      {
         Clinear[0] = 12.92 * Clinear[0];
-
+        rgb.gmt = 0;
+      }
       if (Clinear[1] > 0.0031308)
+      {
         Clinear[1] = 1.055 * Math.Pow(Clinear[1], (1 / (2.2))) - 0.055;
+        rgb.gmt = 1;
+      }
       else
+      {
         Clinear[1] = 12.92 * Clinear[1];
+        rgb.gmt = 0;
+      }
       if (Clinear[2] > 0.0031308)
+      {
         Clinear[2] = 1.055 * Math.Pow(Clinear[2], (1 / (2.2))) - 0.055;
+        rgb.gmt = 1;
+      }
       else
+      {
         Clinear[2] = 12.92 * Clinear[2];
+        rgb.gmt = 0;
+      }
 
 
       ////gamma companding
@@ -560,10 +577,10 @@ namespace PerceptionLib
       tempr = (Math.Round(Clinear[0] * 255));
       tempg = (Math.Round(Clinear[1] * 255));
       tempb = (Math.Round(Clinear[2] * 255));
-      if (tempr > 255 || tempg > 255 || tempb > 255)
-        rgb.gmt = 1;
-      else
-        rgb.gmt = 1;
+      //if (tempr > 255 || tempg > 255 || tempb > 255)
+      //  rgb.gmt = 1;
+      //else
+      //  rgb.gmt = 0;
       // make sure rgb is not over 255
       //if (tempr > 255)
       //{
@@ -675,8 +692,8 @@ namespace PerceptionLib
 
 
       return new CIEXYZ((r * 0.4124564 + g * 0.3575761 + b * 0.1804375),
-                         (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
-                         (r * 0.0193339 + g * 0.1191920 + b * 0.9503041));
+                        (r * 0.2126729 + g * 0.7151522 + b * 0.0721750),
+                        (r * 0.0193339 + g * 0.1191920 + b * 0.9503041));
     }
 
     /// <summary>
@@ -832,7 +849,7 @@ namespace PerceptionLib
     public static double ColorDistanceCalAB(Color Color1, Color Color2)
     {
       double l, u, v, result;
-      l = Color1.L - Color2.L;
+      l = Color1.LA - Color2.LA;
       u = Color1.A - Color2.A;
       v = Color1.B - Color2.B;
       l = l * l;
@@ -1100,6 +1117,8 @@ namespace PerceptionLib
 
     }
 
+
+    
 
   }
 

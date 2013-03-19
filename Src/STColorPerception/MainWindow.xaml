@@ -100,8 +100,10 @@
 
                         <Button Width="104" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
                         <Button Width="132" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
-                        <!--<Button Width="132" Name="btn_CSMixedColor" Margin="10,0,0,0" Click="Btn_CSMixedColor_Click">CSMixedColorColor</Button>-->
-                        
+                        <Button Width="132" Name="Btn_CSCompensation" Margin="10,0,0,0" Click="Btn_CSCompensation_Click">CSColorCompensation</Button>
+                        <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Click">CSBasicCompensation</Button>
+                        <Button Width="132" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">CATCalulator</Button>
+
                     </StackPanel>
                 </StackPanel>
                 <!--<StackPanel Orientation="Horizontal" Width="1035" Height="189" Margin="10,10,10,10 ">
@@ -308,10 +310,10 @@
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
         <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1078">
-                    <Rectangle Name="rec_displayColor" Width="555" Height="880" VerticalAlignment="Top" Stroke="Black" Margin="0,50,0,0" Fill="{Binding ElementName=mainW, Path=  ProjectedColor}"/>
+                    <Rectangle Name="rec_displayColor" Width="814" Height="768" VerticalAlignment="Top" Stroke="Black" Margin="0,10,0,0" Fill="White"/>
          </Border>
         <!--</Rectangle>-->
-        <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="{Binding ElementName=mainW, Path=BackgroungColor}"/>
+        <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
       </StackPanel>
         </StackPanel>
     

@@ -11,7 +11,7 @@ namespace STColorPerception.Util
   class ColorSpaceConverter
   {
 
-
+   
 
     public static System.Drawing.Color ToGetRGB(int r, int g, int b)
     {
@@ -37,16 +37,23 @@ namespace STColorPerception.Util
     
     public static PerceptionLib.CIEXYZ AddXYZ(CIEXYZ C1xyz, CIEXYZ C2xyz)
     {
-
         PerceptionLib.CIEXYZ C3XYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
         C3XYZ.X = Convert.ToDouble(C1xyz.X.ToString()) + Convert.ToDouble(C2xyz.X.ToString());
         C3XYZ.Y = Convert.ToDouble(C1xyz.Y.ToString()) + Convert.ToDouble(C2xyz.Y.ToString());
         C3XYZ.Z = Convert.ToDouble(C1xyz.Z.ToString()) + Convert.ToDouble(C2xyz.Z.ToString());
-
         return C3XYZ;
-
     }
 
+    public static PerceptionLib.CIEXYZ SubtractXYZ(CIEXYZ C1xyz, CIEXYZ C2xyz)
+    {
+      PerceptionLib.CIEXYZ C3XYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
+      C3XYZ.X = Math.Abs(Convert.ToDouble(C1xyz.X.ToString()) - Convert.ToDouble(C2xyz.X.ToString()));
+      C3XYZ.Y = Math.Abs(Convert.ToDouble(C1xyz.Y.ToString()) - Convert.ToDouble(C2xyz.Y.ToString()));
+      C3XYZ.Z = Math.Abs(Convert.ToDouble(C1xyz.Z.ToString()) - Convert.ToDouble(C2xyz.Z.ToString()));
+      return C3XYZ;
+    }
+
+    
     public static PerceptionLib.Color XYZToLABLUV(CIEXYZ C1xyz,CIEXYZ C2xyz)
     {
         PerceptionLib.CIEXYZ C3XYZ = AddXYZ( C1xyz,  C2xyz);
