@@ -103,6 +103,8 @@
                         <Button Width="132" Name="Btn_CSCompensation" Margin="10,0,0,0" Click="Btn_CSCompensation_Click">CSColorCompensation</Button>
                         <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Click">CSBasicCompensation</Button>
                         <Button Width="132" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">CATCalulator</Button>
+                        <Button Width="132" Name="Btn_ManualBinCalculator" Margin="10,0,0,0" Click="Btn_ManualBinCalculator_Click">ManualBinCalculator</Button>
+                        <Button Width="132" Name="Btn_PhoneBinCalculator" Margin="10,0,0,0" Click="Btn_PhoneBinCalculator_Click">PhoneBinCalculator</Button>
 
                     </StackPanel>
                 </StackPanel>
@@ -309,7 +311,7 @@
         
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
-        <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1078">
+        <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1195">
                     <Rectangle Name="rec_displayColor" Width="814" Height="768" VerticalAlignment="Top" Stroke="Black" Margin="0,10,0,0" Fill="White"/>
          </Border>
         <!--</Rectangle>-->

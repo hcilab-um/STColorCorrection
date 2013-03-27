@@ -1106,13 +1106,13 @@ namespace PerceptionLib
     /// </summary>
     /// <param name="cRGB"></param>
     /// <returns></returns>
-    public static HexRGB RGBtoHEX(byte R, byte G, byte B)
+    public static string RGBtoHEX(byte R, byte G, byte B)
     {
       string retn = ColorTranslator.FromHtml(String.Format("#{0:X2}{1:X2}{2:X2}", R, G, B)).Name.Remove(0, 2);
 
-      HexRGB obj = new HexRGB();
-      obj.Hexcolor = retn;
-      return obj;
+      //HexRGB obj = new HexRGB();
+      //obj.Hexcolor = retn;
+      return retn;
 
 
     }
