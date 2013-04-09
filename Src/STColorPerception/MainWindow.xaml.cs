@@ -597,6 +597,11 @@ namespace STColorPerception
       //ColorToShow.B = -26.270;
       //PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
       //PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
+      
+      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
+     rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(130, 129, 177));
+
+     rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(80, 218, 205));
 
       //Util.CATCalulation.HueAngle(colorToShow);
 
@@ -5975,18 +5980,18 @@ namespace STColorPerception
       btn_ExportGrid.IsEnabled = true;
 
     }
-    
+   
+    //phone caluclator
     private void Btn_CATCalulator_Click(object sender, RoutedEventArgs e)
-
     {
       dtgrid_corrDisplay.IsEnabled = true;
       btn_StartMeasurment.IsEnabled = false;
       txt_R.IsEnabled = false;
       txt_G.IsEnabled = false;
       txt_B.IsEnabled = false;
-
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone_last3000.csv");
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\HexColor88.csv");
+ 
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\bg5_88Phone.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\MixerCal\4bg_0pts.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -6008,32 +6013,28 @@ namespace STColorPerception
 
       for (int i = 0; i < bin.Rows.Count; i++)
       {
-        byte Rt=0;
-        byte tR=0; 
-        byte Gt=0;
-        byte tG=0;
-        byte Bt=0;
-        byte tB=0;
-        
-        if(i>0)
+        byte Rt = 0;
+        byte tR = 0;
+        byte Gt = 0;
+        byte tG = 0;
+        byte Bt = 0;
+        byte tB = 0;
+
+        if (i > 0)
         {
-           Rt = Convert.ToByte(bin.Rows[i-1][0].ToString());
-           Gt = Convert.ToByte(bin.Rows[i-1][1].ToString());
-           Bt = Convert.ToByte(bin.Rows[i-1][2].ToString());
-           if (i<24207)
-           {
-             tR = Convert.ToByte(bin.Rows[i + 1][0].ToString());
-             tG = Convert.ToByte(bin.Rows[i + 1][1].ToString());
-             tB = Convert.ToByte(bin.Rows[i + 1][2].ToString());
-           }
+          Rt = Convert.ToByte(bin.Rows[i - 1][0].ToString());
+          Gt = Convert.ToByte(bin.Rows[i - 1][1].ToString());
+          Bt = Convert.ToByte(bin.Rows[i - 1][2].ToString());
+
         }
         byte R = Convert.ToByte(bin.Rows[i][0].ToString());
         byte G = Convert.ToByte(bin.Rows[i][1].ToString());
         byte B = Convert.ToByte(bin.Rows[i][2].ToString());
 
         newRow = binTable.NewRow();
-        
-        if (R > 185 & R < 195 & G > 167 & G < 178 & B > 153 & B < 168)
+
+
+        if (R >= 190   & G >= 182 & B >= 180)
         {
           newRow[0] = 0;
           newRow[1] = 0;
@@ -6044,12 +6045,11 @@ namespace STColorPerception
           newRow[6] = 0;
           newRow[7] = 0;
           newRow[8] = 0;
-          binTable.Rows.Add(newRow);
-          //continue;
+
         }
-        else if (R < 185  & G < 167 & B < 153)
+        else
         {
-          if (Rt > 185 & Rt < 195 & Gt > 167 & Gt < 178 & Bt > 153 & Bt < 168)
+          if (Rt >= 190 & Gt >= 182 & Bt >= 180)
           {
             newRow[0] = 0;
             newRow[1] = 0;
@@ -6060,23 +6060,9 @@ namespace STColorPerception
             newRow[6] = 0;
             newRow[7] = 0;
             newRow[8] = 0;
-            binTable.Rows.Add(newRow);
-            //continue;
+
           }
-          else if (tR > 185 & tR < 195 & tG > 167 & tG < 178 & tB > 153 & tB < 168)
-          {
-            newRow[0] = 0;
-            newRow[1] = 0;
-            newRow[2] = 0;
-            newRow[3] = 0;
-            newRow[4] = 0;
-            newRow[5] = 0;
-            newRow[6] = 0;
-            newRow[7] = 0;
-            newRow[8] = 0;
-            binTable.Rows.Add(newRow);
-            //continue;
-          }
+
           else
           {
             newRow[0] = bin.Rows[i][0].ToString();
@@ -6088,92 +6074,117 @@ namespace STColorPerception
             newRow[6] = bin.Rows[i][6].ToString();
             newRow[7] = bin.Rows[i][7].ToString();
             newRow[8] = bin.Rows[i][8].ToString();
-            
-            binTable.Rows.Add(newRow);
-         }
-        }
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-      }
-
-      bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
-      binTable = new DataTable();
-      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-      {
-        dtgrid_corrDisplay.Items.Refresh();
-        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
-      }));
-
-      for (int i = 1; i < bin.Rows.Count; i++)
-      {
-
-        byte R = Convert.ToByte(bin.Rows[i - 1][0].ToString());
-        byte G = Convert.ToByte(bin.Rows[i - 1][1].ToString());
-        byte B = Convert.ToByte(bin.Rows[i - 1][2].ToString());
-
-        byte r = Convert.ToByte(bin.Rows[i][0].ToString());
-        byte g = Convert.ToByte(bin.Rows[i][1].ToString());
-        byte b = Convert.ToByte(bin.Rows[i][2].ToString());
-
-        if (R == 0 & G == 0 & B == 0)
-        {
-          if (r > 0 || g > 0 || b > 0)
-          {
-            newRow = binTable.NewRow();
-            newRow[0] = bin.Rows[i][0].ToString();
-            newRow[1] = bin.Rows[i][1].ToString();
-            newRow[2] = bin.Rows[i][2].ToString();
-            newRow[3] = bin.Rows[i][3].ToString();
-            newRow[4] = bin.Rows[i][4].ToString();
-            newRow[5] = bin.Rows[i][5].ToString();
-            newRow[6] = bin.Rows[i][6].ToString();
-            newRow[7] = bin.Rows[i][7].ToString();
-            newRow[8] = bin.Rows[i][8].ToString();
-
-            binTable.Rows.Add(newRow);
           }
-
         }
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+        binTable.Rows.Add(newRow);
       }
 
-      //foreach (DataRow dr in bin.Rows)
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       //zero elimination
+      //bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
+      //binTable = new DataTable();
+      //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       //{
-      //  //ColorToShowXYZ.X = Convert.ToDouble(dr["X"].ToString());
-      //  //ColorToShowXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
-      //  //ColorToShowXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
+      //  dtgrid_corrDisplay.Items.Refresh();
+      //  binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-      //  //BradXYZ = Util.CATCalulation.bradford(ColorToShowXYZ);
-      //  //VonXYZ = Util.CATCalulation.VonKries(ColorToShowXYZ);
-      //  //ScalingXYZ = Util.CATCalulation.XYZScaling(ColorToShowXYZ);
+      //}));
 
-      //  //dr["bradX"] = BradXYZ.X.ToString();
-      //  //dr["bradY"] = BradXYZ.Y.ToString();
-      //  //dr["bradZ"] = BradXYZ.Z.ToString();
+      //for (int i = 1; i < bin.Rows.Count; i++)
+      //{
 
-      //  //dr["bradX"] = VonXYZ.X.ToString();
-      //  //dr["bradY"] = VonXYZ.Y.ToString();
-      //  //dr["bradZ"] = VonXYZ.Z.ToString();
+      //  byte R = Convert.ToByte(bin.Rows[i - 1][0].ToString());
+      //  byte G = Convert.ToByte(bin.Rows[i - 1][1].ToString());
+      //  byte B = Convert.ToByte(bin.Rows[i - 1][2].ToString());
 
-      //  //dr["bradX"] = BradXYZ.X.ToString();
-      //  //dr["bradY"] = BradXYZ.Y.ToString();
-      //  //dr["bradZ"] = BradXYZ.Z.ToString();
+      //  byte r = Convert.ToByte(bin.Rows[i][0].ToString());
+      //  byte g = Convert.ToByte(bin.Rows[i][1].ToString());
+      //  byte b = Convert.ToByte(bin.Rows[i][2].ToString());
 
-      //  byte R = Convert.ToByte(dr["r"].ToString());
-      //  byte G = Convert.ToByte(dr["g"].ToString());
-      //  byte B = Convert.ToByte(dr["b"].ToString());
+      //  if (R == 0 & G == 0 & B == 0)
+      //  {
+      //    if (r > 0 || g > 0 || b > 0)
+      //    {
+      //      byte r1 = Convert.ToByte    (bin.Rows[i][0].ToString());
+      //      byte g1 = Convert.ToByte    (bin.Rows[i][1].ToString());
+      //      byte b1 = Convert.ToByte    (bin.Rows[i][2].ToString());
+      //      double l1 = Convert.ToDouble(bin.Rows[i][3].ToString());
+      //      double a1 = Convert.ToDouble(bin.Rows[i][4].ToString());
+      //      double lb1 = Convert.ToDouble(bin.Rows[i][5].ToString());
+      //      double x1 = Convert.ToDouble(bin.Rows[i][6].ToString());
+      //      double y1 = Convert.ToDouble(bin.Rows[i][7].ToString());
+      //      double z1 = Convert.ToDouble(bin.Rows[i][8].ToString());
 
-      //  String Hex = PerceptionLib.Color.RGBtoHEX(R, G, B);
-      //  dr["HEX"] = "0x"+Hex;
-        
-      //  Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
-      //  Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      //      //byte r2 = Convert.ToByte(bin.Rows[i + 1][0].ToString());
+      //      //byte g2 = Convert.ToByte(bin.Rows[i + 1][1].ToString());
+      //      //byte b2 = Convert.ToByte(bin.Rows[i + 1][2].ToString());
+      //      //double l2 = Convert.ToDouble(bin.Rows[i + 1][3].ToString());
+      //      //double a2 = Convert.ToDouble(bin.Rows[i + 1][4].ToString());
+      //      //double lb2 = Convert.ToDouble(bin.Rows[i + 1][5].ToString());
+      //      //double x2 = Convert.ToDouble(bin.Rows[i + 1][6].ToString());
+      //      //double y2 = Convert.ToDouble(bin.Rows[i + 1][7].ToString());
+      //      //double z2 = Convert.ToDouble(bin.Rows[i + 1][8].ToString());
+
+      //      //byte r3 = Convert.ToByte(bin.Rows[i + 2][0].ToString());
+      //      //byte g3 = Convert.ToByte(bin.Rows[i + 2][1].ToString());
+      //      //byte b3 = Convert.ToByte(bin.Rows[i + 2][2].ToString());
+      //      //double l3 = Convert.ToDouble(bin.Rows[i + 2][3].ToString());
+      //      //double a3 = Convert.ToDouble(bin.Rows[i + 2][4].ToString());
+      //      //double lb3 = Convert.ToDouble(bin.Rows[i + 2][5].ToString());
+      //      //double x3 = Convert.ToDouble(bin.Rows[i + 2][6].ToString());
+      //      //double y3 = Convert.ToDouble(bin.Rows[i + 2][7].ToString());
+      //      //double z3 = Convert.ToDouble(bin.Rows[i + 2][8].ToString());
+
+      //      //byte rFinal = Convert.ToByte((r1 + r2 + r3) / 3);
+      //      //byte gFinal = Convert.ToByte((g1 + g2 + g3) / 3);
+      //      //byte bFinal = Convert.ToByte((b1 + b2 + b3) / 3);
+      //      //double lFinal = (l1 + l2 + l3) / 3.0;
+      //      //double aFinal = (a1 + a2 + a3) / 3.0;
+      //      //double lbFinal = (lb1 + lb2 + lb3) / 3.0;
+      //      //double xFinal = (x1 + x2 + x3) / 3.0;
+      //      //double yFinal = (y1 + y2 + y3) / 3.0;
+      //      //double zFinal = (z1 + z2 + z3) / 3.0;
+
+      //      //newRow = binTable.NewRow();
+      //      //newRow[0] = r1.ToString();
+      //      //newRow[1] = g1.ToString();
+      //      //newRow[2] = b1.ToString();
+      //      //newRow[3] = l1.ToString();
+      //      //newRow[4] = a1.ToString();
+      //      //newRow[5] = lb1.ToString();
+      //      //newRow[6] = x1.ToString();
+      //      //newRow[7] = y1.ToString();
+      //      //newRow[8] = z1.ToString();
+
+
+
+      //      newRow = binTable.NewRow();
+      //      newRow[0] = bin.Rows[i][0].ToString();
+      //      newRow[1] = bin.Rows[i][1].ToString();
+      //      newRow[2] = bin.Rows[i][2].ToString();
+      //      newRow[3] = bin.Rows[i][3].ToString();
+      //      newRow[4] = bin.Rows[i][4].ToString();
+      //      newRow[5] = bin.Rows[i][5].ToString();
+      //      newRow[6] = bin.Rows[i][6].ToString();
+      //      newRow[7] = bin.Rows[i][7].ToString();
+      //      newRow[8] = bin.Rows[i][8].ToString();
+
+
+      //      binTable.Rows.Add(newRow);
+      //    }
+
+      //  }
       //}
+
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
       btn_ExportGrid.IsEnabled = true;
     }
 
@@ -6398,13 +6409,14 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
+      //loopvalue = 15;
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
       {
         DisplayMeasuredValuesFromCs200();
         newRow = dt_Bg.NewRow();
-
+    
         newRow[0] = MR.ToString();
         newRow[1] = MG.ToString();
         newRow[2] = MB.ToString();
@@ -6418,22 +6430,23 @@ namespace STColorPerception
         //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
         //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
         
-        
-        if (i >16000)
+        //78500 3000 phone
+        //if (i >47500)
+        if (i > 1390)
         {
           temp = 0;
-          for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
+          for (int j = dt_Bg.Rows.Count - 35; j < dt_Bg.Rows.Count; j++)
           {
             double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
-           
-            if (r < 191 & 183 < r)
+
+            if (r>193)//(r == 0)
             {
-              if (g < 180 & 173 < g)
+             if (g >182)//if (g < 180 & 173 < g)
               {
-                if (b < 169 & 150 < b)
-                {
+                if (b >180)//if (b < 169 & 150 < b)
+              {
                   temp++;
                 }
               }
@@ -6442,7 +6455,7 @@ namespace STColorPerception
           }
         }
 
-        if (temp > 13)
+        if (temp > 20)
         {
           break;
         }
@@ -6452,6 +6465,99 @@ namespace STColorPerception
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       });
 
+      btn_ExportGrid.IsEnabled = true;
+    }
+
+    private void Btn_CAT_Click(object sender, RoutedEventArgs e)
+    {
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BinForCATlab.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+
+      foreach (DataRow dr in bin.Rows)
+      {
+
+        //CAT LAB caluclation
+
+        //brad
+        ColorToShowXYZ.X = Convert.ToDouble(dr["bradX"].ToString());
+        ColorToShowXYZ.Y = Convert.ToDouble(dr["bradY"].ToString());
+        ColorToShowXYZ.Z = Convert.ToDouble(dr["bradZ"].ToString());
+
+        ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+
+        dr["bradL"] = ColorToShow.LA.ToString();
+        dr["bradA"] = ColorToShow.A.ToString();
+        dr["bradB"] = ColorToShow.B.ToString();
+
+        //Von
+        ColorToShowXYZ.X = Convert.ToDouble(dr["VonX"].ToString());
+        ColorToShowXYZ.Y = Convert.ToDouble(dr["VonY"].ToString());
+        ColorToShowXYZ.Z = Convert.ToDouble(dr["VonZ"].ToString());
+
+        ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+
+        //scaling
+        dr["vonL"] = ColorToShow.LA.ToString();
+        dr["vonA"] = ColorToShow.A.ToString();
+        dr["vonB"] = ColorToShow.B.ToString();
+
+        ColorToShowXYZ.X = Convert.ToDouble(dr["SX"].ToString());
+        ColorToShowXYZ.Y = Convert.ToDouble(dr["SY"].ToString());
+        ColorToShowXYZ.Z = Convert.ToDouble(dr["SZ"].ToString());
+
+        ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+
+        dr["sL"] = ColorToShow.LA.ToString();
+        dr["sA"] = ColorToShow.A.ToString();
+        dr["sB"] = ColorToShow.B.ToString();
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //xyz caluclation
+        
+        //ColorToShowXYZ.X = Convert.ToDouble(dr["X"].ToString());
+        //ColorToShowXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
+        //ColorToShowXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
+
+        //BradXYZ = Util.CATCalulation.bradford(ColorToShowXYZ);
+        //VonXYZ = Util.CATCalulation.VonKries(ColorToShowXYZ);
+        //ScalingXYZ = Util.CATCalulation.XYZScaling(ColorToShowXYZ);
+
+        //dr["bradX"] = BradXYZ.X.ToString();
+        //dr["bradY"] = BradXYZ.Y.ToString();
+        //dr["bradZ"] = BradXYZ.Z.ToString();
+
+        //dr["bradX"] = VonXYZ.X.ToString();
+        //dr["bradY"] = VonXYZ.Y.ToString();
+        //dr["bradZ"] = VonXYZ.Z.ToString();
+
+        //dr["bradX"] = BradXYZ.X.ToString();
+        //dr["bradY"] = BradXYZ.Y.ToString();
+        //dr["bradZ"] = BradXYZ.Z.ToString();
+
+        //byte R = Convert.ToByte(dr["r"].ToString());
+        //byte G = Convert.ToByte(dr["g"].ToString());
+        //byte B = Convert.ToByte(dr["b"].ToString());
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Hex color
+        //String Hex = PerceptionLib.Color.RGBtoHEX(R, G, B);
+        //dr["HEX"] = "0x" + Hex;
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      }
       btn_ExportGrid.IsEnabled = true;
     }
 
@@ -6704,6 +6810,67 @@ namespace STColorPerception
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
       }
     }
+
+    private void Btn_Reduce_Click(object sender, RoutedEventArgs e)
+    {
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\phoneBin_full.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\phoneBin_template.csv");
+
+       DataTable binTable = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      DataRow newRow;
+            
+      for (int i = 0; i < bin.Rows.Count; i=i+20)
+      {
+        
+        newRow = binTable.NewRow();
+        newRow[0] = bin.Rows[i][0].ToString();
+        newRow[1] = bin.Rows[i][1].ToString();
+        newRow[2] = bin.Rows[i][2].ToString();
+        newRow[3] = bin.Rows[i][3].ToString();
+        newRow[4] = bin.Rows[i][4].ToString();
+        newRow[5] = bin.Rows[i][5].ToString();
+        newRow[6] = bin.Rows[i][6].ToString();
+        newRow[7] = bin.Rows[i][7].ToString();
+        newRow[8] = bin.Rows[i][8].ToString();
+        newRow[9] = bin.Rows[i][9].ToString();
+        newRow[10] = bin.Rows[i][10].ToString();
+        newRow[11] = bin.Rows[i][11].ToString();
+        newRow[12] = bin.Rows[i][12].ToString();
+        newRow[13] = bin.Rows[i][13].ToString();
+        newRow[14] = bin.Rows[i][14].ToString();
+        newRow[15] = bin.Rows[i][15].ToString();
+        newRow[16] = bin.Rows[i][16].ToString();
+        newRow[17] = bin.Rows[i][17].ToString();
+        newRow[18] = bin.Rows[i][18].ToString();
+        newRow[19] = bin.Rows[i][19].ToString();
+        
+
+        binTable.Rows.Add(newRow);
+      }
+
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+      btn_ExportGrid.IsEnabled = true;
+    }
+
+   
 
    
 

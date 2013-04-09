@@ -169,7 +169,16 @@ namespace PerceptionLib
       r = CaptureEngine.read64_usb(0, returnString, 1, 250);
 
       string error = returnString.ToString(0, 4);
-           
+
+      if (error == "ER21")
+      {
+        CIEXYZ xyz = new CIEXYZ(0, 0, 0);
+        xyz.stdx = t;
+        xyz.stdy = 0;
+        xyz.stdz = 0;
+        return xyz;
+      }
+
       while (error == "ER02")
       {
         t = t + 300;

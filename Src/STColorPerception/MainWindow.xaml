@@ -92,19 +92,21 @@
         <Label Name="lbl_FgNo" Width="59" Height="26" Margin="10,0,0,0">No of FG_Colour:</Label>
         <TextBox Name="txt_FgNo" Width="43" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=FgNo}"/>
         <Button Width="64" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
-        <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
+        <Button Width="96" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
                     <Button Width="104" Name="btn_ImportGrid" Margin="10,0,0,0" Click="Btn_ImportGrid_Click">Import DataGrid</Button>
                     <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Height="33" Width="1123">
 
-                        <Button Width="104" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
-                        <Button Width="132" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
+                        <Button Width="63" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
+                        <Button Width="69" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
                         <Button Width="132" Name="Btn_CSCompensation" Margin="10,0,0,0" Click="Btn_CSCompensation_Click">CSColorCompensation</Button>
                         <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Click">CSBasicCompensation</Button>
-                        <Button Width="132" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">CATCalulator</Button>
-                        <Button Width="132" Name="Btn_ManualBinCalculator" Margin="10,0,0,0" Click="Btn_ManualBinCalculator_Click">ManualBinCalculator</Button>
-                        <Button Width="132" Name="Btn_PhoneBinCalculator" Margin="10,0,0,0" Click="Btn_PhoneBinCalculator_Click">PhoneBinCalculator</Button>
+                        <Button Width="107" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">PhoneDataCalulator</Button>
+                        <Button Width="73" Name="Btn_CAT" Margin="10,0,0,0" Click="Btn_CAT_Click">CATCalulator</Button>
+                        <Button Width="73" Name="Btn_Reduce" Margin="10,0,0,0" Click="Btn_Reduce_Click">Reduce</Button>
+                        <Button Width="119" Name="Btn_ManualBinCalculator" Margin="10,0,0,0" Click="Btn_ManualBinCalculator_Click">ManualBinCalculator</Button>
+                        <Button Width="112" Name="Btn_PhoneBinCalculator" Margin="10,0,0,0" Click="Btn_PhoneBinCalculator_Click">PhoneBinCalculator</Button>
 
                     </StackPanel>
                 </StackPanel>
