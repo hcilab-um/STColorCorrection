@@ -42,9 +42,9 @@ namespace server_bluetoothexample
     {
       //serverSocket = new BluetoothListener(applicationGuid);
       //serverSocket.Start();
-
-      port = new SerialPort("COM7", 9600);
-      port.Open();
+      string[] sPorts = SerialPort.GetPortNames();
+      //port = new SerialPort("COM6", 9600);
+      //port.Open();
 
       serverWorker = new BackgroundWorker();
       this.mwObject = mwObject;

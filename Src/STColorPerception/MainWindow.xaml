@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
           <StackPanel Orientation="Vertical" Height="79" Width="116">
             <Label>Color Displayed</Label>
-            <Rectangle Name="rec_shown" Width="50" Height="50" Fill="Blue" Stroke="White"/>
+            <Rectangle Name="rec_shown" Width="50" Height="50" Fill="{Binding ElementName=mainW, Path= ProjectedColor.hexcolor}" Stroke="White"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
                     <StackPanel Orientation="Vertical" Height="77">
@@ -26,14 +26,14 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Height="77">
             <Label>Last Color Capture</Label>
-            <Rectangle Name="Rectangle_Captured" Width="50" Height="50" Fill="Red" Stroke="Black"/>
+                        <Rectangle Name="Rectangle_Captured" Width="50" Height="50" Fill="{Binding ElementName=mainW, Path=CapturedColor}" Stroke="Black"/>
             <Label>{L,u,v} - {RGB}</Label>
           </StackPanel>
       
                 </StackPanel>
         <perception:CIE1976Control x:Name="cie1976C" VerticalAlignment="Top" HorizontalAlignment="Left" Height="500" Width="494"
                                DataContext="{StaticResource ResourceKey=mpcColors}"/>
-        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="538" Height="654">
+        <StackPanel Orientation="Vertical" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="524" Height="654">
         <Label Name="LBL_GraphText" Width="520" Height="31" Margin="0,0,0,0" ></Label>
         <Label Name="LBL_Camera" Width="90" Height="25" Margin="0,0,0,0" >Camera Image</Label>
           <Image Name="Image_Camera" Stretch="Fill" Width="82" Height="40" Margin="10,0,10,0" />
@@ -68,7 +68,7 @@
                             <Label Height="30">Von Color</Label>
                             <Rectangle Name="rect_Von" Width="48" Height="50" Fill="White" Stroke="White" />
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="79" Width="70">
+                        <StackPanel Orientation="Vertical" Height="79" Width="88">
                             <Label Height="30">Scale Color</Label>
                             <Rectangle Name="rect_Scaling" Width="48" Height="50" Fill="White" Stroke="White" />
                         </StackPanel>
@@ -76,14 +76,15 @@
                 </StackPanel>
       </StackPanel>
             
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1085" Height="1258">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0" Width="1138" Height="1258">
         <Label>Color List</Label>
-        <DataGrid Name="dtgrid_corrDisplay" Width="1050" Height="332" SelectionChanged="dtgrid_corrDisplay_SelectionChanged"></DataGrid>
-        <StackPanel Orientation="Horizontal" Width="1059" Height="26" Margin="10,10,10,10 ">  
+        <DataGrid Name="dtgrid_corrDisplay" Width="1077" Height="369" SelectionChanged="dtgrid_corrDisplay_SelectionChanged"></DataGrid>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Width="1079" Height="26" Margin="10,10,10,10 ">  
           <Button Width="84" Name="btn_StartMeasurment" Margin="10,0,0,0" Click="Btn_StartMeasurment_Click">Start capture</Button>
           <!--<Button  Width="104" Name="btn_CheckMeasurment" Margin="10,0,0,0" Click="Btn_CheckMeasurment_Click">Check Measure</Button>-->
-                    <Button Width="104" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Gamut calculation</Button>
-                    <Button Width="104" Name="btn_StdColorData" Margin="10,0,0,0" Click="Btn_StdColorData_Click">Standard Colors</Button>
+                    <Button Width="76" Name="btn_UseGridData" Margin="10,0,0,0" Click="Btn_UseGridData_Click">Gamut calculation</Button>
+                    <Button Width="69" Name="btn_StdColorData" Margin="10,0,0,0" Click="Btn_StdColorData_Click">Standard Colors</Button>
                     <Button Width="74" Name="btn_ColorPredictor" Margin="10,0,0,0" Click="Btn_BinColor_Click">BinColor</Button>
                     <Button Width="74" Name="btn_BinColor" Margin="10,0,0,0" Click="Btn_ColorPredictor_Click">Predictor</Button>
                     <Label Name="lbl_BgNo" Width="59" Height="26" Margin="10,0,0,0">No of BG_Colour:</Label>
@@ -91,10 +92,24 @@
         <Label Name="lbl_FgNo" Width="59" Height="26" Margin="10,0,0,0">No of FG_Colour:</Label>
         <TextBox Name="txt_FgNo" Width="43" Height="24" Margin="0,0,0,0" Text="{Binding ElementName=mainW, Path=FgNo}"/>
         <Button Width="64" Name="btn_MixedColour" Margin="10,0,0,0" Click="Btn_MixedColour_Click">Colour Mixture Calculator</Button>                     
-        <Button Width="104" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
+        <Button Width="96" Name="btn_ExportGrid" Margin="10,0,0,0" Click="Btn_ExportGrid_Click">Export DataGrid</Button>
                     <Button Width="104" Name="btn_ImportGrid" Margin="10,0,0,0" Click="Btn_ImportGrid_Click">Import DataGrid</Button>
                     <ComboBox Height="23" Name="cmb_graph" Width="120" Margin="10,0,0,0" Text="Cie Graph based on BG" SelectionChanged="cmb_graph_SelectionChanged" />
         </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Height="33" Width="1123">
+
+                        <Button Width="63" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
+                        <Button Width="69" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
+                        <Button Width="132" Name="Btn_CSCompensation" Margin="10,0,0,0" Click="Btn_CSCompensation_Click">CSColorCompensation</Button>
+                        <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Click">CSBasicCompensation</Button>
+                        <Button Width="107" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">PhoneDataCalulator</Button>
+                        <Button Width="73" Name="Btn_CAT" Margin="10,0,0,0" Click="Btn_CAT_Click">CATCalulator</Button>
+                        <Button Width="73" Name="Btn_Reduce" Margin="10,0,0,0" Click="Btn_Reduce_Click">Reduce</Button>
+                        <Button Width="119" Name="Btn_ManualBinCalculator" Margin="10,0,0,0" Click="Btn_ManualBinCalculator_Click">ManualBinCalculator</Button>
+                        <Button Width="112" Name="Btn_PhoneBinCalculator" Margin="10,0,0,0" Click="Btn_PhoneBinCalculator_Click">PhoneBinCalculator</Button>
+
+                    </StackPanel>
+                </StackPanel>
                 <!--<StackPanel Orientation="Horizontal" Width="1035" Height="189" Margin="10,10,10,10 ">
                     <StackPanel Orientation="Vertical"  Width="175" VerticalAlignment="Top" Height="160" Margin="10,10,10,10 " Background="{x:Null}" OpacityMask="{x:Null}" Opacity="3">
                         <StackPanel Height="41" Orientation="Horizontal" Width="139" Margin="10">
@@ -298,8 +313,8 @@
         
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
-        <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1078">
-        <Rectangle Name="rec_displayColor" Width="798" Height="1065" VerticalAlignment="Top" Fill="White" Stroke="Black" Margin="0,250,0,0" />
+        <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1195">
+                    <Rectangle Name="rec_displayColor" Width="814" Height="768" VerticalAlignment="Top" Stroke="Black" Margin="0,10,0,0" Fill="White"/>
          </Border>
         <!--</Rectangle>-->
         <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
