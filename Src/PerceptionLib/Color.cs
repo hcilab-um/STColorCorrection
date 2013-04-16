@@ -456,8 +456,6 @@ namespace PerceptionLib
       tempg = (int)Math.Round(Clinear[1] * 255.0);
       tempb = (int)Math.Round(Clinear[2] * 255.0);
 
-
-
       if (tempr > 255 || tempg > 255 || tempb > 255)
         rgb.gmt = 1;
       else
