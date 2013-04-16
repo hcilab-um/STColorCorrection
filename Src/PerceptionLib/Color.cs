@@ -449,18 +449,37 @@ namespace PerceptionLib
       //gamma companding
       for (int i = 0; i < 3; i++)
       {
-
         Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
       }
-
+           
       tempr = (int)Math.Round(Clinear[0] * 255.0);
       tempg = (int)Math.Round(Clinear[1] * 255.0);
       tempb = (int)Math.Round(Clinear[2] * 255.0);
 
 
-      rgb.R = (byte)tempr;
-      rgb.G = (byte)tempg;
-      rgb.B = (byte)tempb;
+
+      if (tempr > 255 || tempg > 255 || tempb > 255)
+        rgb.gmt = 1;
+      else
+        rgb.gmt = 0;
+      //make sure rgb is not over 255
+      if (tempr > 255)
+      {
+        tempr = 255;
+      }
+      if (tempg > 255)
+      {
+        tempg = 255;
+      }
+      if (tempb > 255)
+      {
+        tempb = 255;
+      }
+     
+
+      rgb.R = (byte)(tempr);
+      rgb.G = (byte)(tempg);
+      rgb.B = (byte)(tempb);
       return rgb;
     }
 
@@ -471,7 +490,7 @@ namespace PerceptionLib
     /// <returns></returns>
     public static RGBValue ToRBG(Color PassedLUV)
     {
-      int tempr, tempg, tempb;
+      double tempr, tempg, tempb;
       CIEXYZ xyz = LUVToXYZ(PassedLUV);
 
 
@@ -490,9 +509,11 @@ namespace PerceptionLib
         Clinear[i] = Math.Pow(Clinear[i], (1.0 / 2.2));
       }
 
-      tempr = (int)Math.Round(Clinear[0] * 255.0);
-      tempg = (int)Math.Round(Clinear[1] * 255.0);
-      tempb = (int)Math.Round(Clinear[2] * 255.0);
+      tempr = Math.Round(Clinear[0] * 255.0);
+      tempg = Math.Round(Clinear[1] * 255.0);
+      tempb = Math.Round(Clinear[2] * 255.0);
+
+     
 
 
       rgb.R = (byte)tempr;
@@ -557,7 +578,6 @@ namespace PerceptionLib
         rgb.gmt = 0;
       }
 
-
       ////gamma companding
       //for (int i = 0; i < 3; i++)
       //{
@@ -577,6 +597,7 @@ namespace PerceptionLib
       tempr = (Math.Round(Clinear[0] * 255));
       tempg = (Math.Round(Clinear[1] * 255));
       tempb = (Math.Round(Clinear[2] * 255));
+
       //if (tempr > 255 || tempg > 255 || tempb > 255)
       //  rgb.gmt = 1;
       //else
@@ -739,7 +760,7 @@ namespace PerceptionLib
     {
       double X, Y, Z, xr, yr, zr, Xr, Yr, Zr, Fx, Fy, Fz;
 
-      Fy = (double)((double)(passedLAB.L + 16)) / 116;
+      Fy = (double)((double)(passedLAB.LA + 16)) / 116;
 
       Fx = (double)((double)(passedLAB.A / 500)) + Fy;
 
@@ -747,7 +768,7 @@ namespace PerceptionLib
 
       xr = (Math.Pow(Fx, 3) > (0.008856)) ? Math.Pow(Fx, 3) : ((double)((double)(116 * Fx - 16) / 903.3));
 
-      yr = (passedLAB.L > (0.008856 * 903.3)) ? Math.Pow(Fy, 3) : ((double)(passedLAB.L / 903.3));
+      yr = (passedLAB.LA > (0.008856 * 903.3)) ? Math.Pow(Fy, 3) : ((double)(passedLAB.LA / 903.3));
 
       zr = (Math.Pow(Fz, 3) > (0.008856)) ? Math.Pow(Fz, 3) : ((double)((double)(116 * Fz - 16) / 903.3));
 
