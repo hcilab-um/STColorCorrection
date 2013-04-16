@@ -101,7 +101,7 @@
                         <Button Width="63" Name="btn_CSgammut" Margin="10,0,0,0" Click="Btn_CSGammut_Click">CsGamut</Button>
                         <Button Width="69" Name="Btn_CSPredictor" Margin="10,0,0,0" Click="Btn_CSPredictor_Click">CSPredictor</Button>
                         <Button Width="132" Name="Btn_CSCompensation" Margin="10,0,0,0" Click="Btn_CSCompensation_Click">CSColorCompensation</Button>
-                        <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Click">CSBasicCompensation</Button>
+                        <Button Width="132" Name="Btn_CSBasicCompensation" Margin="10,0,0,0" Click="Btn_CSBasicCompensation_Encd_Click">CSBasicCompensation</Button>
                         <Button Width="107" Name="Btn_CATCalulator" Margin="10,0,0,0" Click="Btn_CATCalulator_Click">PhoneDataCalulator</Button>
                         <Button Width="73" Name="Btn_CAT" Margin="10,0,0,0" Click="Btn_CAT_Click">CATCalulator</Button>
                         <Button Width="73" Name="Btn_Reduce" Margin="10,0,0,0" Click="Btn_Reduce_Click">Reduce</Button>
@@ -193,7 +193,7 @@
           <Label Name="MBlue" Width="20" Height="26" Margin="0,10,0,0">B:</Label>
           <Label Name="lbl_MBlue" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MB}"/>
           <Button Width="132" Name="Btn_PhoneDataCalculator" Margin="10,0,0,0" Click="Btn_PhoneDataCalculator_Click">PhoneDataCalculator</Button>
-        </StackPanel>
+                </StackPanel>
         <StackPanel Orientation="Horizontal" Width="941" Height="41" Margin="10,0,10,10 ">
           <Label Name="L" Width="20" Height="24" Margin="0,10,0,0">L:</Label>
           <Label Name="lbl_L" Width="50" Height="26" Margin="0,10,0,0" Content="{Binding ElementName=mainW, Path=ColorToShow.L}"/>
