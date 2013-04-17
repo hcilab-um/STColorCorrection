@@ -8,14 +8,14 @@
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
       <TextBox x:Name="tbFileName" Width="282"/>
       <Button Content="Select" Click="Button_Click" />
-      <ComboBox x:Name="cbModel" SelectionChanged="cbModel_SelectionChanged">
+      <ComboBox x:Name="cbModel">
         <ComboBoxItem IsSelected="True" Tag="DM">Direct Model</ComboBoxItem>
         <ComboBoxItem Tag="CAT1">CAT 1</ComboBoxItem>
         <ComboBoxItem Tag="CAT2">CAT 2</ComboBoxItem>
         <ComboBoxItem Tag="CAT3">CAT 3</ComboBoxItem>
         <ComboBoxItem Tag="BP">Binned Profile</ComboBoxItem>
       </ComboBox>
-      <ComboBox x:Name="cbBgType" SelectionChanged="cbBgType_SelectionChanged">
+      <ComboBox x:Name="cbBgType">
         <ComboBoxItem IsSelected="True" Tag="TD">Through DP</ComboBoxItem>
         <ComboBoxItem Tag="ND">Before DP</ComboBoxItem>
       </ComboBox>

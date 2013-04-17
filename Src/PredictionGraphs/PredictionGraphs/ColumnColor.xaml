@@ -46,14 +46,13 @@
   <Grid>
     <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="{Binding ElementName=columnC, Path=ActualWidth}" Height="{Binding ElementName=columnC, Path=ActualWidth}"
              Fill="{Binding ElementName=columnC, Path=TestBg}"/>
-    <ListBox x:Name="lbChart" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=columnC, Path=ActualWidth}" BorderThickness="0"
-             Style="{StaticResource ResourceKey=ColorsColumn}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-      <ListBox.Height>
+    <Canvas x:Name="cHistogram" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+      <Canvas.Height>
         <MultiBinding Converter="{StaticResource ResourceKey=subConverter}" ConverterParameter="5">
           <Binding ElementName="columnC" Path="ActualHeight"/>
           <Binding ElementName="columnC" Path="ActualWidth"/>
         </MultiBinding>
-      </ListBox.Height>
-    </ListBox>
+      </Canvas.Height>      
+    </Canvas>
   </Grid>
 </UserControl>

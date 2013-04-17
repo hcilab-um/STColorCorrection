@@ -43,28 +43,6 @@ namespace PredictionGraphs
       set { SetValue(BgTypeProperty, value); }
     }
 
-    private String distanceVarName;
-    public String DistanceVarName
-    {
-      get { return distanceVarName; }
-      set
-      {
-        distanceVarName = value;
-        OnPropertyChanged("DistanceVarName");
-      }
-    }
-
-    private double measureHeight;
-    public double MeasureHeight 
-    {
-      get { return measureHeight; }
-      set
-      {
-        measureHeight = value;
-        OnPropertyChanged("MeasureHeight");
-      }
-    }
-
     private double maxValue;
     public double MaxValue
     {
@@ -90,17 +68,40 @@ namespace PredictionGraphs
         if (DataContext == null || !(DataContext is DataTable))
           return;
 
-        DistanceVarName = String.Format("Dist_{0}_{1}", Model, BgType);
+        String varName = String.Format("Dist_{0}_{1}", Model, BgType);
 
         SolidColorBrush bgColor = TestBg as SolidColorBrush;
         DataView view = new DataView(DataContext as DataTable);
         String filter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", view.Table.Columns[0].ColumnName, bgColor.Color.R, bgColor.Color.G, bgColor.Color.B);
         view.RowFilter = filter;
-        view.Sort = String.Format("Dist DESC");
-        lbChart.ItemsSource = view;
-        
-        MeasureHeight = lbChart.ActualHeight / view.Count;
+
+        cHistogram.Children.Clear();
+        foreach (DataRowView row in view)
+        {
+          Rectangle measurement = new Rectangle();
+          measurement.Width = cHistogram.ActualWidth;
+          measurement.Height = 1;
+          measurement.Opacity = 0.1;
+          measurement.Fill = Brushes.Blue;
+          Canvas.SetLeft(measurement, 0);
+          Canvas.SetTop(measurement, CalculateDistanceFromTop(row, varName, 1));
+          cHistogram.Children.Add(measurement);
+        }
       }
+    }
+
+    private double CalculateDistanceFromTop(DataRowView row, string varName, double markerHeight)
+    {
+      double distance = Double.Parse(row[varName] as String);
+      double columnHeight = cHistogram.ActualHeight;
+
+      if (distance > maxValue)
+        return -10;
+
+      var location = distance * columnHeight / maxValue;
+      location -= markerHeight / 2;
+
+      return columnHeight - location;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

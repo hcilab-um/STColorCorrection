@@ -49,10 +49,7 @@ namespace PredictionGraphs
         {
           parser.Load("prediction-format.xml");
           System.Data.DataSet dsResult = parser.GetDataSet();
-          DataTable data = dsResult.Tables[0];
-          data.Columns.Add(new DataColumn("Dist", typeof(double)));
-          UpdateDistColumn(data);
-          DisplayData = data;
+          DisplayData = dsResult.Tables[0];
         }
       }
     }
@@ -63,27 +60,5 @@ namespace PredictionGraphs
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
-
-    private void cbBgType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      UpdateDistColumn(DisplayData);
-    }
-
-    private void cbModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      UpdateDistColumn(DisplayData);
-    }
-
-    private void UpdateDistColumn(DataTable table)
-    {
-      if (table == null)
-        return;
-
-      String DistanceVarName = String.Format("Dist_{0}_{1}", (cbModel.SelectedItem as ComboBoxItem).Tag, (cbBgType.SelectedItem as ComboBoxItem).Tag);
-      foreach (DataRow row in table.Rows)
-        row["Dist"] = Double.Parse(row[DistanceVarName] as String);
-    }
-
-
   }
 }
