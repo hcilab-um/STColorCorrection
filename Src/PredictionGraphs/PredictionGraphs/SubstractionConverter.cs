@@ -18,7 +18,10 @@ namespace PredictionGraphs
       var factor2 = Double.Parse(values[1].ToString());
       var constant = Double.Parse(parameter.ToString());
  
-      return factor1 - factor2 - constant;
+      var result = factor1 - factor2 - constant;
+      if (result < 0)
+        return (double)0;
+      return result;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)

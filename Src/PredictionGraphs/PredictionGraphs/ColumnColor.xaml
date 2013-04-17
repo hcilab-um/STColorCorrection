@@ -9,9 +9,11 @@
   
   <UserControl.Resources>
     <graphs:SubstractionConverter x:Key="subConverter" />
+    <graphs:DistanceToOpacityConverter x:Key="distToOP" />
+    <graphs:DistanceToLocationConverter x:Key="distToLoc" />
 
     <!--Here comes the style template of the search results-->
-    <Style TargetType="{x:Type ListBox}" x:Key="ColumnColors">
+    <Style TargetType="{x:Type ListBox}" x:Key="ColorsColumn">
       <Setter Property="ItemsPanel">
         <Setter.Value>
           <ItemsPanelTemplate>
@@ -23,14 +25,14 @@
         <Setter.Value>
           <DataTemplate>
             <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}" 
-                       Height="5" Fill="Blue" Opacity="0.5">
+                       Height="1" Fill="Blue" Opacity="0.2">
               <Rectangle.Margin>
-                <MultiBinding Converter="{StaticResource ResourceKey=cBarItemLocation}">
-                  <Binding ElementName="annoBar" Path="PageHeight"/>
-                  <Binding ElementName="annoBar" Path="HeightFactor"/>
-                  <Binding Path="Y"/>
+                <MultiBinding Converter="{StaticResource ResourceKey=distToLoc}">
+                  <Binding />
+                  <Binding ElementName="columnC" Path="DistanceVarName"/>
+                  <Binding ElementName="columnC" Path="MaxValue"/>
                   <Binding RelativeSource="{RelativeSource AncestorType=ListBox}" Path="ActualHeight" />
-                  <Binding RelativeSource="{RelativeSource Self}"  Path="ActualHeight" />
+                  <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight" />
                 </MultiBinding>
               </Rectangle.Margin>
             </Rectangle>
@@ -44,9 +46,10 @@
   <Grid>
     <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="{Binding ElementName=columnC, Path=ActualWidth}" Height="{Binding ElementName=columnC, Path=ActualWidth}"
              Fill="{Binding ElementName=columnC, Path=TestBg}"/>
-    <ListBox HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=columnC, Path=ActualWidth}" BorderThickness="0">
+    <ListBox x:Name="lbChart" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=columnC, Path=ActualWidth}" BorderThickness="0"
+             Style="{StaticResource ResourceKey=ColorsColumn}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
       <ListBox.Height>
-        <MultiBinding Converter="{StaticResource ResourceKey=subConverter}" ConverterParameter="10">
+        <MultiBinding Converter="{StaticResource ResourceKey=subConverter}" ConverterParameter="5">
           <Binding ElementName="columnC" Path="ActualHeight"/>
           <Binding ElementName="columnC" Path="ActualWidth"/>
         </MultiBinding>
