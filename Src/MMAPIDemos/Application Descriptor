@@ -1,0 +1,48 @@
+VideoTest-6: MPEG1 Video - Canvas
+PlayerURL-6: resource:/video/animated_89_c.gif
+PlayerURL-5: http://java.sun.com/products/java-media/mma/media/test-midi.mid
+VideoTest-4: Video Capture - Canvas
+PlayerURL-4: http://java.sun.com/products/java-media/mma/media/test-wav.wav
+VideoTest-5: MPEG1 Video - Form
+PlayerURL-3: resource:/audio/beethoven.jts
+PlayerURL-2: resource:/audio/scale.mid
+VideoTest-2: Animated GIF - Canvas [jar]
+PlayerURL-1: resource:/audio/bong.wav
+VideoTest-3: Video Capture - Form
+VideoTest-1: Animated GIF - Form [jar]
+PlayerURL-11: http://java.sun.com/products/java-media/mma/media/test-mpeg.mpg
+PlayerURL-10: capture://video
+PlayerURL-9: capture://audio
+PlayerURL-8: resource:/audio/amr-wb.awb
+PlayerURL-7: resource:/audio/amr-nb.amr
+PlayerTitle-7: AMR Narrow Band [jar]
+PlayerTitle-6: Animated GIF [jar]
+PlayerTitle-9: Audio Capture from default device
+PlayerTitle-8: AMR Wide Band 3[jar]
+VideoTest-URL3: capture://video
+VideoTest-URL4: capture://video
+VideoTest-URL5: http://java.sun.com/products/java-media/mma/media/test-mpeg.mpg
+VideoTest-URL6: http://java.sun.com/products/java-media/mma/media/test-mpeg.mpg
+VideoTest-URL1: resource:/video/animated_89_c.gif
+VideoTest-URL2: resource:/video/animated_89_c.gif
+PauseAudioURL: http://java.sun.com/products/java-media/mma/media/test-wav.wav
+PlayerTitle-1: Bong [jar]
+PlayerTitle-4: WAV Music [http]
+PlayerTitle-5: MIDI scale [http]
+PlayerTitle-2: MIDI Scale [jar]
+PlayerTitle-3: Simple Ring Tone [jar]
+PlayerTitle-11: MPEG1 Video [http]
+PlayerTitle-10: Video Capture Simulation
+MIDlet-4: Pausing Audio Test, /icons/App.png, example.mmademo.PausingAudioTest
+MIDlet-3: Video, /icons/App.png, example.mmademo.VideoTest
+MIDlet-2: Simple Player, /icons/App.png, example.mmademo.SimplePlayer
+MIDlet-1: Simple Tones, /icons/App.png, example.mmademo.SimpleTones
+MIDlet-Permissions: javax.microedition.io.Connector.http,javax.microedition.media.control.RecordControl,javax.microedition.media.control.VideoControl.getSnapshot
+MIDlet-Vendor: Oracle
+MIDlet-Name: MMAPI demos
+MIDlet-Description: Demo suite for MMAPI
+MIDlet-Version: 1.0.3
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-URL: MMAPIDemos.jar
+MIDlet-Jar-Size: 934016

@@ -599,7 +599,7 @@ namespace STColorPerception
       PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
       //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
 
 
      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
@@ -607,6 +607,8 @@ namespace STColorPerception
      rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(80, 218, 205));
 
       //Util.CATCalulation.HueAngle(colorToShow);
+     String Hex = PerceptionLib.Color.RGBtoHEX(77, 19, 18);
+     
 
       projectedColor = new PerceptionLib.HexRGB();
       BackgroungColor = new PerceptionLib.HexRGB();
@@ -6615,8 +6617,9 @@ namespace STColorPerception
       txt_B.IsEnabled = false;
 
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\MixerCal\19bg_0pts.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\till4000_3.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -6659,7 +6662,8 @@ namespace STColorPerception
         newRow = binTable.NewRow();
 
 
-        if (R >= 176 & G >=164  & B >= 151)
+        //if (R >= 174 & G >=164  & B >= 149)
+        if(R<7 & G <=60  & B <= 89)
         {
           newRow[0] = 0;
           newRow[1] = 0;
@@ -6674,7 +6678,8 @@ namespace STColorPerception
         }
         else
         {
-          if (Rt >= 176 & Gt >= 164 & Bt >= 151)
+          //if (Rt >= 174 & Gt >= 164 & Bt >= 149)
+          if (Rt< 7 & Gt <= 60 & Bt <= 89)
           {
             newRow[0] = 0;
             newRow[1] = 0;
@@ -7034,7 +7039,7 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
-      loopvalue = 15;
+      //loopvalue = 15;
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7056,25 +7061,25 @@ namespace STColorPerception
         //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
         
         //78500 3000 phone
-        //if (i >47500)
+      
         
-        if (i > 1390)
+        if (i > 32800)
         {
           temp = 0;
-          for (int j = dt_Bg.Rows.Count - 35; j < dt_Bg.Rows.Count; j++)
+          for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
           {
             double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-            if (r>231)//(r == 0)
+            if (r< 7)//(r == 0)
             {
-             if (g >220)//if (g < 180 & 173 < g)
+             if (g < 58)//if (g < 180 & 173 < g)
               {
-                if (b >209)//if (b < 169 & 150 < b)
+                if (b < 89)//if (b < 169 & 150 < b)
               {
                   temp++;
-                }
+              }
               }
 
             }
