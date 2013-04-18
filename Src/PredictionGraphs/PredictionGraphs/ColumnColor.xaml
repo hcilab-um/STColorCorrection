@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="PredictionGraphs.ColumnColor" x:Name="columnC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:graphs="clr-namespace:PredictionGraphs"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="30">
+  
+  <UserControl.Resources>
+    <graphs:SubstractionConverter x:Key="subConverter" />
+    <graphs:DistanceToOpacityConverter x:Key="distToOP" />
+    <graphs:DistanceToLocationConverter x:Key="distToLoc" />
+
+    <!--Here comes the style template of the search results-->
+    <Style TargetType="{x:Type ListBox}" x:Key="ColorsColumn">
+      <Setter Property="ItemsPanel">
+        <Setter.Value>
+          <ItemsPanelTemplate>
+            <Canvas VerticalAlignment="Stretch"/>
+          </ItemsPanelTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}" 
+                       Height="1" Fill="Blue" Opacity="0.2">
+              <Rectangle.Margin>
+                <MultiBinding Converter="{StaticResource ResourceKey=distToLoc}">
+                  <Binding />
+                  <Binding ElementName="columnC" Path="DistanceVarName"/>
+                  <Binding ElementName="columnC" Path="MaxValue"/>
+                  <Binding RelativeSource="{RelativeSource AncestorType=ListBox}" Path="ActualHeight" />
+                  <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight" />
+                </MultiBinding>
+              </Rectangle.Margin>
+            </Rectangle>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+  </UserControl.Resources>
+  
+  <Grid>
+    <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="{Binding ElementName=columnC, Path=ActualWidth}" Height="{Binding ElementName=columnC, Path=ActualWidth}"
+             Fill="{Binding ElementName=columnC, Path=TestBg}"/>
+    <Canvas x:Name="cHistogram" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+      <Canvas.Height>
+        <MultiBinding Converter="{StaticResource ResourceKey=subConverter}" ConverterParameter="5">
+          <Binding ElementName="columnC" Path="ActualHeight"/>
+          <Binding ElementName="columnC" Path="ActualWidth"/>
+        </MultiBinding>
+      </Canvas.Height>      
+    </Canvas>
+  </Grid>
+</UserControl>
