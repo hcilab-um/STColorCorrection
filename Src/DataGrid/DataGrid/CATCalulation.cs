@@ -32,6 +32,8 @@ namespace DataGrid
 
                   c1 = -0.455826584037247, c2 = -1.394610457951430, c3 = 3.596564478605494;
 
+
+
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0,0,0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
             colorObject.Y = (b1 * ColorIntended.X) + (b2 * ColorIntended.Y) + (b3 * ColorIntended.Z);

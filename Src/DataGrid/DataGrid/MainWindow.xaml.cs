@@ -99,34 +99,35 @@ namespace DataGrid
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //xyz caluclation
 
-        ColorToShowXYZ.X = Convert.ToDouble(dr["X"].ToString());
-        ColorToShowXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
-        ColorToShowXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
+        //ColorToShowXYZ.X = Convert.ToDouble(dr["X"].ToString());
+        //ColorToShowXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
+        //ColorToShowXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
 
-        BradXYZ = CATCalulation.bradford(ColorToShowXYZ);
-        VonXYZ = CATCalulation.VonKries(ColorToShowXYZ);
-        ScalingXYZ = CATCalulation.XYZScaling(ColorToShowXYZ);
+        //BradXYZ = CATCalulation.bradford(ColorToShowXYZ);
+        //VonXYZ = CATCalulation.VonKries(ColorToShowXYZ);
+        //ScalingXYZ = CATCalulation.XYZScaling(ColorToShowXYZ);
 
-        dr["bradX"] = BradXYZ.X.ToString();
-        dr["bradY"] = BradXYZ.Y.ToString();
-        dr["bradZ"] = BradXYZ.Z.ToString();
+        //dr["bradX"] = BradXYZ.X.ToString();
+        //dr["bradY"] = BradXYZ.Y.ToString();
+        //dr["bradZ"] = BradXYZ.Z.ToString();
 
-        dr["VonX"] = VonXYZ.X.ToString();
-        dr["VonY"] = VonXYZ.Y.ToString();
-        dr["VonZ"] = VonXYZ.Z.ToString();
+        //dr["VonX"] = VonXYZ.X.ToString();
+        //dr["VonY"] = VonXYZ.Y.ToString();
+        //dr["VonZ"] = VonXYZ.Z.ToString();
 
-        dr["ScalX"] = ScalingXYZ.X.ToString();
-        dr["ScalY"] = ScalingXYZ.Y.ToString();
-        dr["ScalZ"] = ScalingXYZ.Z.ToString();
-
-        //byte R = Convert.ToByte(dr["r"].ToString());
-        //byte G = Convert.ToByte(dr["g"].ToString());
-        //byte B = Convert.ToByte(dr["b"].ToString());
+        //dr["ScalX"] = ScalingXYZ.X.ToString();
+        //dr["ScalY"] = ScalingXYZ.Y.ToString();
+        //dr["ScalZ"] = ScalingXYZ.Z.ToString();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ColorToShow.LA = Convert.ToByte(dr["L"].ToString());
+        ColorToShow.A = Convert.ToByte(dr["A"].ToString());
+        ColorToShow.B = Convert.ToByte(dr["B"].ToString());
+        PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
+               
         //Hex color
-        //String Hex = PerceptionLib.Color.RGBtoHEX(R, G, B);
-        //dr["HEX"] = "0x" + Hex;
+        String Hex = PerceptionLib.Color.RGBtoHEX(R, G, B);
+        dr["HEX"] = "0x" + Hex;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //ColorToShowXYZ = new CIEXYZ(0, 0, 0);
