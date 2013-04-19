@@ -46,7 +46,7 @@
   <Grid>
     <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="{Binding ElementName=columnC, Path=ActualWidth}" Height="{Binding ElementName=columnC, Path=ActualWidth}"
              Fill="{Binding ElementName=columnC, Path=TestBg}"/>
-    <Canvas x:Name="cHistogram" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="Red">
+    <Canvas x:Name="cHistogram" VerticalAlignment="Top" HorizontalAlignment="Stretch">
       <Canvas.Height>
         <MultiBinding Converter="{StaticResource ResourceKey=subConverter}" ConverterParameter="5">
           <Binding ElementName="columnC" Path="ActualHeight"/>
