@@ -24,15 +24,17 @@ namespace DataGrid
             //       b1 = -0.00599909318707803, b2 = 1.23251321283751, b3 = 0.000563974739215607,
             //       c1 = -0.0229710501639069, c2 = 0.109301363961475, c3 = 1.22235691025888;
 
-          double a1 = 3.680878397355853, a2 = -0.125561420765456, a3 = -0.031693982497234,
+          //double a1 = 3.680878397355853, a2 = -0.125561420765456, a3 = -0.031693982497234,
 
 
-                  b1 = 0.130942826233715, b2 = 3.378993619275563, b3 = -0.017998480571422,
+          //        b1 = 0.130942826233715, b2 = 3.378993619275563, b3 = -0.017998480571422,
 
 
-                  c1 = -0.455826584037247, c2 = -1.394610457951430, c3 = 3.596564478605494;
+          //        c1 = -0.455826584037247, c2 = -1.394610457951430, c3 = 3.596564478605494;
 
-
+          double a1 = 3.631563690991946, a2 = -0.138231682500917, a3 = -0.029995888441995,
+              b1 = 0.127321552471585, b2 = 3.328860477113199, b3 = 0.017034161465600,
+              c1 = -0.364711225715155, c2 = -1.437331989165315, c3 = 3.540751574279470;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0,0,0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
@@ -49,13 +51,19 @@ namespace DataGrid
 
 
 
-          double a1 = 3.563498356215192, a2 = 0.294040219362152, a3 = -0.229656814142911,
+          //double a1 = 3.563498356215192, a2 = 0.294040219362152, a3 = -0.229656814142911,
 
 
-                   b1 = 0.032298232574425, b2 = 3.454281611478240, b3 = -0.006515457264759,
+          //         b1 = 0.032298232574425, b2 = 3.454281611478240, b3 = -0.006515457264759,
 
-                   c1 = 0, c2 = 0, c3 = 2.426091800356506;
+          //         c1 = 0, c2 = 0, c3 = 2.426091800356506;
 
+          double a1 = 3.507963951452145, a2 = 0.281748688696900, a3 = -0.224693595192396,
+
+
+                   b1 = 0.030948095110295, b2 = 3.403312707890528, b3 = 0.006242962423505,
+
+                   c1 = 0, c2 = 0, c3 = 2.395138583369995;
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
             colorObject.Y = (b1 * ColorIntended.X) + (b2 * ColorIntended.Y) + (b3 * ColorIntended.Z);
@@ -69,9 +77,14 @@ namespace DataGrid
             //       b1 = 0, b2 = 1.22740048850539, b3 = 0,
             //       c1 = 0, c2 = 0, c3 = 1.30801388705357;
 
-          double a1 = 3.495660169179846, a2 = 0, a3 = 0,
-                   b1 = 0, b2 = 3.474635163307853, b3 = 0,
-                   c1 = 0, c2 = 0, c3 = 2.426091800356506;
+          //double a1 = 3.495660169179846, a2 = 0, a3 = 0,
+          //         b1 = 0, b2 = 3.474635163307853, b3 = 0,
+          //         c1 = 0, c2 = 0, c3 = 2.426091800356506;
+
+
+          double a1 = 3.436261749819233, a2 = 0, a3 = 0,
+                   b1 = 0, b2 = 3.422899195618689, b3 = 0,
+                   c1 = 0, c2 = 0, c3 = 2.395138583369996;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
@@ -99,7 +112,69 @@ namespace DataGrid
             }
             return Math.Sqrt(sum / x.Length);
         }
+       
+      public static double HueAngle(PerceptionLib.Color colorToShow)
+        {
+          double value1 = colorToShow.B / colorToShow.A;
+          //double value1 = -107.9785394 / 78.5459795;
 
+
+          double radians = Math.Atan(value1);
+          double ColorToShowangle = radians * (180 / Math.PI);
+
+          if (ColorToShowangle < 0)
+          {
+            ColorToShowangle = ColorToShowangle + 360;
+          }
+          if (ColorToShowangle >= 360)
+          {
+            ColorToShowangle = ColorToShowangle - 360;
+          }
+
+          return ColorToShowangle;
+        }
+
+        /// <summary>
+        /// function lakes to lab value to find the huedeffirence between them 
+        /// based on :http://www.hunterlab.com/kb/hardware/d25ltvalues.pdf
+        /// </summary>
+        /// <param name="colorToCompare"></param>
+        /// <param name="colorToComparePlsBG"></param>
+        /// <returns></returns>
+        public static double hueDifference(PerceptionLib.Color colorToCompare, PerceptionLib.Color colorToComparePlsBG)
+        {
+          double HueDifference = 0;
+          // difference in L
+          double DifferenceInL = (colorToCompare.LA - colorToComparePlsBG.LA) * (colorToCompare.LA - colorToComparePlsBG.LA);
+
+          //color equlidin distance calculation
+          double ColorDifference = PerceptionLib.Color.ColorDistanceCalAB(colorToCompare, colorToComparePlsBG);
+          ColorDifference = ColorDifference * ColorDifference;
+
+          //diffence in c calculation
+          double Ca = (colorToCompare.A * colorToCompare.A) + (colorToCompare.B * colorToCompare.B);
+          double colorToCompareC = Math.Sqrt(Ca);
+          if (colorToCompareC > 5)
+          {
+            Ca = (colorToComparePlsBG.A * colorToComparePlsBG.A) + (colorToComparePlsBG.B * colorToComparePlsBG.B);
+            double colorToComparePlsBGC = Math.Sqrt(Ca);
+            if (colorToComparePlsBGC > 5)
+            {
+              double DifferenceInC = Math.Abs(colorToCompareC - colorToComparePlsBGC);
+              DifferenceInC = DifferenceInC * DifferenceInC;
+
+              HueDifference = Math.Sqrt(ColorDifference - DifferenceInL - DifferenceInC);
+              HueDifferenceFlag = 0;
+            }
+            else
+              HueDifferenceFlag = 1;
+          }
+          else
+            HueDifferenceFlag = 1;
+
+          return HueDifference;
+
+        }
        
 
     }

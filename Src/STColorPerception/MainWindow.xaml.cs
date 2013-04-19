@@ -6007,8 +6007,8 @@ namespace STColorPerception
 
       }));
 
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BaseBinFile.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BaseBinFile.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -6058,10 +6058,10 @@ namespace STColorPerception
         maxB = Math.Max(maxBLevel, BLvl);
       }
 
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\RGBgammut.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\RGBgammut.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\RGB88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\RGB8000Sorted.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\RGB8000NotSorted.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\RGB8000NotSorted.csv");
       DataTable dt_RGBGammut = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -6072,8 +6072,8 @@ namespace STColorPerception
       BgNo = dt_Bg.Rows.Count;
       FgNo = dt_RGBGammut.Rows.Count;
 
-      //BgNo = 12;
-      //FgNo = 400;
+      BgNo = 12;
+     // FgNo = 100;
       PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\CsBasicCOMPENSATOR.csv");
 
       DataTable dt_DataCollection = new DataTable();
@@ -6089,7 +6089,7 @@ namespace STColorPerception
         for (int i = 0; i < BgNo; i++)
         {
 
-          for (int j = 0; j < FgNo; j = j + 10)
+          for (int j = 11; j < FgNo; j = j + 20)
           {
             newRow = dt_DataCollection.NewRow();
             BgR = Convert.ToByte(dt_Bg.Rows[i][0].ToString());
