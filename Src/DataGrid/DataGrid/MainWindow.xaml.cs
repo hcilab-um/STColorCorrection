@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Data;
 using System.Windows.Threading;
 using PerceptionLib;
+using System.Drawing;
 
 namespace DataGrid
 {
@@ -55,7 +56,7 @@ namespace DataGrid
       PerceptionLib.CIEXYZ BradXYZ = new CIEXYZ(0, 0, 0);
       PerceptionLib.CIEXYZ VonXYZ = new CIEXYZ(0, 0, 0);
       PerceptionLib.CIEXYZ ScalingXYZ = new CIEXYZ(0, 0, 0);
-      PerceptionLib.Color ColorToShow;
+      PerceptionLib.Color ColorToShow= new PerceptionLib.Color();
 
       foreach (DataRow dr in bin.Rows)
       {
@@ -120,13 +121,13 @@ namespace DataGrid
         //dr["ScalZ"] = ScalingXYZ.Z.ToString();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ColorToShow.LA = Convert.ToByte(dr["L"].ToString());
-        ColorToShow.A = Convert.ToByte(dr["A"].ToString());
-        ColorToShow.B = Convert.ToByte(dr["B"].ToString());
+        ColorToShow.LA = Convert.ToDouble(dr["L"].ToString());
+        ColorToShow.A = Convert.ToDouble(dr["A"].ToString());
+        ColorToShow.B = Convert.ToDouble(dr["B"].ToString());
         PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
                
         //Hex color
-        String Hex = PerceptionLib.Color.RGBtoHEX(R, G, B);
+        String Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
         dr["HEX"] = "0x" + Hex;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
