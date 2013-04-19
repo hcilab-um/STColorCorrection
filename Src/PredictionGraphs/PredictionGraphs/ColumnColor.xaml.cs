@@ -29,18 +29,11 @@ namespace PredictionGraphs
       set { SetValue(TestBgProperty, value); }
     }
 
-    public static readonly DependencyProperty ModelProperty = DependencyProperty.Register("Model", typeof(String), typeof(ColumnColor));
-    public String Model
+    public static readonly DependencyProperty DistanceProperty = DependencyProperty.Register("Distance", typeof(String), typeof(ColumnColor));
+    public String Distance
     {
-      get { return (String)GetValue(ModelProperty); }
-      set { SetValue(ModelProperty, value); }
-    }
-
-    public static readonly DependencyProperty BgTypeProperty = DependencyProperty.Register("BgType", typeof(String), typeof(ColumnColor));
-    public String BgType
-    {
-      get { return (String)GetValue(BgTypeProperty); }
-      set { SetValue(BgTypeProperty, value); }
+      get { return (String)GetValue(DistanceProperty); }
+      set { SetValue(DistanceProperty, value); }
     }
 
     private double maxValue;
@@ -63,12 +56,12 @@ namespace PredictionGraphs
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
       base.OnPropertyChanged(e);
-      if (e.Property == ModelProperty || e.Property == BgTypeProperty || e.Property == DataContextProperty)
+      if (e.Property == DistanceProperty || e.Property == DataContextProperty)
       {
         if (DataContext == null || !(DataContext is DataTable))
           return;
 
-        String varName = String.Format("Dist_{0}_{1}", Model, BgType);
+        String varName = String.Format("Dist_{0}", Distance);
 
         SolidColorBrush bgColor = TestBg as SolidColorBrush;
         DataView view = new DataView(DataContext as DataTable);
@@ -92,7 +85,15 @@ namespace PredictionGraphs
 
     private double CalculateDistanceFromTop(DataRowView row, string varName, double markerHeight)
     {
-      double distance = Double.Parse(row[varName] as String);
+      String distanceValue = row[varName] as String;
+      if (distanceValue == null || distanceValue.Length == 0)
+      {
+        distanceValue = "5.000";
+        //throw new ArgumentException("DataSet missing data!");
+        Console.WriteLine("DataSet missing data!");
+      }
+
+      double distance = Double.Parse(distanceValue);
       double columnHeight = cHistogram.ActualHeight;
 
       if (distance > maxValue)
