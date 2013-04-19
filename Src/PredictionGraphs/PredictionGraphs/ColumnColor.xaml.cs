@@ -90,6 +90,7 @@ namespace PredictionGraphs
       {
         distanceValue = "5.000";
         //throw new ArgumentException("DataSet missing data!");
+        Console.WriteLine("DataSet missing data!");
       }
 
       double distance = Double.Parse(distanceValue);
