@@ -198,7 +198,7 @@ namespace DataGrid
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\800_2.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\sample.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -397,7 +397,8 @@ namespace DataGrid
 
       btn_ExportGrid.IsEnabled = true;
     }
-
+    
+    //cat
     private void button3_Click(object sender, RoutedEventArgs e)
     {
        PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\small pro cat mixture\SmallPro800.csv");
@@ -413,6 +414,8 @@ namespace DataGrid
       PerceptionLib.CIEXYZ DBg = new CIEXYZ(0, 0, 0);
       PerceptionLib.CIEXYZ TDBg= new CIEXYZ(0, 0, 0);
       
+      PerceptionLib.CIEXYZ AXYZ = new CIEXYZ(0, 0, 0);
+      PerceptionLib.CIEXYZ BinXYZ = new CIEXYZ(0, 0, 0);
 
       PerceptionLib.CIEXYZ BradXYZ = new CIEXYZ(0, 0, 0);
       PerceptionLib.CIEXYZ VonXYZ = new CIEXYZ(0, 0, 0);
@@ -428,7 +431,8 @@ namespace DataGrid
       PerceptionLib.CIEXYZ DScalXYZ = new CIEXYZ(0, 0, 0);
 
 
-
+      PerceptionLib.Color Acolor = new PerceptionLib.Color();
+      PerceptionLib.Color Bincolor = new PerceptionLib.Color();
        PerceptionLib.Color Brad       =    new PerceptionLib.Color();
        PerceptionLib.Color Von      =     new PerceptionLib.Color();
        PerceptionLib.Color Scal    = new PerceptionLib.Color();
@@ -464,9 +468,17 @@ namespace DataGrid
        TDBg.Y = Convert.ToDouble(dr["BMY"].ToString());
        TDBg.Z = Convert.ToDouble(dr["BMZ"].ToString());
 
-        BradXYZ.X = Convert.ToDouble(dr["BradX"].ToString());
-        BradXYZ.Y = Convert.ToDouble(dr["BradY"].ToString());
-        BradXYZ.Z = Convert.ToDouble(dr["BradZ"].ToString());
+       AXYZ.X = Convert.ToDouble(dr["AX"].ToString());
+       AXYZ.Y = Convert.ToDouble(dr["AY"].ToString());
+       AXYZ.Z = Convert.ToDouble(dr["AZ"].ToString());
+
+       BinXYZ.X = Convert.ToDouble(dr["BinX"].ToString());
+       BinXYZ.Y = Convert.ToDouble(dr["BinY"].ToString());
+       BinXYZ.Z = Convert.ToDouble(dr["BinZ"].ToString());
+
+       BradXYZ.X = Convert.ToDouble(dr["BradX"].ToString());
+       BradXYZ.Y = Convert.ToDouble(dr["BradY"].ToString());
+       BradXYZ.Z = Convert.ToDouble(dr["BradZ"].ToString());
         
         Brad=PerceptionLib.Color.ToLAB(BradXYZ);
         dr["CAT1_Fg_L"] = Brad.LA.ToString();

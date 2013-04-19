@@ -422,6 +422,27 @@ namespace PerceptionLib
       return rColor;
     }
 
+    public static Color ToLAB(CIEXYZ xyz, CIEXYZ WtPoint)
+    {
+      double Fx, Fy, Fz;
+      Color rColor = new Color();
+      //CIEXYZ xyz = RGBToXYZ(cRGB);
+
+      double yr = xyz.Y / WtPoint.Y;
+      double xr = xyz.X / WtPoint.X;
+      double zr = xyz.Z / WtPoint.Z;
+
+      Fx = FX(xr);
+      Fy = FX(yr);
+      Fz = FX(zr);
+
+      rColor.LA = Lxyz(yr);
+      rColor.A = 500 * (Fx - Fy);
+      rColor.B = 200 * (Fy - Fz);
+
+      return rColor;
+    }
+
     private static double FX(double e)
     {
       return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e + 16) / 116));
