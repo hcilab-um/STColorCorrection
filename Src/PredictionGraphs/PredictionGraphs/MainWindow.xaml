@@ -8,43 +8,49 @@
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
       <TextBox x:Name="tbFileName" Width="282"/>
       <Button Content="Select" Click="Button_Click" />
-      <ComboBox x:Name="cbModel">
-        <ComboBoxItem IsSelected="True" Tag="DM">Direct Model</ComboBoxItem>
-        <ComboBoxItem Tag="CAT1">CAT 1</ComboBoxItem>
-        <ComboBoxItem Tag="CAT2">CAT 2</ComboBoxItem>
-        <ComboBoxItem Tag="CAT3">CAT 3</ComboBoxItem>
-        <ComboBoxItem Tag="BP">Binned Profile</ComboBoxItem>
-      </ComboBox>
-      <ComboBox x:Name="cbBgType">
-        <ComboBoxItem IsSelected="True" Tag="TD">Through DP</ComboBoxItem>
-        <ComboBoxItem Tag="ND">Before DP</ComboBoxItem>
+      <ComboBox x:Name="cbDistance">
+        <ComboBoxItem IsSelected="True" Tag="Fg">to Fg</ComboBoxItem>
+        <ComboBoxItem Tag="CAT1_Fg">to CAT 1 Fg</ComboBoxItem>
+        <ComboBoxItem Tag="CAT2_Fg">to CAT 2 Fg</ComboBoxItem>
+        <ComboBoxItem Tag="CAT3_Fg">to CAT 3 Fg</ComboBoxItem>
+        <ComboBoxItem Tag="BP_Fg">to BP Fg</ComboBoxItem>
+        <ComboBoxItem Tag="DM_P_TD">to Predicted DM - TD</ComboBoxItem>
+        <ComboBoxItem Tag="DM_P_ND">to Predicted DM - ND</ComboBoxItem>
+        <ComboBoxItem Tag="CAT1_P_TD">to Predicted CAT1 - TD</ComboBoxItem>
+        <ComboBoxItem Tag="CAT1_P_ND">to Predicted CAT1 - ND</ComboBoxItem>
+        <ComboBoxItem Tag="CAT2_P_TD">to Predicted CAT2 - TD</ComboBoxItem>
+        <ComboBoxItem Tag="CAT2_P_ND">to Predicted CAT2 - ND</ComboBoxItem>
+        <ComboBoxItem Tag="CAT3_P_TD">to Predicted CAT3 - TD</ComboBoxItem>
+        <ComboBoxItem Tag="CAT3_P_ND">to Predicted CAT3 - ND</ComboBoxItem>
+        <ComboBoxItem Tag="BP_P_TD">to Predicted BP - TD</ComboBoxItem>
+        <ComboBoxItem Tag="BP_P_ND">to Predicted BP - ND</ComboBoxItem>
       </ComboBox>
     </StackPanel>
     <Grid Margin="0,25,0,1">
       <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center">
-        <controls:ColumnColor Width="20" TestBg="#39469e" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/> <!-- 01 - macberth color chart -->
-        <controls:ColumnColor Width="20" TestBg="#3d3c3d" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#519b4f" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#5264aa" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#5c5c5c" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#61744b" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#644573" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#6682a1" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#6cc1af" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#7a594a" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#818180" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#8988b5" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#a6a6a6" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#b53742" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#bf5b9a" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#c55d6a" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#c69c89" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#cccccc" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#db8130" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#e7a835" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#efcb27" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#f4f3ee" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
-        <controls:ColumnColor Width="20" TestBg="#a5bf46" Margin="0,0,1,0" Model="{Binding ElementName=cbModel, Path=SelectedItem.Tag}" BgType="{Binding ElementName=cbBgType, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#39469e" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/> <!-- 01 - macberth color chart -->
+        <controls:ColumnColor Width="20" TestBg="#3d3c3d" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#519b4f" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#5264aa" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#5c5c5c" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#61744b" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#644573" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#6682a1" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#6cc1af" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#7a594a" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#818180" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#8988b5" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#a6a6a6" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#b53742" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#bf5b9a" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#c55d6a" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#c69c89" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#cccccc" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#db8130" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#e7a835" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#efcb27" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#f4f3ee" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
+        <controls:ColumnColor Width="20" TestBg="#a5bf46" Margin="0,0,1,0" Distance="{Binding ElementName=cbDistance, Path=SelectedItem.Tag}" DataContext="{Binding ElementName=mainW, Path=DisplayData}" MaxValue="100"/>
       </StackPanel>
     </Grid>
   </Grid>
