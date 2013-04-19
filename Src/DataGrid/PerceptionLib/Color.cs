@@ -350,6 +350,29 @@ namespace PerceptionLib
       return rColor;
     }
 
+
+    public static Color ToLUV(CIEXYZ xyz,CIEXYZ WtPoint)
+    {
+      Color rColor = new Color();
+      Color rColorlab = new Color();
+      //CIEXYZ xyz = RGBToXYZ(cRGB);
+
+      rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+      rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+
+      double UR = (4 * WtPoint.X) / (WtPoint.X + (15 * WtPoint.Y) + (3 * WtPoint.Z));
+      double VR = (9 * WtPoint.Y) / (WtPoint.X + (15 * WtPoint.Y) + (3 * WtPoint.Z));
+
+      double yr = xyz.Y / WtPoint.Y;
+      rColor.L = Lxyz(yr);
+      rColor.U = (13 * rColor.L) * (rColor.UP - UR);
+      rColor.V = (13 * rColor.L) * (rColor.VP - VR);
+      rColorlab = ToLAB(xyz);
+      rColor.LA = rColorlab.LA;
+      rColor.A = rColorlab.A;
+      rColor.B = rColorlab.B;
+      return rColor;
+    }
     private static double Lxyz(double e)
     {
       return ((e > 0.008856) ? (116 * Math.Pow(e, (1.0 / 3.0))) - 16 : (903.3 * e));
