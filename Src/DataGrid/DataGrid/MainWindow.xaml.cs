@@ -197,8 +197,8 @@ namespace DataGrid
 
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\4000-6000.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\6000-8000.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\800_2.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -221,11 +221,11 @@ namespace DataGrid
       for (int i = 0; i < bin.Rows.Count; i++)
       {
         byte Rt = 0;
-       
+
         byte Gt = 0;
-       
+
         byte Bt = 0;
-       
+
 
         if (i > 0)
         {
@@ -241,9 +241,9 @@ namespace DataGrid
         newRow = binTable.NewRow();
 
 
-        //if (R >= 174 & G >=164  & B >= 149)
-        //if (R < 50 & G <= 60 & B <= 89)
-          if (R < 75 & G <= 90 & B <= 100)
+        if (R >= 174 & G >= 164 & B >= 149)
+        // if (R < 10 & G <= 60 & B <= 89)
+        // if (R < 75 & G <= 90 & B <= 100)
         {
           newRow[0] = 0;
           newRow[1] = 0;
@@ -258,9 +258,9 @@ namespace DataGrid
         }
         else
         {
-          //if (Rt >= 174 & Gt >= 164 & Bt >= 149)
-         // if (Rt < 29 & Gt <= 60 & Bt <= 89)
-          if (Rt < 75 & Gt <= 90 & Bt <= 100)
+          if (Rt >= 174 & Gt >= 164 & Bt >= 149)
+          //if (Rt < 10 & Gt <= 60 & Bt <= 89)
+          //if (Rt < 75 & Gt <= 90 & Bt <= 100)
           {
             newRow[0] = 0;
             newRow[1] = 0;
@@ -294,106 +294,106 @@ namespace DataGrid
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      ////  // zero elimination
-      bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //  // zero elimination
+      //bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
-      binTable = new DataTable();
-      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-      {
-        dtgrid_corrDisplay.Items.Refresh();
-        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
+      //binTable = new DataTable();
+      //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      //{
+      //  dtgrid_corrDisplay.Items.Refresh();
+      //  binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-      }));
+      //}));
 
-      for (int i = 1; i < bin.Rows.Count; i++)
-      {
+      //for (int i = 1; i < bin.Rows.Count; i++)
+      //{
 
-        byte R = Convert.ToByte(bin.Rows[i - 1][0].ToString());
-        byte G = Convert.ToByte(bin.Rows[i - 1][1].ToString());
-        byte B = Convert.ToByte(bin.Rows[i - 1][2].ToString());
+      //  byte R = Convert.ToByte(bin.Rows[i - 1][0].ToString());
+      //  byte G = Convert.ToByte(bin.Rows[i - 1][1].ToString());
+      //  byte B = Convert.ToByte(bin.Rows[i - 1][2].ToString());
 
-        byte r = Convert.ToByte(bin.Rows[i][0].ToString());
-        byte g = Convert.ToByte(bin.Rows[i][1].ToString());
-        byte b = Convert.ToByte(bin.Rows[i][2].ToString());
+      //  byte r = Convert.ToByte(bin.Rows[i][0].ToString());
+      //  byte g = Convert.ToByte(bin.Rows[i][1].ToString());
+      //  byte b = Convert.ToByte(bin.Rows[i][2].ToString());
 
-        if (R == 0 & G == 0 & B == 0)
-        {
-          if (r > 0 || g > 0 || b > 0)
-          {
-            byte r1 = Convert.ToByte(bin.Rows[i][0].ToString());
-            byte g1 = Convert.ToByte(bin.Rows[i][1].ToString());
-            byte b1 = Convert.ToByte(bin.Rows[i][2].ToString());
-            double l1 = Convert.ToDouble(bin.Rows[i][3].ToString());
-            double a1 = Convert.ToDouble(bin.Rows[i][4].ToString());
-            double lb1 = Convert.ToDouble(bin.Rows[i][5].ToString());
-            double x1 = Convert.ToDouble(bin.Rows[i][6].ToString());
-            double y1 = Convert.ToDouble(bin.Rows[i][7].ToString());
-            double z1 = Convert.ToDouble(bin.Rows[i][8].ToString());
+      //  if (R == 0 & G == 0 & B == 0)
+      //  {
+      //    if (r > 0 || g > 0 || b > 0)
+      //    {
+      //      byte r1 = Convert.ToByte(bin.Rows[i][0].ToString());
+      //      byte g1 = Convert.ToByte(bin.Rows[i][1].ToString());
+      //      byte b1 = Convert.ToByte(bin.Rows[i][2].ToString());
+      //      double l1 = Convert.ToDouble(bin.Rows[i][3].ToString());
+      //      double a1 = Convert.ToDouble(bin.Rows[i][4].ToString());
+      //      double lb1 = Convert.ToDouble(bin.Rows[i][5].ToString());
+      //      double x1 = Convert.ToDouble(bin.Rows[i][6].ToString());
+      //      double y1 = Convert.ToDouble(bin.Rows[i][7].ToString());
+      //      double z1 = Convert.ToDouble(bin.Rows[i][8].ToString());
 
-            byte r2 = Convert.ToByte(bin.Rows[i + 1][0].ToString());
-            byte g2 = Convert.ToByte(bin.Rows[i + 1][1].ToString());
-            byte b2 = Convert.ToByte(bin.Rows[i + 1][2].ToString());
-            double l2 = Convert.ToDouble(bin.Rows[i + 1][3].ToString());
-            double a2 = Convert.ToDouble(bin.Rows[i + 1][4].ToString());
-            double lb2 = Convert.ToDouble(bin.Rows[i + 1][5].ToString());
-            double x2 = Convert.ToDouble(bin.Rows[i + 1][6].ToString());
-            double y2 = Convert.ToDouble(bin.Rows[i + 1][7].ToString());
-            double z2 = Convert.ToDouble(bin.Rows[i + 1][8].ToString());
+      //      byte r2 = Convert.ToByte(bin.Rows[i + 1][0].ToString());
+      //      byte g2 = Convert.ToByte(bin.Rows[i + 1][1].ToString());
+      //      byte b2 = Convert.ToByte(bin.Rows[i + 1][2].ToString());
+      //      double l2 = Convert.ToDouble(bin.Rows[i + 1][3].ToString());
+      //      double a2 = Convert.ToDouble(bin.Rows[i + 1][4].ToString());
+      //      double lb2 = Convert.ToDouble(bin.Rows[i + 1][5].ToString());
+      //      double x2 = Convert.ToDouble(bin.Rows[i + 1][6].ToString());
+      //      double y2 = Convert.ToDouble(bin.Rows[i + 1][7].ToString());
+      //      double z2 = Convert.ToDouble(bin.Rows[i + 1][8].ToString());
 
-            byte r3 = Convert.ToByte(bin.Rows[i + 2][0].ToString());
-            byte g3 = Convert.ToByte(bin.Rows[i + 2][1].ToString());
-            byte b3 = Convert.ToByte(bin.Rows[i + 2][2].ToString());
-            double l3 = Convert.ToDouble(bin.Rows[i + 2][3].ToString());
-            double a3 = Convert.ToDouble(bin.Rows[i + 2][4].ToString());
-            double lb3 = Convert.ToDouble(bin.Rows[i + 2][5].ToString());
-            double x3 = Convert.ToDouble(bin.Rows[i + 2][6].ToString());
-            double y3 = Convert.ToDouble(bin.Rows[i + 2][7].ToString());
-            double z3 = Convert.ToDouble(bin.Rows[i + 2][8].ToString());
+      //      byte r3 = Convert.ToByte(bin.Rows[i + 2][0].ToString());
+      //      byte g3 = Convert.ToByte(bin.Rows[i + 2][1].ToString());
+      //      byte b3 = Convert.ToByte(bin.Rows[i + 2][2].ToString());
+      //      double l3 = Convert.ToDouble(bin.Rows[i + 2][3].ToString());
+      //      double a3 = Convert.ToDouble(bin.Rows[i + 2][4].ToString());
+      //      double lb3 = Convert.ToDouble(bin.Rows[i + 2][5].ToString());
+      //      double x3 = Convert.ToDouble(bin.Rows[i + 2][6].ToString());
+      //      double y3 = Convert.ToDouble(bin.Rows[i + 2][7].ToString());
+      //      double z3 = Convert.ToDouble(bin.Rows[i + 2][8].ToString());
 
-            byte rFinal = Convert.ToByte((r1 + r2 + r3) / 3);
-            byte gFinal = Convert.ToByte((g1 + g2 + g3) / 3);
-            byte bFinal = Convert.ToByte((b1 + b2 + b3) / 3);
-            double lFinal = (l1 + l2 + l3) / 3.0;
-            double aFinal = (a1 + a2 + a3) / 3.0;
-            double lbFinal = (lb1 + lb2 + lb3) / 3.0;
-            double xFinal = (x1 + x2 + x3) / 3.0;
-            double yFinal = (y1 + y2 + y3) / 3.0;
-            double zFinal = (z1 + z2 + z3) / 3.0;
+      //      byte rFinal = Convert.ToByte((r1 + r2 + r3) / 3);
+      //      byte gFinal = Convert.ToByte((g1 + g2 + g3) / 3);
+      //      byte bFinal = Convert.ToByte((b1 + b2 + b3) / 3);
+      //      double lFinal = (l1 + l2 + l3) / 3.0;
+      //      double aFinal = (a1 + a2 + a3) / 3.0;
+      //      double lbFinal = (lb1 + lb2 + lb3) / 3.0;
+      //      double xFinal = (x1 + x2 + x3) / 3.0;
+      //      double yFinal = (y1 + y2 + y3) / 3.0;
+      //      double zFinal = (z1 + z2 + z3) / 3.0;
 
-            newRow = binTable.NewRow();
-            newRow[0] = r1.ToString();
-            newRow[1] = g1.ToString();
-            newRow[2] = b1.ToString();
-            newRow[3] = l1.ToString();
-            newRow[4] = a1.ToString();
-            newRow[5] = lb1.ToString();
-            newRow[6] = x1.ToString();
-            newRow[7] = y1.ToString();
-            newRow[8] = z1.ToString();
-
-
-
-            //newRow = binTable.NewRow();
-            //newRow[0] = bin.Rows[i][0].ToString();
-            //newRow[1] = bin.Rows[i][1].ToString();
-            //newRow[2] = bin.Rows[i][2].ToString();
-            //newRow[3] = bin.Rows[i][3].ToString();
-            //newRow[4] = bin.Rows[i][4].ToString();
-            //newRow[5] = bin.Rows[i][5].ToString();
-            //newRow[6] = bin.Rows[i][6].ToString();
-            //newRow[7] = bin.Rows[i][7].ToString();
-            //newRow[8] = bin.Rows[i][8].ToString();
+      //      newRow = binTable.NewRow();
+      //      newRow[0] = r1.ToString();
+      //      newRow[1] = g1.ToString();
+      //      newRow[2] = b1.ToString();
+      //      newRow[3] = l1.ToString();
+      //      newRow[4] = a1.ToString();
+      //      newRow[5] = lb1.ToString();
+      //      newRow[6] = x1.ToString();
+      //      newRow[7] = y1.ToString();
+      //      newRow[8] = z1.ToString();
 
 
-            binTable.Rows.Add(newRow);
-          }
 
-        }
-      }
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      //      //newRow = binTable.NewRow();
+      //      //newRow[0] = bin.Rows[i][0].ToString();
+      //      //newRow[1] = bin.Rows[i][1].ToString();
+      //      //newRow[2] = bin.Rows[i][2].ToString();
+      //      //newRow[3] = bin.Rows[i][3].ToString();
+      //      //newRow[4] = bin.Rows[i][4].ToString();
+      //      //newRow[5] = bin.Rows[i][5].ToString();
+      //      //newRow[6] = bin.Rows[i][6].ToString();
+      //      //newRow[7] = bin.Rows[i][7].ToString();
+      //      //newRow[8] = bin.Rows[i][8].ToString();
+
+
+      //      binTable.Rows.Add(newRow);
+      //    }
+
+      //  }
+      //}
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
       btn_ExportGrid.IsEnabled = true;
     }

@@ -598,13 +598,13 @@ namespace STColorPerception
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
       PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+     // rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
 
 
      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
 
-     rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(80, 218, 205));
+     rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
 
       //Util.CATCalulation.HueAngle(colorToShow);
      String Hex = PerceptionLib.Color.RGBtoHEX(77, 19, 18);
@@ -6072,7 +6072,7 @@ namespace STColorPerception
       BgNo = dt_Bg.Rows.Count;
       FgNo = dt_RGBGammut.Rows.Count;
 
-      BgNo = 12;
+      //BgNo = 12;
      // FgNo = 100;
       PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\CsBasicCOMPENSATOR.csv");
 
@@ -6086,7 +6086,7 @@ namespace STColorPerception
       ThreadPool.QueueUserWorkItem(ignored =>
       {
         PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
-        for (int i = 0; i < BgNo; i++)
+        for (int i = 12; i < BgNo; i++)
         {
 
           for (int j = 11; j < FgNo; j = j + 20)
@@ -6590,7 +6590,7 @@ namespace STColorPerception
             dt_DataCollection.Rows.Add(newRow);
 
             R = 0; G = 0; B = 0;
-            
+
 
             //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_DataCollection.DefaultView));
             //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
@@ -7039,7 +7039,7 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
-      //loopvalue = 15;
+      loopvalue = 100;
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)

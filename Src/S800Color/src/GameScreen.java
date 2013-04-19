@@ -11294,7 +11294,7 @@ public class GameScreen
 			//int loopDelay = 1000 / 15;
 			if(LoopFlag==1 )
 			{
-			loopDelay = 25000;
+			loopDelay = 25000000;
 			LoopFlag=0;
 			}
 			else
@@ -11348,8 +11348,8 @@ public class GameScreen
 		}
 		else
 		{
-			 colour= 0x000021;
-			//colour= 0xffffff;
+			 //colour= 0x000021;
+			colour= 0xffffff;
 
 			 //colour= 0x9ffa32;
 			loopbaclk=0;
