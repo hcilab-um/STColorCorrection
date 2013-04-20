@@ -7039,7 +7039,11 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
+<<<<<<< HEAD
+      //loopvalue = 100;
+=======
       loopvalue = 100;
+>>>>>>> parent of fa6f2b5... updates
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7063,7 +7067,11 @@ namespace STColorPerception
         //78500 3000 phone
       
         
+<<<<<<< HEAD
+        if (i > 575)
+=======
         if (i > 35700)
+>>>>>>> parent of fa6f2b5... updates
         {
           temp = 0;
           for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
@@ -7072,11 +7080,19 @@ namespace STColorPerception
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
+<<<<<<< HEAD
+            if (r>174)//(r< 7)//(r == 0)
+            {
+             if (g>164)//(g < 58)//if (g < 180 & 173 < g)
+              {
+                if (b>149)//(b < 89)//if (b < 169 & 150 < b)
+=======
             if (r< 7)//(r == 0)
             {
              if (g < 58)//if (g < 180 & 173 < g)
               {
                 if (b < 89)//if (b < 169 & 150 < b)
+>>>>>>> parent of fa6f2b5... updates
               {
                   temp++;
               }

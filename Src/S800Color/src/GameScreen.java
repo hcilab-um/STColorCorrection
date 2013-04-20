@@ -11,6 +11,45 @@ public class GameScreen
 	int colour;
 	int index=0;
 	int csDelayCount=0;
+<<<<<<< HEAD
+	int[] colourArray1 =new int[]{0x341915	,
+			0x3423a7	,
+			0x34243d	,
+			0x342631	,
+			0x34281e	,
+			0x342bc6	,
+			0x342e56	,
+			0x343241	,
+			0x343287	,
+			0x343434	,
+			0x343520	,
+			0x3438de	,
+			0x34428c	,
+			0x34431a	,
+			0x3448ed	,
+			0x344a65	,
+			0x3459b8	,
+			0x345bf3	,
+			0x345c34	,
+			0x345d0d	,
+			0x346386	,
+			0x3463d7	,
+			0x34666e	,
+			0x347926	,
+			0x34a26b	,
+			0x34a532	,
+			0x34c432	,
+			0x34cea3	,
+			0x34d432	,
+			0x34e802	,
+			0x350019	,
+			0x350608	,
+			0x351333	,
+			0x351727	,
+			0x351b59	
+	};
+
+=======
 	int[] colourArray1 =new int[]{0xb5c4f4	,
 			0xb5cabb	,
 			0xb5d065	,
@@ -2390,6 +2429,7 @@ public class GameScreen
 			0xffffff	
 
 	};
+>>>>>>> parent of fa6f2b5... updates
 	/*int[] colourArray=new int[]{0x000021,
 			0x000026,
 			0x00002c,
