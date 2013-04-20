@@ -590,16 +590,16 @@ namespace STColorPerception
       ColorToShowXYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
 
       //testing rgb gamut limit
-      ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.7252, 0.5394, 1.0888);
-      ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+      //ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.7252, 0.5394, 1.0888);
+      //ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
       //ColorToShow.L = 81.92236628;
       //ColorToShow.A = -7.659442063;
       //ColorToShow.B = 19.20678352;
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
-      PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
+      //PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
-     // rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
+      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+     rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
 
 
      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
@@ -7040,10 +7040,14 @@ namespace STColorPerception
       int temp = 0;
       double loopvalue=double.MaxValue;
 <<<<<<< HEAD
+<<<<<<< HEAD
       //loopvalue = 100;
 =======
       loopvalue = 100;
 >>>>>>> parent of fa6f2b5... updates
+=======
+      //loopvalue = 15;
+>>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7068,10 +7072,14 @@ namespace STColorPerception
       
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (i > 575)
 =======
         if (i > 35700)
 >>>>>>> parent of fa6f2b5... updates
+=======
+        if (i > 7550)
+>>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
         {
           temp = 0;
           for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
@@ -7081,6 +7089,7 @@ namespace STColorPerception
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (r>174)//(r< 7)//(r == 0)
             {
              if (g>164)//(g < 58)//if (g < 180 & 173 < g)
@@ -7088,11 +7097,18 @@ namespace STColorPerception
                 if (b>149)//(b < 89)//if (b < 169 & 150 < b)
 =======
             if (r< 7)//(r == 0)
+=======
+            if (r>185 )//(r< 7)//(r == 0)
+>>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
             {
-             if (g < 58)//if (g < 180 & 173 < g)
+             if (g>169)//(g < 58)//if (g < 180 & 173 < g)
               {
+<<<<<<< HEAD
                 if (b < 89)//if (b < 169 & 150 < b)
 >>>>>>> parent of fa6f2b5... updates
+=======
+                if (b>153)//(b < 89)//if (b < 169 & 150 < b)
+>>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
               {
                   temp++;
               }
