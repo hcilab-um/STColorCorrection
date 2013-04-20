@@ -7039,15 +7039,13 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       //loopvalue = 100;
-=======
-      loopvalue = 100;
->>>>>>> parent of fa6f2b5... updates
-=======
+
+      //loopvalue = 100;
+
       //loopvalue = 15;
->>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
+
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7065,22 +7063,9 @@ namespace STColorPerception
         newRow[7] = colorMeasured.A.ToString();
         newRow[8] = colorMeasured.B.ToString();
         dt_Bg.Rows.Add(newRow);
-        //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
-        //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
-        
-        //78500 3000 phone
-      
-        
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if (i > 575)
-=======
-        if (i > 35700)
->>>>>>> parent of fa6f2b5... updates
-=======
+    
         if (i > 7550)
->>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
-        {
+           {
           temp = 0;
           for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
           {
@@ -7088,27 +7073,18 @@ namespace STColorPerception
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (r>174)//(r< 7)//(r == 0)
-            {
-             if (g>164)//(g < 58)//if (g < 180 & 173 < g)
-              {
-                if (b>149)//(b < 89)//if (b < 169 & 150 < b)
-=======
-            if (r< 7)//(r == 0)
-=======
+
+        
+
             if (r>185 )//(r< 7)//(r == 0)
->>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
+
             {
              if (g>169)//(g < 58)//if (g < 180 & 173 < g)
               {
-<<<<<<< HEAD
+
                 if (b < 89)//if (b < 169 & 150 < b)
->>>>>>> parent of fa6f2b5... updates
-=======
                 if (b>153)//(b < 89)//if (b < 169 & 150 < b)
->>>>>>> 29892641d2a0bcb5ec6d2183cbff48e74df73fb4
+
               {
                   temp++;
               }
@@ -7126,12 +7102,15 @@ namespace STColorPerception
       }
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      
+    
       });
-
+   
       btn_ExportGrid.IsEnabled = true;
     }
+      
     
-    private void Btn_CAT_Click(object sender, RoutedEventArgs e)
+    private  void Btn_CAT_Click(object sender, RoutedEventArgs e)
     {
       
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BinForCATlab.csv");
