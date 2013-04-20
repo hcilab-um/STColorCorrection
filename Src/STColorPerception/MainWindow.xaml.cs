@@ -590,16 +590,16 @@ namespace STColorPerception
       ColorToShowXYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
 
       //testing rgb gamut limit
-      //ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.7252, 0.5394, 1.0888);
-      //ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+      ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.7252, 0.5394, 1.0888);
+      ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
       //ColorToShow.L = 81.92236628;
       //ColorToShow.A = -7.659442063;
       //ColorToShow.B = 19.20678352;
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
-      //PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
+      PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
-     rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+     // rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
 
 
      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
@@ -7039,13 +7039,7 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
-
       //loopvalue = 100;
-
-      //loopvalue = 100;
-
-      //loopvalue = 15;
-
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7063,9 +7057,14 @@ namespace STColorPerception
         newRow[7] = colorMeasured.A.ToString();
         newRow[8] = colorMeasured.B.ToString();
         dt_Bg.Rows.Add(newRow);
-    
-        if (i > 7550)
-           {
+        //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
+        //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+        
+        //78500 3000 phone
+      
+        
+        if (i > 575)
+        {
           temp = 0;
           for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
           {
@@ -7073,18 +7072,11 @@ namespace STColorPerception
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-
-        
-
-            if (r>185 )//(r< 7)//(r == 0)
-
+            if (r>174)//(r< 7)//(r == 0)
             {
-             if (g>169)//(g < 58)//if (g < 180 & 173 < g)
+             if (g>164)//(g < 58)//if (g < 180 & 173 < g)
               {
-
-                if (b < 89)//if (b < 169 & 150 < b)
-                if (b>153)//(b < 89)//if (b < 169 & 150 < b)
-
+                if (b>149)//(b < 89)//if (b < 169 & 150 < b)
               {
                   temp++;
               }
@@ -7102,15 +7094,12 @@ namespace STColorPerception
       }
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
-      
-    
       });
-   
+
       btn_ExportGrid.IsEnabled = true;
     }
-      
     
-    private  void Btn_CAT_Click(object sender, RoutedEventArgs e)
+    private void Btn_CAT_Click(object sender, RoutedEventArgs e)
     {
       
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BinForCATlab.csv");
