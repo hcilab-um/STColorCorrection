@@ -24,7 +24,8 @@ namespace PredictionGraphs
   {
 
     private DataTable displayData;
-    public DataTable DisplayData
+    
+		public DataTable DisplayData
     {
       get { return displayData; }
       set 
