@@ -7019,7 +7019,7 @@ namespace STColorPerception
 
     private void Btn_PhoneBinCalculator_Click(object sender, RoutedEventArgs e)
     {
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(194, 84, 98));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(160, 188, 60));
       int connect = PerceptionLib.Cs200Connection.ConnectToCS200();
       btn_StartMeasurment.IsEnabled = false;
       txt_R.IsEnabled = false;
@@ -7072,11 +7072,11 @@ namespace STColorPerception
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-            if (r>206)//(r< 7)//(r == 0)
+            if (r>195)//(r< 7)//(r == 0)
             {
-             if (g>169)//(g < 58)//if (g < 180 & 173 < g)
+             if (g>193)//(g < 58)//if (g < 180 & 173 < g)
               {
-                if (b>158)//(b < 89)//if (b < 169 & 150 < b)
+                if (b>152)//(b < 89)//if (b < 169 & 150 < b)
               {
                   temp++;
               }
