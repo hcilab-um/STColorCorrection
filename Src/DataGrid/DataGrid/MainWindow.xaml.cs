@@ -702,7 +702,7 @@ namespace DataGrid
     private void Reduce_Click(object sender, RoutedEventArgs e)
     {
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\phoneBin_full.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\PhoneBin.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -712,29 +712,28 @@ namespace DataGrid
       }));
 
 
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\phoneBin_template.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_outPut.csv");
-      DataTable binTable = new DataTable();
-      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-      {
-        dtgrid_corrDisplay.Items.Refresh();
-        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
-      }));
-
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\phoneBin_template.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_outPut.csv");
       //DataTable binTable = new DataTable();
-      //binTable = bin.Clone();
+      //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      //{
+      //  dtgrid_corrDisplay.Items.Refresh();
+      //  binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      //}));
+
+      DataTable binTable = new DataTable();
+      binTable = bin.Clone();
       Random random = new Random();
-           
-        for (int i = 0; i < 200; i ++)
+
+      for (int i = 0; i < bin.Rows.Count; i = i + 10)
         {
 
-
-          bin.ImportRow(bin.Rows[i]);
+          binTable.ImportRow(bin.Rows[i]);
 
         }
 
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
         Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       
 
