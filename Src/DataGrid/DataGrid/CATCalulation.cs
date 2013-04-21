@@ -32,9 +32,9 @@ namespace DataGrid
 
           //        c1 = -0.455826584037247, c2 = -1.394610457951430, c3 = 3.596564478605494;
 
-          double a1 = 3.631563690991946, a2 = -0.138231682500917, a3 = -0.029995888441995,
-              b1 = 0.127321552471585, b2 = 3.328860477113199, b3 = 0.017034161465600,
-              c1 = -0.364711225715155, c2 = -1.437331989165315, c3 = 3.540751574279470;
+          double a1 = 3.817540589912686, a2 = -0.149043618721286, a3 = -0.044288984594160,
+              b1 = 0.178356377375283, b2 = 3.418828936965993, b3 = -0.025150970813326,
+              c1 = -0.727790647275128, c2 = -1.788890974311670, c3 = 3.714721548607603;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0,0,0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
@@ -58,12 +58,12 @@ namespace DataGrid
 
           //         c1 = 0, c2 = 0, c3 = 2.426091800356506;
 
-          double a1 = 3.507963951452145, a2 = 0.281748688696900, a3 = -0.224693595192396,
+          double a1 = 3.666332229286743, a2 = 0.400609336658032, a3 = -0.283244448162549,
 
 
-                   b1 = 0.030948095110295, b2 = 3.403312707890528, b3 = 0.006242962423505,
+                   b1 = 0.044004094252600, b2 = 3.517532014962554, b3 = -0.0088777160091205,
 
-                   c1 = 0, c2 = 0, c3 = 2.395138583369995;
+                   c1 = 0, c2 = 0, c3 = 2.263524539896431;
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);
             colorObject.Y = (b1 * ColorIntended.X) + (b2 * ColorIntended.Y) + (b3 * ColorIntended.Z);
@@ -82,9 +82,9 @@ namespace DataGrid
           //         c1 = 0, c2 = 0, c3 = 2.426091800356506;
 
 
-          double a1 = 3.436261749819233, a2 = 0, a3 = 0,
-                   b1 = 0, b2 = 3.422899195618689, b3 = 0,
-                   c1 = 0, c2 = 0, c3 = 2.395138583369996;
+          double a1 = 3.578954106607625, a2 = 0, a3 = 0,
+                   b1 = 0, b2 = 3.543812149605574, b3 = 0,
+                   c1 = 0, c2 = 0, c3 = 2.263524539896431;
 
             PerceptionLib.CIEXYZ colorObject = new PerceptionLib.CIEXYZ(0, 0, 0);
             colorObject.X = (a1 * ColorIntended.X) + (a2 * ColorIntended.Y) + (a3 * ColorIntended.Z);

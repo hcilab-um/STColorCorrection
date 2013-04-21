@@ -598,8 +598,8 @@ namespace STColorPerception
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
       PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
-     // rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(115, 80, 64));
+      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+     
 
 
      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
@@ -1046,7 +1046,7 @@ namespace STColorPerception
 
     }
 
-    private void DisplayMeasuredValuesFromCs200()
+    private void DisplayMeasuredValuesFromCs200() 
     {
       DateTime Start = DateTime.Now;
       //ad this sleep to normal code other than phone
@@ -7019,6 +7019,7 @@ namespace STColorPerception
 
     private void Btn_PhoneBinCalculator_Click(object sender, RoutedEventArgs e)
     {
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(160, 188, 60));
       int connect = PerceptionLib.Cs200Connection.ConnectToCS200();
       btn_StartMeasurment.IsEnabled = false;
       txt_R.IsEnabled = false;
@@ -7039,7 +7040,7 @@ namespace STColorPerception
      
       int temp = 0;
       double loopvalue=double.MaxValue;
-      //loopvalue = 100;
+      //loopvalue = 15;
       ThreadPool.QueueUserWorkItem(ignored =>
       {
       for (int i = 0; i < loopvalue; i++)
@@ -7062,21 +7063,20 @@ namespace STColorPerception
         
         //78500 3000 phone
       
-        
-        if (i > 575)
+        if (i > 3050)
         {
           temp = 0;
-          for (int j = dt_Bg.Rows.Count - 25; j < dt_Bg.Rows.Count; j++)
+          for (int j = dt_Bg.Rows.Count - 30; j < dt_Bg.Rows.Count; j++)
           {
             double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
             double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
             double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-            if (r>174)//(r< 7)//(r == 0)
+            if (r>195)//(r< 7)//(r == 0)
             {
-             if (g>164)//(g < 58)//if (g < 180 & 173 < g)
+             if (g>193)//(g < 58)//if (g < 180 & 173 < g)
               {
-                if (b>149)//(b < 89)//if (b < 169 & 150 < b)
+                if (b>152)//(b < 89)//if (b < 169 & 150 < b)
               {
                   temp++;
               }
