@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HeatMapWPF.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HeatMapPixelWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="HeatMapPixelHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="DataMapWidth" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="DataMapHeight" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="XColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fg_a</Value>
+    </Setting>
+    <Setting Name="YColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fg_b</Value>
+    </Setting>
+    <Setting Name="ValueColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dist_BP_Fg</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

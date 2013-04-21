@@ -1351,21 +1351,6 @@
               The column number in the file that the exception was thrown at.
             </summary>
         </member>
-        <member name="T:GenericParsing.FieldType">
-            <summary>
-              Indicates whether text fields are delimited or fixed width.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.FieldType.Delimited">
-            <summary>
-              Indicates that the fields are delimited.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.FieldType.FixedWidth">
-            <summary>
-              Indicates that the fields are fixed width.
-            </summary>
-        </member>
         <member name="T:GenericParsing.ParserState">
             <summary>
             The current internal state of the parser.
@@ -1389,6 +1374,21 @@
         <member name="F:GenericParsing.ParserState.Finished">
             <summary>
               Indicates that the parser has finished parsing the datasource.
+            </summary>
+        </member>
+        <member name="T:GenericParsing.FieldType">
+            <summary>
+              Indicates whether text fields are delimited or fixed width.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.FieldType.Delimited">
+            <summary>
+              Indicates that the fields are delimited.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.FieldType.FixedWidth">
+            <summary>
+              Indicates that the fields are fixed width.
             </summary>
         </member>
     </members>
