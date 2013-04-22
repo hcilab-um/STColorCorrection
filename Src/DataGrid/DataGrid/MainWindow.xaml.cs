@@ -726,17 +726,19 @@ namespace DataGrid
      // DataTable binTable = new DataTable();
       //binTable = bin.Clone();
       Random random = new Random();
+      for (int j = 0; j < bin.Rows.Count; j = j++)
+      {
 
-      for (int i = 1; i < binTable.Rows.Count; i = i++)
+        for (int i = 0; i < binTable.Rows.Count; i = i+200)
         {
-
-          if (Convert.ToInt32( binTable.Rows[i][0].ToString()) == Convert.ToInt32(bin.Rows[i][0].ToString())) 
-          binTable.ImportRow(bin.Rows[i]);
-
+          int bgno = Convert.ToInt32(binTable.Rows[i][0].ToString());
+          int bgref = Convert.ToInt32(bin.Rows[j][3].ToString());
+          if (bgno == bgref)
+            binTable.ImportRow(bin.Rows[j]);
         }
-
+      }
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       
 
       btn_ExportGrid.IsEnabled = true;
