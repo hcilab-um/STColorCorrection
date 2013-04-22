@@ -11,7 +11,7 @@ namespace HeatMapWPF
 {
 	class HeatMapData
 	{
-		public const int GRID_SIZE = 40;
+		public const int GRID_SIZE = 30;
 
 		public static readonly double DataWidth = Settings.Default.DataMapWidth / GRID_SIZE;
 		public static readonly double DataHeight = Settings.Default.DataMapHeight / GRID_SIZE;
@@ -40,6 +40,8 @@ namespace HeatMapWPF
 		public int Row { get; set; }
 		public int Column { get; set; }
 
+    public bool IsOutsideGammut { get; set; }
+
 		public HeatMapData(int row, int col) 
 		{
 			Row = row;
@@ -51,6 +53,7 @@ namespace HeatMapWPF
 
 			DataX = col * DataWidth-100;
 			DataY = (GRID_SIZE - row - 1) * DataHeight-100;
+      IsOutsideGammut = false;
 		}
 
 		public Rectangle drawRectangle()
@@ -58,14 +61,23 @@ namespace HeatMapWPF
 			Rectangle rect = new Rectangle();
 			rect.Width = GraphWidth;
 			rect.Height = GraphHeight;
-			rect.Fill = Brushes.Blue;
-			double opacity = 0;
-			
-			if (DataAverageValue >= 100)
-				opacity = 1;
-			else
-				opacity = DataAverageValue / 100;
-			rect.Opacity = opacity;
+
+      if (!IsOutsideGammut)
+      {
+        rect.Fill = Brushes.Blue;
+        double opacity = 0;
+        if (DataAverageValue >= 100)
+          opacity = 1;
+        else
+          opacity = DataAverageValue / 100;
+        rect.Opacity = opacity;
+      }
+      else
+      {
+        rect.Fill = Brushes.Red;
+        rect.Opacity = 1;
+      }
+
 			Canvas.SetLeft(rect, GraphX);
 			Canvas.SetBottom(rect, GraphY);
 			return rect;

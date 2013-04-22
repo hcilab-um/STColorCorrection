@@ -91,13 +91,13 @@ namespace HeatMapWPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Dist_BP_Fg")]
-        public string ValueColumnName {
+        [global::System.Configuration.DefaultSettingValueAttribute("Bg_RRGGBB")]
+        public string BgColumn {
             get {
-                return ((string)(this["ValueColumnName"]));
+                return ((string)(this["BgColumn"]));
             }
             set {
-                this["ValueColumnName"] = value;
+                this["BgColumn"] = value;
             }
         }
     }

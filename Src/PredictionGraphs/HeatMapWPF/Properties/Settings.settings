@@ -20,8 +20,8 @@
     <Setting Name="YColumnName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fg_b</Value>
     </Setting>
-    <Setting Name="ValueColumnName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Dist_BP_Fg</Value>
+    <Setting Name="BgColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bg_RRGGBB</Value>
     </Setting>
   </Settings>
 </SettingsFile>

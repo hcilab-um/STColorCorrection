@@ -103,6 +103,10 @@
       <Project>{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}</Project>
       <Name>GenericParsing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\PerceptionLib\PerceptionLib.csproj">
+      <Project>{AE4BE93A-7A93-403C-9241-4FCFD722EDE7}</Project>
+      <Name>PerceptionLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -19,8 +19,11 @@
 	<StackPanel Orientation="Vertical">
 		<StackPanel Orientation="Horizontal" VerticalAlignment="Top">
 			<TextBox x:Name="tbFileName" Width="282"/>
-			<Button Content="Select" Click="Button_Click_Select" />
+      <Button Content="Select" Margin="10,0" Click="Button_Click_Select" />
 			<Button Content="Refresh" Margin="10,0" Click="Button_Click_Refresh"/>
+      <ComboBox Margin="10,0" x:Name="cbFrom" Width="150"/>
+      <ComboBox Margin="10,0" x:Name="cbTo" Width="150"/>
+      <CheckBox Margin="10,4,0,0" x:Name="chkbOutsideGammut" Content="Outside Gammut"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal">
 			<StackPanel x:Name="sp_Control" Margin="0,50">

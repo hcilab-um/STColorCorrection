@@ -867,14 +867,14 @@ namespace PerceptionLib
 
     public static double ColorDistanceCalAB(Color Color1, Color Color2)
     {
-      double l, u, v, result;
+      double l, a, b, result;
       l = Color1.LA - Color2.LA;
-      u = Color1.A - Color2.A;
-      v = Color1.B - Color2.B;
+      a = Color1.A - Color2.A;
+      b = Color1.B - Color2.B;
       l = l * l;
-      u = u * u;
-      v = v * v;
-      result = l + u + v;
+      a = a * a;
+      b = b * b;
+      result = l + a + b;
 
 
       // double Euv = Math.Pow(result, (1.0 / 2.0));
