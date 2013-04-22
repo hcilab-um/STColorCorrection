@@ -112,6 +112,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\LAB.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="prediction-format.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

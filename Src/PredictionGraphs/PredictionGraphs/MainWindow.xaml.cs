@@ -51,6 +51,21 @@ namespace PredictionGraphs
           parser.Load("prediction-format.xml");
           System.Data.DataSet dsResult = parser.GetDataSet();
           DisplayData = dsResult.Tables[0];
+          PopulateFromAndTo();
+        }
+      }
+    }
+
+    private void PopulateFromAndTo()
+    {
+      foreach (DataColumn column in DisplayData.Columns)
+      {
+        if (column.ColumnName.EndsWith("_L"))
+        {
+          String variable = column.ColumnName.Substring(0, column.ColumnName.Length - 2);
+          variable = variable.Trim();
+          cbFrom.Items.Add(variable);
+          cbTo.Items.Add(variable);
         }
       }
     }

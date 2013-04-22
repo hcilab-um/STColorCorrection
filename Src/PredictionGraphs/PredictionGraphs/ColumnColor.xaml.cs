@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.ComponentModel;
+using PredictionGraphs.Properties;
 
 namespace PredictionGraphs
 {
@@ -29,11 +30,18 @@ namespace PredictionGraphs
       set { SetValue(TestBgProperty, value); }
     }
 
-    public static readonly DependencyProperty DistanceProperty = DependencyProperty.Register("Distance", typeof(String), typeof(ColumnColor));
-    public String Distance
+    public static readonly DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(String), typeof(ColumnColor));
+    public String From
     {
-      get { return (String)GetValue(DistanceProperty); }
-      set { SetValue(DistanceProperty, value); }
+      get { return (String)GetValue(FromProperty); }
+      set { SetValue(FromProperty, value); }
+    }
+
+    public static readonly DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(String), typeof(ColumnColor));
+    public String To
+    {
+      get { return (String)GetValue(ToProperty); }
+      set { SetValue(ToProperty, value); }
     }
 
     private double maxValue;
@@ -56,16 +64,16 @@ namespace PredictionGraphs
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
       base.OnPropertyChanged(e);
-      if (e.Property == DistanceProperty || e.Property == DataContextProperty)
+      if (e.Property == FromProperty || e.Property == ToProperty || e.Property == DataContextProperty)
       {
         if (DataContext == null || !(DataContext is DataTable))
           return;
-
-        String varName = String.Format("Dist_{0}", Distance);
+        if(From == null || To == null)
+          return;
 
         SolidColorBrush bgColor = TestBg as SolidColorBrush;
         DataView view = new DataView(DataContext as DataTable);
-        String filter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", view.Table.Columns[0].ColumnName, bgColor.Color.R, bgColor.Color.G, bgColor.Color.B);
+        String filter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, bgColor.Color.R, bgColor.Color.G, bgColor.Color.B);
         view.RowFilter = filter;
 
         cHistogram.Children.Clear();
@@ -77,23 +85,15 @@ namespace PredictionGraphs
           measurement.Opacity = 0.1;
           measurement.Fill = Brushes.Blue;
           Canvas.SetLeft(measurement, 0);
-          Canvas.SetTop(measurement, CalculateDistanceFromTop(row, varName, 1));
+          Canvas.SetTop(measurement, CalculateDistanceFromTop(row, From, To, 1));
           cHistogram.Children.Add(measurement);
         }
       }
     }
 
-    private double CalculateDistanceFromTop(DataRowView row, string varName, double markerHeight)
+    private double CalculateDistanceFromTop(DataRowView row, string fromName, string toName, double markerHeight)
     {
-      String distanceValue = row[varName] as String;
-      if (distanceValue == null || distanceValue.Length == 0)
-      {
-        distanceValue = "5.000";
-        //throw new ArgumentException("DataSet missing data!");
-        Console.WriteLine("DataSet missing data!");
-      }
-
-      double distance = Double.Parse(distanceValue);
+      double distance = CalculateDistance(row, fromName, toName);
       double columnHeight = cHistogram.ActualHeight;
 
       if (distance > maxValue)
@@ -103,6 +103,22 @@ namespace PredictionGraphs
       location -= markerHeight / 2;
 
       return columnHeight - location;
+    }
+
+    private double CalculateDistance(DataRowView dataRowView, String fromVar, String toVar)
+    {
+      double fromL = Double.Parse(dataRowView[fromVar + "_L"] as String);
+      double froma = Double.Parse(dataRowView[fromVar + "_a"] as String);
+      double fromb = Double.Parse(dataRowView[fromVar + "_b"] as String);
+      PerceptionLib.Color fromColor = new PerceptionLib.Color() { L = fromL, A = froma, B = fromb };
+
+      double toL = Double.Parse(dataRowView[toVar + "_L"] as String);
+      double toa = Double.Parse(dataRowView[toVar + "_a"] as String);
+      double tob = Double.Parse(dataRowView[toVar + "_b"] as String);
+      PerceptionLib.Color toColor = new PerceptionLib.Color() { L = toL, A = toa, B = tob };
+
+      double distance = PerceptionLib.Color.ColorDistanceCalAB(fromColor, toColor);
+      return distance;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
