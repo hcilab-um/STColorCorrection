@@ -123,9 +123,9 @@ namespace HeatMapWPF
         graphX = cvHeatMap.ActualWidth / Settings.Default.DataMapWidth * dataX + cvHeatMap.ActualWidth / 2;
         graphY = cvHeatMap.ActualHeight / Settings.Default.DataMapHeight * dataY + cvHeatMap.ActualHeight / 2;
 
-        backgroundMarkers[index] = new Ellipse(); ;
-        backgroundMarkers[index].Width = 10;
-        backgroundMarkers[index].Height = 10;
+        backgroundMarkers[index] = new Ellipse();
+        backgroundMarkers[index].Width = 20;
+        backgroundMarkers[index].Height = 20;
         backgroundMarkers[index].Fill = checkBox.Background;
         backgroundMarkers[index].Stroke = Brushes.Black;
         backgroundMarkers[index].StrokeThickness = 2;

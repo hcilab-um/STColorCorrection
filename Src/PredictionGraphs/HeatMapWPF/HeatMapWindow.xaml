@@ -33,97 +33,97 @@
     <StackPanel Orientation="Horizontal">
       <StackPanel x:Name="sp_Control" Margin="0,50">
         <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_1" Content="#39469e" Background="#39469e" Tag="32.58337179,-58.93719936"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#39469e"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" x:Name="cb_2" Content="#3d3c3d" Background="#3d3c3d" Tag="0.285547276,-4.094571652"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#3d3c3d"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_3" Content="#519b4f" Background="#519b4f" Tag="-41.52750909,34.68727635"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#519b4f"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_4" Content="#5264aa" Background="#5264aa" Tag="21.6132862,-49.91378647"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#5264aa"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_5" Content="#5c5c5c" Background="#5c5c5c" Tag="1.09003667,-3.781337739"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#5c5c5c"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_6" Content="#61744b" Background="#61744b" Tag="-14.27373562,19.44014008"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#61744b"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_7" Content="#644573" Background="#644573" Tag="28.35519829,-28.18593658"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#644573"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_8" Content="#6682a1" Background="#6682a1" Tag="2.504878017,-27.65019949"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#6682a1"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_9" Content="#6cc1af" Background="#6cc1af" Tag="-28.14609746,-5.352479319"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#6cc1af"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_10" Content="#7a594a" Background="#7a594a" Tag="14.7622999,13.08945494"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#7a594a"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_11" Content="#818180" Background="#818180" Tag="2.121362617,-3.978622006"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#818180"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_12" Content="#8988b5" Background="#8988b5" Tag="16.46366013,-32.61238171"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#8988b5"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_13" Content="#a6a6a6" Background="#a6a6a6" Tag="3.042995622,-5.768803249"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#a6a6a6"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_14" Content="#b53742" Background="#b53742" Tag="54.88643384,22.97984287"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#b53742"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_15" Content="#bf5b9a" Background="#bf5b9a" Tag="53.11412825,-21.82970521"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#bf5b9a"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_16" Content="#c55d6a" Background="#c55d6a" Tag="47.96817821,10.12335574"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#c55d6a"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_17" Content="#c69c89" Background="#c69c89" Tag="16.45166796,13.32944936"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#c69c89"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_18" Content="#cccccc" Background="#cccccc" Tag="3.938713657,-6.886673175"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#cccccc"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_19" Content="#db8130" Background="#db8130" Tag="34.06928483,59.42269033"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#db8130"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_20" Content="#e7a835" Background="#e7a835" Tag="17.67080188,68.99983877"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#e7a835"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_21" Content="#efcb27" Background="#efcb27" Tag="0.093396254,85.81892016"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#efcb27"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_22" Content="#f4f3ee" Background="#f4f3ee" Tag="3.934836119,-4.39281478"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#f4f3ee"/>
-        </StackPanel>
-        <StackPanel Style="{StaticResource ResourceKey=st_spColor}">
-          <CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_23" Content="#a5bf46" Background="#a5bf46" Tag="-25.78181261,60.84714002"/>
-          <Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#a5bf46"/>
-        </StackPanel>
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_1" Content="#39469e" Background="#39469e" Tag="24.71398711,-51.44824535"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#39469e"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" x:Name="cb_2" Content="#3d3c3d" Background="#3d3c3d" Tag="0.68378038,-0.484869159"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#3d3c3d"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_3" Content="#519b4f" Background="#519b4f" Tag="-40.50240418,34.10943237"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#519b4f"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_4" Content="#5264aa" Background="#5264aa" Tag="13.82491511,-40.65830362"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#5264aa"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_5" Content="#5c5c5c" Background="#5c5c5c" Tag="0.005802828,-0.000866361"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#5c5c5c"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_6" Content="#61744b" Background="#61744b" Tag="-15.48084738,21.31472659"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#61744b"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_7" Content="#644573" Background="#644573" Tag="23.41951659,-22.21087132"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#644573"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_8" Content="#6682a1" Background="#6682a1" Tag="-1.956721507,-20.1240403"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#6682a1"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_9" Content="#6cc1af" Background="#6cc1af" Tag="-30.40096446,0.876639034"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#6cc1af"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_10" Content="#7a594a" Background="#7a594a" Tag="11.9793789,14.95247699"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#7a594a"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_11" Content="#818180" Background="#818180" Tag="-0.184351483,0.522772979"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#818180"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_12" Content="#8988b5" Background="#8988b5" Tag="10.51916413,-23.81676635"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#8988b5"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_13" Content="#a6a6a6" Background="#a6a6a6" Tag="0.008943999,-0.001335337"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#a6a6a6"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_14" Content="#b53742" Background="#b53742" Tag="52.81210404,23.78612718"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#b53742"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_15" Content="#bf5b9a" Background="#bf5b9a" Tag="48.34766885,-16.03855585"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#bf5b9a"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_16" Content="#c55d6a" Background="#c55d6a" Tag="43.51221551,12.6423232"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#c55d6a"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_17" Content="#c69c89" Background="#c69c89" Tag="12.53287027,16.41920241"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#c69c89"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_18" Content="#cccccc" Background="#cccccc" Tag="0.010401204,-0.001552897"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#cccccc"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_19" Content="#db8130" Background="#db8130" Tag="28.50739267,57.72845842"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#db8130"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_20" Content="#e7a835" Background="#e7a835" Tag="12.83250396,66.1053807"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#e7a835"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_21" Content="#efcb27" Background="#efcb27" Tag="-2.619359059,78.91637851"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#efcb27"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_22" Content="#f4f3ee" Background="#f4f3ee" Tag="-0.485813332,2.321445107"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#f4f3ee"/>
+				</StackPanel>
+				<StackPanel Style="{StaticResource ResourceKey=st_spColor}">
+					<CheckBox Style="{StaticResource ResourceKey=st_cbColor}" Name="cb_23" Content="#a5bf46" Background="#a5bf46" Tag="-26.32536568,57.54288147"/>
+					<Ellipse Style="{StaticResource ResourceKey=el_Color}" Fill="#a5bf46"/>
+				</StackPanel>
 
         <CheckBox Name="cbShowHeatMap" Content="Show Heatmap" IsChecked="True"/>
       </StackPanel>
