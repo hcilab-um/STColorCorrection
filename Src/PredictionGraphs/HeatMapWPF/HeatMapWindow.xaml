@@ -130,7 +130,7 @@
       <Grid HorizontalAlignment="Left" Margin="10">
         <Border BorderThickness="2" BorderBrush="Black">
           <Grid  Height="900" Width="900">
-            <!--<Image Source="Image/LAB.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
+            <Image Source="Image/LAB.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
             <Canvas Name="cvHeatMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
           </Grid>
         </Border>
