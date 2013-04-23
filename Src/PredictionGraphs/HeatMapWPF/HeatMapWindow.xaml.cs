@@ -32,6 +32,10 @@ namespace HeatMapWPF
     public MainWindow()
     {
       InitializeComponent();
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
       InitCheckBoxes();
       InitBackgroundPositions();
       InitMap();
@@ -116,15 +120,18 @@ namespace HeatMapWPF
         graphY = (HeatMapData.GRID_SIZE - row - 1) * HeatMapData.GraphHeight;
         graphX = col * HeatMapData.GraphWidth;
 
-        backgroundMarkers[index] = new Ellipse(); ;
-        backgroundMarkers[index].Width = HeatMapData.GraphWidth/2;
-        backgroundMarkers[index].Height = HeatMapData.GraphHeight/2;
+        graphX = cvHeatMap.ActualWidth / Settings.Default.DataMapWidth * dataX + cvHeatMap.ActualWidth / 2;
+        graphY = cvHeatMap.ActualHeight / Settings.Default.DataMapHeight * dataY + cvHeatMap.ActualHeight / 2;
+
+        backgroundMarkers[index] = new Ellipse();
+        backgroundMarkers[index].Width = 20;
+        backgroundMarkers[index].Height = 20;
         backgroundMarkers[index].Fill = checkBox.Background;
         backgroundMarkers[index].Stroke = Brushes.Black;
         backgroundMarkers[index].StrokeThickness = 2;
 
-        Canvas.SetLeft(backgroundMarkers[index], graphX + (HeatMapData.GraphWidth - backgroundMarkers[index].Width)/2);
-        Canvas.SetBottom(backgroundMarkers[index], graphY + (HeatMapData.GraphHeight - backgroundMarkers[index].Height) / 2);
+        Canvas.SetLeft(backgroundMarkers[index], graphX - backgroundMarkers[index].Width/2);
+        Canvas.SetBottom(backgroundMarkers[index], graphY - backgroundMarkers[index].Height/ 2);
       }
     }
 
@@ -194,8 +201,8 @@ namespace HeatMapWPF
     {
       foreach (HeatMapData heatMapDataq in heatMap)
       {
-        if (heatMapDataq != null)
-          cvHeatMap.Children.Add(heatMapDataq.drawRectangle());
+        if (heatMapDataq != null && cbShowHeatMap.IsChecked.Value)
+          cvHeatMap.Children.Add(heatMapDataq.DrawRectangle());
       }
 
       string[] splitValues;
@@ -272,9 +279,17 @@ namespace HeatMapWPF
         int row = HeatMapData.GRID_SIZE - (int)((HeatMapData.GRID_SIZE * (y_value + 100) / Settings.Default.DataMapHeight)) - 1;
         var heatMapData = heatMap[row, col];
 
-        heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
-        heatMapData.DataSize++;
-        heatMapData.IsOutsideGammut = (heatMapData.IsOutsideGammut || GetGammutFlag(dataRowView)) && chkbOutsideGammut.IsChecked.Value;
+        bool isOutsideGammut = GetGammutFlag(dataRowView);
+        if ((cbGammutBoth.IsSelected || cbGammutOut.IsSelected) && isOutsideGammut)
+        {
+          heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
+          heatMapData.DataSize++;
+        }
+        else if ((cbGammutBoth.IsSelected || cbGammutIn.IsSelected) && !isOutsideGammut)
+        {
+          heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
+          heatMapData.DataSize++;
+        }
       }
 
       CorrectMap();

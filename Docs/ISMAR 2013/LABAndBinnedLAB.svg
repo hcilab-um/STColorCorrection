@@ -7,10 +7,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1499.9999"
-   height="200.00002"
+   width="2721.6174"
+   height="442.52304"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -27,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="615.90229"
-     inkscape:cy="-8.0981848"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="1165.1912"
+     inkscape:cy="414.46303"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -37,8 +38,8 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1366"
-     inkscape:window-height="706"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
@@ -50,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,96 +59,102 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-72.785713,-131.00505)">
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2985"
-       width="297"
-       height="197.00002"
-       x="74.285713"
-       y="132.50505" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2985-1"
-       width="297"
-       height="197.00002"
-       x="374.28571"
-       y="132.50505" />
+     transform="translate(190.64287,-333.91061)">
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="176.78375"
-       y="239.60077"
+       x="10.768951"
+       y="356.14108"
        id="text3005"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3007"
-         x="176.78375"
-         y="239.60077">CIE LAB</tspan></text>
+         x="10.768951"
+         y="356.14108">CIE LAB</tspan></text>
+    <image
+       y="376.43365"
+       x="871.68469"
+       id="image3038"
+       xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/Big_Bin.png"
+       height="400"
+       width="602.22223" />
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="435.76813"
-       y="239.60077"
-       id="text3009"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3011"
-         x="435.76813"
-         y="239.60077">Binned CIE LAB</tspan></text>
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2985-1-1"
-       width="297"
-       height="197.00002"
-       x="674.28571"
-       y="132.50505" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2985-1-7"
-       width="297"
-       height="197.00002"
-       x="974.28571"
-       y="132.50505" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect2985-1-4"
-       width="297"
-       height="197.00002"
-       x="1274.2856"
-       y="132.50505" />
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="740.64899"
-       y="239.60077"
-       id="text3009-0"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3011-9"
-         x="740.64899"
-         y="239.60077">Small Projector</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="1052.9888"
-       y="239.60077"
+       x="1087.6532"
+       y="351.38327"
        id="text3009-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3011-8"
-         x="1052.9888"
-         y="239.60077">Big Projector</tspan></text>
+         x="1087.6532"
+         y="351.38327">Projector p3700</tspan></text>
+    <g
+       id="g3067">
+      <image
+         width="576.34412"
+         height="400"
+         xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/Phone_Bin.png"
+         id="image3049"
+         x="1954.6304"
+         y="376.43365" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3009-8"
+         y="356.14108"
+         x="2199.1267"
+         style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="356.14108"
+           x="2199.1267"
+           id="tspan3011-2"
+           sodipodi:role="line">T-OLED</tspan></text>
+    </g>
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="1379.1099"
-       y="239.60077"
-       id="text3009-8"
+       x="1629.9038"
+       y="351.38327"
+       id="text3009-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3011-2"
-         x="1379.1099"
-         y="239.60077">T-OLED</tspan></text>
+         id="tspan3011-9"
+         x="1629.9038"
+         y="351.38327">Projector p2200</tspan></text>
+    <image
+       y="376.43365"
+       x="1435.6847"
+       id="image3027"
+       xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/SmallPro_Bin.png"
+       height="400"
+       width="558.72339" />
+    <g
+       id="g3052">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3009"
+         y="356.14108"
+         x="501.91711"
+         style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="356.14108"
+           x="501.91711"
+           id="tspan3011"
+           sodipodi:role="line">Binned CIE LAB</tspan></text>
+      <image
+         width="653.5"
+         height="400"
+         xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/LAB_Bin.png"
+         id="image3016"
+         x="262.18469"
+         y="376.43365" />
+    </g>
+    <image
+       y="376.43365"
+       x="-190.64287"
+       id="image3005"
+       xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/LAB-3D.png"
+       height="400"
+       width="494.82755" />
   </g>
 </svg>

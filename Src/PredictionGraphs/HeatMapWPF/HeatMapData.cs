@@ -56,7 +56,7 @@ namespace HeatMapWPF
       IsOutsideGammut = false;
 		}
 
-		public Rectangle drawRectangle()
+		public Rectangle DrawRectangle()
 		{
 			Rectangle rect = new Rectangle();
 			rect.Width = GraphWidth;
