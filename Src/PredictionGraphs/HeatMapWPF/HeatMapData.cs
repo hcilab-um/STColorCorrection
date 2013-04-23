@@ -11,7 +11,7 @@ namespace HeatMapWPF
 {
 	class HeatMapData
 	{
-		public const int GRID_SIZE = 30;
+		public const int GRID_SIZE = 100;
 
 		public static readonly double DataWidth = Settings.Default.DataMapWidth / GRID_SIZE;
 		public static readonly double DataHeight = Settings.Default.DataMapHeight / GRID_SIZE;

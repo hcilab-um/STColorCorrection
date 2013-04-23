@@ -32,6 +32,10 @@ namespace HeatMapWPF
     public MainWindow()
     {
       InitializeComponent();
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
       InitCheckBoxes();
       InitBackgroundPositions();
       InitMap();
@@ -116,15 +120,18 @@ namespace HeatMapWPF
         graphY = (HeatMapData.GRID_SIZE - row - 1) * HeatMapData.GraphHeight;
         graphX = col * HeatMapData.GraphWidth;
 
+        graphX = cvHeatMap.ActualWidth / Settings.Default.DataMapWidth * dataX + cvHeatMap.ActualWidth / 2;
+        graphY = cvHeatMap.ActualHeight / Settings.Default.DataMapHeight * dataY + cvHeatMap.ActualHeight / 2;
+
         backgroundMarkers[index] = new Ellipse(); ;
-        backgroundMarkers[index].Width = HeatMapData.GraphWidth/2;
-        backgroundMarkers[index].Height = HeatMapData.GraphHeight/2;
+        backgroundMarkers[index].Width = 10;
+        backgroundMarkers[index].Height = 10;
         backgroundMarkers[index].Fill = checkBox.Background;
         backgroundMarkers[index].Stroke = Brushes.Black;
         backgroundMarkers[index].StrokeThickness = 2;
 
-        Canvas.SetLeft(backgroundMarkers[index], graphX + (HeatMapData.GraphWidth - backgroundMarkers[index].Width)/2);
-        Canvas.SetBottom(backgroundMarkers[index], graphY + (HeatMapData.GraphHeight - backgroundMarkers[index].Height) / 2);
+        Canvas.SetLeft(backgroundMarkers[index], graphX - backgroundMarkers[index].Width/2);
+        Canvas.SetBottom(backgroundMarkers[index], graphY - backgroundMarkers[index].Height/ 2);
       }
     }
 
@@ -194,7 +201,7 @@ namespace HeatMapWPF
     {
       foreach (HeatMapData heatMapDataq in heatMap)
       {
-        if (heatMapDataq != null)
+        if (heatMapDataq != null && cbShowHeatMap.IsChecked.Value)
           cvHeatMap.Children.Add(heatMapDataq.DrawRectangle());
       }
 
