@@ -103,7 +103,7 @@ namespace PerceptionLib
     //public static readonly CIEXYZ D65 = new CIEXYZ(0.3127, 0.3290, 0.3583);
 
     // the new D65 XYZ as provided by David and also cross verified with wikipedia
-    public static readonly CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
+    public static  CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
 
     private double x;
     private double y;
@@ -164,7 +164,7 @@ namespace PerceptionLib
 
   public class Color : INotifyPropertyChanged
   {
-
+    public CIEXYZ D65 = new CIEXYZ(0.9504, 1.0000, 1.0888);
     private double u, v, uR, vR, xi, yi, lv;
     private double l, uP, vP, la, a, b;
 
@@ -333,8 +333,8 @@ namespace PerceptionLib
       Color rColorlab = new Color();
       //CIEXYZ xyz = RGBToXYZ(cRGB);
 
-      rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
-      rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+      //rColor.UP = (4 * xyz.X) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
+      //rColor.VP = (9 * xyz.Y) / (xyz.X + (15 * xyz.Y) + (3 * xyz.Z));
 
       //rColor.UR = (4 * CIEXYZ.D65.X) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
       //rColor.VR = (9 * CIEXYZ.D65.Y) / (CIEXYZ.D65.X + (15 * CIEXYZ.D65.Y) + (3 * CIEXYZ.D65.Z));
@@ -406,7 +406,7 @@ namespace PerceptionLib
       double Fx, Fy, Fz;
       Color rColor = new Color();
       //CIEXYZ xyz = RGBToXYZ(cRGB);
-
+      
       double yr = xyz.Y / CIEXYZ.D65.Y;
       double xr = xyz.X / CIEXYZ.D65.X;
       double zr = xyz.Z / CIEXYZ.D65.Z;

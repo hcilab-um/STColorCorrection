@@ -400,6 +400,63 @@ namespace STColorPerception.Util
           return BinNUmber;
         }
 
+
+        public static int MatchWithBinned(PerceptionLib.Color ColorToCompensate, DataTable bin, PerceptionLib.CIEXYZ BG, PerceptionLib.Color ColorToShow)
+        {
+          int BinNUmber = 0;
+          int i;
+          double closestColor = double.MaxValue;
+         // double closestColorValue = double.MaxValue;
+          //double angleDifference = double.MaxValue;
+
+
+          PerceptionLib.Color colorToCompare = new PerceptionLib.Color();
+          PerceptionLib.CIEXYZ colorToCompareXYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
+
+          PerceptionLib.CIEXYZ colorToComparePlsBG_XYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
+          PerceptionLib.Color colorToComparePlsBG = new PerceptionLib.Color();
+
+          for (int index = 0; index < bin.Rows.Count; index++)
+          {
+            i = index;
+
+            colorToCompare.LA = Convert.ToDouble(bin.Rows[index][9].ToString());
+            colorToCompare.A = Convert.ToDouble(bin.Rows[index][10].ToString());
+            colorToCompare.B = Convert.ToDouble(bin.Rows[index][11].ToString());
+
+            double distance = PerceptionLib.Color.ColorDistanceCalAB(colorToCompare, ColorToCompensate);
+            if (distance >= closestColor)
+              continue;
+
+            //ClosestL = colorToCompare.LA;
+            //ClosestA = colorToCompare.A;
+            //ClosestB = colorToCompare.B;
+
+            //int BinNUmber1 = index;
+            //colorToCompareXYZ.X = Convert.ToDouble(bin.Rows[index][12].ToString());
+            //colorToCompareXYZ.Y = Convert.ToDouble(bin.Rows[index][13].ToString());
+            //colorToCompareXYZ.Z = Convert.ToDouble(bin.Rows[index][14].ToString());
+
+            //colorToComparePlsBG_XYZ = Util.ColorSpaceConverter.AddXYZ(colorToCompareXYZ, BG);
+            //colorToComparePlsBG = PerceptionLib.Color.ToLUV(colorToComparePlsBG_XYZ);
+
+            //double ColorDistance = PerceptionLib.Color.ColorDistanceCalAB(colorToComparePlsBG, ColorToShow);
+            //if (ColorDistance >= closestColorValue)
+            //  continue;
+
+
+            //closestColorValue = ColorDistance;
+            closestColor = distance;
+
+
+            closestColorInsideTheBin = distance;
+            //closestColorOnAddition = ColorDistance;
+            //HueAngeDifference = angleDifference;
+            BinNUmber = index;
+
+          }
+          return BinNUmber;
+        }
       public static double HueAngle(PerceptionLib.Color colorToShow)
       {
        double value1 = colorToShow.B / colorToShow.A;

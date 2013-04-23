@@ -6607,6 +6607,214 @@ namespace STColorPerception
       btn_ExportGrid.IsEnabled = true;
 
     }
+
+
+    private void Btn_Recheck_Click(object sender, RoutedEventArgs e)
+    {
+      dtgrid_corrDisplay.IsEnabled = true;
+      btn_StartMeasurment.IsEnabled = false;
+      txt_R.IsEnabled = false;
+      txt_G.IsEnabled = false;
+      txt_B.IsEnabled = false;
+
+      double X, Y, Z, DeltaA_Luv, DeltaA_LAb, DeltaBin_Luv, DeltaBin_Lab;
+      double CDeltaA_Luv, CDeltaA_LAb, CDeltaBin_Luv, CDeltaBin_Lab;
+
+      int binnumber = 0;
+      int GammutRangeCheck1, GammutRangeCheck2, GammutRangeCheck3, GammutRangeCheck4;
+
+      DataRow newRow;
+
+      int connect = PerceptionLib.Cs200Connection.ConnectToCS200();
+
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BgValueWtPt.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BgValueSet1.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\big_pro_crosscheck.csv");
+      DataTable dt_Bg = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        dt_Bg = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\BaseBinFile.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      double minLLevel = double.MaxValue;
+      double maxLLevel = double.MinValue;
+      double minALevel = double.MaxValue;
+      double maxALevel = double.MinValue;
+      double minBLevel = double.MaxValue;
+      double maxBLevel = double.MinValue;
+
+      double minL = double.MaxValue;
+      double maxL = double.MinValue;
+      double minA = double.MaxValue;
+      double maxA = double.MinValue;
+      double minB = double.MaxValue;
+      double maxB = double.MinValue;
+
+      foreach (DataRow dr in bin.Rows)
+      {
+        double accountLevel = dr.Field<double>("MLA");
+        minLLevel = Math.Min(minLLevel, accountLevel);
+        maxLLevel = Math.Max(maxLLevel, accountLevel);
+
+        double ALevel = dr.Field<double>("MA");
+        minALevel = Math.Min(minALevel, ALevel);
+        maxALevel = Math.Max(maxALevel, ALevel);
+
+        double BLevel = dr.Field<double>("MlaB");
+        minBLevel = Math.Min(minBLevel, BLevel);
+        maxBLevel = Math.Max(maxBLevel, BLevel);
+
+        double account = dr.Field<double>("LA");
+        minL = Math.Min(minL, account);
+        maxL = Math.Max(maxL, account);
+
+        double ALvl = dr.Field<double>("A");
+        minA = Math.Min(minA, ALvl);
+        maxA = Math.Max(maxA, ALvl);
+
+        double BLvl = dr.Field<double>("LB");
+        minB = Math.Min(minBLevel, BLvl);
+        maxB = Math.Max(maxBLevel, BLvl);
+      }
+
+      ThreadPool.QueueUserWorkItem(ignored =>
+    {
+      PerceptionLib.RGBValue rgb = new PerceptionLib.RGBValue();
+      for (int i = 0; i < dt_Bg.Rows.Count; i++)
+      {
+        BgR =Convert.ToByte(dt_Bg.Rows[i][12].ToString());
+        BgG = Convert.ToByte(dt_Bg.Rows[i][13].ToString());
+        BgB = Convert.ToByte(dt_Bg.Rows[i][14].ToString());
+
+        X = Convert.ToDouble(dt_Bg.Rows[i][15].ToString());
+        Y = Convert.ToDouble(dt_Bg.Rows[i][16].ToString());
+        Z = Convert.ToDouble(dt_Bg.Rows[i][17].ToString());
+
+        ColorBackGroundXYZ = new CIEXYZ(X, Y, Z);
+
+        X = Convert.ToDouble(dt_Bg.Rows[i][9].ToString());
+        Y = Convert.ToDouble(dt_Bg.Rows[i][10].ToString());
+        Z = Convert.ToDouble(dt_Bg.Rows[i][11].ToString());
+        BINcolorXYZ = new CIEXYZ(X, Y, Z);
+        BINColor = PerceptionLib.Color.ToLAB(MBINcolorXYZ);
+        
+        MBINcolorXYZ = Util.ColorSpaceConverter.SubtractXYZ(BINcolorXYZ, ColorBackGroundXYZ);
+        MBINColor = PerceptionLib.Color.ToLAB(MBINcolorXYZ);
+        BincolorRGB = PerceptionLib.Color.ToRBGFromLAB(MBINColor);
+
+        //newRow[140] = MBINColor.LA.ToString();
+        //newRow[141] = MBINColor.A.ToString();
+        //newRow[142] = MBINColor.B.ToString();
+
+        binnumber = Util.CATCalulation.MatchWithBinnedColors(MBINColor, bin, ColorBackGroundXYZ, BINColor);
+        //newRow[126] = Util.CATCalulation.closestColorInsideTheBin.ToString();
+        //newRow[127] = Util.CATCalulation.closestColorOnAddition.ToString();
+        GammutRangeCheck4 = 1;
+
+        //newRow[143] = Util.CATCalulation.ClosestL.ToString();
+        //newRow[144] = Util.CATCalulation.ClosestA.ToString();
+        //newRow[145] = Util.CATCalulation.ClosestB.ToString();
+
+
+        if ((MBINColor.LA >= minLLevel) & (MBINColor.LA <= maxLLevel) & (MBINColor.A >= minALevel) & (MBINColor.A <= maxALevel) & (MBINColor.B >= minBLevel) & (MBINColor.B <= maxBLevel))
+        {
+          for (int index = 0; index < bin.Rows.Count; index++)
+          {
+            double tempL, tempA, tempB;
+            tempL = Convert.ToDouble(bin.Rows[index][9].ToString());
+            tempA = Convert.ToDouble(bin.Rows[index][10].ToString());
+            tempB = Convert.ToDouble(bin.Rows[index][11].ToString());
+
+            if ((MBINColor.LA >= tempL - 5) & (MBINColor.LA <= tempL + 5) & (MBINColor.A >= tempA - 5) & (MBINColor.A <= tempA + 5) & (MBINColor.B >= tempB - 5) & (MBINColor.B <= tempB + 5))
+            {
+              GammutRangeCheck4 = 0;
+              break;
+            }
+            GammutRangeCheck4 = 1;
+          }
+
+        }
+        else
+          GammutRangeCheck4 = 1;
+        //
+        //binnumber = Util.CATCalulation.MatchWithBinnedColorsBasedOn3D(MBINColor, bin, ColorBackGroundXYZ, BINColor);
+
+        MBINcolorXYZ.X = Convert.ToDouble(bin.Rows[binnumber][6].ToString());
+        MBINcolorXYZ.Y = Convert.ToDouble(bin.Rows[binnumber][7].ToString());
+        MBINcolorXYZ.Z = Convert.ToDouble(bin.Rows[binnumber][8].ToString());
+        MBINColor.LA = Convert.ToDouble(bin.Rows[binnumber][3].ToString());
+        MBINColor.A = Convert.ToDouble(bin.Rows[binnumber][4].ToString());
+        MBINColor.B = Convert.ToDouble(bin.Rows[binnumber][5].ToString());
+        BincolorRGB.R = Convert.ToByte(bin.Rows[binnumber][0].ToString());
+        BincolorRGB.G = Convert.ToByte(bin.Rows[binnumber][1].ToString());
+        BincolorRGB.B = Convert.ToByte(bin.Rows[binnumber][2].ToString());
+
+        //newRow[88] = MBINcolorXYZ.X.ToString();
+        //newRow[89] = MBINcolorXYZ.Y.ToString();
+        //newRow[90] = MBINcolorXYZ.Z.ToString();
+        dt_Bg.Rows[i][45] = MBINColor.LA.ToString();
+        dt_Bg.Rows[i][46] = MBINColor.A.ToString();
+        dt_Bg.Rows[i][47] = MBINColor.B.ToString();
+        //newRow[94] = BincolorRGB.R.ToString();
+        //newRow[95] = BincolorRGB.G.ToString();
+        //newRow[96] = BincolorRGB.B.ToString();
+
+
+        Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+        {
+          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BgR, BgG, BgB));
+          rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(BincolorRGB.R, BincolorRGB.G, BincolorRGB.B));
+         
+        }));
+        DisplayMeasuredValuesFromCs200();
+
+        MBincolorRGB = PerceptionLib.Color.ToRBG(MBINcolorXYZ);
+
+        //newRow[97] = ColorMeasuredXYZ.X.ToString();
+        //newRow[98] = ColorMeasuredXYZ.Y.ToString();
+        //newRow[99] = ColorMeasuredXYZ.Z.ToString();
+        dt_Bg.Rows[i][48] = ColorMeasured.LA.ToString();
+        dt_Bg.Rows[i][49] = ColorMeasured.A.ToString();
+        dt_Bg.Rows[i][50] = ColorMeasured.B.ToString();
+        //newRow[103] = MR.ToString();
+        //newRow[104] = MG.ToString();
+        //newRow[105] = MB.ToString();
+        //newRow[160] = Util.CATCalulation.HueAngle(ColorMeasured);
+
+        //newRow[122] = binnumber.ToString();
+
+        //DeltaBin_Lab = PerceptionLib.Color.ColorDistanceCalAB(MBINColor, ColorMeasured);
+        DeltaBin_Lab = PerceptionLib.Color.ColorDistanceCalAB(ColorToShow, ColorMeasured);
+
+        dt_Bg.Rows[i][51] = DeltaBin_Lab.ToString();
+        dt_Bg.Rows[i][52] = GammutRangeCheck4.ToString();
+
+
+      }
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+    });
+
+      btn_ExportGrid.IsEnabled = true;
+
+
+    }
+   
+    
+    
+    
     //phone caluclator
     private void Btn_CATCalulator_Click(object sender, RoutedEventArgs e)
     {
@@ -7022,6 +7230,8 @@ namespace STColorPerception
     {
       stop = 1;
     }
+   
+    
     private void Btn_PhoneBinCalculator_Click(object sender, RoutedEventArgs e)
     {
       BgNo = 1;
@@ -7324,83 +7534,14 @@ namespace STColorPerception
       //  }
 
 
-      ////// bg5
-      //  Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-      //  {
-          
-      //    rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(217, 122, 37));
-
-      //  }));
-       
-      //  for (int i = 0; i < loopvalue; i++)
-      //  {
-
-      //    if (stop == 1)
-      //    {
-      //      stop = 0;
-      //      break;
-      //    }
-      //    DisplayMeasuredValuesFromCs200();
-      //    newRow = dt_Bg.NewRow();
-
-      //    newRow[0] = MR.ToString();
-      //    newRow[1] = MG.ToString();
-      //    newRow[2] = MB.ToString();
-      //    newRow[3] = ColorMeasuredXYZ.X.ToString();
-      //    newRow[4] = ColorMeasuredXYZ.Y.ToString();
-      //    newRow[5] = ColorMeasuredXYZ.Z.ToString();
-      //    newRow[6] = colorMeasured.LA.ToString();
-      //    newRow[7] = colorMeasured.A.ToString();
-      //    newRow[8] = colorMeasured.B.ToString();
-      //    dt_Bg.Rows.Add(newRow);
-      //    //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
-      //    //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
-
-      //    //78500 3000 phone
-      //    int temp = 0;
-      //    if (i > 9630)
-      //    {
-      //      temp = 0;
-      //      for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
-      //      {
-      //        FgNo = j;
-      //        double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
-      //        double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
-      //        double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
-
-      //        if (r < 133)//(r == 0)
-      //        {
-      //          if (g < 90)//if (g < 180 & 173 < g)
-      //          {
-      //            if (b < 85)//if (b < 169 & 150 < b)
-      //            {
-      //              temp++;
-      //            }
-      //          }
-
-      //        }
-      //      }
-      //    }
-
-      //    if (temp > 15)
-      //    {
-      //      newRow[9] = BgNo.ToString();
-      //      BgNo++;
-      //      FgNo = 0;
-      //      break;
-      //    }
-
-      //  }
-
-        // bg6
+        //// bg5
         Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
         {
-          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(230, 163, 42));
-
+          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(201, 201, 201));
         }));
+        
         for (int i = 0; i < loopvalue; i++)
         {
-
 
           if (stop == 1)
           {
@@ -7425,7 +7566,7 @@ namespace STColorPerception
 
           //78500 3000 phone
           int temp = 0;
-          if (i > 9600)
+          if (i > 9630)
           {
             temp = 0;
             for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
@@ -7435,11 +7576,11 @@ namespace STColorPerception
               double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
               double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-              if (r < 145)//(r == 0)
+              if (r < 123)//(r == 0)
               {
-                if (g < 110)//if (g < 180 & 173 < g)
+                if (g < 134)//if (g < 180 & 173 < g)
                 {
-                  if (b < 90)//if (b < 169 & 150 < b)
+                  if (b < 145)//if (b < 169 & 150 < b)
                   {
                     temp++;
                   }
@@ -7459,13 +7600,80 @@ namespace STColorPerception
 
         }
 
+        //// //bg6
+        //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+        //{
+        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
+
+        //}));
+        //for (int i = 0; i < loopvalue; i++)
+        //{
+
+
+        //  if (stop == 1)
+        //  {
+        //    stop = 0;
+        //    break;
+        //  }
+        //  DisplayMeasuredValuesFromCs200();
+        //  newRow = dt_Bg.NewRow();
+
+        //  newRow[0] = MR.ToString();
+        //  newRow[1] = MG.ToString();
+        //  newRow[2] = MB.ToString();
+        //  newRow[3] = ColorMeasuredXYZ.X.ToString();
+        //  newRow[4] = ColorMeasuredXYZ.Y.ToString();
+        //  newRow[5] = ColorMeasuredXYZ.Z.ToString();
+        //  newRow[6] = colorMeasured.LA.ToString();
+        //  newRow[7] = colorMeasured.A.ToString();
+        //  newRow[8] = colorMeasured.B.ToString();
+        //  dt_Bg.Rows.Add(newRow);
+        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
+        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+        //  //78500 3000 phone
+        //  int temp = 0;
+        //  if (i > 9600)
+        //  {
+        //    temp = 0;
+        //    for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
+        //    {
+        //      FgNo = j;
+        //      double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
+        //      double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
+        //      double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
+
+        //      if (r < 115)//(r == 0)
+        //      {
+        //        if (g < 65)//if (g < 180 & 173 < g)
+        //        {
+        //          if (b < 94)//if (b < 169 & 150 < b)
+        //          {
+        //            temp++;
+        //          }
+        //        }
+
+        //      }
+        //    }
+        //  }
+
+        //  if (temp > 15)
+        //  {
+        //    newRow[9] = BgNo.ToString();
+        //    BgNo++;
+        //    FgNo = 0;
+        //    break;
+        //  }
+
+        //}
+
         ////bg7
         //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
         //{
-        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(194, 84, 98));
+        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(238, 200, 27));
 
         //}));
-        ////loopvalue = 15;
+        
         //for (int i = 0; i < loopvalue; i++)
         //{
 
@@ -7502,11 +7710,11 @@ namespace STColorPerception
         //      double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
         //      double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-        //      if (r < 121)//(r == 0)
+        //      if (r < 151)//(r == 0)
         //      {
-        //        if (g < 71)//if (g < 180 & 173 < g)
+        //        if (g < 133)//if (g < 180 & 173 < g)
         //        {
-        //          if (b < 105)//if (b < 169 & 150 < b)
+        //          if (b < 86)//if (b < 169 & 150 < b)
         //          {
         //            temp++;
         //          }
@@ -8085,6 +8293,7 @@ namespace STColorPerception
         rec_displayColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(Convert.ToByte(dataTable.Rows[i][0].ToString()), Convert.ToByte(dataTable.Rows[i][1].ToString()), Convert.ToByte((dataTable.Rows[i][2]).ToString())));
       }
     }
+
 
    
 

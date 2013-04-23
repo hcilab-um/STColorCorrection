@@ -193,6 +193,7 @@
           <Label Name="MBlue" Width="20" Height="26" Margin="0,10,0,0">B:</Label>
           <Label Name="lbl_MBlue" Width="50" Height="26" Margin="10,10,0,0" Content="{Binding ElementName=mainW, Path=MB}"/>
           <Button Width="132" Name="Btn_PhoneDataCalculator" Margin="10,0,0,0" Click="Btn_PhoneDataCalculator_Click">PhoneDataCalculator</Button>
+                    <Button Content="Btn_Recheck" Height="44" Name="button1" Width="75" Margin="10,0,0,0" Click="Btn_Recheck_Click" />
                     <Button Content="Stop" Height="42" Name="Btn_Stop" Width="75" Margin="10,0,0,0" Click="Btn_Stop_Click" />
                 </StackPanel>
         <StackPanel Orientation="Horizontal" Width="941" Height="41" Margin="10,0,10,10 ">
