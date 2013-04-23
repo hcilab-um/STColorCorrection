@@ -44,6 +44,20 @@ namespace PredictionGraphs
       set { SetValue(ToProperty, value); }
     }
 
+    public static readonly DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(String), typeof(ColumnColor));
+    public String Filter
+    {
+      get { return (String)GetValue(FilterProperty); }
+      set { SetValue(FilterProperty, value); }
+    }
+
+    public static readonly DependencyProperty IntensityProperty = DependencyProperty.Register("Intensity", typeof(int), typeof(ColumnColor));
+    public int Intensity
+    {
+      get { return (int)GetValue(IntensityProperty); }
+      set { SetValue(IntensityProperty, value); }
+    }
+
     private double maxValue;
     public double MaxValue
     {
@@ -64,7 +78,7 @@ namespace PredictionGraphs
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
       base.OnPropertyChanged(e);
-      if (e.Property == FromProperty || e.Property == ToProperty || e.Property == DataContextProperty)
+      if (e.Property == FromProperty || e.Property == ToProperty || e.Property == FilterProperty || e.Property == IntensityProperty)
       {
         if (DataContext == null || !(DataContext is DataTable))
           return;
@@ -73,12 +87,23 @@ namespace PredictionGraphs
 
         SolidColorBrush bgColor = TestBg as SolidColorBrush;
         DataView view = new DataView(DataContext as DataTable);
-        String filter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, bgColor.Color.R, bgColor.Color.G, bgColor.Color.B);
-        view.RowFilter = filter;
+        String bgFilter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, bgColor.Color.R, bgColor.Color.G, bgColor.Color.B);
+        if (Filter != null && Filter.Length != 0)
+          bgFilter += " AND " + Filter;
+        view.RowFilter = bgFilter;
 
         cHistogram.Children.Clear();
         foreach (DataRowView row in view)
         {
+          if (Intensity != 0)
+          {
+            double fg_L = Double.Parse(row["fg_L"] as String);
+            if (Intensity == 1 && fg_L < 50)
+              continue;
+            if (Intensity == -1 && fg_L > 50)
+              continue;
+          }
+
           Rectangle measurement = new Rectangle();
           measurement.Width = cHistogram.ActualWidth;
           measurement.Height = 1;

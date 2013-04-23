@@ -130,8 +130,8 @@ namespace HeatMapWPF
         backgroundMarkers[index].Stroke = Brushes.Black;
         backgroundMarkers[index].StrokeThickness = 2;
 
-        Canvas.SetLeft(backgroundMarkers[index], graphX - backgroundMarkers[index].Width/2);
-        Canvas.SetBottom(backgroundMarkers[index], graphY - backgroundMarkers[index].Height/ 2);
+        Canvas.SetLeft(backgroundMarkers[index], graphX - backgroundMarkers[index].Width / 2);
+        Canvas.SetBottom(backgroundMarkers[index], graphY - backgroundMarkers[index].Height / 2);
       }
     }
 
@@ -216,7 +216,6 @@ namespace HeatMapWPF
         else
           cvHeatMap.Children.Remove(backgroundMarkers[index]);
       }
-
     }
 
     private void Button_Click_Select(object sender, RoutedEventArgs e)
@@ -263,6 +262,8 @@ namespace HeatMapWPF
         return;
       }
 
+      ApplyFilters();
+
       cvHeatMap.Children.Clear();
       foreach (HeatMapData heatMapData in heatMap)
       {
@@ -279,17 +280,18 @@ namespace HeatMapWPF
         int row = HeatMapData.GRID_SIZE - (int)((HeatMapData.GRID_SIZE * (y_value + 100) / Settings.Default.DataMapHeight)) - 1;
         var heatMapData = heatMap[row, col];
 
-        bool isOutsideGammut = GetGammutFlag(dataRowView);
-        if ((cbGammutBoth.IsSelected || cbGammutOut.IsSelected) && isOutsideGammut)
+        String intensitySelection = (cbIntensity.SelectedItem as ComboBoxItem).Tag as String;
+        if (intensitySelection != "0")
         {
-          heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
-          heatMapData.DataSize++;
+          double intensity = Double.Parse(dataRowView["Fg_L"] as String);
+          if (intensitySelection == "1" && intensity < 50)
+            continue;
+          if (intensitySelection == "-1" && intensity > 50)
+            continue;
         }
-        else if ((cbGammutBoth.IsSelected || cbGammutIn.IsSelected) && !isOutsideGammut)
-        {
-          heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
-          heatMapData.DataSize++;
-        }
+
+        heatMapData.DataSum += CalculateDistance(dataRowView, cbFrom.SelectedItem as String, cbTo.SelectedItem as String);
+        heatMapData.DataSize++;
       }
 
       CorrectMap();
@@ -329,8 +331,11 @@ namespace HeatMapWPF
         cb.IsChecked = false;
         return;
       }
+    }
 
-      String filter = null;
+    private void ApplyFilters()
+    {
+      String filter = String.Empty;
       SolidColorBrush solidColorBrush;
       dataView.RowFilter = "";
       foreach (CheckBox checkBox in checkBoxes)
@@ -338,12 +343,24 @@ namespace HeatMapWPF
         if (checkBox.IsChecked == true)
         {
           solidColorBrush = checkBox.Background as SolidColorBrush;
-          if (filter == null)
-            filter = String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, solidColorBrush.Color.R, solidColorBrush.Color.G, solidColorBrush.Color.B);
-          else
-            filter += " OR " + String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, solidColorBrush.Color.R, solidColorBrush.Color.G, solidColorBrush.Color.B);
+          if (filter.Length != 0)
+            filter += " OR ";
+          filter += String.Format("{0} = '0x{1:x2}{2:x2}{3:x2}'", Settings.Default.BgColumn, solidColorBrush.Color.R, solidColorBrush.Color.G, solidColorBrush.Color.B);
         }
       }
+
+      if (filter.Length != 0)
+        filter = "( " + filter + " ) AND ";
+
+      if (dataView.Table.Columns.Contains("Method"))
+        filter += String.Format("{0} = '{1}'", "Method", (cbMethod.SelectedItem as ComboBoxItem).Tag as String);
+      if (dataView.Table.Columns.Contains("Type"))
+        filter += String.Format("AND {0} = '{1}'", "Type", (cbType.SelectedItem as ComboBoxItem).Tag as String);
+      if (cbGammutIn.IsSelected)
+        filter += "AND GammutFlag = '0'";
+      if (cbGammutOut.IsSelected)
+        filter += "AND GammutFlag = '1'";
+
       dataView.RowFilter = filter;
     }
 

@@ -61,6 +61,7 @@ namespace HeatMapWPF
 			Rectangle rect = new Rectangle();
 			rect.Width = GraphWidth;
 			rect.Height = GraphHeight;
+      rect.ToolTip = DataAverageValue;
 
       if (!IsOutsideGammut)
       {

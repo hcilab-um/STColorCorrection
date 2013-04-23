@@ -24,6 +24,7 @@ namespace PredictionGraphs
   {
 
     private DataTable displayData;
+    private String filter;
     
 		public DataTable DisplayData
     {
@@ -32,6 +33,16 @@ namespace PredictionGraphs
       {
         displayData = value;
         OnPropertyChanged("DisplayData");
+      }
+    }
+
+    public String Filter
+    {
+      get { return filter; }
+      set 
+      {
+        filter = value;
+        OnPropertyChanged("Filter");
       }
     }
 
@@ -58,6 +69,8 @@ namespace PredictionGraphs
 
     private void PopulateFromAndTo()
     {
+      cbFrom.Items.Clear();
+      cbTo.Items.Clear();
       foreach (DataColumn column in DisplayData.Columns)
       {
         if (column.ColumnName.EndsWith("_L"))
@@ -68,6 +81,40 @@ namespace PredictionGraphs
           cbTo.Items.Add(variable);
         }
       }
+    }
+
+    private Dictionary<String, String> filterValues = new Dictionary<string, string>();
+    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      if (DisplayData == null)
+        return;
+
+      ComboBox source = (ComboBox)sender;
+      String columnName = source.Tag as String;
+      if (!DisplayData.Columns.Contains(columnName))
+      {
+        MessageBox.Show(String.Format("Cannot filter by {0}", columnName));
+        return;
+      }
+
+      String value = (source.SelectedItem as ComboBoxItem).Tag as String;
+      if (value != null)
+        filterValues[columnName] = value;
+      else if(filterValues.ContainsKey(columnName))
+        filterValues.Remove(columnName);
+
+      String tmpFilter = String.Empty;
+      foreach (String key in filterValues.Keys)
+      {
+        if (tmpFilter.Length != 0)
+          tmpFilter += " AND ";
+        tmpFilter += String.Format("{0} = '{1}'", key, filterValues[key]);
+      }
+      Filter = tmpFilter;
+    }
+
+    private void Intensity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
