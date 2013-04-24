@@ -40,28 +40,62 @@ namespace PlotterAB
           parser.Load("prediction-format.xml");
           System.Data.DataSet dsResult = parser.GetDataSet();
           dataView = dsResult.Tables[0].AsDataView();
-          DrawPoints();
+          PopulateComboBoxes();
+        }
+      }
+    }
+
+    private void PopulateComboBoxes()
+    {
+      foreach (DataColumn column in dataView.Table.Columns)
+      {
+        if (column.ColumnName.EndsWith("_L"))
+        {
+          String variable = column.ColumnName.Substring(0, column.ColumnName.Length - 2);
+          variable = variable.Trim();
+          cbA.Items.Add(variable);
         }
       }
     }
 
     private void DrawPoints()
     {
+      if (dataView == null)
+        return;
+      if (cbA.SelectedItem == null)
+        return;
+
+      cvHeatMap.Children.Clear();
       foreach (DataRowView row in dataView)
       {
-        double dataX = Double.Parse(row["a"] as String);
-        double dataY = Double.Parse(row["b"] as String);
+        double dataX = Double.Parse(row[(cbA.SelectedItem as String) + "_a"] as String);
+        double dataY = Double.Parse(row[(cbA.SelectedItem as String) + "_b"] as String);
 
         double graphX = cvHeatMap.ActualWidth / 200 * dataX + cvHeatMap.ActualWidth / 2;
         double graphY = cvHeatMap.ActualHeight / 200 * dataY + cvHeatMap.ActualHeight / 2;
 
         Ellipse circle = new Ellipse();
-        circle.Width = 20;
-        circle.Height = 20;
-        circle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(row["RGB"] as String));
+        circle.Width = sSize.Value;
+        circle.Height = sSize.Value;
+        
+        circle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF" + (row["Bg_RRGGBB"] as String).Substring(2).ToUpper()));
         circle.Stroke = Brushes.Black;
         circle.StrokeThickness = 2;
+
+        Canvas.SetLeft(circle, graphX - circle.Width / 2);
+        Canvas.SetBottom(circle, graphY - circle.Height / 2);
+        cvHeatMap.Children.Add(circle);
       }
+    }
+
+    private void cbA_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      DrawPoints();
+    }
+
+    private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+      DrawPoints();
     }
   }
 }

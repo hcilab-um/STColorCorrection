@@ -1,15 +1,26 @@
 ﻿<Window x:Class="PlotterAB.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:plotter="clr-namespace:PlotterAB"
         Title="MainWindow" SizeToContent="WidthAndHeight">
+
+  <Window.Resources>
+    <plotter:BoolToVisibilityConverter x:Key="bvConverter" />
+  </Window.Resources>
+
   <StackPanel Orientation="Vertical">
     <StackPanel Orientation="Horizontal">
       <TextBox x:Name="tbFileName" Width="282"/>
       <Button Content="Select" Margin="10,0" Click="Button_Click" />
+      <ComboBox x:Name="cbA" Margin="10,0" Width="100" SelectionChanged="cbA_SelectionChanged"/>
+      <Slider x:Name="sSize" Margin="10,0" Minimum="10" Maximum="20" Width="200" Value="20" ValueChanged="Slider_ValueChanged"/>
+      <CheckBox x:Name="cbShowImage" Margin="10,0" IsChecked="True" Content="Show Image" />
     </StackPanel>
-    <Grid  Height="900" Width="900">
-      <Image Source="Image/LAB.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Image>
-      <Canvas Name="cvHeatMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-    </Grid>
+    <Border BorderThickness="2" BorderBrush="Black">
+      <Grid  Height="900" Width="900">
+        <Image Source="Image/LAB.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="{Binding ElementName=cbShowImage, Path=IsChecked, Converter={StaticResource ResourceKey=bvConverter}}"></Image>
+        <Canvas Name="cvHeatMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+      </Grid>
+    </Border>
   </StackPanel>
 </Window>
