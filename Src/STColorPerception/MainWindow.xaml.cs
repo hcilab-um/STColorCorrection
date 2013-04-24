@@ -7613,7 +7613,7 @@ namespace STColorPerception
         //// bg5
         Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
         {
-          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(201, 201, 201));
+          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(161, 161, 161));
         }));
         
         for (int i = 0; i < loopvalue; i++)
@@ -7652,11 +7652,11 @@ namespace STColorPerception
               double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
               double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-              if (r < 123)//(r == 0)
+              if (r < 99)//(r == 0)
               {
-                if (g < 134)//if (g < 180 & 173 < g)
+                if (g < 110)//if (g < 180 & 173 < g)
                 {
-                  if (b < 145)//if (b < 169 & 150 < b)
+                  if (b < 124)//if (b < 169 & 150 < b)
                   {
                     temp++;
                   }
