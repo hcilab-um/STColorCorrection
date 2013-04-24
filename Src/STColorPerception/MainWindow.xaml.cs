@@ -7611,75 +7611,76 @@ namespace STColorPerception
 
 
         //// bg5
-        Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-        {
-          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(161, 161, 161));
-        }));
-        
-        for (int i = 0; i < loopvalue; i++)
-        {
-
-          if (stop == 1)
-          {
-            stop = 0;
-            break;
-          }
-          DisplayMeasuredValuesFromCs200();
-          newRow = dt_Bg.NewRow();
-
-          newRow[0] = MR.ToString();
-          newRow[1] = MG.ToString();
-          newRow[2] = MB.ToString();
-          newRow[3] = ColorMeasuredXYZ.X.ToString();
-          newRow[4] = ColorMeasuredXYZ.Y.ToString();
-          newRow[5] = ColorMeasuredXYZ.Z.ToString();
-          newRow[6] = colorMeasured.LA.ToString();
-          newRow[7] = colorMeasured.A.ToString();
-          newRow[8] = colorMeasured.B.ToString();
-          dt_Bg.Rows.Add(newRow);
-          //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
-          //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
-
-          //78500 3000 phone
-          int temp = 0;
-          if (i > 9630)
-          {
-            temp = 0;
-            for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
-            {
-              FgNo = j;
-              double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
-              double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
-              double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
-
-              if (r < 99)//(r == 0)
-              {
-                if (g < 110)//if (g < 180 & 173 < g)
-                {
-                  if (b < 124)//if (b < 169 & 150 < b)
-                  {
-                    temp++;
-                  }
-                }
-
-              }
-            }
-          }
-
-          if (temp > 15)
-          {
-            newRow[9] = BgNo.ToString();
-            BgNo++;
-            FgNo = 0;
-            break;
-          }
-
-        }
-
-        //// //bg6
         //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
         //{
-        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 44, 56));
+        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(122, 122, 121));
+         
+        //}));
+        
+        //for (int i = 0; i < loopvalue; i++)
+        //{
+
+        //  if (stop == 1)
+        //  {
+        //    stop = 0;
+        //    break;
+        //  }
+        //  DisplayMeasuredValuesFromCs200();
+        //  newRow = dt_Bg.NewRow();
+
+        //  newRow[0] = MR.ToString();
+        //  newRow[1] = MG.ToString();
+        //  newRow[2] = MB.ToString();
+        //  newRow[3] = ColorMeasuredXYZ.X.ToString();
+        //  newRow[4] = ColorMeasuredXYZ.Y.ToString();
+        //  newRow[5] = ColorMeasuredXYZ.Z.ToString();
+        //  newRow[6] = colorMeasured.LA.ToString();
+        //  newRow[7] = colorMeasured.A.ToString();
+        //  newRow[8] = colorMeasured.B.ToString();
+        //  dt_Bg.Rows.Add(newRow);
+        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
+        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+        //  //78500 3000 phone
+        //  int temp = 0;
+        //  if (i > 9630)
+        //  {
+        //    temp = 0;
+        //    for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
+        //    {
+        //      FgNo = j;
+        //      double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
+        //      double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
+        //      double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
+
+        //      if (r < 77)//(r == 0)
+        //      {
+        //        if (g < 90)//if (g < 180 & 173 < g)
+        //        {
+        //          if (b < 110)//if (b < 169 & 150 < b)
+        //          {
+        //            temp++;
+        //          }
+        //        }
+
+        //      }
+        //    }
+        //  }
+
+        //  if (temp > 15)
+        //  {
+        //    newRow[9] = BgNo.ToString();
+        //    BgNo++;
+        //    FgNo = 0;
+        //    break;
+        //  }
+
+        //}
+
+        // //bg6
+        //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+        //{
+        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(83, 83, 83));
 
         //}));
         //for (int i = 0; i < loopvalue; i++)
@@ -7719,11 +7720,11 @@ namespace STColorPerception
         //      double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
         //      double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-        //      if (r < 115)//(r == 0)
+        //      if (r < 50)//(r == 0)
         //      {
-        //        if (g < 65)//if (g < 180 & 173 < g)
+        //        if (g < 74)//if (g < 180 & 173 < g)
         //        {
-        //          if (b < 94)//if (b < 169 & 150 < b)
+        //          if (b < 99)//if (b < 169 & 150 < b)
         //          {
         //            temp++;
         //          }
@@ -7743,72 +7744,72 @@ namespace STColorPerception
 
         //}
 
-        ////bg7
-        //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-        //{
-        //  rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(238, 200, 27));
+        //bg7
+        Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+        {
+          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(50, 49, 50));
 
-        //}));
-        
-        //for (int i = 0; i < loopvalue; i++)
-        //{
+        }));
 
-        //  if (stop == 1)
-        //  {
-        //    stop = 0;
-        //    break;
-        //  }
-        //  DisplayMeasuredValuesFromCs200();
-        //  newRow = dt_Bg.NewRow();
+        for (int i = 0; i < loopvalue; i++)
+        {
 
-        //  newRow[0] = MR.ToString();
-        //  newRow[1] = MG.ToString();
-        //  newRow[2] = MB.ToString();
-        //  newRow[3] = ColorMeasuredXYZ.X.ToString();
-        //  newRow[4] = ColorMeasuredXYZ.Y.ToString();
-        //  newRow[5] = ColorMeasuredXYZ.Z.ToString();
-        //  newRow[6] = colorMeasured.LA.ToString();
-        //  newRow[7] = colorMeasured.A.ToString();
-        //  newRow[8] = colorMeasured.B.ToString();
-        //  dt_Bg.Rows.Add(newRow);
-        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
-        //  //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+          if (stop == 1)
+          {
+            stop = 0;
+            break;
+          }
+          DisplayMeasuredValuesFromCs200();
+          newRow = dt_Bg.NewRow();
 
-        //  //78500 3000 phone
-        //  int temp = 0;
-        //  if (i > 9630)
-        //  {
-        //    temp = 0;
-        //    for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
-        //    {
-        //      FgNo = j;
-        //      double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
-        //      double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
-        //      double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
+          newRow[0] = MR.ToString();
+          newRow[1] = MG.ToString();
+          newRow[2] = MB.ToString();
+          newRow[3] = ColorMeasuredXYZ.X.ToString();
+          newRow[4] = ColorMeasuredXYZ.Y.ToString();
+          newRow[5] = ColorMeasuredXYZ.Z.ToString();
+          newRow[6] = colorMeasured.LA.ToString();
+          newRow[7] = colorMeasured.A.ToString();
+          newRow[8] = colorMeasured.B.ToString();
+          dt_Bg.Rows.Add(newRow);
+          //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
+          //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-        //      if (r < 151)//(r == 0)
-        //      {
-        //        if (g < 133)//if (g < 180 & 173 < g)
-        //        {
-        //          if (b < 86)//if (b < 169 & 150 < b)
-        //          {
-        //            temp++;
-        //          }
-        //        }
+          //78500 3000 phone
+          int temp = 0;
+          if (i > 9630)
+          {
+            temp = 0;
+            for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
+            {
+              FgNo = j;
+              double r = Convert.ToDouble(dt_Bg.Rows[j][0].ToString());
+              double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
+              double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-        //      }
-        //    }
-        //  }
+              if (r < 10)//(r == 0)
+              {
+                if (g < 67)//if (g < 180 & 173 < g)
+                {
+                  if (b < 92)//if (b < 169 & 150 < b)
+                  {
+                    temp++;
+                  }
+                }
 
-        //  if (temp > 15)
-        //  {
-        //    newRow[9] = BgNo.ToString();
-        //    BgNo++;
-        //    FgNo = 0;
-        //    break;
-        //  }
+              }
+            }
+          }
 
-        //}
+          if (temp > 15)
+          {
+            newRow[9] = BgNo.ToString();
+            BgNo++;
+            FgNo = 0;
+            break;
+          }
+
+        }
 
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = dt_Bg.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));

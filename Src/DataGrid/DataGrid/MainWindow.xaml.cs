@@ -69,7 +69,6 @@ namespace DataGrid
 
       foreach (DataRow dr in bin.Rows)
       {
-
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //CAT LAB caluclation
 
@@ -198,7 +197,7 @@ namespace DataGrid
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\16bg_fg200.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\14bg_600.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -241,9 +240,10 @@ namespace DataGrid
         newRow = binTable.NewRow();
 
 
-        if (R >= 224 & G >= 197 & B >= 153)
+        //if (R >= 224 & G >= 197 & B >= 153)
         // if (R < 10 & G <= 60 & B <= 89)
-        // if (R < 75 & G <= 90 & B <= 100)
+        // if (R <=70 & G <= 95 & B <= 123)
+        if (R <= 45 & G <= 110 & B <= 97)
         {
           newRow[0] = 0;
           newRow[1] = 0;
@@ -258,9 +258,9 @@ namespace DataGrid
         }
         else
         {
-          if (Rt >= 224 & Gt >= 197 & Bt >= 153)
+          //if (Rt >= 224 & Gt >= 197 & Bt >= 153)
           //if (Rt < 10 & Gt <= 60 & Bt <= 89)
-          //if (Rt < 75 & Gt <= 90 & Bt <= 100)
+          if (Rt <=45 & Gt <= 110 & Bt <= 97)
           {
             newRow[0] = 0;
             newRow[1] = 0;
@@ -294,8 +294,8 @@ namespace DataGrid
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       //zero elimination
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // //zero elimination
       bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
       PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
@@ -817,14 +817,9 @@ namespace DataGrid
       btn_ExportGrid.IsEnabled = true;
 
     }
-
-
+    
     }
-
-
-
-
-
+  
 
   }
 
