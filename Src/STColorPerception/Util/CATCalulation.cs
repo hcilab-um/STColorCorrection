@@ -457,6 +457,9 @@ namespace STColorPerception.Util
           }
           return BinNUmber;
         }
+    
+      
+      
       public static double HueAngle(PerceptionLib.Color colorToShow)
       {
        double value1 = colorToShow.B / colorToShow.A;
