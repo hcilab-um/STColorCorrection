@@ -1291,6 +1291,31 @@
             </remarks>
             <exception cref="T:System.InvalidOperationException">Attempting to modify the configuration, while parsing.</exception>
         </member>
+        <member name="T:GenericParsing.ParserState">
+            <summary>
+            The current internal state of the parser.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.NoDataSource">
+            <summary>
+              Indicates that the parser has no datasource and is not properly setup.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Ready">
+            <summary>
+              Indicates that the parser is ready to begin parsing.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Parsing">
+            <summary>
+              Indicates that the parser is currently parsing the datasource.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Finished">
+            <summary>
+              Indicates that the parser has finished parsing the datasource.
+            </summary>
+        </member>
         <member name="T:GenericParsing.ParsingException">
             <summary>
               <see cref="T:GenericParsing.ParsingException"/> is an exception class meant for states where
@@ -1349,31 +1374,6 @@
         <member name="P:GenericParsing.ParsingException.ColumnNumber">
             <summary>
               The column number in the file that the exception was thrown at.
-            </summary>
-        </member>
-        <member name="T:GenericParsing.ParserState">
-            <summary>
-            The current internal state of the parser.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.NoDataSource">
-            <summary>
-              Indicates that the parser has no datasource and is not properly setup.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Ready">
-            <summary>
-              Indicates that the parser is ready to begin parsing.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Parsing">
-            <summary>
-              Indicates that the parser is currently parsing the datasource.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Finished">
-            <summary>
-              Indicates that the parser has finished parsing the datasource.
             </summary>
         </member>
         <member name="T:GenericParsing.FieldType">
