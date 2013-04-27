@@ -3878,8 +3878,8 @@ namespace STColorPerception
 
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color88ForPhone.txt");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\colorForPhone.txt");
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bin8000.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bgcolor.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bin8000.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bgcolor.csv");
       dtgrid_corrDisplay.IsEnabled = false;
       
       //Thread.Sleep(16500);
@@ -7747,8 +7747,7 @@ namespace STColorPerception
         //bg7
         Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
         {
-          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(50, 49, 50));
-
+          rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(72, 91, 165));
         }));
 
         for (int i = 0; i < loopvalue; i++)
@@ -7778,6 +7777,7 @@ namespace STColorPerception
           //78500 3000 phone
           int temp = 0;
           if (i > 9630)
+          //if (i > 3060)
           {
             temp = 0;
             for (int j = dt_Bg.Rows.Count - 20; j < dt_Bg.Rows.Count; j++)
@@ -7787,11 +7787,11 @@ namespace STColorPerception
               double g = Convert.ToDouble(dt_Bg.Rows[j][1].ToString());
               double b = Convert.ToDouble(dt_Bg.Rows[j][2].ToString());
 
-              if (r < 10)//(r == 0)
+              if (r < 40)//(r == 0)
               {
-                if (g < 67)//if (g < 180 & 173 < g)
+                if (g < 80)//if (g < 180 & 173 < g)
                 {
-                  if (b < 92)//if (b < 169 & 150 < b)
+                  if (b < 128)//if (b < 169 & 150 < b)
                   {
                     temp++;
                   }
