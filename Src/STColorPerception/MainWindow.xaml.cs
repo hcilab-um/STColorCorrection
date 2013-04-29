@@ -3878,8 +3878,9 @@ namespace STColorPerception
 
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color88ForPhone.txt");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\colorForPhone.txt");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bin8000.csv");
+     // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bin8000.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\bgcolor.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\binforL.csv");
       dtgrid_corrDisplay.IsEnabled = false;
       
       //Thread.Sleep(16500);

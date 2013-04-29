@@ -197,8 +197,8 @@ namespace DataGrid
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\8bg_fg200new.csv");
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\data to go in phone\New folder\4bg_td0.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\New folder\bg8_600new0.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\data to go in phone\New folder\10bg_td0.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -218,94 +218,94 @@ namespace DataGrid
 
       DataRow newRow;
 
-      for (int i = 0; i < bin.Rows.Count; i++)
-      {
-        byte Rt = 0;
+      //for (int i = 0; i < bin.Rows.Count; i++)
+      //{
+      //  byte Rt = 0;
 
-        byte Gt = 0;
+      //  byte Gt = 0;
 
-        byte Bt = 0;
-
-
-        if (i > 0)
-        {
-          Rt = Convert.ToByte(bin.Rows[i - 1][0].ToString());
-          Gt = Convert.ToByte(bin.Rows[i - 1][1].ToString());
-          Bt = Convert.ToByte(bin.Rows[i - 1][2].ToString());
-
-        }
-        byte R = Convert.ToByte(bin.Rows[i][0].ToString());
-        byte G = Convert.ToByte(bin.Rows[i][1].ToString());
-        byte B = Convert.ToByte(bin.Rows[i][2].ToString());
-
-        newRow = binTable.NewRow();
+      //  byte Bt = 0;
 
 
-        if (R >= 150 & G >= 150 & B >= 150)
+      //  if (i > 0)
+      //  {
+      //    Rt = Convert.ToByte(bin.Rows[i - 1][0].ToString());
+      //    Gt = Convert.ToByte(bin.Rows[i - 1][1].ToString());
+      //    Bt = Convert.ToByte(bin.Rows[i - 1][2].ToString());
 
-        //if (R <= 40 & G <= 83 & B <= 129)
-        {
-          newRow[0] = 0;
-          newRow[1] = 0;
-          newRow[2] = 0;
-          newRow[3] = 0;
-          newRow[4] = 0;
-          newRow[5] = 0;
-          newRow[6] = 0;
-          newRow[7] = 0;
-          newRow[8] = 0;
+      //  }
+      //  byte R = Convert.ToByte(bin.Rows[i][0].ToString());
+      //  byte G = Convert.ToByte(bin.Rows[i][1].ToString());
+      //  byte B = Convert.ToByte(bin.Rows[i][2].ToString());
 
-        }
-        else
-        {
-           if (Rt >= 150 & Gt >= 150 & Bt >= 150)
-          // if (Rt < 10 & Gt <= 60 & Bt <= 89)
-          //if (Rt <= 40 & Gt <= 83 & Bt <= 129)
-          {
-            newRow[0] = 0;
-            newRow[1] = 0;
-            newRow[2] = 0;
-            newRow[3] = 0;
-            newRow[4] = 0;
-            newRow[5] = 0;
-            newRow[6] = 0;
-            newRow[7] = 0;
-            newRow[8] = 0;
+      //  newRow = binTable.NewRow();
 
-          }
 
-          else
-          {
-            newRow[0] = bin.Rows[i][0].ToString();
-            newRow[1] = bin.Rows[i][1].ToString();
-            newRow[2] = bin.Rows[i][2].ToString();
-            newRow[3] = bin.Rows[i][3].ToString();
-            newRow[4] = bin.Rows[i][4].ToString();
-            newRow[5] = bin.Rows[i][5].ToString();
-            newRow[6] = bin.Rows[i][6].ToString();
-            newRow[7] = bin.Rows[i][7].ToString();
-            newRow[8] = bin.Rows[i][8].ToString();
+      //  //if (R >= 150 & G >= 150 & B >= 150)
 
-          }
-        }
-        binTable.Rows.Add(newRow);
-      }
+      //  if (R <= 72 & G <= 71 & B <= 93)
+      //  {
+      //    newRow[0] = 0;
+      //    newRow[1] = 0;
+      //    newRow[2] = 0;
+      //    newRow[3] = 0;
+      //    newRow[4] = 0;
+      //    newRow[5] = 0;
+      //    newRow[6] = 0;
+      //    newRow[7] = 0;
+      //    newRow[8] = 0;
 
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      //  }
+      //  else
+      //  {
+      //    //if (Rt >= 150 & Gt >= 150 & Bt >= 150)
+      //    // if (Rt < 10 & Gt <= 60 & Bt <= 89)
+      //    if (Rt <= 72 & Gt <= 71 & Bt <= 93)
+      //    {
+      //      newRow[0] = 0;
+      //      newRow[1] = 0;
+      //      newRow[2] = 0;
+      //      newRow[3] = 0;
+      //      newRow[4] = 0;
+      //      newRow[5] = 0;
+      //      newRow[6] = 0;
+      //      newRow[7] = 0;
+      //      newRow[8] = 0;
 
-      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //    }
 
-      bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+      //    else
+      //    {
+      //      newRow[0] = bin.Rows[i][0].ToString();
+      //      newRow[1] = bin.Rows[i][1].ToString();
+      //      newRow[2] = bin.Rows[i][2].ToString();
+      //      newRow[3] = bin.Rows[i][3].ToString();
+      //      newRow[4] = bin.Rows[i][4].ToString();
+      //      newRow[5] = bin.Rows[i][5].ToString();
+      //      newRow[6] = bin.Rows[i][6].ToString();
+      //      newRow[7] = bin.Rows[i][7].ToString();
+      //      newRow[8] = bin.Rows[i][8].ToString();
 
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
-      binTable = new DataTable();
-      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
-      {
-        dtgrid_corrDisplay.Items.Refresh();
-        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+      //    }
+      //  }
+      //  binTable.Rows.Add(newRow);
+      //}
 
-      }));
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      //bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Phone_Bin_wt0.csv");
+      //binTable = new DataTable();
+      //Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      //{
+      //  dtgrid_corrDisplay.Items.Refresh();
+      //  binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      //}));
 
       for (int i = 1; i < bin.Rows.Count; i++)
       {
@@ -402,7 +402,8 @@ namespace DataGrid
     {
       // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\small pro cat mixture\SmallPro800.csv");
      // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\PhonePredcition800_diff200.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_HEX.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_HEX.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone data pewdiction data 800\Bg8new.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -489,254 +490,254 @@ namespace DataGrid
       {
         //i++;
 
-        //DBg.X = Convert.ToDouble(dr["BX"].ToString());
-        //DBg.Y = Convert.ToDouble(dr["BY"].ToString());
-        //DBg.Z = Convert.ToDouble(dr["BZ"].ToString());
+        DBg.X = Convert.ToDouble(dr["BX"].ToString());
+        DBg.Y = Convert.ToDouble(dr["BY"].ToString());
+        DBg.Z = Convert.ToDouble(dr["BZ"].ToString());
 
-        //TDBg.X = Convert.ToDouble(dr["BMX"].ToString());
-        //TDBg.Y = Convert.ToDouble(dr["BMY"].ToString());
-        //TDBg.Z = Convert.ToDouble(dr["BMZ"].ToString());
+        TDBg.X = Convert.ToDouble(dr["BMX"].ToString());
+        TDBg.Y = Convert.ToDouble(dr["BMY"].ToString());
+        TDBg.Z = Convert.ToDouble(dr["BMZ"].ToString());
 
-        ////bin fg
-        //BinXYZ.X = Convert.ToDouble(dr["BinX"].ToString());
-        //BinXYZ.Y = Convert.ToDouble(dr["BinY"].ToString());
-        //BinXYZ.Z = Convert.ToDouble(dr["BinZ"].ToString());
+        //bin fg
+        BinXYZ.X = Convert.ToDouble(dr["BinX"].ToString());
+        BinXYZ.Y = Convert.ToDouble(dr["BinY"].ToString());
+        BinXYZ.Z = Convert.ToDouble(dr["BinZ"].ToString());
 
-        //Bin = PerceptionLib.Color.ToLAB(BinXYZ, screenWt);
-        //dr["BP_Fg_L"] = Bin.LA.ToString();
-        //dr["BP_Fg_a"] = Bin.A.ToString();
-        //dr["BP_Fg_b"] = Bin.B.ToString();
+        Bin = PerceptionLib.Color.ToLAB(BinXYZ, screenWt);
+        dr["BP_Fg_L"] = Bin.LA.ToString();
+        dr["BP_Fg_a"] = Bin.A.ToString();
+        dr["BP_Fg_b"] = Bin.B.ToString();
 
-        //ab = PerceptionLib.Color.ToRBGFromLAB(Bin);
-        //String Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["BP_Fg_RRGGBB"] = "0x" + Hex;
+        ab = PerceptionLib.Color.ToRBGFromLAB(Bin);
+        String Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["BP_Fg_RRGGBB"] = "0x" + Hex;
 
-        ////pure
+        //pure
 
 
-        //AXYZ.X = Convert.ToDouble(dr["X"].ToString());
-        //AXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
-        //AXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
+        AXYZ.X = Convert.ToDouble(dr["X"].ToString());
+        AXYZ.Y = Convert.ToDouble(dr["Y"].ToString());
+        AXYZ.Z = Convert.ToDouble(dr["Z"].ToString());
 
         Acolor.LA = Convert.ToDouble(dr["Fg_L"].ToString());
         Acolor.A = Convert.ToDouble(dr["Fg_A"].ToString());
         Acolor.B = Convert.ToDouble(dr["Fg_B"].ToString());
         
         ab = PerceptionLib.Color.ToRBGFromLAB(Acolor);
-        string Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+         Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
         dr["Fg_RRGGBB"] = "0x" + Hex;
 
-        //cat
-        //BradXYZ.X = Convert.ToDouble(dr["BradX"].ToString());
-        //BradXYZ.Y = Convert.ToDouble(dr["BradY"].ToString());
-        //BradXYZ.Z = Convert.ToDouble(dr["BradZ"].ToString());
-
-        //Brad = PerceptionLib.Color.ToLAB(BradXYZ, screenWt);
-        //dr["CAT1_Fg_L"] = Brad.LA.ToString();
-        //dr["CAT1_Fg_a"] = Brad.A.ToString();
-        //dr["CAT1_Fg_b"] = Brad.B.ToString();
-
-        //ab = PerceptionLib.Color.ToRBGFromLAB(Brad);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT1_Fg_RRGGBB"] = "0x" + Hex;
-
-        //VonXYZ.X = Convert.ToDouble(dr["VonX"].ToString());
-        //VonXYZ.Y = Convert.ToDouble(dr["VonY"].ToString());
-        //VonXYZ.Z = Convert.ToDouble(dr["VonZ"].ToString());
-
-        //Von = PerceptionLib.Color.ToLAB(VonXYZ, screenWt);
-        //dr["CAT2_Fg_L"] = Von.LA.ToString();
-        //dr["CAT2_Fg_a"] = Von.A.ToString();
-        //dr["CAT2_Fg_b"] = Von.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(Von);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT2_Fg_RRGGBB"] = "0x" + Hex;
-
-        //ScalXYZ.X = Convert.ToDouble(dr["ScalX"].ToString());
-        //ScalXYZ.Y = Convert.ToDouble(dr["ScalY"].ToString());
-        //ScalXYZ.Z = Convert.ToDouble(dr["ScalZ"].ToString());
-
-        //Scal = PerceptionLib.Color.ToLAB(ScalXYZ, screenWt);
-        //dr["CAT3_Fg_L"] = Scal.LA.ToString();
-        //dr["CAT3_Fg_a"] = Scal.A.ToString();
-        //dr["CAT3_Fg_b"] = Scal.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(Scal);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT3_Fg_RRGGBB"] = "0x" + Hex;
-
-        //// color measured
-        //ColorMeasuredXYZ.X = Convert.ToDouble(dr["MX"].ToString());
-        //ColorMeasuredXYZ.Y = Convert.ToDouble(dr["MY"].ToString());
-        //ColorMeasuredXYZ.Z = Convert.ToDouble(dr["MZ"].ToString());
-        //ColorMeasured = PerceptionLib.Color.ToLAB(ColorMeasuredXYZ, screenBgWt);
-        //ColorMeasured_fordiff = PerceptionLib.Color.ToLAB(ColorMeasuredXYZ, screenWt);
         
-        //dr["Bc_L"] = ColorMeasured.LA.ToString();
-        //dr["Bc_a"] = ColorMeasured.A.ToString();
-        //dr["Bc_b"] = ColorMeasured.B.ToString();
+        BradXYZ.X = Convert.ToDouble(dr["BradX"].ToString());
+        BradXYZ.Y = Convert.ToDouble(dr["BradY"].ToString());
+        BradXYZ.Z = Convert.ToDouble(dr["BradZ"].ToString());
 
-        //ab = PerceptionLib.Color.ToRBGFromLAB(ColorMeasured);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["Bc_RRGGBB"] = "0x" + Hex;
+        Brad = PerceptionLib.Color.ToLAB(BradXYZ, screenWt);
+        dr["CAT1_Fg_L"] = Brad.LA.ToString();
+        dr["CAT1_Fg_a"] = Brad.A.ToString();
+        dr["CAT1_Fg_b"] = Brad.B.ToString();
+
+        ab = PerceptionLib.Color.ToRBGFromLAB(Brad);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT1_Fg_RRGGBB"] = "0x" + Hex;
+
+        VonXYZ.X = Convert.ToDouble(dr["VonX"].ToString());
+        VonXYZ.Y = Convert.ToDouble(dr["VonY"].ToString());
+        VonXYZ.Z = Convert.ToDouble(dr["VonZ"].ToString());
+
+        Von = PerceptionLib.Color.ToLAB(VonXYZ, screenWt);
+        dr["CAT2_Fg_L"] = Von.LA.ToString();
+        dr["CAT2_Fg_a"] = Von.A.ToString();
+        dr["CAT2_Fg_b"] = Von.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(Von);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT2_Fg_RRGGBB"] = "0x" + Hex;
+
+        ScalXYZ.X = Convert.ToDouble(dr["ScalX"].ToString());
+        ScalXYZ.Y = Convert.ToDouble(dr["ScalY"].ToString());
+        ScalXYZ.Z = Convert.ToDouble(dr["ScalZ"].ToString());
+
+        Scal = PerceptionLib.Color.ToLAB(ScalXYZ, screenWt);
+        dr["CAT3_Fg_L"] = Scal.LA.ToString();
+        dr["CAT3_Fg_a"] = Scal.A.ToString();
+        dr["CAT3_Fg_b"] = Scal.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(Scal);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT3_Fg_RRGGBB"] = "0x" + Hex;
+
+        // color measured
+        ColorMeasuredXYZ.X = Convert.ToDouble(dr["MX"].ToString());
+        ColorMeasuredXYZ.Y = Convert.ToDouble(dr["MY"].ToString());
+        ColorMeasuredXYZ.Z = Convert.ToDouble(dr["MZ"].ToString());
+        ColorMeasured = PerceptionLib.Color.ToLAB(ColorMeasuredXYZ, screenBgWt);
+        ColorMeasured_fordiff = PerceptionLib.Color.ToLAB(ColorMeasuredXYZ, screenWt);
+        
+        dr["Bc_L"] = ColorMeasured.LA.ToString();
+        dr["Bc_a"] = ColorMeasured.A.ToString();
+        dr["Bc_b"] = ColorMeasured.B.ToString();
+
+        ab = PerceptionLib.Color.ToRBGFromLAB(ColorMeasured);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["Bc_RRGGBB"] = "0x" + Hex;
 
 
-        ////aCOLOR
+        //aCOLOR
 
-        //TDAXYZ.X = AXYZ.X + TDBg.X;
-        //TDAXYZ.Y = AXYZ.Y + TDBg.Y;
-        //TDAXYZ.Z = AXYZ.Z + TDBg.Z;
+        TDAXYZ.X = AXYZ.X + TDBg.X;
+        TDAXYZ.Y = AXYZ.Y + TDBg.Y;
+        TDAXYZ.Z = AXYZ.Z + TDBg.Z;
 
-        //TDAcolor = PerceptionLib.Color.ToLAB(TDAXYZ, screenBgWt);
-        //dr["P_Bc_TD_L"] = TDAcolor.LA.ToString();
-        //dr["P_Bc_TD_a"] = TDAcolor.A.ToString();
-        //dr["P_Bc_TD_b"] = TDAcolor.B.ToString();
+        TDAcolor = PerceptionLib.Color.ToLAB(TDAXYZ, screenBgWt);
+        dr["P_Bc_TD_L"] = TDAcolor.LA.ToString();
+        dr["P_Bc_TD_a"] = TDAcolor.A.ToString();
+        dr["P_Bc_TD_b"] = TDAcolor.B.ToString();
 
-        //ab = PerceptionLib.Color.ToRBGFromLAB(TDAcolor);
-        // Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        // dr["P_Bc_TD_RRGGBB"] = "0x" + Hex;
+        ab = PerceptionLib.Color.ToRBGFromLAB(TDAcolor);
+         Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+         dr["P_Bc_TD_RRGGBB"] = "0x" + Hex;
 
-        //DAXYZ.X = AXYZ.X + DBg.X;
-        //DAXYZ.Y = AXYZ.Y + DBg.Y;
-        //DAXYZ.Z = AXYZ.Z + DBg.Z;
+        DAXYZ.X = AXYZ.X + DBg.X;
+        DAXYZ.Y = AXYZ.Y + DBg.Y;
+        DAXYZ.Z = AXYZ.Z + DBg.Z;
 
-        //DAcolor = PerceptionLib.Color.ToLAB(DAXYZ, screenBgWt);
-        //dr["P_Bc_ND_L"] = DAcolor.LA.ToString();
-        //dr["P_Bc_ND_a"] = DAcolor.A.ToString();
-        //dr["P_Bc_ND_b"] = DAcolor.B.ToString();
+        DAcolor = PerceptionLib.Color.ToLAB(DAXYZ, screenBgWt);
+        dr["P_Bc_ND_L"] = DAcolor.LA.ToString();
+        dr["P_Bc_ND_a"] = DAcolor.A.ToString();
+        dr["P_Bc_ND_b"] = DAcolor.B.ToString();
 
-        //ab = PerceptionLib.Color.ToRBGFromLAB(DAcolor);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["P_Bc_ND_RRGGBB"] = "0x" + Hex;
+        ab = PerceptionLib.Color.ToRBGFromLAB(DAcolor);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["P_Bc_ND_RRGGBB"] = "0x" + Hex;
         
         
 
-        ////brad
+        //brad
 
-        //TDBradXYZ.X = BradXYZ.X + TDBg.X;
-        //TDBradXYZ.Y = BradXYZ.Y + TDBg.Y;
-        //TDBradXYZ.Z = BradXYZ.Z + TDBg.Z;
+        TDBradXYZ.X = BradXYZ.X + TDBg.X;
+        TDBradXYZ.Y = BradXYZ.Y + TDBg.Y;
+        TDBradXYZ.Z = BradXYZ.Z + TDBg.Z;
 
-        //TDBrad = PerceptionLib.Color.ToLAB(TDBradXYZ, screenBgWt);
-        //dr["CAT1_P_Bc_TD_L"] = TDBrad.LA.ToString();
-        //dr["CAT1_P_Bc_TD_a"] = TDBrad.A.ToString();
-        //dr["CAT1_P_Bc_TD_b"] = TDBrad.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(TDBrad);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT1_P_Bc_TD_RRGGBB"] = "0x" + Hex;
-
-
-        //DBradXYZ.X = BradXYZ.X + DBg.X;
-        //DBradXYZ.Y = BradXYZ.Y + DBg.Y;
-        //DBradXYZ.Z = BradXYZ.Z + DBg.Z;
-
-        //DBrad = PerceptionLib.Color.ToLAB(DBradXYZ, screenBgWt);
-        //dr["CAT1_P_Bc_ND_L"] = DBrad.LA.ToString();
-        //dr["CAT1_P_Bc_ND_a"] = DBrad.A.ToString();
-        //dr["CAT1_P_Bc_ND_b"] = DBrad.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(DBrad);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT1_P_Bc_ND_RRGGBB"] = "0x" + Hex;
+        TDBrad = PerceptionLib.Color.ToLAB(TDBradXYZ, screenBgWt);
+        dr["CAT1_P_Bc_TD_L"] = TDBrad.LA.ToString();
+        dr["CAT1_P_Bc_TD_a"] = TDBrad.A.ToString();
+        dr["CAT1_P_Bc_TD_b"] = TDBrad.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(TDBrad);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT1_P_Bc_TD_RRGGBB"] = "0x" + Hex;
 
 
-        ////von
-        //TDVonXYZ.X = VonXYZ.X + TDBg.X;
-        //TDVonXYZ.Y = VonXYZ.Y + TDBg.Y;
-        //TDVonXYZ.Z = VonXYZ.Z + TDBg.Z;
+        DBradXYZ.X = BradXYZ.X + DBg.X;
+        DBradXYZ.Y = BradXYZ.Y + DBg.Y;
+        DBradXYZ.Z = BradXYZ.Z + DBg.Z;
 
-        //TDVon = PerceptionLib.Color.ToLAB(TDVonXYZ, screenBgWt);
-        //dr["CAT2_P_Bc_TD_L"] = TDVon.LA.ToString();
-        //dr["CAT2_P_Bc_TD_a"] = TDVon.A.ToString();
-        //dr["CAT2_P_Bc_TD_b"] = TDVon.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(TDVon);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT2_P_Bc_TD_RRGGBB"] = "0x" + Hex;
-
-        //DVonXYZ.X = VonXYZ.X + DBg.X;
-        //DVonXYZ.Y = VonXYZ.Y + DBg.Y;
-        //DVonXYZ.Z = VonXYZ.Z + DBg.Z;
-
-        //DVon = PerceptionLib.Color.ToLAB(DVonXYZ, screenBgWt);
-        //dr["CAT2_P_Bc_ND_L"] = DVon.LA.ToString();
-        //dr["CAT2_P_Bc_ND_a"] = DVon.A.ToString();
-        //dr["CAT2_P_Bc_ND_b"] = DVon.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(DVon);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT2_P_Bc_ND_RRGGBB"] = "0x" + Hex;
-
-        //// scal
-
-        //TDScalXYZ.X = ScalXYZ.X + TDBg.X;
-        //TDScalXYZ.Y = ScalXYZ.Y + TDBg.Y;
-        //TDScalXYZ.Z = ScalXYZ.Z + TDBg.Z;
-
-        //TDScal = PerceptionLib.Color.ToLAB(TDScalXYZ, screenBgWt);
-        //dr["CAT3_P_Bc_TD_L"] = TDScal.LA.ToString();
-        //dr["CAT3_P_Bc_TD_a"] = TDScal.A.ToString();
-        //dr["CAT3_P_Bc_TD_b"] = TDScal.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(TDScal);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT3_P_Bc_TD_RRGGBB"] = "0x" + Hex;
-
-        //DScalXYZ.X = ScalXYZ.X + DBg.X;
-        //DScalXYZ.Y = ScalXYZ.Y + DBg.Y;
-        //DScalXYZ.Z = ScalXYZ.Z + DBg.Z;
-
-        //DScal = PerceptionLib.Color.ToLAB(DScalXYZ, screenBgWt);
-        //dr["CAT3_P_Bc_ND_L"] = DScal.LA.ToString();
-        //dr["CAT3_P_Bc_ND_a"] = DScal.A.ToString();
-        //dr["CAT3_P_Bc_ND_b"] = DScal.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(DScal);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["CAT3_P_Bc_ND_RRGGBB"] = "0x" + Hex;
+        DBrad = PerceptionLib.Color.ToLAB(DBradXYZ, screenBgWt);
+        dr["CAT1_P_Bc_ND_L"] = DBrad.LA.ToString();
+        dr["CAT1_P_Bc_ND_a"] = DBrad.A.ToString();
+        dr["CAT1_P_Bc_ND_b"] = DBrad.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(DBrad);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT1_P_Bc_ND_RRGGBB"] = "0x" + Hex;
 
 
-        ////bin
-        //TDBinXYZ.X = BinXYZ.X + TDBg.X;
-        //TDBinXYZ.Y = BinXYZ.Y + TDBg.Y;
-        //TDBinXYZ.Z = BinXYZ.Z + TDBg.Z;
+        //von
+        TDVonXYZ.X = VonXYZ.X + TDBg.X;
+        TDVonXYZ.Y = VonXYZ.Y + TDBg.Y;
+        TDVonXYZ.Z = VonXYZ.Z + TDBg.Z;
 
-        //TDBin = PerceptionLib.Color.ToLAB(TDBinXYZ, screenBgWt);
-        //dr["BP_P_Bc_TD_L"] = TDBin.LA.ToString();
-        //dr["BP_P_Bc_TD_a"] = TDBin.A.ToString();
-        //dr["BP_P_Bc_TD_b"] = TDBin.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(TDBin);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["BP_P_Bc_TD_RRGGBB"] = "0x" + Hex;
+        TDVon = PerceptionLib.Color.ToLAB(TDVonXYZ, screenBgWt);
+        dr["CAT2_P_Bc_TD_L"] = TDVon.LA.ToString();
+        dr["CAT2_P_Bc_TD_a"] = TDVon.A.ToString();
+        dr["CAT2_P_Bc_TD_b"] = TDVon.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(TDVon);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT2_P_Bc_TD_RRGGBB"] = "0x" + Hex;
 
-        //DBinXYZ.X = BinXYZ.X + DBg.X;
-        //DBinXYZ.Y = BinXYZ.Y + DBg.Y;
-        //DBinXYZ.Z = BinXYZ.Z + DBg.Z;
+        DVonXYZ.X = VonXYZ.X + DBg.X;
+        DVonXYZ.Y = VonXYZ.Y + DBg.Y;
+        DVonXYZ.Z = VonXYZ.Z + DBg.Z;
 
-        //DBin = PerceptionLib.Color.ToLAB(DBinXYZ, screenBgWt);
-        //dr["BP_P_Bc_ND_L"] = DBin.LA.ToString();
-        //dr["BP_P_Bc_ND_a"] = DBin.A.ToString();
-        //dr["BP_P_Bc_ND_b"] = DBin.B.ToString();
-        //ab = PerceptionLib.Color.ToRBGFromLAB(DBin);
-        //Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
-        //dr["BP_P_Bc_ND_RRGGBB"] = "0x" + Hex;
+        DVon = PerceptionLib.Color.ToLAB(DVonXYZ, screenBgWt);
+        dr["CAT2_P_Bc_ND_L"] = DVon.LA.ToString();
+        dr["CAT2_P_Bc_ND_a"] = DVon.A.ToString();
+        dr["CAT2_P_Bc_ND_b"] = DVon.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(DVon);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT2_P_Bc_ND_RRGGBB"] = "0x" + Hex;
+
+        // scal
+
+        TDScalXYZ.X = ScalXYZ.X + TDBg.X;
+        TDScalXYZ.Y = ScalXYZ.Y + TDBg.Y;
+        TDScalXYZ.Z = ScalXYZ.Z + TDBg.Z;
+
+        TDScal = PerceptionLib.Color.ToLAB(TDScalXYZ, screenBgWt);
+        dr["CAT3_P_Bc_TD_L"] = TDScal.LA.ToString();
+        dr["CAT3_P_Bc_TD_a"] = TDScal.A.ToString();
+        dr["CAT3_P_Bc_TD_b"] = TDScal.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(TDScal);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT3_P_Bc_TD_RRGGBB"] = "0x" + Hex;
+
+        DScalXYZ.X = ScalXYZ.X + DBg.X;
+        DScalXYZ.Y = ScalXYZ.Y + DBg.Y;
+        DScalXYZ.Z = ScalXYZ.Z + DBg.Z;
+
+        DScal = PerceptionLib.Color.ToLAB(DScalXYZ, screenBgWt);
+        dr["CAT3_P_Bc_ND_L"] = DScal.LA.ToString();
+        dr["CAT3_P_Bc_ND_a"] = DScal.A.ToString();
+        dr["CAT3_P_Bc_ND_b"] = DScal.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(DScal);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["CAT3_P_Bc_ND_RRGGBB"] = "0x" + Hex;
 
 
-        //dr["Dist_DM_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(TDAcolor, ColorMeasured)).ToString();
-        //dr["Dist_DM_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(DAcolor, ColorMeasured)).ToString();
+        //bin
+        TDBinXYZ.X = BinXYZ.X + TDBg.X;
+        TDBinXYZ.Y = BinXYZ.Y + TDBg.Y;
+        TDBinXYZ.Z = BinXYZ.Z + TDBg.Z;
 
-        //dr["Dist_CAT1_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDBrad)).ToString();
-        //dr["Dist_CAT1_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DBrad)).ToString();
+        TDBin = PerceptionLib.Color.ToLAB(TDBinXYZ, screenBgWt);
+        dr["BP_P_Bc_TD_L"] = TDBin.LA.ToString();
+        dr["BP_P_Bc_TD_a"] = TDBin.A.ToString();
+        dr["BP_P_Bc_TD_b"] = TDBin.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(TDBin);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["BP_P_Bc_TD_RRGGBB"] = "0x" + Hex;
 
-        //dr["Dist_CAT2_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDVon)).ToString();
-        //dr["Dist_CAT2_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DVon)).ToString();
+        DBinXYZ.X = BinXYZ.X + DBg.X;
+        DBinXYZ.Y = BinXYZ.Y + DBg.Y;
+        DBinXYZ.Z = BinXYZ.Z + DBg.Z;
 
-        //dr["Dist_CAT3_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDScal)).ToString();
-        //dr["Dist_CAT3_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DScal)).ToString();
+        DBin = PerceptionLib.Color.ToLAB(DBinXYZ, screenBgWt);
+        dr["BP_P_Bc_ND_L"] = DBin.LA.ToString();
+        dr["BP_P_Bc_ND_a"] = DBin.A.ToString();
+        dr["BP_P_Bc_ND_b"] = DBin.B.ToString();
+        ab = PerceptionLib.Color.ToRBGFromLAB(DBin);
+        Hex = PerceptionLib.Color.RGBtoHEX(ab.R, ab.G, ab.B);
+        dr["BP_P_Bc_ND_RRGGBB"] = "0x" + Hex;
 
 
-        //dr["Dist_BP_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(TDBin, ColorMeasured)).ToString();
-        //dr["Dist_BP_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(DBin, ColorMeasured)).ToString();
+        dr["Dist_DM_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(TDAcolor, ColorMeasured)).ToString();
+        dr["Dist_DM_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(DAcolor, ColorMeasured)).ToString();
 
-        //dr["Dist_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Acolor)).ToString();
-        //dr["Dist_CAT1_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Brad)).ToString();
-        //dr["Dist_CAT2_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Von)).ToString();
-        //dr["Dist_CAT3_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Scal)).ToString();
-        //dr["Dist_BP_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Bin)).ToString();
+        dr["Dist_CAT1_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDBrad)).ToString();
+        dr["Dist_CAT1_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DBrad)).ToString();
+
+        dr["Dist_CAT2_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDVon)).ToString();
+        dr["Dist_CAT2_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DVon)).ToString();
+
+        dr["Dist_CAT3_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, TDScal)).ToString();
+        dr["Dist_CAT3_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured, DScal)).ToString();
+
+
+        dr["Dist_BP_P_TD"] = (PerceptionLib.Color.ColorDistanceCalAB(TDBin, ColorMeasured)).ToString();
+        dr["Dist_BP_P_ND"] = (PerceptionLib.Color.ColorDistanceCalAB(DBin, ColorMeasured)).ToString();
+
+        dr["Dist_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Acolor)).ToString();
+        dr["Dist_CAT1_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Brad)).ToString();
+        dr["Dist_CAT2_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Von)).ToString();
+        dr["Dist_CAT3_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Scal)).ToString();
+        dr["Dist_BP_Fg"] = (PerceptionLib.Color.ColorDistanceCalAB(ColorMeasured_fordiff, Bin)).ToString();
 
 
       }
@@ -962,7 +963,7 @@ namespace DataGrid
           
           
       //FgNo = 400;
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\23bg_ip.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\6bg_ip.csv");
 
       DataTable dt_DataCollection = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
