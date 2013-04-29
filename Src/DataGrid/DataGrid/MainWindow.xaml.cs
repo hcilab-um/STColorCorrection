@@ -198,7 +198,7 @@ namespace DataGrid
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\New folder\bg8_600new0.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\data to go in phone\New folder\10bg_td0.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\data to go in phone\New folder\23bg_td0.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -243,7 +243,7 @@ namespace DataGrid
 
       //  //if (R >= 150 & G >= 150 & B >= 150)
 
-      //  if (R <= 72 & G <= 71 & B <= 93)
+      //  if (R <= 150 & G <= 155 & B <= 160)
       //  {
       //    newRow[0] = 0;
       //    newRow[1] = 0;
@@ -260,7 +260,7 @@ namespace DataGrid
       //  {
       //    //if (Rt >= 150 & Gt >= 150 & Bt >= 150)
       //    // if (Rt < 10 & Gt <= 60 & Bt <= 89)
-      //    if (Rt <= 72 & Gt <= 71 & Bt <= 93)
+      //    if (Rt <= 150 & Gt <= 155 & Bt <= 160)
       //    {
       //      newRow[0] = 0;
       //      newRow[1] = 0;
@@ -294,7 +294,7 @@ namespace DataGrid
       //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
       //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       //bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
@@ -963,7 +963,7 @@ namespace DataGrid
           
           
       //FgNo = 400;
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\6bg_ip.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\17bg_ip.csv");
 
       DataTable dt_DataCollection = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
