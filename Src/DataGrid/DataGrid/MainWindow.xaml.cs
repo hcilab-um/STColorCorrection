@@ -34,6 +34,19 @@ namespace DataGrid
       ColorToShowXYZ.Y = 0.001555845;
       ColorToShowXYZ.Z = 0.020485292;
 
+
+      ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.041177778, 0.036633333, 0.020966667);
+      PerceptionLib.CIEXYZ ColorToShowXYZ2 = new PerceptionLib.CIEXYZ(0.806205144, 0.775540661, 0.843191729);
+      PerceptionLib.CIEXYZ ColorToShowXYZ3 = new PerceptionLib.CIEXYZ(0, 0, 0);
+
+      ColorToShowXYZ3.X = ColorToShowXYZ.X + ColorToShowXYZ2.X;
+      ColorToShowXYZ3.Y = ColorToShowXYZ.Y + ColorToShowXYZ2.Y;
+      ColorToShowXYZ3.Z = ColorToShowXYZ.Z + ColorToShowXYZ2.Z;
+
+      CIEXYZ screenBgWt = new CIEXYZ(0.724775, 0.759896, 0.727336);
+      PerceptionLib.Color ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ3, screenBgWt);
+      
+
       BradXYZ = CATCalulation.bradford(ColorToShowXYZ);
 
     }
