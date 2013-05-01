@@ -210,7 +210,7 @@ namespace DataGrid
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone\mixtureGroundtruth\bg6_HEX88.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bg\nobg_88Phone.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\bincal\0pts\800_2.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\4bg_600fg.csv");
+     //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\1phone\4bg_600fg.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color compensation\phone input\data to go in phone\New folder\23bg_td0.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
@@ -416,7 +416,7 @@ namespace DataGrid
       // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\small pro cat mixture\SmallPro800.csv");
      // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\PhonePredcition800_diff200.csv");
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_HEX.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone data pewdiction data 800\Bg8new.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\PerceptionLib\bin\previous data\cs-200 data\color mixing\phone data pewdiction data 800\Bg4.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -1118,6 +1118,72 @@ namespace DataGrid
         Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
           
 
+      btn_ExportGrid.IsEnabled = true;
+
+    }
+
+   
+    private void HueDifference_Click(object sender, RoutedEventArgs e)
+    {
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_angles.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      double m,l, p, aa,am, al, ap;
+
+      PerceptionLib.Color Acolor = new PerceptionLib.Color();
+      PerceptionLib.Color Mcolor = new PerceptionLib.Color();
+      PerceptionLib.Color Lcolor = new PerceptionLib.Color();
+      PerceptionLib.Color Pcolor = new PerceptionLib.Color();
+
+      foreach (DataRow dr in bin.Rows)
+      {
+        //i++;
+
+        Acolor.LA = Convert.ToDouble(dr["AL"].ToString());
+        Acolor.A = Convert.ToDouble(dr["AA"].ToString());
+        Acolor.B = Convert.ToDouble(dr["AB"].ToString());
+
+        Mcolor.LA = Convert.ToDouble(dr["ML"].ToString());
+        Mcolor.A = Convert.ToDouble(dr["MA"].ToString());
+        Mcolor.B = Convert.ToDouble(dr["MB"].ToString());
+        
+        Lcolor.LA = Convert.ToDouble(dr["LL"].ToString());
+        Lcolor.A = Convert.ToDouble(dr["LA"].ToString());
+        Lcolor.B = Convert.ToDouble(dr["LB"].ToString());
+
+        Pcolor.LA = Convert.ToDouble(dr["PL"].ToString());
+        Pcolor.A = Convert.ToDouble(dr["PA"].ToString());
+        Pcolor.B = Convert.ToDouble(dr["PB"].ToString());
+
+       
+        m = CATCalulation.hueDifference(Mcolor, Acolor);
+        l = CATCalulation.hueDifference(Mcolor, Lcolor);
+        p = CATCalulation.hueDifference(Mcolor, Pcolor);
+
+        aa = CATCalulation.HueAngle(Acolor);
+        am = CATCalulation.HueAngle(Mcolor);
+        al = CATCalulation.HueAngle(Lcolor);
+        ap = CATCalulation.HueAngle(Pcolor);
+
+          dr["m"] =m.ToString();
+          dr["l"] =l.ToString();
+          dr["p"] =p.ToString();
+          dr["aacc"] = aa.ToString();
+          dr["am"] = am.ToString();
+          dr["alum"] = al.ToString();
+          dr["ap"] = ap.ToString();
+          
+
+        
+      }
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       btn_ExportGrid.IsEnabled = true;
 
     }

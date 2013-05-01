@@ -11,5 +11,6 @@
         <Button Content="Reduce" Height="23" HorizontalAlignment="Left" Margin="376,236,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="Reduce_Click" />
         <Button Content="FileConvertor" Height="23" HorizontalAlignment="Left" Margin="42,276,0,0" Name="button4" VerticalAlignment="Top" Width="75" Click="FileConvertor_Click" />
         <Button Content="PhoneCompensation" Height="23" HorizontalAlignment="Left" Margin="123,276,0,0" Name="button5" VerticalAlignment="Top" Width="75" Click="PhoneCompensation_Click" />
+        <Button Content="HueDifference" Height="23" HorizontalAlignment="Left" Margin="204,276,0,0" Name="button6" VerticalAlignment="Top" Width="75" Click="HueDifference_Click" />
     </Grid>
 </Window>
