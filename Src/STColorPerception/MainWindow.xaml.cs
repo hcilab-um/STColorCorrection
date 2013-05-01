@@ -586,28 +586,19 @@ namespace STColorPerception
 
       // captureDevice = new Capture();
       //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
-      ColorToShow= new PerceptionLib.Color();
-      ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.129152096, 0.117765618, 0.078045147);
-      PerceptionLib.CIEXYZ ColorToShowXYZ2 = new PerceptionLib.CIEXYZ(0.806205144, 0.775540661, 0.843191729);
-      PerceptionLib.CIEXYZ ColorToShowXYZ3 = new PerceptionLib.CIEXYZ(0,0,0);
+      //ColorToShow= new PerceptionLib.Color();
 
-      ColorToShowXYZ3.X = ColorToShowXYZ.X + ColorToShowXYZ2.X;
-      ColorToShowXYZ3.Y = ColorToShowXYZ.Y + ColorToShowXYZ2.Y;
-      ColorToShowXYZ3.Z = ColorToShowXYZ.Z + ColorToShowXYZ2.Z;
-
-
-      ColorToShow = 
 
       //testing rgb gamut limit
     // ColorToShowXYZ = new PerceptionLib.CIEXYZ(0.7252, 0.5394, 1.0888);
-      ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
+      //ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ);
       //ColorToShow.L = 81.92236628;
       //ColorToShow.A = -7.659442063;
       //ColorToShow.B = 19.20678352;
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
-      PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
+      //PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      //rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
      
 
 
@@ -619,12 +610,12 @@ namespace STColorPerception
      String Hex = PerceptionLib.Color.RGBtoHEX(77, 19, 18);
      
 
-      projectedColor = new PerceptionLib.HexRGB();
-      BackgroungColor = new PerceptionLib.HexRGB();
-      capturedColor = new PerceptionLib.HexRGB();
-      // ProjectedColor = "#ffffff";
-      //BackgroungColor="#000000";
-      //CapturedColor = "#FFFFFF";
+      //projectedColor = new PerceptionLib.HexRGB();
+      //BackgroungColor = new PerceptionLib.HexRGB();
+      //capturedColor = new PerceptionLib.HexRGB();
+      //// ProjectedColor = "#ffffff";
+      ////BackgroungColor="#000000";
+      ////CapturedColor = "#FFFFFF";
 
       pairs = new MTObservableCollection<MeasurementPair>();
       cie1976C.DataContext = pairs;
