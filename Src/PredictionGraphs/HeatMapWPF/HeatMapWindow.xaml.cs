@@ -32,6 +32,15 @@ namespace HeatMapWPF
     public MainWindow()
     {
       InitializeComponent();
+
+      // sample test code
+      PerceptionLib.Color SampleInputColor= new PerceptionLib.Color();
+      SampleInputColor.LA=95.35070839;
+      SampleInputColor.A = -9;
+      SampleInputColor.B=42.80004413;
+      PerceptionLib.ColorRegion ColorValue= new PerceptionLib.ColorRegion();
+      ColorValue = PerceptionLib.Color.ToFindColorRegion(SampleInputColor);
+
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
