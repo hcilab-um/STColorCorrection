@@ -292,7 +292,7 @@ namespace HeatMapWPF
         String IntensitySelection = (cbIntensity.SelectedItem as ComboBoxItem).Tag as String;
         if (IntensitySelection != "0")
         {
-          double intensity = Double.Parse(dataRowView["CD_Fg_L"] as String);
+          double intensity = Double.Parse(dataRowView["Fg_L"] as String);
           if (IntensitySelection == "1" && intensity < 50)
             continue;
           if (IntensitySelection == "-1" && intensity >= 50)
@@ -302,9 +302,9 @@ namespace HeatMapWPF
         // to slect a color from a perticular region 
 
         PerceptionLib.Color ColorFromData = new PerceptionLib.Color();
-        ColorFromData.LA = Double.Parse(dataRowView["CD_Fg_L"] as String);
-        ColorFromData.A = Double.Parse(dataRowView["CD_Fg_a"] as String);
-        ColorFromData.B = Double.Parse(dataRowView["CD_Fg_b"] as String);
+        ColorFromData.LA = Double.Parse(dataRowView["Fg_L"] as String);
+        ColorFromData.A = Double.Parse(dataRowView["Fg_a"] as String);
+        ColorFromData.B = Double.Parse(dataRowView["Fg_b"] as String);
 
         PerceptionLib.ColorRegion RegionObj = PerceptionLib.Color.ToFindColorRegion(ColorFromData);
         //foreach (Object selecteditem in ListColorRegion.SelectedItems)

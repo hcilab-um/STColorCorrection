@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="HeatMapData.cs" />
     <Compile Include="HeatMapWindow.xaml.cs">
       <DependentUpon>HeatMapWindow.xaml</DependentUpon>

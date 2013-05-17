@@ -1199,7 +1199,7 @@ namespace PerceptionLib
       
       // to find if its within nuteral region
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      double CylinderRadius =11.5; //3 JND
+      double CylinderRadius = 23; //3 JND
       double NuetralL = Convert.ToInt32(colorToShow.LA);
       
       // nuetral color near the input color

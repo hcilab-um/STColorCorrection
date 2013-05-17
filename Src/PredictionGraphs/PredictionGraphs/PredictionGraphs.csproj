@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="ColumnColor.xaml.cs">
       <DependentUpon>ColumnColor.xaml</DependentUpon>
     </Compile>
