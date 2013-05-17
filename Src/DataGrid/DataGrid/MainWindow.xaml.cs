@@ -1189,7 +1189,8 @@ namespace DataGrid
 
     private void EqDistance_Click(object sender, RoutedEventArgs e)
     {
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Data\Big_Pro_Compensation.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -1203,23 +1204,62 @@ namespace DataGrid
     
       Random random = new Random();
       PerceptionLib.Color Acolor= new PerceptionLib.Color();
+
+      PerceptionLib.Color CDcolor = new PerceptionLib.Color();
+      PerceptionLib.Color Mcolor = new PerceptionLib.Color();
+      
       
 
-      for (int i=0 ; i<bin.Rows.Count;i++)
-      {
-        Acolor.LA = Convert.ToDouble(bin.Rows[i][9].ToString());
-        Acolor.A = Convert.ToDouble(bin.Rows[i][10].ToString());
-        Acolor.B = Convert.ToDouble(bin.Rows[i][11].ToString());
+      //for (int i=0 ; i<bin.Rows.Count;i++)
+      //{
+      //  Acolor.LA = Convert.ToDouble(bin.Rows[i][9].ToString());
+      //  Acolor.A = Convert.ToDouble(bin.Rows[i][10].ToString());
+      //  Acolor.B = Convert.ToDouble(bin.Rows[i][11].ToString());
          
-        PerceptionLib.ColorRegion cr=PerceptionLib.Color.ToFindColorRegion(Acolor);
-          if(cr.NetralValueFlag==0)
-            binTable.ImportRow(bin.Rows[i]);
-
-          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      //  PerceptionLib.ColorRegion cr=PerceptionLib.Color.ToFindColorRegion(Acolor);
+      //    if(cr.NetralValueFlag==0)
+      //    binTable.ImportRow(bin.Rows[i]);
+      //    Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      //    Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
         
        
+      //}
+
+
+      foreach (DataRow dr in bin.Rows)
+      {
+        Acolor.LA = Convert.ToDouble(dr["Fg_L"].ToString());
+        Acolor.A = Convert.ToDouble(dr["Fg_A"].ToString());
+        Acolor.B = Convert.ToDouble(dr["Fg_B"].ToString());
+
+        CDcolor.LA = Convert.ToDouble(dr["CD_Fg_L"].ToString());
+        CDcolor.A = Convert.ToDouble(dr["CD_Fg_A"].ToString());
+        CDcolor.B = Convert.ToDouble(dr["CD_Fg_B"].ToString());
+
+        Mcolor.LA = Convert.ToDouble(dr["Measured_L"].ToString());
+        Mcolor.A = Convert.ToDouble(dr["Measured_A"].ToString());
+        Mcolor.B = Convert.ToDouble(dr["Measured_B"].ToString());
+
+        double bgL = Convert.ToDouble(dr["Bg_L"].ToString());
+
+        PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(Acolor);
+
+        if(bgL<50)
+        dr["BGLValue"] = "0";
+        else
+          dr["BGLValue"] = "1";
+
+       
+        dr["FGLValue"] = cr.LValueFlag.ToString();
+        dr["NuetralValue"] = cr.NetralValueFlag.ToString();
+        dr["Region"] = cr.RegionValue.ToString();
+
+        dr["Distance"] = (PerceptionLib.Color.ColorDistanceCalAB(CDcolor, Mcolor)).ToString();
+                
       }
+
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       btn_ExportGrid.IsEnabled = true;
 
     }
