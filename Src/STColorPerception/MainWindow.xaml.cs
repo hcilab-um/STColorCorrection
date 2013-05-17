@@ -598,7 +598,7 @@ namespace STColorPerception
       ////PerceptionLib.RGBValue a = PerceptionLib.Color.ToRBG(ColorToShowXYZ);
       //PerceptionLib.RGBValue ab = PerceptionLib.Color.ToRBGFromLAB(ColorToShow);
       
-      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
+      rec_BgColor.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(46, 60, 153));
      
 
 
