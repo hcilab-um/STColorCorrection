@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.ComponentModel;
+using System.Windows.Media.Media3D;
 
 namespace PerceptionLib
 {
@@ -1198,19 +1199,20 @@ namespace PerceptionLib
       
       // to find if its within nuteral region
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      double CylinderRadius=6.9; //3 JND
-      int NuetralL = Convert.ToInt32(colorToShow.L);
+      double CylinderRadius =11.5; //3 JND
+      double NuetralL = Convert.ToInt32(colorToShow.LA);
       
       // nuetral color near the input color
       Color NuetralValue = new Color();
       NuetralValue.LA = NuetralL;
       NuetralValue.A = 0;
       NuetralValue.B = 0;
+
       
       double Distacne = ColorDistanceCalAB(colorToShow, NuetralValue);
       
-      //NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
-      if (Distacne<=CylinderRadius)
+
+      if (Distacne <= CylinderRadius)
         ColorValues.NetralValueFlag=0;
       else
         ColorValues.NetralValueFlag=1;

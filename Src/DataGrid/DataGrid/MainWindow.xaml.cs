@@ -1121,8 +1121,7 @@ namespace DataGrid
       btn_ExportGrid.IsEnabled = true;
 
     }
-
-   
+       
     private void HueDifference_Click(object sender, RoutedEventArgs e)
     {
       PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\Reduscer_angles.csv");
@@ -1184,6 +1183,43 @@ namespace DataGrid
       }
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
       Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      btn_ExportGrid.IsEnabled = true;
+
+    }
+
+    private void EqDistance_Click(object sender, RoutedEventArgs e)
+    {
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      DataTable binTable = new DataTable();
+      binTable = bin.Clone();
+    
+      Random random = new Random();
+      PerceptionLib.Color Acolor= new PerceptionLib.Color();
+      
+
+      for (int i=0 ; i<bin.Rows.Count;i++)
+      {
+        Acolor.LA = Convert.ToDouble(bin.Rows[i][9].ToString());
+        Acolor.A = Convert.ToDouble(bin.Rows[i][10].ToString());
+        Acolor.B = Convert.ToDouble(bin.Rows[i][11].ToString());
+         
+        PerceptionLib.ColorRegion cr=PerceptionLib.Color.ToFindColorRegion(Acolor);
+          if(cr.NetralValueFlag==0)
+            binTable.ImportRow(bin.Rows[i]);
+
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+        
+       
+      }
       btn_ExportGrid.IsEnabled = true;
 
     }
