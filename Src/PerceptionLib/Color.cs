@@ -1198,8 +1198,8 @@ namespace PerceptionLib
       
       // to find if its within nuteral region
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      double CylinderRadius=6.9; //3 JND
-      int NuetralL = Convert.ToInt32(colorToShow.L);
+      double CylinderRadius =20; //3 JND
+      double NuetralL = Convert.ToInt32(colorToShow.L);
       
       // nuetral color near the input color
       Color NuetralValue = new Color();
@@ -1210,6 +1210,7 @@ namespace PerceptionLib
       double Distacne = ColorDistanceCalAB(colorToShow, NuetralValue);
       
       //NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
+      
       if (Distacne<=CylinderRadius)
         ColorValues.NetralValueFlag=0;
       else

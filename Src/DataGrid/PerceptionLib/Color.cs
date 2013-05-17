@@ -162,6 +162,31 @@ namespace PerceptionLib
     }
   }
 
+  /// <summary>
+  /// color quaratent value
+  /// </summary>
+  public class ColorRegion
+  {
+    /// <summary>
+    /// RegionValue=1 then RegionValue =Red-Yellow
+    /// RegionValue=2 then RegionValue =Yellow-Green
+    /// RegionValue=3 then RegionValue =Green-Cyan
+    /// RegionValue=4 then RegionValue =Cyan-Blue
+    /// RegionValue=5 then RegionValue =Blue-Magenta
+    /// RegionValue=6 then RegionValue =Magenta-Red
+    /// </summary>
+    public int RegionValue { get; set; }
+    /// <summary>
+    /// LValueFlag=0 for L Less than 50 and 1 for other wise
+    /// </summary>
+    public int LValueFlag { get; set; }
+    /// <summary>
+    /// NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
+    /// </summary>
+    public int NetralValueFlag { get; set; }
+
+  }
+
   public class Color : INotifyPropertyChanged
   {
 
@@ -1163,6 +1188,9 @@ namespace PerceptionLib
       return binedLabValues;
 
     }
+   
+
+
 
     /// <summary>
     /// function to create Hexdecimal values from RGB
@@ -1180,7 +1208,107 @@ namespace PerceptionLib
 
     }
 
+    /// <summary>
+    /// To find which quadrant
+    /// </summary>
+    /// <param name="colorToShow"></param>
+    /// <returns></returns>
+    public static ColorRegion ToFindColorRegion(Color colorToShow)
+    {
+      ColorRegion ColorValues = new ColorRegion();
 
+      // to find if its within nuteral region
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      double CylinderRadius = 20; //3 JND
+      double NuetralL = Convert.ToInt32(colorToShow.L);
+
+      // nuetral color near the input color
+      Color NuetralValue = new Color();
+      NuetralValue.LA = NuetralL;
+      NuetralValue.A = 0;
+      NuetralValue.B = 0;
+
+      double Distacne = ColorDistanceCalAB(colorToShow, NuetralValue);
+
+      //NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
+
+      if (Distacne <= CylinderRadius)
+        ColorValues.NetralValueFlag = 0;
+      else
+        ColorValues.NetralValueFlag = 1;
+
+      // to find L region (High or Low)
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      //LValueFlag=0 for L Less than 50 and 1 for other wise
+      if (NuetralL < 50)
+        ColorValues.LValueFlag = 0;
+      else
+        ColorValues.LValueFlag = 1;
+
+
+      // to find which Quadrant color belongs to
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // to calculate the hue angle
+
+
+      /// <summary>
+      /// RegionValue=1 then RegionValue =Red-Yellow
+      /// RegionValue=2 then RegionValue =Yellow-Green
+      /// RegionValue=3 then RegionValue =Green-Cyan
+      /// RegionValue=4 then RegionValue =Cyan-Blue
+      /// RegionValue=5 then RegionValue =Blue-Magenta
+      /// RegionValue=6 then RegionValue =Magenta-Red
+      /// RegionValue=6 then RegionValue =ERROR
+      /// </summary>
+      /// 
+
+      RGBValue ColorVal = new RGBValue();
+      ColorVal = ToRBGFromLAB(colorToShow);
+
+      if (ColorVal.R >= ColorVal.G && ColorVal.G >= ColorVal.B)
+        ColorValues.RegionValue = 1;
+      else if (ColorVal.G > ColorVal.R && ColorVal.R >= ColorVal.B)
+        ColorValues.RegionValue = 2;
+      else if (ColorVal.G >= ColorVal.B && ColorVal.B > ColorVal.R)
+        ColorValues.RegionValue = 3;
+      else if (ColorVal.B > ColorVal.G && ColorVal.G > ColorVal.R)
+        ColorValues.RegionValue = 4;
+      else if (ColorVal.B > ColorVal.R && ColorVal.R >= ColorVal.G)
+        ColorValues.RegionValue = 5;
+      else if (ColorVal.R >= ColorVal.B && ColorVal.B > ColorVal.G)
+        ColorValues.RegionValue = 6;
+      //error check
+      else
+        ColorValues.RegionValue = 0;
+
+
+      //calculation using lab hue formula -- found not working for the Preucil circle
+      //double Hue = HueAngle(colorToShow);
+      //if (0 <= Hue && Hue < 60)
+      //  ColorValues.QuatarentValue = 1;
+      //else if(60 <= Hue && Hue < 120)
+      //  ColorValues.QuatarentValue = 2;
+      //else if (120 <= Hue && Hue < 180)
+      //  ColorValues.QuatarentValue = 3;
+      //else if (180 <= Hue && Hue < 240)
+      //  ColorValues.QuatarentValue = 4;
+      //else if (240 <= Hue && Hue < 300)
+      //  ColorValues.QuatarentValue = 5;
+      //else if (300 <= Hue && Hue < 0)
+      //  ColorValues.QuatarentValue = 6;
+      //  //error check
+      //else
+      //  ColorValues.QuatarentValue = 0;
+
+
+
+      return ColorValues;
+
+
+
+
+    }
     
 
   }

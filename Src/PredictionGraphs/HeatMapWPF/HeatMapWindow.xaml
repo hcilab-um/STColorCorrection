@@ -133,10 +133,35 @@
         
         <ComboBox Margin="10,0" x:Name="cbTo" Width="150"/>
 
-        <ComboBox x:Name="cbIntensity" Margin="10,0" Width="150" Tag="fg_L">
-          <ComboBoxItem Tag="0" IsSelected="True">Both</ComboBoxItem>
+       <ComboBox x:Name="cbIntensity" Margin="10,0" Width="150" Tag="CD_Fg_L" >
+          <ComboBoxItem Tag="0" IsSelected="True">Both High and Low Fg</ComboBoxItem>
           <ComboBoxItem Tag="1">Fg High Intensity</ComboBoxItem>
           <ComboBoxItem Tag="-1">Fg Low Intensity</ComboBoxItem>
+        </ComboBox>
+        
+          <ComboBox x:Name="cbNuetral" Margin="10,0" Width="150"  >
+            <ComboBoxItem Tag="0" IsSelected="True">Both Nuetral and Non </ComboBoxItem>
+            <ComboBoxItem Tag="1">Nuteral</ComboBoxItem>
+            <ComboBoxItem Tag="-1">Non Nuteral</ComboBoxItem>
+        </ComboBox>
+        <!--<ListBox Name="ListColorRegion" Height="100"  Width="120" SelectionMode="Multiple">
+            <ListBoxItem Tag="0" IsSelected="True">All Color Regions</ListBoxItem>
+                <ListBoxItem Tag="1">Red-Yellow</ListBoxItem>
+                <ListBoxItem Tag="2">Yellow-Green</ListBoxItem>
+                <ListBoxItem Tag="3">Green-Cyan</ListBoxItem>
+                <ListBoxItem Tag="4">Cyan-Blue</ListBoxItem>
+                <ListBoxItem Tag="5">Blue-Magenta</ListBoxItem>
+                <ListBoxItem Tag="6">Magenta-Red</ListBoxItem>
+        </ListBox>-->
+
+        <ComboBox x:Name="cbColorRegion" Margin="10,0" Width="150"  >
+            <ComboBoxItem Tag="0" IsSelected="True">All Color Regions</ComboBoxItem>
+            <ComboBoxItem Tag="1">Red-Yellow</ComboBoxItem>
+            <ComboBoxItem Tag="2">Yellow-Green</ComboBoxItem>
+            <ComboBoxItem Tag="3">Green-Cyan</ComboBoxItem>
+            <ComboBoxItem Tag="4">Cyan-Blue</ComboBoxItem>
+            <ComboBoxItem Tag="5">Blue-Magenta</ComboBoxItem>
+            <ComboBoxItem Tag="6">Magenta-Red</ComboBoxItem>
         </ComboBox>
 
         <ComboBox Margin="10,0" Width="150">
@@ -146,8 +171,9 @@
         </ComboBox>
 
         <Button Content="Refresh" Margin="10,0" Click="Button_Click_Refresh"/>
-
-      </StackPanel>
+               
+          
+            </StackPanel>
       <Grid HorizontalAlignment="Left" Margin="10">
         <Border BorderThickness="2" BorderBrush="Black">
           <Grid  Height="900" Width="900">

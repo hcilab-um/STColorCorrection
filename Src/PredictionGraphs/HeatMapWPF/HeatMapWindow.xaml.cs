@@ -289,13 +289,67 @@ namespace HeatMapWPF
         int row = HeatMapData.GRID_SIZE - (int)((HeatMapData.GRID_SIZE * (y_value + 100) / Settings.Default.DataMapHeight)) - 1;
         var heatMapData = heatMap[row, col];
 
-        String intensitySelection = (cbIntensity.SelectedItem as ComboBoxItem).Tag as String;
-        if (intensitySelection != "0")
+        String IntensitySelection = (cbIntensity.SelectedItem as ComboBoxItem).Tag as String;
+        if (IntensitySelection != "0")
         {
-          double intensity = Double.Parse(dataRowView["Fg_L"] as String);
-          if (intensitySelection == "1" && intensity < 50)
+          double intensity = Double.Parse(dataRowView["CD_Fg_L"] as String);
+          if (IntensitySelection == "1" && intensity < 50)
             continue;
-          if (intensitySelection == "-1" && intensity > 50)
+          if (IntensitySelection == "-1" && intensity >= 50)
+            continue;
+        }
+
+        // to slect a color from a perticular region 
+
+        PerceptionLib.Color ColorFromData = new PerceptionLib.Color();
+        ColorFromData.LA = Double.Parse(dataRowView["CD_Fg_L"] as String);
+        ColorFromData.A = Double.Parse(dataRowView["CD_Fg_a"] as String);
+        ColorFromData.B = Double.Parse(dataRowView["CD_Fg_b"] as String);
+
+        PerceptionLib.ColorRegion RegionObj = PerceptionLib.Color.ToFindColorRegion(ColorFromData);
+        //foreach (Object selecteditem in ListColorRegion.SelectedItems)
+        //{
+        //   String RegionSelection = (ListColorRegion.SelectedItems as ListBoxItem).Tag as String;
+        //  if (RegionSelection != "0")
+        //  {
+        //    if (RegionSelection == "1" && RegionObj.RegionValue != 1)
+        //      continue;
+        //    if (RegionSelection == "2" && RegionObj.RegionValue != 2)
+        //      continue;
+        //    if (RegionSelection == "3" && RegionObj.RegionValue != 3)
+        //      continue;
+        //    if (RegionSelection == "4" && RegionObj.RegionValue != 4)
+        //      continue;
+        //    if (RegionSelection == "5" && RegionObj.RegionValue != 5)
+        //      continue;
+        //    if (RegionSelection == "6" && RegionObj.RegionValue != 6)
+        //      continue;
+        //  }
+        //}
+
+        string NuteralSelection = (cbNuetral.SelectedItem as ComboBoxItem).Tag as String;
+        if (NuteralSelection != "0")
+        {
+          if (NuteralSelection == "1" && RegionObj.NetralValueFlag !=0)
+            continue;
+          if (NuteralSelection == "-1" && RegionObj.NetralValueFlag == 0)
+            continue;
+        }
+
+        String RegionSel = (cbColorRegion.SelectedItem as ComboBoxItem).Tag as String;
+        if (RegionSel != "0")
+        {
+          if (RegionSel == "1" && RegionObj.RegionValue != 1)
+            continue;
+          if (RegionSel == "2" && RegionObj.RegionValue != 2)
+            continue;
+          if (RegionSel == "3" && RegionObj.RegionValue != 3)
+            continue;
+          if (RegionSel == "4" && RegionObj.RegionValue != 4)
+            continue;
+          if (RegionSel == "5" && RegionObj.RegionValue != 5)
+            continue;
+          if (RegionSel == "6" && RegionObj.RegionValue != 6)
             continue;
         }
 
@@ -379,5 +433,7 @@ namespace HeatMapWPF
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
+
+ 
   }
 }
