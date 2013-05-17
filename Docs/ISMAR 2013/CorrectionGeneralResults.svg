@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="930.45508"
+   height="1159.4844"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   inkscape:export-filename="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionGeneralResults.png"
+   inkscape:export-xdpi="180.00243"
+   inkscape:export-ydpi="180.00243"
+   sodipodi:docname="CorrectionGeneralResults.svg">
+  <defs
+     id="defs4">
+    <clipPath
+       id="clipPath2998"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="144.50504"
+         x="-1913.5714"
+         height="330"
+         width="490"
+         id="rect3000"
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2998-7">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3000-1"
+         width="490"
+         height="330"
+         x="-1913.5714"
+         y="144.50504" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3019">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3021"
+         width="486.89352"
+         height="329.81482"
+         x="-1654.6299"
+         y="-484.58493" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3869">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3871"
+         width="486.42856"
+         height="327.85715"
+         x="-1652.6472"
+         y="-483.16547" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2998-7-1">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3000-1-5"
+         width="490"
+         height="330"
+         x="-1913.5714"
+         y="144.50504" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3040">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3042"
+         width="491.42856"
+         height="332.14285"
+         x="-2502.1428"
+         y="-1553.3521" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2998-7-1-2">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3000-1-5-7"
+         width="490"
+         height="330"
+         x="-1913.5714"
+         y="144.50504" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3869-6">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.03543307;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3871-1"
+         width="486.42856"
+         height="327.85715"
+         x="-1652.6472"
+         y="-483.16547" />
+    </clipPath>
+    <marker
+       style="overflow:visible"
+       id="marker5068-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="StopL">
+      <path
+         transform="scale(0.8,0.8)"
+         style="fill:none;stroke:#000000;stroke-width:1pt"
+         d="M 0,5.65 0,-5.65"
+         id="path5070-8"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="StopL-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="StopL">
+      <path
+         transform="scale(0.8,0.8)"
+         style="fill:none;stroke:#000000;stroke-width:1pt"
+         d="M 0,5.65 0,-5.65"
+         id="path4403-0"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker5068"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="StopL">
+      <path
+         transform="scale(0.8,0.8)"
+         style="fill:none;stroke:#000000;stroke-width:1pt"
+         d="M 0,5.65 0,-5.65"
+         id="path5070"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="StopL-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="StopL">
+      <path
+         transform="scale(0.8,0.8)"
+         style="fill:none;stroke:#000000;stroke-width:1pt"
+         d="M 0,5.65 0,-5.65"
+         id="path4403-8"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="DistanceEnd"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DistanceEnd"
+       style="overflow:visible">
+      <g
+         id="g4289">
+        <path
+           id="path2316"
+           d="M 0,0 -2,0"
+           style="fill:none;stroke:#ffffff;stroke-width:1.14999998;stroke-linecap:square"
+           inkscape:connector-curvature="0" />
+        <path
+           id="path2312"
+           d="M 0,0 -13,4 -9,0 -13,-4 0,0 z"
+           style="fill:#000000;fill-rule:evenodd;stroke:none"
+           inkscape:connector-curvature="0" />
+        <path
+           id="path2314"
+           d="M 0,-4 0,40"
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square"
+           inkscape:connector-curvature="0" />
+      </g>
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="StopL"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="StopL">
+      <path
+         transform="scale(0.8,0.8)"
+         style="fill:none;stroke:#000000;stroke-width:1pt"
+         d="M 0,5.65 0,-5.65"
+         id="path4403"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="290.204"
+     inkscape:cy="585.38805"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(505.62079,-272.07986)">
+    <a
+       xlink:href="Big_BP_TD_Algo.png"
+       transform="translate(-479.419,463.18583)"
+       id="a3454"
+       target="Big_BP_TD_Algo.png"
+       xlink:title="Big_BP_TD_Algo.png"
+       xlink:type=".png" />
+    <g
+       id="g3349"
+       transform="translate(0,-17.999942)">
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+         sodipodi:linespacing="125%"
+         id="text6009-0"
+         y="313.0798"
+         x="-85.205765"
+         style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="313.0798"
+           x="-85.205765"
+           id="tspan6011-93"
+           sodipodi:role="line">p2200</tspan></text>
+      <g
+         id="g3193">
+        <g
+           id="g3687"
+           transform="translate(0,6.1035156e-5)">
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-84-4-5"
+             d="m -457.8166,353.31696 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-1-0-7-5"
+             d="m -457.8166,383.53009 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-5-76-3-1"
+             d="m -457.8166,413.74323 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-2-3-4-7"
+             d="m -457.8166,443.95636 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-7-6-0-1"
+             d="m -457.8166,474.1695 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-6-15-8-1"
+             d="m -457.8166,504.38263 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-14-4-8-5"
+             d="m -457.8166,534.59574 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-23-20-1-2"
+             d="m -457.8166,564.80887 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-22-9-5-7"
+             d="m -457.8166,595.02201 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-16-7-2-6"
+             d="m -457.8166,625.23514 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-904-1-1-8"
+             y="648.21753"
+             x="-481.51532"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="648.21753"
+               x="-481.51532"
+               id="tspan8544-29-8-9-9"
+               sodipodi:role="line">0</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-7-3-2-9-2"
+             y="587.9118"
+             x="-494.87469"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="587.9118"
+               x="-494.87469"
+               id="tspan8544-2-14-80-5-7"
+               sodipodi:role="line">20</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-2-82-1-5-9"
+             y="527.60608"
+             x="-494.87469"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="527.60608"
+               x="-494.87469"
+               id="tspan8544-5-05-8-5-5"
+               sodipodi:role="line">40</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-9-5-4-6-4"
+             y="467.30035"
+             x="-494.87469"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="467.30035"
+               x="-494.87469"
+               id="tspan8544-1-9-8-0-3"
+               sodipodi:role="line">60</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-0-3-6-5-1"
+             y="406.99463"
+             x="-494.87469"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="406.99463"
+               x="-494.87469"
+               id="tspan8544-8-28-0-9-2"
+               sodipodi:role="line">80</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-5-74-9-4-3"
+             y="346.6889"
+             x="-508.23407"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="346.6889"
+               x="-508.23407"
+               id="tspan8544-0-8-30-6-3"
+               sodipodi:role="line">100</tspan></text>
+          <image
+             width="485"
+             height="330"
+             xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionP2200.png"
+             id="image3402"
+             x="-439.78082"
+             y="335.26776" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-3-2-4"
+             d="m -457.8166,338.21039 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-72-4-2"
+             d="m -457.8166,640.34171 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-0-6-6-3"
+             d="m -457.8166,610.12857 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-9-0-6-2"
+             d="m -457.8166,579.91544 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-4-1-6-2"
+             d="m -457.8166,549.7023 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-8-65-2-1"
+             d="m -457.8166,519.4892 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-82-7-9-6"
+             d="m -457.8166,489.27606 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-45-5-0-8"
+             d="m -457.8166,459.06293 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-5-4-4-5"
+             d="m -457.8166,428.84979 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-1-1-9-7"
+             d="m -457.8166,398.63666 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-2-3-6"
+             d="m -457.8166,368.42352 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        </g>
+        <image
+           width="335.82901"
+           height="335.82901"
+           xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionP2200-HM.png"
+           id="image3130"
+           x="89.005257"
+           y="329.4389" />
+      </g>
+    </g>
+    <g
+       id="g3390"
+       transform="translate(0,-6.6517979)">
+      <g
+         id="g3311">
+        <g
+           id="g3723"
+           transform="translate(-233.37961,3.1991272)">
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-84-4-5-1"
+             d="m -224.43698,732.9582 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-1-0-7-5-7"
+             d="m -224.43698,763.17133 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-5-76-3-1-4"
+             d="m -224.43698,793.38447 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-2-3-4-7-0"
+             d="m -224.43698,823.59761 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-7-6-0-1-9"
+             d="m -224.43698,853.81075 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-6-15-8-1-4"
+             d="m -224.43698,884.02388 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-14-4-8-5-8"
+             d="m -224.43698,914.23699 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-23-20-1-2-8"
+             d="m -224.43698,944.45012 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-22-9-5-7-2"
+             d="m -224.43698,974.66326 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-16-7-2-6-4"
+             d="m -224.43698,1004.8764 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <image
+             width="485"
+             height="330"
+             xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionP3700.png"
+             id="image3413"
+             x="-206.40118"
+             y="715.63623" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-904-1-1-8-5"
+             y="1027.8588"
+             x="-248.13571"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1027.8588"
+               x="-248.13571"
+               id="tspan8544-29-8-9-9-5"
+               sodipodi:role="line">0</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-7-3-2-9-2-1"
+             y="967.55304"
+             x="-261.49509"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="967.55304"
+               x="-261.49509"
+               id="tspan8544-2-14-80-5-7-7"
+               sodipodi:role="line">20</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-2-82-1-5-9-1"
+             y="907.24731"
+             x="-261.49509"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="907.24731"
+               x="-261.49509"
+               id="tspan8544-5-05-8-5-5-1"
+               sodipodi:role="line">40</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-9-5-4-6-4-5"
+             y="846.94159"
+             x="-261.49509"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="846.94159"
+               x="-261.49509"
+               id="tspan8544-1-9-8-0-3-2"
+               sodipodi:role="line">60</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-0-3-6-5-1-7"
+             y="786.63586"
+             x="-261.49509"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="786.63586"
+               x="-261.49509"
+               id="tspan8544-8-28-0-9-2-6"
+               sodipodi:role="line">80</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-5-74-9-4-3-1"
+             y="726.33014"
+             x="-274.85446"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="726.33014"
+               x="-274.85446"
+               id="tspan8544-0-8-30-6-3-4"
+               sodipodi:role="line">100</tspan></text>
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-3-2-4-2"
+             d="m -224.43698,717.85163 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-72-4-2-3"
+             d="m -224.43698,1019.983 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-0-6-6-3-2"
+             d="m -224.43698,989.76982 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-9-0-6-2-2"
+             d="m -224.43698,959.55669 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-4-1-6-2-1"
+             d="m -224.43698,929.34355 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-8-65-2-1-6"
+             d="m -224.43698,899.13045 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-82-7-9-6-8"
+             d="m -224.43698,868.91731 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-45-5-0-8-5"
+             d="m -224.43698,838.70418 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-5-4-4-5-7"
+             d="m -224.43698,808.49103 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-1-1-9-7-6"
+             d="m -224.43698,778.2779 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-2-3-6-1"
+             d="m -224.43698,748.06476 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        </g>
+        <image
+           width="335.82901"
+           height="335.82901"
+           xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionP3700-HM.png"
+           id="image3141"
+           x="89.005257"
+           y="712.8551" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+         sodipodi:linespacing="125%"
+         id="text6009-0-3"
+         y="695.9198"
+         x="-85.205765"
+         style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="695.9198"
+           x="-85.205765"
+           id="tspan6011-93-2"
+           sodipodi:role="line">p3700</tspan></text>
+    </g>
+    <g
+       id="g3431"
+       transform="translate(0,-0.96047559)">
+      <g
+         id="g3273">
+        <g
+           transform="translate(-247.19687,0)"
+           id="g3795">
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-84-4-5-8"
+             d="m -210.61973,1119.7248 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-1-0-7-5-9"
+             d="m -210.61973,1149.9379 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-5-76-3-1-2"
+             d="m -210.61973,1180.1511 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-2-3-4-7-7"
+             d="m -210.61973,1210.3642 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-7-6-0-1-95"
+             d="m -210.61973,1240.5773 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-6-15-8-1-43"
+             d="m -210.61973,1270.7905 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-14-4-8-5-1"
+             d="m -210.61973,1301.0036 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-23-20-1-2-2"
+             d="m -210.61973,1331.2167 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-22-9-5-7-3"
+             d="m -210.61973,1361.4299 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-1-16-7-2-6-3"
+             d="m -210.61973,1391.643 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+          <image
+             width="485"
+             height="330"
+             xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionTOLED.png"
+             id="image3391"
+             x="-192.58394"
+             y="1102.5247" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-904-1-1-8-4"
+             y="1414.6254"
+             x="-234.31845"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1414.6254"
+               x="-234.31845"
+               id="tspan8544-29-8-9-9-1"
+               sodipodi:role="line">0</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-7-3-2-9-2-13"
+             y="1354.3197"
+             x="-247.67783"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1354.3197"
+               x="-247.67783"
+               id="tspan8544-2-14-80-5-7-8"
+               sodipodi:role="line">20</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-2-82-1-5-9-7"
+             y="1294.0139"
+             x="-247.67783"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1294.0139"
+               x="-247.67783"
+               id="tspan8544-5-05-8-5-5-4"
+               sodipodi:role="line">40</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-9-5-4-6-4-2"
+             y="1233.7083"
+             x="-247.67783"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1233.7083"
+               x="-247.67783"
+               id="tspan8544-1-9-8-0-3-7"
+               sodipodi:role="line">60</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-0-3-6-5-1-79"
+             y="1173.4025"
+             x="-247.67783"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1173.4025"
+               x="-247.67783"
+               id="tspan8544-8-28-0-9-2-3"
+               sodipodi:role="line">80</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text8542-5-74-9-4-3-19"
+             y="1113.0968"
+             x="-261.0372"
+             style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               y="1113.0968"
+               x="-261.0372"
+               id="tspan8544-0-8-30-6-3-8"
+               sodipodi:role="line">100</tspan></text>
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-3-2-4-6"
+             d="m -210.61973,1104.6182 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-72-4-2-5"
+             d="m -210.61973,1406.7496 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-0-6-6-3-0"
+             d="m -210.61973,1376.5364 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-9-0-6-2-28"
+             d="m -210.61973,1346.3233 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-4-1-6-2-6"
+             d="m -210.61973,1316.1101 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-8-65-2-1-0"
+             d="m -210.61973,1285.897 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-82-7-9-6-2"
+             d="m -210.61973,1255.6839 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-45-5-0-8-4"
+             d="m -210.61973,1225.4708 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-5-4-4-5-8"
+             d="m -210.61973,1195.2576 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-1-1-9-7-65"
+             d="m -210.61973,1165.0445 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+             inkscape:connector-curvature="0"
+             id="path6111-4-7-2-3-6-0"
+             d="m -210.61973,1134.8314 521.07158,0"
+             style="fill:#ff0000;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        </g>
+        <image
+           width="335.82901"
+           height="335.82901"
+           xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionTOLED-HM.png"
+           id="image3152"
+           x="89.005257"
+           y="1096.2712" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\g8625-01-9-1-1.png"
+         sodipodi:linespacing="125%"
+         id="text6009-0-3-6"
+         y="1085.4565"
+         x="-98.62764"
+         style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="1085.4565"
+           x="-98.62764"
+           id="tspan6011-93-2-8"
+           sodipodi:role="line">T-OLED</tspan></text>
+    </g>
+  </g>
+</svg>
