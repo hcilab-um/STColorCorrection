@@ -107,7 +107,7 @@ namespace PerceptionLib
     /// </summary>
     public int LValueFlag { get; set; }
     /// <summary>
-    /// NetralValueFlag=0 for L Less than 50 and 1 for other wise
+    /// NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
     /// </summary>
     public int NetralValueFlag { get; set; }
 
@@ -1209,7 +1209,7 @@ namespace PerceptionLib
       
       double Distacne = ColorDistanceCalAB(colorToShow, NuetralValue);
       
-      //NetralValueFlag=0 for L Less than 50 and 1 for other wise
+      //NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
       if (Distacne<=CylinderRadius)
         ColorValues.NetralValueFlag=0;
       else
@@ -1260,7 +1260,6 @@ namespace PerceptionLib
       else
         ColorValues.RegionValue = 0;
       
-
 
       //calculation using lab hue formula -- found not working for the Preucil circle
       //double Hue = HueAngle(colorToShow);
