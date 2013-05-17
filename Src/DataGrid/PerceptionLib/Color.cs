@@ -6,6 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 
+
 namespace PerceptionLib
 {
   // class to get RBG 
@@ -1219,8 +1220,8 @@ namespace PerceptionLib
 
       // to find if its within nuteral region
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      double CylinderRadius = 20; //3 JND
-      double NuetralL = Convert.ToInt32(colorToShow.L);
+      double CylinderRadius = 11.5; //3 JND
+      double NuetralL = Convert.ToInt32(colorToShow.LA);
 
       // nuetral color near the input color
       Color NuetralValue = new Color();
@@ -1228,6 +1229,8 @@ namespace PerceptionLib
       NuetralValue.A = 0;
       NuetralValue.B = 0;
 
+
+      
       double Distacne = ColorDistanceCalAB(colorToShow, NuetralValue);
 
       //NetralValueFlag=0 for for inside the nuetral region  and 1 for other wise
