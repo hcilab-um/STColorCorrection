@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Media.Media3D;
+using System.Diagnostics;
 
 namespace DataGrid
 {
@@ -196,6 +197,49 @@ namespace DataGrid
 
         }
 
+        public static int MatchWithBinnedColors_noSubration(DataTable bin, PerceptionLib.CIEXYZ BG, PerceptionLib.Color ColorToShow)
+        {
+          int BinNUmber = 0;
+          for (int k = 0; k < 1001; k++)
+          {
+            
+            int i;
+
+
+            double closestColorValue = double.MaxValue;
+            PerceptionLib.CIEXYZ colorToCompareXYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
+
+            PerceptionLib.CIEXYZ colorToComparePlsBG_XYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
+            PerceptionLib.Color colorToComparePlsBG = new PerceptionLib.Color();
+
+            for (int index = 0; index < bin.Rows.Count; index++)
+            {
+              i = index;
+
+              int BinNUmber1 = index;
+              colorToCompareXYZ.X = Convert.ToDouble(bin.Rows[index][12].ToString());
+              colorToCompareXYZ.Y = Convert.ToDouble(bin.Rows[index][13].ToString());
+              colorToCompareXYZ.Z = Convert.ToDouble(bin.Rows[index][14].ToString());
+
+              colorToComparePlsBG_XYZ = ColorSpaceConverter.AddXYZ(colorToCompareXYZ, BG);
+              colorToComparePlsBG = PerceptionLib.Color.ToLUV(colorToComparePlsBG_XYZ);
+
+              double ColorDistance = PerceptionLib.Color.ColorDistanceCalAB(colorToComparePlsBG, ColorToShow);
+              if (ColorDistance >= closestColorValue)
+                continue;
+
+
+              closestColorValue = ColorDistance;
+
+              closestColorOnAddition = ColorDistance;
+
+              BinNUmber = index;
+              string a = bin.Rows[index][1].ToString();
+
+            }
+          }
+          return BinNUmber;
+        }
 
         /// <summary>
         /// funtion to calcullate bin number
