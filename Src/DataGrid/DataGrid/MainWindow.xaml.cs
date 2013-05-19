@@ -16,6 +16,7 @@ using System.Data;
 using System.Windows.Threading;
 using PerceptionLib;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace DataGrid
 {
@@ -46,7 +47,6 @@ namespace DataGrid
       CIEXYZ screenBgWt = new CIEXYZ(0.724775, 0.759896, 0.727336);
       PerceptionLib.Color ColorToShow = PerceptionLib.Color.ToLAB(ColorToShowXYZ3, screenBgWt);
       
-
       BradXYZ = CATCalulation.bradford(ColorToShowXYZ);
 
     }
@@ -1189,8 +1189,8 @@ namespace DataGrid
 
     private void EqDistance_Click(object sender, RoutedEventArgs e)
     {
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Data\Big_Pro_Compensation.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Data\Big_Pro_Compensation.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -1199,6 +1199,7 @@ namespace DataGrid
 
       }));
 
+      
       DataTable binTable = new DataTable();
       binTable = bin.Clone();
     
@@ -1207,59 +1208,76 @@ namespace DataGrid
 
       PerceptionLib.Color CDcolor = new PerceptionLib.Color();
       PerceptionLib.Color Mcolor = new PerceptionLib.Color();
-      
-      
 
-      //for (int i=0 ; i<bin.Rows.Count;i++)
+      //CIEXYZ bg = new CIEXYZ(0,0,0);
+      ////Acolor.LA = 10.10715853;
+      ////Acolor.A = 0.053429388;
+      ////Acolor.B = -10.79067387;
+
+      //Acolor.LA = 100;
+      //Acolor.A = 0;
+      //Acolor.B = 0;
+
+      //Stopwatch stopwatch = new Stopwatch();
+      //Dispatcher.Invoke((Action) delegate()
       //{
-      //  Acolor.LA = Convert.ToDouble(bin.Rows[i][9].ToString());
-      //  Acolor.A = Convert.ToDouble(bin.Rows[i][10].ToString());
-      //  Acolor.B = Convert.ToDouble(bin.Rows[i][11].ToString());
-         
-      //  PerceptionLib.ColorRegion cr=PerceptionLib.Color.ToFindColorRegion(Acolor);
-      //    if(cr.NetralValueFlag==0)
-      //    binTable.ImportRow(bin.Rows[i]);
-      //    Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-      //    Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
-        
-       
-      //}
+      //  stopwatch.Start();
+      //  CATCalulation.MatchWithBinnedColors_noSubration(bin, bg, Acolor);
+      //  stopwatch.Stop();
+      //}, DispatcherPriority.Render);
+      
+      //Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
-
-      foreach (DataRow dr in bin.Rows)
+      for (int i = 0; i < bin.Rows.Count; i++)
       {
-        Acolor.LA = Convert.ToDouble(dr["Fg_L"].ToString());
-        Acolor.A = Convert.ToDouble(dr["Fg_A"].ToString());
-        Acolor.B = Convert.ToDouble(dr["Fg_B"].ToString());
-
-        CDcolor.LA = Convert.ToDouble(dr["CD_Fg_L"].ToString());
-        CDcolor.A = Convert.ToDouble(dr["CD_Fg_A"].ToString());
-        CDcolor.B = Convert.ToDouble(dr["CD_Fg_B"].ToString());
-
-        Mcolor.LA = Convert.ToDouble(dr["Measured_L"].ToString());
-        Mcolor.A = Convert.ToDouble(dr["Measured_A"].ToString());
-        Mcolor.B = Convert.ToDouble(dr["Measured_B"].ToString());
-
-        double bgL = Convert.ToDouble(dr["Bg_L"].ToString());
+        Acolor.LA = Convert.ToDouble(bin.Rows[i][3].ToString());
+        Acolor.A = Convert.ToDouble(bin.Rows[i][4].ToString());
+        Acolor.B = Convert.ToDouble(bin.Rows[i][5].ToString());
 
         PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(Acolor);
+        if (cr.NetralValueFlag == 0)
+          binTable.ImportRow(bin.Rows[i]);
+        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
-        if(bgL<50)
-        dr["BGLValue"] = "0";
-        else
-          dr["BGLValue"] = "1";
 
-       
-        dr["FGLValue"] = cr.LValueFlag.ToString();
-        dr["NuetralValue"] = cr.NetralValueFlag.ToString();
-        dr["Region"] = cr.RegionValue.ToString();
-
-        dr["Distance"] = (PerceptionLib.Color.ColorDistanceCalAB(CDcolor, Mcolor)).ToString();
-                
       }
 
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
-      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+      //foreach (DataRow dr in bin.Rows)
+      //{
+      //  Acolor.LA = Convert.ToDouble(dr["Fg_L"].ToString());
+      //  Acolor.A = Convert.ToDouble(dr["Fg_A"].ToString());
+      //  Acolor.B = Convert.ToDouble(dr["Fg_B"].ToString());
+
+      //  CDcolor.LA = Convert.ToDouble(dr["CD_Fg_L"].ToString());
+      //  CDcolor.A = Convert.ToDouble(dr["CD_Fg_A"].ToString());
+      //  CDcolor.B = Convert.ToDouble(dr["CD_Fg_B"].ToString());
+
+      //  Mcolor.LA = Convert.ToDouble(dr["Measured_L"].ToString());
+      //  Mcolor.A = Convert.ToDouble(dr["Measured_A"].ToString());
+      //  Mcolor.B = Convert.ToDouble(dr["Measured_B"].ToString());
+
+      //  double bgL = Convert.ToDouble(dr["Bg_L"].ToString());
+
+      //  PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(Acolor);
+
+      //  if(bgL<50)
+      //  dr["BGLValue"] = "0";
+      //  else
+      //    dr["BGLValue"] = "1";
+
+       
+      //  dr["FGLValue"] = cr.LValueFlag.ToString();
+      //  dr["NuetralValue"] = cr.NetralValueFlag.ToString();
+      //  dr["Region"] = cr.RegionValue.ToString();
+
+      //  dr["Distance"] = (PerceptionLib.Color.ColorDistanceCalAB(CDcolor, Mcolor)).ToString();
+                
+      //}
+
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+      //Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
       btn_ExportGrid.IsEnabled = true;
 
     }
