@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="569.04266"
+   height="95.262939"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
    inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\ISMAR 2013\EuclidianAndJND_RealValues_updated.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="EuclidianAndJND_RealValues.svg">
   <defs
      id="defs4">
     <marker
@@ -56,17 +56,21 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="143.12298"
-     inkscape:cy="583.37163"
+     inkscape:zoom="0.35"
+     inkscape:cx="282.87995"
+     inkscape:cy="105.28694"
      inkscape:document-units="px"
      inkscape:current-layer="layer1-9"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1018"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -75,14 +79,15 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(139.75697,-479.01455)">
     <g
        transform="translate(-115.34716,-502.21189)"
        id="layer1-9"
