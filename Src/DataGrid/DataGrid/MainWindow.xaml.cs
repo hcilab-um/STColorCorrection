@@ -1189,8 +1189,9 @@ namespace DataGrid
 
     private void EqDistance_Click(object sender, RoutedEventArgs e)
     {
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
-      //PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Data\Big_Pro_Compensation.csv");
+      
+     // PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\bigProjecor\BaseBinFile.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Data\Phone_Prediction_WhitePointsApplied_v2.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -1199,15 +1200,55 @@ namespace DataGrid
 
       }));
 
-      
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\Predicition_Anova.txt");
       DataTable binTable = new DataTable();
-      binTable = bin.Clone();
-    
-      Random random = new Random();
-      PerceptionLib.Color Acolor= new PerceptionLib.Color();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        binTable = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-      PerceptionLib.Color CDcolor = new PerceptionLib.Color();
-      PerceptionLib.Color Mcolor = new PerceptionLib.Color();
+      }));
+
+      DataRow newRow;
+      int index = 0;
+
+      for (int i = 0; i < bin.Rows.Count; i++)
+      {
+        newRow = binTable.NewRow();
+        newRow[0] = "Phone";
+        newRow[1] = "DirectModel";
+        newRow[2] = "Behind";
+        newRow[3] = bin.Rows[i][76];
+        newRow[4] = index.ToString();
+        binTable.Rows.Add(newRow);
+
+        newRow = binTable.NewRow();
+        newRow[0] = "Phone";
+        newRow[1] = "DirectModel";
+        newRow[2] = "front";
+        newRow[3] = bin.Rows[i][77];
+        newRow[4] = index.ToString();
+        binTable.Rows.Add(newRow);
+        
+        newRow = binTable.NewRow();
+        newRow[0] = "Phone";
+        newRow[1] = "BinModel";
+        newRow[2] = "Behind";
+        newRow[3] = bin.Rows[i][84];
+        newRow[4] = index.ToString();
+        binTable.Rows.Add(newRow);
+        
+        newRow = binTable.NewRow();
+        newRow[0] = "Phone";
+        newRow[1] = "BinModel";
+        newRow[2] = "front";
+        newRow[3] = bin.Rows[i][85];
+        newRow[4] = index.ToString();
+        binTable.Rows.Add(newRow);
+        index++;
+      }
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
       //CIEXYZ bg = new CIEXYZ(0,0,0);
       ////Acolor.LA = 10.10715853;
@@ -1228,20 +1269,20 @@ namespace DataGrid
       
       //Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
-      for (int i = 0; i < bin.Rows.Count; i++)
-      {
-        Acolor.LA = Convert.ToDouble(bin.Rows[i][3].ToString());
-        Acolor.A = Convert.ToDouble(bin.Rows[i][4].ToString());
-        Acolor.B = Convert.ToDouble(bin.Rows[i][5].ToString());
+      //for (int i = 0; i < bin.Rows.Count; i++)
+      //{
+      //  Acolor.LA = Convert.ToDouble(bin.Rows[i][3].ToString());
+      //  Acolor.A = Convert.ToDouble(bin.Rows[i][4].ToString());
+      //  Acolor.B = Convert.ToDouble(bin.Rows[i][5].ToString());
 
-        PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(Acolor);
-        if (cr.NetralValueFlag == 0)
-          binTable.ImportRow(bin.Rows[i]);
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
-        Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      //  PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(Acolor);
+      //  if (cr.NetralValueFlag == 0)
+      //    binTable.ImportRow(bin.Rows[i]);
+      // Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = binTable.DefaultView));
+      //  Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
 
 
-      }
+      //}
 
 
       //foreach (DataRow dr in bin.Rows)

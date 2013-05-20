@@ -10,8 +10,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="3277.5393"
-   height="1947.5391"
+   width="3277.051"
+   height="1027.5391"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -25,7 +25,7 @@
        inkscape:collect="always"
        xlink:href="#pattern3019"
        id="pattern4513"
-       patternTransform="translate(125.7143,144.71892)" />
+       patternTransform="translate(-66.640144,-229.01185)" />
     <pattern
        inkscape:collect="always"
        xlink:href="#pattern3014"
@@ -45,16 +45,6 @@
          x="0"
          y="0" />
     </pattern>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath4549">
-      <path
-         style="fill:#8aa578;fill-opacity:1;stroke:none"
-         d="m 125.71429,145.2195 450,449.99997 -450,0 z"
-         id="path4551"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccc" />
-    </clipPath>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath4553">
@@ -285,6 +275,16 @@
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccc" />
     </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4718">
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path4720"
+         d="m -6.031,125.04212 450,449.99997 -450,0 z"
+         style="fill:#8aa578;fill-opacity:1;stroke:none" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -294,13 +294,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="1707.4679"
-     inkscape:cy="882.7694"
+     inkscape:cx="1779.412"
+     inkscape:cy="710.41861"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1018"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -324,25 +324,75 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(1913.5703,-7.5031204)">
-    <rect
-       style="fill:url(#pattern4513);stroke:none"
-       width="450"
-       height="450.50055"
-       x="125.71429"
-       y="144.71892"
-       id="rect3017"
-       clip-path="url(#clipPath4549)"
-       transform="translate(-131.74529,-20.177383)" />
+     transform="translate(1913.082,-7.5031204)">
     <image
-       y="-1.9832"
-       x="631.61951"
-       id="image3007"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-RY.png"
-       height="450"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-MR.png"
+       xlink:href="CorrectionHM/High-MR.png"
+       transform="translate(-144.60241,-673.03424)"
+       clip-path="url(#clipPath5253)"
        width="450"
+       height="450"
+       id="image5075"
+       x="1058.5714"
+       y="1258.0764" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-BM.png"
+       xlink:href="CorrectionHM/High-BM.png"
+       transform="translate(-104.60247,-644.46294)"
+       clip-path="url(#clipPath5196)"
+       width="450"
+       height="450"
+       id="image5053"
+       x="558.57147"
+       y="1229.5051" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-CB.png"
+       xlink:href="CorrectionHM/High-CB.png"
+       transform="translate(-45.102438,-575.89142)"
+       clip-path="url(#clipPath5135)"
+       width="449.5"
+       height="450"
+       id="image5031"
+       x="39.071438"
+       y="1160.9336" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-GC.png"
+       xlink:href="CorrectionHM/Low-GC.png"
+       transform="translate(-955.3412,-367.69559)"
+       clip-path="url(#clipPath4764)"
+       width="450"
+       height="450"
+       id="image4732"
+       x="1869.3102"
+       y="492.7377" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-YG.png"
+       xlink:href="CorrectionHM/Low-YG.png"
+       transform="translate(-510.72967,-355.09622)"
+       clip-path="url(#clipPath4647)"
+       width="450"
+       height="450"
+       id="image4614"
+       x="964.69867"
+       y="480.13834" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-RY.png"
+       xlink:href="CorrectionHM/Low-RY.png"
+       transform="translate(-637.65052,127.02529)"
        clip-path="url(#clipPath4553)"
-       transform="translate(-637.65052,127.02529)" />
+       width="450"
+       height="450"
+       id="image3007"
+       x="631.61951"
+       y="-1.9832" />
+    <image
+       y="125.04212"
+       x="-6.0310001"
+       id="image4715"
+       xlink:href="file:///C:/Users/jhincapie/Desktop/Projects/STColorCorrection/Docs/ISMAR%202013/CorrectionHM/Low-CB.png"
+       height="450.50055"
+       width="450"
+       clip-path="url(#clipPath4718)" />
     <g
        id="g4563"
        transform="translate(-130.19895,-21.822705)">
@@ -399,23 +449,15 @@
        id="path4617"
        inkscape:connector-curvature="0" />
     <image
-       y="662.4433"
-       x="1543.531"
-       id="image4603"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-BM.png"
-       height="450"
-       width="449.5"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-BM.png"
+       xlink:href="CorrectionHM/Low-BM.png"
+       transform="translate(-1089.062,-537.40119)"
        clip-path="url(#clipPath4651)"
-       transform="translate(-1089.062,-537.40119)" />
-    <image
-       y="480.13834"
-       x="964.69867"
-       id="image4614"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-YG.png"
+       width="449.5"
        height="450"
-       width="450"
-       clip-path="url(#clipPath4647)"
-       transform="translate(-510.72967,-355.09622)" />
+       id="image4603"
+       x="1543.531"
+       y="662.4433" />
     <path
        style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
        d="m 455.469,573.54211 447.00003,-447"
@@ -472,23 +514,15 @@
            sodipodi:role="line">YG</tspan></text>
     </g>
     <image
-       y="508.90012"
-       x="1331.9091"
-       id="image4721"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-MR.png"
-       height="450"
-       width="450"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-MR.png"
+       xlink:href="CorrectionHM/Low-MR.png"
+       transform="translate(-417.9401,-383.85801)"
        clip-path="url(#clipPath4760)"
-       transform="translate(-417.9401,-383.85801)" />
-    <image
-       y="492.7377"
-       x="1869.3102"
-       id="image4732"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-GC.png"
-       height="450"
        width="450"
-       clip-path="url(#clipPath4764)"
-       transform="translate(-955.3412,-367.69559)" />
+       height="450"
+       id="image4721"
+       x="1331.9091"
+       y="508.90012" />
     <path
        style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
        d="m 915.46901,573.54211 447.00009,-447"
@@ -545,33 +579,37 @@
            sodipodi:role="line">GC</tspan></text>
     </g>
     <image
-       y="125.04211"
-       x="-1386.031"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-Dark.png"
+       xlink:href="CorrectionHM/Low-Dark.png"
+       width="450"
+       height="450"
        id="image4873"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-Dark.png"
-       height="450"
-       width="450" />
+       x="-1386.031"
+       y="125.04211" />
     <image
-       y="125.04211"
-       x="-1846.0308"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-Light.png"
+       xlink:href="CorrectionHM/Low-Light.png"
+       width="450"
+       height="450"
        id="image4884"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-Light.png"
-       height="450"
-       width="450" />
+       x="-1846.0308"
+       y="125.04211" />
     <image
-       y="125.04211"
-       x="-466.03101"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-N-Dark.png"
+       xlink:href="CorrectionHM/Low-N-Dark.png"
+       width="450"
+       height="450"
        id="image4895"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-N-Dark.png"
-       height="450"
-       width="450" />
+       x="-466.03101"
+       y="125.04211" />
     <image
-       y="125.04211"
-       x="-926.03101"
-       id="image4906"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Low-N-Light.png"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/Low-N-Light.png"
+       xlink:href="CorrectionHM/Low-N-Light.png"
+       width="450"
        height="450"
-       width="450" />
+       id="image4906"
+       x="-926.03101"
+       y="125.04211" />
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -685,51 +723,47 @@
          x="-359.10773"
          y="-1884.4492">Low Intensity</tspan></text>
     <image
-       y="585.04218"
-       x="-1386.031"
-       id="image4976"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-Dark.png"
-       height="450"
-       width="450" />
-    <image
-       y="585.04218"
-       x="-1846.0308"
-       id="image4987"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="585.04218"
-       x="-466.03101"
-       id="image4998"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-N-Dark.png"
-       height="450"
-       width="450" />
-    <image
-       y="585.04218"
-       x="-926.03101"
-       id="image5009"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-N-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="706.64795"
-       x="32.857155"
-       id="image5020"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-RY.png"
-       height="450"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-Dark.png"
+       xlink:href="CorrectionHM/High-Dark.png"
        width="450"
-       clip-path="url(#clipPath5131)"
-       transform="translate(-38.888155,-121.60577)" />
-    <image
-       y="1160.9336"
-       x="39.071438"
-       id="image5031"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-CB.png"
        height="450"
-       width="449.5"
-       clip-path="url(#clipPath5135)"
-       transform="translate(-45.102438,-575.89142)" />
+       id="image4976"
+       x="-1386.031"
+       y="585.04218" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-Light.png"
+       xlink:href="CorrectionHM/High-Light.png"
+       width="450"
+       height="450"
+       id="image4987"
+       x="-1846.0308"
+       y="585.04218" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-N-Dark.png"
+       xlink:href="CorrectionHM/High-N-Dark.png"
+       width="450"
+       height="450"
+       id="image4998"
+       x="-466.03101"
+       y="585.04218" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-N-Light.png"
+       xlink:href="CorrectionHM/High-N-Light.png"
+       width="450"
+       height="450"
+       id="image5009"
+       x="-926.03101"
+       y="585.04218" />
+    <image
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-RY.png"
+       xlink:href="CorrectionHM/High-RY.png"
+       transform="translate(-38.888155,-121.60577)"
+       clip-path="url(#clipPath5131)"
+       width="450"
+       height="450"
+       id="image5020"
+       x="32.857155"
+       y="706.64795" />
     <g
        id="g4563-9"
        transform="translate(-130.19895,438.17768)">
@@ -786,23 +820,15 @@
        id="path4617-7"
        inkscape:connector-curvature="0" />
     <image
-       y="743.79083"
-       x="552.85712"
-       id="image5042"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-YG.png"
-       height="450"
-       width="450"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-YG.png"
+       xlink:href="CorrectionHM/High-YG.png"
+       transform="translate(-98.88812,-158.74865)"
        clip-path="url(#clipPath5192)"
-       transform="translate(-98.88812,-158.74865)" />
-    <image
-       y="1229.5051"
-       x="558.57147"
-       id="image5053"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-BM.png"
-       height="450"
        width="450"
-       clip-path="url(#clipPath5196)"
-       transform="translate(-104.60247,-644.46294)" />
+       height="450"
+       id="image5042"
+       x="552.85712"
+       y="743.79083" />
     <path
        style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
        d="M 455.469,1033.5422 902.46898,586.54218"
@@ -859,23 +885,15 @@
            sodipodi:role="line">YG</tspan></text>
     </g>
     <image
-       y="743.79071"
-       x="1041.4286"
-       id="image5064"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-GC.png"
-       height="450"
-       width="450"
+       sodipodi:absref="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionHM/High-GC.png"
+       xlink:href="CorrectionHM/High-GC.png"
+       transform="translate(-127.4596,-158.74853)"
        clip-path="url(#clipPath5257)"
-       transform="translate(-127.4596,-158.74853)" />
-    <image
-       y="1258.0764"
-       x="1058.5714"
-       id="image5075"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/High-MR.png"
-       height="450"
        width="450"
-       clip-path="url(#clipPath5253)"
-       transform="translate(-144.60241,-673.03424)" />
+       height="450"
+       id="image5064"
+       x="1041.4286"
+       y="743.79071" />
     <path
        style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
        d="M 915.469,1033.5422 1362.4689,586.54218"
@@ -943,566 +961,5 @@
          id="tspan4915-5-1"
          x="-811.1828"
          y="-1884.4492">High Intensity</tspan></text>
-    <image
-       y="1045.0422"
-       x="-1386.0308"
-       id="image5430"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-Dark.png"
-       height="450"
-       width="450" />
-    <image
-       y="1045.0422"
-       x="-1846.0308"
-       id="image5441"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="1045.0422"
-       x="-466.03088"
-       id="image5452"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-N-Dark.png"
-       height="450"
-       width="450" />
-    <image
-       y="1045.0422"
-       x="-926.03088"
-       id="image5463"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-N-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="1505.0422"
-       x="-1386.0308"
-       id="image5540"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Country-Dark.png"
-       height="450"
-       width="450" />
-    <image
-       y="1505.0422"
-       x="-1846.0308"
-       id="image5551"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Country-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="1505.0422"
-       x="-926.03088"
-       id="image5562"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Country-N-Light.png"
-       height="450"
-       width="450" />
-    <image
-       y="1505.0422"
-       x="-466.03088"
-       id="image5573"
-       xlink:href="file:///C:/Users/jhincapie/Desktop/Country-N-Dark.png"
-       height="450"
-       width="450" />
-    <g
-       id="g6260"
-       transform="translate(-249.74173,-1069.8839)">
-      <image
-         transform="translate(2.7664693,164.919)"
-         clip-path="url(#clipPath5784)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-RY.png"
-         id="image5584"
-         x="240.94432"
-         y="2410.0071" />
-      <image
-         transform="translate(-5.31474,-332.0761)"
-         clip-path="url(#clipPath5788)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-CB.png"
-         id="image5595"
-         x="249.02553"
-         y="2907.0022" />
-      <g
-         id="g6018">
-        <g
-           id="g4563-9-5"
-           transform="translate(119.54284,2428.0616)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-7-00"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-22-4"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-8-54"
-               sodipodi:role="line">RY</tspan></text>
-        </g>
-        <g
-           id="g4563-3-2-9"
-           transform="translate(-260.45716,2808.0616)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-8-5"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-9-6"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-0-4"
-               sodipodi:role="line">CB</tspan></text>
-        </g>
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 245.21079,2576.4261 446.99999,447"
-           id="path4617-7-8"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
-    <g
-       id="g6169"
-       transform="translate(-365.41215,-274.00014)">
-      <image
-         clip-path="url(#clipPath5820)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-GC.png"
-         id="image5518"
-         x="1279.3811"
-         y="1319.0425" />
-      <image
-         transform="translate(-60.609296,-585.88831)"
-         clip-path="url(#clipPath5816)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-MR.png"
-         id="image5529"
-         x="1339.9904"
-         y="1904.9308" />
-      <g
-         transform="translate(-119.9442,-290.17782)"
-         id="g5973">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 1400.8253,2057.7203 446.9999,-447.0001"
-           id="path4617-3-8-6-9"
-           inkscape:connector-curvature="0" />
-        <g
-           id="g4563-3-1-6-2-2"
-           transform="translate(1275.1581,1842.3557)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-0-6-0"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-6-5-7"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-6-3-0"
-               sodipodi:role="line">MR</tspan></text>
-        </g>
-        <g
-           id="g4563-3-1-1-9-6"
-           transform="translate(895.15809,1462.3557)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-8-2-0"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-4-4-7"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-9-6-0"
-               sodipodi:role="line">GC</tspan></text>
-        </g>
-      </g>
-    </g>
-    <g
-       id="g6232"
-       transform="translate(-393.69645,-949.41162)">
-      <image
-         clip-path="url(#clipPath5812)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-GC.png"
-         id="image5628"
-         x="1307.6654"
-         y="2454.4539" />
-      <image
-         transform="translate(-32.324829,-521.23853)"
-         clip-path="url(#clipPath5808)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-MR.png"
-         id="image5639"
-         x="1339.9902"
-         y="2975.6924" />
-      <g
-         transform="translate(-75.497495,-152.79714)"
-         id="g6007">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 1384.6629,3055.751 446.9999,-447"
-           id="path4617-3-8-6-5"
-           inkscape:connector-curvature="0" />
-        <g
-           id="g4563-3-1-6-2-6"
-           transform="translate(1258.9956,2840.3865)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-0-6-7"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-6-5-3"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-6-3-8"
-               sodipodi:role="line">MR</tspan></text>
-        </g>
-        <g
-           id="g4563-3-1-1-9-4"
-           transform="translate(878.99565,2460.3865)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-8-2-9"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-4-4-2"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-9-6-6"
-               sodipodi:role="line">GC</tspan></text>
-        </g>
-      </g>
-    </g>
-    <g
-       id="g6246"
-       transform="translate(-320.33592,-933.24906)">
-      <image
-         clip-path="url(#clipPath5800)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-YG.png"
-         id="image5606"
-         x="774.30493"
-         y="2438.2913" />
-      <image
-         transform="translate(-8.0811157,-517.1982)"
-         clip-path="url(#clipPath5804)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Country-BM.png"
-         id="image5617"
-         x="782.38605"
-         y="2955.4895" />
-      <g
-         transform="translate(-67.416168,-233.6094)"
-         id="g6071">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 843.2211,3120.4007 447,-447"
-           id="path4617-3-8-5"
-           inkscape:connector-curvature="0" />
-        <g
-           id="g4563-3-1-15-7"
-           transform="translate(717.55377,2905.0362)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-86-7"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-1-4"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-2-5"
-               sodipodi:role="line">BM</tspan></text>
-        </g>
-        <g
-           id="g4563-3-5-4-7"
-           transform="translate(337.55377,2525.0362)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-0-2-9"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-2-5-83"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-8-8-0"
-               sodipodi:role="line">YG</tspan></text>
-        </g>
-      </g>
-    </g>
-    <g
-       id="g6183"
-       transform="translate(-336.49834,-249.75655)">
-      <image
-         clip-path="url(#clipPath5792)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-YG.png"
-         id="image5496"
-         x="790.46735"
-         y="1294.7988" />
-      <image
-         transform="translate(-3.3e-4,-593.96977)"
-         clip-path="url(#clipPath5796)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-BM.png"
-         id="image5507"
-         x="790.46735"
-         y="1888.7686" />
-      <g
-         transform="translate(-104.53266,-49.706215)"
-         id="g6105">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 896.50001,1793.005 446.99999,-447"
-           id="path4617-3-8-2"
-           inkscape:connector-curvature="0" />
-        <g
-           id="g4563-3-1-15-2"
-           transform="translate(770.83268,1577.6405)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-9-86-3"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-8-1-6"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-6-2-7"
-               sodipodi:role="line">BM</tspan></text>
-        </g>
-        <g
-           id="g4563-3-5-4-1"
-           transform="translate(390.83268,1197.6405)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-0-2-5"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-2-5-5"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-8-8-4"
-               sodipodi:role="line">YG</tspan></text>
-        </g>
-      </g>
-    </g>
-    <g
-       id="g6197"
-       transform="translate(-204.54887,-276.22053)">
-      <image
-         transform="translate(-42.426413,46.666944)"
-         clip-path="url(#clipPath5776)"
-         width="450"
-         height="450"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-RY.png"
-         id="image5474"
-         x="240.94435"
-         y="1274.5958" />
-      <image
-         transform="translate(-46.467017,-478.81231)"
-         clip-path="url(#clipPath5780)"
-         width="449.79999"
-         height="449.79999"
-         xlink:href="file:///C:/Users/jhincapie/Desktop/Urban-CB.png"
-         id="image5485"
-         x="244.98495"
-         y="1800.0751" />
-      <g
-         transform="translate(7.3350878,-25.317837)"
-         id="g6158">
-        <g
-           id="g4563-9-0"
-           transform="translate(67.014903,1199.7161)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-7-2"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-22-6"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-8-0"
-               sodipodi:role="line">RY</tspan></text>
-        </g>
-        <g
-           id="g4563-3-2-6"
-           transform="translate(-312.9851,1579.7161)">
-          <path
-             transform="matrix(0.5689365,0,0,0.67804761,286.00673,141.94299)"
-             d="m 488.91383,58.877155 c 0,20.363052 -19.67334,36.870568 -43.94163,36.870568 -24.2683,0 -43.94164,-16.507516 -43.94164,-36.870568 0,-20.363052 19.67334,-36.870567 43.94164,-36.870567 24.26829,0 43.94163,16.507515 43.94163,36.870567 z"
-             sodipodi:ry="36.870567"
-             sodipodi:rx="43.941635"
-             sodipodi:cy="58.877155"
-             sodipodi:cx="444.9722"
-             id="path4557-1-8-1"
-             style="fill:#000000;stroke:none"
-             sodipodi:type="arc" />
-          <text
-             sodipodi:linespacing="125%"
-             id="text4559-2-9-1"
-             y="190.45435"
-             x="521.60126"
-             style="font-size:24px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-             xml:space="preserve"><tspan
-               y="190.45435"
-               x="521.60126"
-               id="tspan4561-3-0-1"
-               sodipodi:role="line">CB</tspan></text>
-        </g>
-        <path
-           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.00000004, 12.00000004;stroke-dashoffset:0"
-           d="m 192.68285,1348.0806 446.99999,447"
-           id="path4617-7-7"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-1271.1907"
-       y="-1884.4492"
-       id="text4913-3-1-3"
-       sodipodi:linespacing="125%"
-       transform="matrix(0,-1,1,0,0,0)"><tspan
-         sodipodi:role="line"
-         id="tspan4915-5-1-0"
-         x="-1271.1907"
-         y="-1884.4492">Urban Daylight</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-1730.7297"
-       y="-1884.4492"
-       id="text4913-3-1-3-0"
-       sodipodi:linespacing="125%"
-       transform="matrix(0,-1,1,0,0,0)"><tspan
-         sodipodi:role="line"
-         id="tspan4915-5-1-0-4"
-         x="-1730.7297"
-         y="-1884.4492">Country Daylight</tspan></text>
   </g>
 </svg>
