@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="CorrectionResultsANOVA.svg"
-   inkscape:export-filename="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\CorrectionResultsANOVA.png"
+   inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\CorrectionResultsANOVA.png"
    inkscape:export-xdpi="180"
    inkscape:export-ydpi="180">
   <defs
@@ -574,8 +574,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="706"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -1363,7 +1363,7 @@
          sodipodi:role="line"
          id="tspan3658-9"
          x="-437.55777"
-         y="242.06343">Correction Accuracy</tspan><tspan
+         y="242.06343">Correction Error Rate</tspan><tspan
          sodipodi:role="line"
          x="-437.55777"
          y="262.06342"
