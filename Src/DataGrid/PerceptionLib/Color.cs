@@ -492,10 +492,10 @@ namespace PerceptionLib
       return rColor;
     }
 
-    private static double FX(double e)
-    {
-      return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e + 16) / 116));
-    }
+      private static double FX(double e)
+      {
+        return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e + 16) / 116));
+      }
 
     /// <summary>
     /// funtion for LAb To RGB

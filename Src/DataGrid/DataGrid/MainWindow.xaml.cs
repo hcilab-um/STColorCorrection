@@ -1322,6 +1322,52 @@ namespace DataGrid
       btn_ExportGrid.IsEnabled = true;
 
     }
+
+    private void BgCal_Click(object sender, RoutedEventArgs e)
+    {
+      
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\BaseBinFile.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      double OL,OA,OB,OX,OY,OZ,LL,LA,LB,LX,LY,LZ;
+
+
+      foreach (DataRow dr in bin.Rows)
+      {
+        OL=Convert.ToDouble(dr["BGLA"].ToString());
+        OA=Convert.ToDouble(dr["BGA"].ToString());
+        OB=Convert.ToDouble(dr["BGlaB"].ToString());
+        
+        OX=Convert.ToDouble(dr["BGX"].ToString());
+        OY=Convert.ToDouble(dr["BGY"].ToString());
+        OZ=Convert.ToDouble(dr["BGZ"].ToString());
+
+        LL=Convert.ToDouble(dr["LumistyLA"].ToString());
+        LA=Convert.ToDouble(dr["LumistyA"].ToString());
+        LB=Convert.ToDouble(dr["LumistylaB"].ToString());
+        
+        LX=Convert.ToDouble(dr["LumistyX"].ToString());
+        LY=Convert.ToDouble(dr["Lumistyy"].ToString());
+        LZ=Convert.ToDouble(dr["LumistyZ"].ToString());
+
+        dr["PL"] = (0.8858*OL) - 1.477;
+        dr["PA"] = (0.874*OA) - 0.9226;
+        dr["PB"] =(0.8603*OB)+ 3.9524;
+        
+        dr["PX"]= (0.7041*OX) - 0.0012;
+        dr["PY"] =( 0.7066*OY) - 0.000003;
+        dr["PZ"] = (0.626 * OZ) + 0.0006;
+
+
+      }
+      
+    }
     
     }
   

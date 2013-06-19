@@ -10,9 +10,6 @@ namespace DataGrid
 {
   class ColorSpaceConverter
   {
-
-   
-
     public static System.Drawing.Color ToGetRGB(int r, int g, int b)
     {
       System.Drawing.Color mRGB = new System.Drawing.Color();
@@ -71,11 +68,6 @@ namespace DataGrid
 
         return colorObject;
     }
-
-   
-   
-
-
 
   }
 }
