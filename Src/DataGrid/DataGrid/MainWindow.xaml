@@ -12,7 +12,7 @@
         <Button Content="FileConvertor" Height="23" HorizontalAlignment="Left" Margin="42,276,0,0" Name="button4" VerticalAlignment="Top" Width="75" Click="FileConvertor_Click" />
         <Button Content="PhoneCompensation" Height="23" HorizontalAlignment="Left" Margin="123,276,0,0" Name="button5" VerticalAlignment="Top" Width="75" Click="PhoneCompensation_Click" />
         <Button Content="HueDifference" Height="23" HorizontalAlignment="Left" Margin="204,276,0,0" Name="button6" VerticalAlignment="Top" Width="75" Click="HueDifference_Click" />
-        <Button Content="EqDistance" Height="23" HorizontalAlignment="Left" Margin="285,276,0,0" Name="button7" VerticalAlignment="Top" Width="75" Click="EqDistance_Click" />
+        <Button Content="EqDistance" Height="23" HorizontalAlignment="Right" Margin="0,276,143,0" Name="button7" VerticalAlignment="Top" Width="75" Click="EqDistance_Click" />
         <Button Content="BgCal" Height="23" HorizontalAlignment="Left" Margin="376,276,0,0" Name="button8" VerticalAlignment="Top" Width="75" Click="BgCal_Click" />
     </Grid>
 </Window>

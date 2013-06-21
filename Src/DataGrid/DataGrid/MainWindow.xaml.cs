@@ -1326,7 +1326,7 @@ namespace DataGrid
     private void BgCal_Click(object sender, RoutedEventArgs e)
     {
       
-      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\value\phone\BaseBinFile.csv");
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\bin\value\Predicted_Bg_input.csv");
       DataTable bin = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -1335,37 +1335,50 @@ namespace DataGrid
 
       }));
 
-      double OL,OA,OB,OX,OY,OZ,LL,LA,LB,LX,LY,LZ;
+      double OL,OA,OB,px,py,pz,LL,LA,LB;
 
-
+      PerceptionLib.Color BgColor =new PerceptionLib.Color();
+      PerceptionLib.Color LBgColor = new PerceptionLib.Color();
+      
+      
       foreach (DataRow dr in bin.Rows)
       {
-        OL=Convert.ToDouble(dr["BGLA"].ToString());
+        OL=Convert.ToDouble(dr["BGL"].ToString());
         OA=Convert.ToDouble(dr["BGA"].ToString());
-        OB=Convert.ToDouble(dr["BGlaB"].ToString());
+        OB=Convert.ToDouble(dr["BGB"].ToString());
+
+        LL = Convert.ToDouble(dr["LumistyL"].ToString());
+        LA = Convert.ToDouble(dr["LumistyA"].ToString());
+        LB = Convert.ToDouble(dr["LumistyB"].ToString());
         
-        OX=Convert.ToDouble(dr["BGX"].ToString());
-        OY=Convert.ToDouble(dr["BGY"].ToString());
-        OZ=Convert.ToDouble(dr["BGZ"].ToString());
+        px = Convert.ToDouble(dr["PX"].ToString());
+        py = Convert.ToDouble(dr["PY"].ToString());
+        pz = Convert.ToDouble(dr["PZ"].ToString());
 
-        LL=Convert.ToDouble(dr["LumistyLA"].ToString());
-        LA=Convert.ToDouble(dr["LumistyA"].ToString());
-        LB=Convert.ToDouble(dr["LumistylaB"].ToString());
+        PerceptionLib.CIEXYZ xyz = new CIEXYZ(px, py, pz);
+
+        PerceptionLib.Color PLBgColor = PerceptionLib.Color.ToLAB(xyz);
         
-        LX=Convert.ToDouble(dr["LumistyX"].ToString());
-        LY=Convert.ToDouble(dr["Lumistyy"].ToString());
-        LZ=Convert.ToDouble(dr["LumistyZ"].ToString());
+        BgColor.LA = OL;
+        BgColor.A = OA;
+        BgColor.B = OB;
 
-        dr["PL"] = (0.8858*OL) - 1.477;
-        dr["PA"] = (0.874*OA) - 0.9226;
-        dr["PB"] =(0.8603*OB)+ 3.9524;
+
+        LBgColor.LA = LL;
+        LBgColor.A = LA;
+        LBgColor.B = LB;
         
-        dr["PX"]= (0.7041*OX) - 0.0012;
-        dr["PY"] =( 0.7066*OY) - 0.000003;
-        dr["PZ"] = (0.626 * OZ) + 0.0006;
-
-
+        PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(BgColor);
+        
+        dr["BGLValue"] = cr.LValueFlag.ToString();
+        dr["SaturationValue"] = cr.NetralValueFlag.ToString();
+        dr["Region"] = cr.RegionValue.ToString();
+        dr["PXYZ_EqDistance"] = (PerceptionLib.Color.ColorDistanceCalAB(PLBgColor, LBgColor)).ToString();
       }
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      btn_ExportGrid.IsEnabled = true;
+
       
     }
     
