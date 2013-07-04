@@ -7,7 +7,7 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
  
-const int blocksize = 1; 
+const int blocksize = 800; 
 const int N = 16; 
 
 
@@ -251,7 +251,7 @@ __device__ void LABToXYZ(double L1,double A1,double B1)
 	
  __global__ void correct(int *block_frame, double *block_background, double *block_profile,char *a, int *b) 
 {
-	a[threadIdx.x] += b[threadIdx.x];
+	//a[threadIdx.x] += b[threadIdx.x];
 	//GPU_FRAME_DIMENSIONS
 	for(int pixel = 0 ; pixel < 1 ; pixel++)
 	{
@@ -444,13 +444,17 @@ int main(int argc, char** argv)
 		cudaMemcpy(bd, b, isize, cudaMemcpyHostToDevice ); 
 		/////////////////////
 		//4- call the kernel
-		dim3 dimBlock( blocksize, 1 );
+		dim3 block_size( 16,16 );
 		dim3 dimGrid( 1, 1 );
+
+		dim3 grid_size;
+    grid_size.x = (100 + block_size.x - 1)/block_size.x;  /*< Greater than or equal to image width */
+    grid_size.y = (100 + block_size.y - 1)/block_size.y;
 	
 		tstart = clock();
 				// Start record
 		cudaEventRecord(start, 0);
-		correct<<<dimGrid, dimBlock>>>(gpu_frame, gpu_background,gpu_profile,ad, bd);
+		correct<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile,ad, bd);
 		// Stop event
 		cudaEventRecord(stop, 0);
 		
@@ -469,7 +473,7 @@ int main(int argc, char** argv)
 	
 		runTime = ((end-tstart));
 		///////////////////////////
-		cudaMemcpy( a, ad, csize, cudaMemcpyDeviceToHost ); 
+		//cudaMemcpy( a, ad, csize, cudaMemcpyDeviceToHost ); 
 		cudaFree(ad);
 		cudaFree(bd);
 		
@@ -499,5 +503,6 @@ int main(int argc, char** argv)
 
 int main1(int argc, char** argv)
 {
+
 	return 0;
 }
