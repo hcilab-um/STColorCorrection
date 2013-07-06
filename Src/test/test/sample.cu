@@ -708,9 +708,10 @@ __global__ void correct3(int *block_frame, double *block_background, double *blo
 			
 			XYZ_blend=addXYZ_st(0,0,0,bgX,bgY,bgZ);
 			
-			lab_blend=XYZtoLAB_st(XYZ_blend.X,XYZ_blend.Y,XYZ_blend.Z);
+			//lab_blend=XYZtoLAB_st(XYZ_blend.X,XYZ_blend.Y,XYZ_blend.Z);
 			
-			ClosestBinDistance=distance(lab.L,lab.A,lab.B,lab_blend.L,lab_blend.A,lab_blend.B);
+			//ClosestBinDistance=distance(lab.L,lab.A,lab.B,lab_blend.L,lab_blend.A,lab_blend.B);
+			ClosestBinDistance=distance(XYZ_blend.X,XYZ_blend.Y,XYZ_blend.Z,XYZ_blend.Y,XYZ_blend.Y,XYZ_blend.Z);
 
 			 if (ClosestBinDistance >= closestColor)
 	               continue;
@@ -719,6 +720,7 @@ __global__ void correct3(int *block_frame, double *block_background, double *blo
 			  BinIndex=bin;
 
 		}
+		
 
 		block_frame[3*pixel + 0]=(int)block_profile[6*BinIndex + 3];
 		block_frame[3*pixel + 1]=(int)block_profile[6*BinIndex + 4];
@@ -798,7 +800,7 @@ int main(int argc, char** argv)
 	cudaEventCreate(&start);
 	cudaEventCreate(&stop);
 	//-- for 100 frames
-	for(int f = 0 ; f < 1 ; f++)
+	for(int f = 0 ; f < 3 ; f++)
 	{
 		//start inner timer
 		
@@ -812,12 +814,12 @@ int main(int argc, char** argv)
 		
 		
 		//4- call the kernel
-		dim3 block_size(20,20);
+		dim3 block_size(24,24);
 		dim3 dimGrid( 1, 1 );
 
 		dim3 grid_size;
-        grid_size.x = (100)/block_size.x;  /*< Greater than or equal to image width */
-		grid_size.y = (100)/block_size.y;
+        grid_size.x = (80)/block_size.x;  /*< Greater than or equal to image width */
+		grid_size.y = (60)/block_size.y;
 	
 		
 				// Start record
