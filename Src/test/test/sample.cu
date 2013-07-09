@@ -15,9 +15,11 @@ const int PROFILE_SIZE = 8376;
 const int PROFILE_ARRAY_SIZE = PROFILE_SIZE * 6;
 __device__ const int GPU_PROFILE_SIZE = 8376;
 
-const int FRAME_DIMENSIONS = 800 * 600;
+const int FRAME_WIDTH = 800;
+const int FRAME_HEIGHT = 600;
+const int FRAME_DIMENSIONS = FRAME_WIDTH * FRAME_HEIGHT;
 const int FRAME_ARRAY_SIZE = FRAME_DIMENSIONS * 3;
-__device__ const int GPU_FRAME_DIMENSIONS = 800 * 600;
+__device__ const int GPU_FRAME_DIMENSIONS = FRAME_DIMENSIONS;
 
 __device__ double X,Y,Z,L,A,B;
 __device__ struct xyz
@@ -53,28 +55,6 @@ __device__ void addXYZ(double X1,double Y1,double Z1,double X2,double Y2,double 
 	X=X1+X2;
 	Y=Y1+Y2;
 	Z=Z1+Z2;
-/*
-	if(X>0.9504)
-		X=0.9504;
-	else if (X<0)
-		X=0;
-	else
-		X=X;
-	
-	if(X>1)
-		Y=1
-	else if (Y<0)
-		Y=0;
-	else
-		Y=Y;
-
-	if(Z>1.0888)
-		Z=1.0888;
-	else if (Z<0)
-		Z=0;
-	else
-		Z=Z;
-*/
 }
 __device__  struct xyz addXYZ_st(double X1,double Y1,double Z1,double X2,double Y2,double Z2)
 {
@@ -669,87 +649,70 @@ __global__ void correct2(int *block_frame, double *block_background, double *blo
 
 __global__ void correct3(int *block_frame, double *block_background, double *block_profile) 
 {
-	//a[threadIdx.x] += b[threadIdx.x];
-	//GPU_FRAME_DIMENSIONS
-	for(int pixel = 0 ; pixel <1 ; pixel++)
-	{
-		 //struct xyz XYZ;
-		 struct xyz XYZ_blend;
-		 struct LAB lab;
-		// struct LAB Keylab;
-		 struct LAB lab_blend;
+	int pixel = 0;
+	int block_background_index = 3 * pixel;
 
-		
-		double bgX = block_background[3*pixel + 0];
-		double bgY = block_background[3*pixel + 1];
-		double bgZ = block_background[3*pixel + 2];
+	double blendX;
+	double blendY;
+	double blendZ;
 
-		
-		double closestColor =  DBL_MAX;
-		double ClosestBinDistance;
-		int BinIndex=0;
+	double tempX;
+	double tempY;
+	double tempZ;
 
-		lab.L=block_profile[6*BinIndex + 3];
-		lab.A=block_profile[6*BinIndex + 4];
-		lab.B=block_profile[6*BinIndex + 5];
+	double bgX = block_background[block_background_index + 0];
+	double bgY = block_background[block_background_index + 1];
+	double bgZ = block_background[block_background_index + 2];
 
-		//DO YOUR MAGIC
-		
-		
-			
-		for(int bin = 0 ; bin < 8376 ; bin++)
-		{			
-			
-			double valueL = block_profile[6*bin + 3];
-			double valueA = block_profile[6*bin + 4];
-			double valueB = block_profile[6*bin + 5];
+	double closestColor =  DBL_MAX;
+	double closestBinDistance;
+	int binIndex=0;	
+	int block_profile_index = 0;
+	double diffX, diffY, diffZ, result;
 
-			//getting the xyz values of the chocen bin
-			
-			XYZ_blend=addXYZ_st(0,0,0,bgX,bgY,bgZ);
-			
-			//lab_blend=XYZtoLAB_st(XYZ_blend.X,XYZ_blend.Y,XYZ_blend.Z);
-			
-			//ClosestBinDistance=distance(lab.L,lab.A,lab.B,lab_blend.L,lab_blend.A,lab_blend.B);
-			ClosestBinDistance=distance(XYZ_blend.X,XYZ_blend.Y,XYZ_blend.Z,XYZ_blend.Y,XYZ_blend.Y,XYZ_blend.Z);
+	for(int bin = 0 ; bin < GPU_PROFILE_SIZE; bin++)
+	{			
+		block_profile_index = 6*bin;
+		tempX = block_profile[block_profile_index + 3];
+		tempY = block_profile[block_profile_index + 4];
+		tempZ = block_profile[block_profile_index + 5];
 
-			 if (ClosestBinDistance >= closestColor)
-	               continue;
-				
-	          closestColor = ClosestBinDistance;
-			  BinIndex=bin;
+		//getting the xyz values of the chocen bin
+		blendX = tempX + bgX;
+		blendY = tempY + bgY;
+		blendZ = tempZ + bgZ;
 
+		{
+			diffX = blendX - 0;
+			diffY = blendY - 0;
+			diffZ = blendZ - 0;
+			diffX = diffX * diffX;
+			diffY = diffY * diffY;
+			diffZ = diffZ * diffZ;
+			closestBinDistance = sqrt(diffX + diffY + diffZ);
 		}
-		
 
-		block_frame[3*pixel + 0]=(int)block_profile[6*BinIndex + 3];
-		block_frame[3*pixel + 1]=(int)block_profile[6*BinIndex + 4];
-		block_frame[3*pixel + 2]=(int)block_profile[6*BinIndex + 5];
-	
+		if (closestBinDistance >= closestColor)
+			continue;
+
+		closestColor = closestBinDistance;
+		binIndex = bin;
 	}
+
+	block_profile_index = 6*binIndex;
+	block_frame[block_background_index + 0]= (int)block_profile[block_profile_index + 3];
+	block_frame[block_background_index + 1]= (int)block_profile[block_profile_index + 4];
+	block_frame[block_background_index + 2]= (int)block_profile[block_profile_index + 5];
 }
 
 //basic cuda whihc runs on a single thread 
 int main(int argc, char** argv)
 {
-	//
-	char a[N] = "Hello \0\0\0\0\0\0";
-	int b[N] = {15, 10, 6, 0, -11, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-	char *ad;
-	int *bd;
-	const int csize = N*sizeof(char);
-	const int isize = N*sizeof(int);
- 
-	printf("%s", a);
-
-	///0
 	clock_t tstart;
 	clock_t end;
 	double runTime;
 
 	double *background,*profile;
-	//unsigned char *frame;
 	int *frame;
 
 	//var display-profile -- lookup table in LAB
@@ -758,36 +721,29 @@ int main(int argc, char** argv)
 	for(int index = 0 ; index < PROFILE_ARRAY_SIZE ; index++)
 		profile[index] = 30;
 
-	//var frame-image -- image to correct in RGB
-	/*frame=	(unsigned char*)malloc(FRAME_ARRAY_SIZE * sizeof(unsigned char));
-	for(int index = 0 ; index < FRAME_ARRAY_SIZE ; index++)
-		frame[index] = '3';
-	*/
-
+	//var frame-image -- XYZ
 	frame =	(int*)malloc(FRAME_ARRAY_SIZE * sizeof(int));
 	for(int index = 0 ; index < FRAME_ARRAY_SIZE ; index++)
 		frame[index] = 1;
-	//var background-image -- background image in YXZ
+	
+	//var background-image -- background image in XYZ
 	background= (double*)malloc(FRAME_ARRAY_SIZE * sizeof(double));
 	for(int index = 0 ; index < FRAME_ARRAY_SIZE ; index++)
 		background[index] = 0;
 
 	//pointers on the device
 	double *gpu_profile;
-	//unsigned char *gpu_frame;
 	int *gpu_frame;
-
 	double *gpu_background;
+
 	printf("prg starting\n");
 
 	const int psize = PROFILE_ARRAY_SIZE * sizeof(double);
-	//const int fsize = FRAME_ARRAY_SIZE * sizeof(unsigned char);
 	const int fsize = FRAME_ARRAY_SIZE * sizeof(int);
 	const int bgsize = FRAME_ARRAY_SIZE * sizeof(double);
 	
 	//memory allocation on the GPU
 	cudaMalloc(&gpu_profile, PROFILE_ARRAY_SIZE * sizeof(double)); 
-	//cudaMalloc(&gpu_frame, FRAME_ARRAY_SIZE * sizeof(unsigned char)); 
 	cudaMalloc(&gpu_frame, FRAME_ARRAY_SIZE * sizeof(int)); 
 	cudaMalloc(&gpu_background, FRAME_ARRAY_SIZE * sizeof(double)); 
 
@@ -800,153 +756,36 @@ int main(int argc, char** argv)
 	cudaEventCreate(&start);
 	cudaEventCreate(&stop);
 	//-- for 100 frames
-	for(int f = 0 ; f < 3 ; f++)
+	for(int f = 0 ; f < 1 ; f++)
 	{
-		//start inner timer
-		
-				
 		//2- pass the image to correct to the GPU
-		
 		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-
 		//3- pass the background image to the GPU
 		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
 		
+		dim3 threadsPerBlock(32, 32);
+		dim3 numBlocks(FRAME_WIDTH/threadsPerBlock.x, FRAME_HEIGHT/threadsPerBlock.y); 
 		
-		//4- call the kernel
-		dim3 block_size(24,24);
-		dim3 dimGrid( 1, 1 );
-
-		dim3 grid_size;
-        grid_size.x = (80)/block_size.x;  /*< Greater than or equal to image width */
-		grid_size.y = (60)/block_size.y;
-	
-		
-				// Start record
+		// Start record
 		cudaEventRecord(start, NULL);
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			float elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-		
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			cudaEventRecord(stop, NULL);
-			cudaEventSynchronize(stop);
-			 elapsedTime=-1;
-			cudaEventElapsedTime(&elapsedTime, start, stop);
-			printf("Run time is: %f \n",elapsedTime);
-cudaEventRecord(start, NULL);
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
-		correct3<<<grid_size, block_size>>>(gpu_frame, gpu_background,gpu_profile);
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-			
-		
-		
-	
-		
-		// Stop event
+		correct3<<<numBlocks, threadsPerBlock>>>(gpu_frame, gpu_background, gpu_profile);
+		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost);
 		cudaEventRecord(stop, NULL);
 		cudaEventSynchronize(stop);
-
-		elapsedTime=-1;
+		float elapsedTime=-1;
 		cudaEventElapsedTime(&elapsedTime, start, stop);
-		
 		printf("Run time is: %f \n",elapsedTime);
-		
-				
-		//5- copy the corrected image back to the CPU
-		cudaMemcpy(frame, gpu_frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyDeviceToHost); 
-		
-	
-				
 	}
+
 	cudaEventDestroy(start);
 	cudaEventDestroy(stop);
 	
 	for(int index = 0 ; index < 3 ; index++)
-	printf("%d\n", frame[index]);
+		printf("%d\n", frame[index]);
 	
 	end = clock();
 	runTime = (end-tstart);
-	printf("total Run time is %g seconds\n",runTime);
+	printf("total Run time is %g mil;liseconds \n",runTime);
 	cudaFree( gpu_profile );
 	cudaFree( gpu_frame );
 	cudaFree( gpu_background );
@@ -955,14 +794,6 @@ cudaEventRecord(start, NULL);
 	free(frame );
 	free(background );
 
-	//system("PAUSE");	
-	// stop outer timer
-	// print outer timer -- 3333 millisenconds MAX
 	return EXIT_SUCCESS;
 }
 
-int main1(int argc, char** argv)
-{
-
-	return 0;
-}
