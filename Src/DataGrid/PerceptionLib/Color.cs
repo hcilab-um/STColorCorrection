@@ -492,10 +492,10 @@ namespace PerceptionLib
       return rColor;
     }
 
-    private static double FX(double e)
-    {
-      return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e + 16) / 116));
-    }
+      private static double FX(double e)
+      {
+        return ((e > 0.008856) ? (Math.Pow(e, (1.0 / 3.0))) : ((903.3 * e + 16) / 116));
+      }
 
     /// <summary>
     /// funtion for LAb To RGB
@@ -1237,8 +1237,18 @@ namespace PerceptionLib
 
       if (Distacne <= CylinderRadius)
         ColorValues.NetralValueFlag = 0;
-      else
+      else if (Distacne<=40)
         ColorValues.NetralValueFlag = 1;
+      else if (Distacne <= 60)
+        ColorValues.NetralValueFlag = 2;
+      else if (Distacne <= 80)
+        ColorValues.NetralValueFlag = 3;
+      else if (Distacne <= 100)
+        ColorValues.NetralValueFlag = 4;
+      else
+        ColorValues.NetralValueFlag = 5;
+      //else 
+      //  ColorValues.NetralValueFlag = 1;
 
       // to find L region (High or Low)
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1303,15 +1313,9 @@ namespace PerceptionLib
       //  //error check
       //else
       //  ColorValues.QuatarentValue = 0;
-
-
-
       return ColorValues;
-
-
-
-
     }
+    
     
 
   }

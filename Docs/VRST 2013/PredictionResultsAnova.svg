@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="PredictionResultsAnova.svg"
-   inkscape:export-filename="C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Docs\ISMAR 2013\PredictionResultsAnova.png"
+   inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\PredictionResultsAnova.png"
    inkscape:export-xdpi="180"
    inkscape:export-ydpi="180">
   <defs
@@ -892,9 +892,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="143.05681"
-     inkscape:cy="99.707713"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="441.89679"
+     inkscape:cy="338.09232"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -902,8 +902,8 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1366"
-     inkscape:window-height="706"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
@@ -915,7 +915,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -930,364 +930,580 @@
        width="661.81726"
        height="39"
        x="66.082176"
-       y="503.65417" />
+       y="503.65417"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3061"
        style="fill:#f0f0f0;fill-opacity:1;fill-rule:nonzero;stroke:none"
        d="m 66.57679,121.0459 325.2125,0 0,341.575 -325.2125,0 0,-341.575 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3951"
        style="fill:#f0f0f0;fill-opacity:1;fill-rule:nonzero;stroke:none"
        d="m 402.72095,121.04591 325.21253,0 0,341.575 -325.21253,0 0,-341.575 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
        d="m 66.339286,385.93361 661.785714,0"
        id="path7711"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
        d="m 66.339286,308.9084 661.785714,0"
        id="path7711-2"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
        d="m 66.339286,232.0584 661.785714,0"
        id="path7711-21"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
        d="m 66.339286,155.1959 661.785714,0"
        id="path7711-6"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3961"
        style="fill:none;stroke:#000000;stroke-width:0.62126249;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.33000004;stroke-opacity:1;stroke-dasharray:none"
        d="m 402.72095,462.62091 325.21253,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3963"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 565.2696,462.62091 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3965"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 670.20848,462.62091 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4053"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 565.32098,462.62091 0,-105.1 -41.45,0 0,105.1 41.45,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4055"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 565.32098,462.62091 0,-105.1 -41.45,0 0,105.1 41.45,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4057"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 670.20848,462.62091 0,-248 -41.4625,0 0,248 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4059"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 670.20848,462.62091 0,-248 -41.4625,0 0,248 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4081"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 606.79598,462.62091 0,-134.55 -41.4625,0 0,134.55 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4083"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 606.79598,462.62091 0,-134.55 -41.4625,0 0,134.55 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4085"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 711.67098,462.62091 0,-264.1875 -41.4625,0 0,264.1875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4087"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 711.67098,462.62091 0,-264.1875 -41.4625,0 0,264.1875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4125"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 539.40848,357.88341 5.1875,0 0,-0.7125 -5.1875,0 10.375,0 -5.1875,0 0,0.7125 5.1875,0 -10.375,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4127"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 539.40848,357.88341 5.1875,0 0,-0.7125 -5.1875,0 10.375,0 -5.1875,0 0,0.7125 5.1875,0 -10.375,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4129"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 644.29598,215.63341 5.1875,0 0,-2.025 -5.1875,0 10.3625,0 -5.175,0 0,2.025 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4131"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 644.29598,215.63341 5.1875,0 0,-2.025 -5.1875,0 10.3625,0 -5.175,0 0,2.025 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4137"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 580.88348,328.47091 5.175,0 0,-0.8 -5.175,0 10.3625,0 -5.1875,0 0,0.8 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4139"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 580.88348,328.47091 5.175,0 0,-0.8 -5.175,0 10.3625,0 -5.1875,0 0,0.8 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4141"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 685.75848,199.13341 5.1875,0 0,-1.4 -5.1875,0 10.3625,0 -5.175,0 0,1.4 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4143"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 685.75848,199.13341 5.1875,0 0,-1.4 -5.1875,0 10.3625,0 -5.175,0 0,1.4 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3967"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 460.44595,462.62091 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4061"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 460.44595,462.62091 0,-169.5875 -41.4625,0 0,169.5875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4063"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 460.44595,462.62091 0,-169.5875 -41.4625,0 0,169.5875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4089"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 501.90845,462.62091 0,-174.5875 -41.4625,0 0,174.5875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4091"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 501.90845,462.62091 0,-174.5875 -41.4625,0 0,174.5875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4133"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 434.53345,293.85841 5.175,0 0,-1.6625 -5.175,0 10.3625,0 -5.1875,0 0,1.6625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4135"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 434.53345,293.85841 5.175,0 0,-1.6625 -5.175,0 10.3625,0 -5.1875,0 0,1.6625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4145"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 475.99595,288.70841 5.175,0 0,-1.3625 -5.175,0 10.3625,0 -5.1875,0 0,1.3625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4147"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 475.99595,288.70841 5.175,0 0,-1.3625 -5.175,0 10.3625,0 -5.1875,0 0,1.3625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path4165"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 402.72095,121.04591 325.21253,0 0,341.575 -325.21253,0 0,-341.575 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3071"
        style="fill:none;stroke:#000000;stroke-width:0.62126249;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.33000004;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,462.6209 325.2125,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3103"
        style="fill:none;stroke:#000000;stroke-width:0.62126249;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.33000004;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,121.0459 0,341.575"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3105"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,462.6209 -6.5625,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3107"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,385.7709 -6.5625,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3109"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,308.9084 -6.5625,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3111"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,232.0584 -6.5625,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3113"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,155.1959 -6.5625,0"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3073"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 229.21468,462.6209 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3075"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 334.06429,462.6209 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3163"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 229.17679,462.6209 0,-21.325 -41.45,0 0,21.325 41.45,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3165"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 229.17679,462.6209 0,-21.325 -41.45,0 0,21.325 41.45,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3167"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 334.06429,462.6209 0,-63.3875 -41.4625,0 0,63.3875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3169"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 334.06429,462.6209 0,-63.3875 -41.4625,0 0,63.3875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3191"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 270.65179,462.6209 0,-79.075 -41.4625,0 0,79.075 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3193"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 270.65179,462.6209 0,-79.075 -41.4625,0 0,79.075 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3195"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 375.52679,462.6209 0,-197 -41.4625,0 0,197 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3197"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 375.52679,462.6209 0,-197 -41.4625,0 0,197 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3235"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 203.26429,441.3959 5.1875,0 0,-0.2125 -5.1875,0 10.375,0 -5.1875,0 0,0.2125 5.1875,0 -10.375,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3237"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 203.26429,441.3959 5.1875,0 0,-0.2125 -5.1875,0 10.375,0 -5.1875,0 0,0.2125 5.1875,0 -10.375,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3239"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 308.15179,399.8709 5.1875,0 0,-1.2625 -5.1875,0 10.3625,0 -5.175,0 0,1.2625 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3241"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 308.15179,399.8709 5.1875,0 0,-1.2625 -5.1875,0 10.3625,0 -5.175,0 0,1.2625 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3247"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 244.73929,383.8459 5.175,0 0,-0.6 -5.175,0 10.3625,0 -5.1875,0 0,0.6 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3249"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 244.73929,383.8459 5.175,0 0,-0.6 -5.175,0 10.3625,0 -5.1875,0 0,0.6 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3251"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 349.61429,266.2084 5.1875,0 0,-1.175 -5.1875,0 10.3625,0 -5.175,0 0,1.175 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3253"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 349.61429,266.2084 5.1875,0 0,-1.175 -5.1875,0 10.3625,0 -5.175,0 0,1.175 5.175,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3077"
        style="fill:none;stroke:#000000;stroke-width:1.24252498;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.67000008;stroke-opacity:1;stroke-dasharray:none"
        d="m 124.30179,462.6209 0,6.5625"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3171"
        style="fill:#3e58ac;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 124.30179,462.6209 0,-38.275 -41.4625,0 0,38.275 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3173"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 124.30179,462.6209 0,-38.275 -41.4625,0 0,38.275 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3199"
        style="fill:#2eb848;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 165.76429,462.6209 0,-77.0875 -41.4625,0 0,77.0875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3201"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 165.76429,462.6209 0,-77.0875 -41.4625,0 0,77.0875 41.4625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3243"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 98.38929,424.4709 5.175,0 0,-0.2625 -5.175,0 10.3625,0 -5.1875,0 0,0.2625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3245"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 98.38929,424.4709 5.175,0 0,-0.2625 -5.175,0 10.3625,0 -5.1875,0 0,0.2625 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3255"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        d="m 139.85179,385.6959 5.175,0 0,-0.3125 -5.175,0 10.3625,0 -5.1875,0 0,0.3125 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3257"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 139.85179,385.6959 5.175,0 0,-0.3125 -5.175,0 10.3625,0 -5.1875,0 0,0.3125 5.1875,0 -10.3625,0 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path3275"
        style="fill:none;stroke:#000000;stroke-width:0.93190002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;stroke-dasharray:none"
        d="m 66.57679,121.0459 325.2125,0 0,341.575 -325.2125,0 0,-341.575 z"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="96.293976"
        y="489.17957"
        id="text8593"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595"
          x="96.293976"
@@ -1298,7 +1514,10 @@
        x="201.20686"
        y="489.17957"
        id="text8597"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8599"
          x="201.20686"
@@ -1309,7 +1528,10 @@
        x="297.66782"
        y="489.37488"
        id="text8601"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8603"
          x="297.66782"
@@ -1320,7 +1542,10 @@
        x="432.43814"
        y="489.17957"
        id="text8593-6"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-1"
          x="432.43814"
@@ -1331,7 +1556,10 @@
        x="537.26178"
        y="489.17957"
        id="text8597-8"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8599-9"
          x="537.26178"
@@ -1342,7 +1570,10 @@
        x="633.81201"
        y="489.37488"
        id="text8601-2"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8603-7"
          x="633.81201"
@@ -1353,7 +1584,10 @@
        x="44.226921"
        y="469.68634"
        id="text8593-9"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-5"
          x="44.226921"
@@ -1364,7 +1598,10 @@
        x="33.094109"
        y="392.83633"
        id="text8593-4"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-3"
          x="33.094109"
@@ -1375,7 +1612,10 @@
        x="33.094109"
        y="315.97382"
        id="text8593-1"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-2"
          x="33.094109"
@@ -1386,7 +1626,10 @@
        x="33.094109"
        y="239.11894"
        id="text8593-3"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-34"
          x="33.094109"
@@ -1397,7 +1640,10 @@
        x="33.094109"
        y="162.26134"
        id="text8593-11"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8595-38"
          x="33.094109"
@@ -1408,22 +1654,28 @@
        x="136.22894"
        y="110.34581"
        id="text8717"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8719"
          x="136.22894"
-         y="110.34581">Binned-Profile Model</tspan></text>
+         y="110.34581">Binned-Profile Method </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="509.09186"
        y="110.34581"
        id="text8721"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8723"
          x="509.09186"
-         y="110.34581">Direct Model</tspan></text>
+         y="110.34581">Direct Method </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1431,11 +1683,14 @@
        y="-5.5285935"
        id="text3656-8"
        sodipodi:linespacing="125%"
-       transform="matrix(0,-1,1,0,0,0)"><tspan
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan3658-9"
          x="-292.06778"
-         y="-5.5285935">Prediction Accuracy</tspan><tspan
+         y="-5.5285935">Prediction Error Rate</tspan><tspan
          sodipodi:role="line"
          x="-292.06778"
          y="19.471407"
@@ -1446,14 +1701,20 @@
        x="74.117157"
        y="528.20789"
        id="text3656-1"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan3658-1"
          x="74.117157"
          y="528.20789">Background Distortion:</tspan></text>
     <g
        id="g8777"
-       transform="translate(-477.21872,358.48053)">
+       transform="translate(-477.21872,358.48053)"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <text
          sodipodi:linespacing="125%"
          id="text3656-3"
@@ -1464,7 +1725,7 @@
            y="171.71466"
            x="789.80103"
            id="tspan3658-8"
-           sodipodi:role="line">Distorted</tspan></text>
+           sodipodi:role="line">Adjusted</tspan></text>
       <rect
          y="155.67365"
          x="762.55872"
@@ -1475,7 +1736,10 @@
     </g>
     <g
        id="g8782"
-       transform="translate(-360.85372,334.65918)">
+       transform="translate(-360.85372,334.65918)"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <text
          sodipodi:linespacing="125%"
          id="text3656-7"
@@ -1486,7 +1750,7 @@
            y="195.53601"
            x="791.01196"
            id="tspan3658-4"
-           sodipodi:role="line">Pure</tspan></text>
+           sodipodi:role="line">Plain</tspan></text>
       <rect
          y="179.495"
          x="762.55872"
@@ -1501,7 +1765,10 @@
        x="544.29797"
        y="530.31238"
        id="text3656"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\see-through-project\gt\STColorCorrection\Docs\VRST 2013\prediction_result.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan3658"
          x="544.29797"

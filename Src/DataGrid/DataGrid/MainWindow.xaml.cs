@@ -1322,6 +1322,65 @@ namespace DataGrid
       btn_ExportGrid.IsEnabled = true;
 
     }
+
+    private void BgCal_Click(object sender, RoutedEventArgs e)
+    {
+      
+      PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\bin\value\Predicted_Bg_input.csv");
+      DataTable bin = new DataTable();
+      Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+      {
+        dtgrid_corrDisplay.Items.Refresh();
+        bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+
+      }));
+
+      double OL,OA,OB,px,py,pz,LL,LA,LB;
+
+      PerceptionLib.Color BgColor =new PerceptionLib.Color();
+      PerceptionLib.Color LBgColor = new PerceptionLib.Color();
+      
+      
+      foreach (DataRow dr in bin.Rows)
+      {
+        OL=Convert.ToDouble(dr["BGL"].ToString());
+        OA=Convert.ToDouble(dr["BGA"].ToString());
+        OB=Convert.ToDouble(dr["BGB"].ToString());
+
+        LL = Convert.ToDouble(dr["LumistyL"].ToString());
+        LA = Convert.ToDouble(dr["LumistyA"].ToString());
+        LB = Convert.ToDouble(dr["LumistyB"].ToString());
+        
+        px = Convert.ToDouble(dr["PX"].ToString());
+        py = Convert.ToDouble(dr["PY"].ToString());
+        pz = Convert.ToDouble(dr["PZ"].ToString());
+
+        PerceptionLib.CIEXYZ xyz = new CIEXYZ(px, py, pz);
+
+        PerceptionLib.Color PLBgColor = PerceptionLib.Color.ToLAB(xyz);
+        
+        BgColor.LA = OL;
+        BgColor.A = OA;
+        BgColor.B = OB;
+
+
+        LBgColor.LA = LL;
+        LBgColor.A = LA;
+        LBgColor.B = LB;
+        
+        PerceptionLib.ColorRegion cr = PerceptionLib.Color.ToFindColorRegion(BgColor);
+        
+        dr["BGLValue"] = cr.LValueFlag.ToString();
+        dr["SaturationValue"] = cr.NetralValueFlag.ToString();
+        dr["Region"] = cr.RegionValue.ToString();
+        dr["PXYZ_EqDistance"] = (PerceptionLib.Color.ColorDistanceCalAB(PLBgColor, LBgColor)).ToString();
+      }
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+      Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+      btn_ExportGrid.IsEnabled = true;
+
+      
+    }
     
     }
   
