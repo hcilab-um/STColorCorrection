@@ -15,9 +15,12 @@ const int PROFILE_SIZE = 8376;
 const int PROFILE_ARRAY_SIZE = PROFILE_SIZE * 6;
 __device__ const int GPU_PROFILE_SIZE = 8376;
 
-const int FRAME_WIDTH = 800;
-const int FRAME_HEIGHT = 600;
+const int FRAME_WIDTH = 1024;
+const int FRAME_HEIGHT = 768;
+const int PART_FRAME_WIDTH = FRAME_WIDTH/10;
+const int PART_FRAME_HEIGHT = FRAME_HEIGHT/10;
 const int FRAME_DIMENSIONS = FRAME_WIDTH * FRAME_HEIGHT;
+const int PARTITIONED_FRAME_DIMENSIONS = (FRAME_WIDTH/10) * (FRAME_HEIGHT/10);
 const int FRAME_ARRAY_SIZE = FRAME_DIMENSIONS * 3;
 __device__ const int GPU_FRAME_DIMENSIONS = FRAME_DIMENSIONS;
 
@@ -670,7 +673,7 @@ __global__ void correct3(int *block_frame, double *block_background, double *blo
 	int block_profile_index = 0;
 	double diffX, diffY, diffZ, result;
 
-	for(int bin = 0 ; bin < GPU_PROFILE_SIZE; bin++)
+	for(int bin = 0 ; bin < 8000; bin++)
 	{			
 		block_profile_index = 6*bin;
 		tempX = block_profile[block_profile_index + 3];
@@ -678,10 +681,10 @@ __global__ void correct3(int *block_frame, double *block_background, double *blo
 		tempZ = block_profile[block_profile_index + 5];
 
 		//getting the xyz values of the chocen bin
-		blendX = tempX + bgX;
-		blendY = tempY + bgY;
-		blendZ = tempZ + bgZ;
 
+		/*blendX = tempX + bgX;
+		blendY = tempY + bgY;
+		blendZ = tempZ + bgZ;*/
 		{
 			diffX = blendX - 0;
 			diffY = blendY - 0;
@@ -712,8 +715,8 @@ int main(int argc, char** argv)
 	clock_t end;
 	double runTime;
 
-	double *background,*profile;
-	int *frame;
+	double *background,*profile,*partitioned_background;
+	int *frame,*partitioned_frame;
 
 	//var display-profile -- lookup table in LAB
 	profile = (double*) malloc(PROFILE_ARRAY_SIZE * sizeof(double));
@@ -730,6 +733,14 @@ int main(int argc, char** argv)
 	background= (double*)malloc(FRAME_ARRAY_SIZE * sizeof(double));
 	for(int index = 0 ; index < FRAME_ARRAY_SIZE ; index++)
 		background[index] = 0;
+
+	//broken frame 
+	partitioned_frame =	(int*)malloc( PARTITIONED_FRAME_DIMENSIONS* sizeof(int));
+	
+	
+	///broken background-image 
+	partitioned_background= (double*)malloc(PARTITIONED_FRAME_DIMENSIONS * sizeof(double));
+	
 
 	//pointers on the device
 	double *gpu_profile;
@@ -755,16 +766,31 @@ int main(int argc, char** argv)
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
 	cudaEventCreate(&stop);
-	//-- for 100 frames
-	for(int f = 0 ; f < 1 ; f++)
+	
+	int partition_index=0;
+	//image partitioned into 10 parts
+	for(int f = 0 ; f < FRAME_DIMENSIONS ; f=f+PARTITIONED_FRAME_DIMENSIONS)
 	{
+		// assigning partitioed values of the frame and background
+		for(int index = f ; index <  f+PARTITIONED_FRAME_DIMENSIONS ; index++)
+		{
+
+			partitioned_frame[partition_index] = frame[index];
+			partitioned_background[partition_index] = background[index];
+			partition_index++;
+		}
+		partition_index=0;
+				
+
 		//2- pass the image to correct to the GPU
-		cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
+		//cudaMemcpy(gpu_frame, frame, FRAME_ARRAY_SIZE * sizeof(int), cudaMemcpyHostToDevice); 
+		cudaMemcpy(gpu_frame, partitioned_frame, PARTITIONED_FRAME_DIMENSIONS * sizeof(int), cudaMemcpyHostToDevice); 
 		//3- pass the background image to the GPU
-		cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
+		//cudaMemcpy(gpu_background, background, FRAME_ARRAY_SIZE * sizeof(double), cudaMemcpyHostToDevice); 
+		cudaMemcpy(gpu_background, partitioned_background, PARTITIONED_FRAME_DIMENSIONS * sizeof(double), cudaMemcpyHostToDevice); 
 		
 		dim3 threadsPerBlock(32, 32);
-		dim3 numBlocks(FRAME_WIDTH/threadsPerBlock.x, FRAME_HEIGHT/threadsPerBlock.y); 
+		dim3 numBlocks(PART_FRAME_WIDTH/threadsPerBlock.x, PART_FRAME_HEIGHT/threadsPerBlock.y); 
 		
 		// Start record
 		cudaEventRecord(start, NULL);
@@ -775,7 +801,9 @@ int main(int argc, char** argv)
 		float elapsedTime=-1;
 		cudaEventElapsedTime(&elapsedTime, start, stop);
 		printf("Run time is: %f \n",elapsedTime);
+
 	}
+
 
 	cudaEventDestroy(start);
 	cudaEventDestroy(stop);
