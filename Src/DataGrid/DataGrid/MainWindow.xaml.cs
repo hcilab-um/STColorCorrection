@@ -1389,200 +1389,85 @@ namespace DataGrid
         /// <param name="e"></param>
         private void DSCal_Click(object sender, RoutedEventArgs e)
         {
-            PopulateGrid(@"C:\sri\STColorCorrection\Src\DataGrid\DataGrid\ds.csv");
-            DataTable bin = new DataTable();
+            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+            DataTable labDS = new DataTable();
             Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
             {
                 dtgrid_corrDisplay.Items.Refresh();
-                bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+                labDS = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
             }));
 
-            DataRow newRow;
-
-            int lAxis = 0;
-            int aAxis = 0;
-            int bAxis = 0;
-            //quatarent 1
-
-            for (int l = 50; l <= 100; l = l + 5)
+            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+            DataTable bin = new DataTable();
+            Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
             {
-                for (int a = 0; l <= 100; a = a + 5)
-                {
-                    for (int b = 0; b <= 110; b = b + 5)
-                    {
-                        if (l == 50 && a == 0 && b == 0)
-                        {
-                            lAxis = 0;
-                            aAxis = 0;
-                            bAxis = 0;
+              dtgrid_corrDisplay.Items.Refresh();
+              bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-                        }
-                        else
-                        {
-                            lAxis++;
-                            aAxis++;
-                            bAxis++;
-                        }
-                        newRow = bin.NewRow();
-                        newRow[0] = l.ToString();
-                        newRow[1] = a.ToString();
-                        newRow[2] = b.ToString();
-                        newRow[3] = lAxis;
-                        newRow[4] = aAxis;
-                        newRow[5] = bAxis;
-                        bin.Rows.Add(newRow);
+            }));
 
+            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+            DataTable template = new DataTable();
+            Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+            {
+              dtgrid_corrDisplay.Items.Refresh();
+              template = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
 
-                    }
-                }
+            }));
+
+            int l, a, b, lx, ax, bx;
+            for (int i = 0; i < bin.Rows.Count; i++)
+            {
+              l = Convert.ToInt32(bin.Rows[i][0].ToString());
+              a = Convert.ToInt32(bin.Rows[i][1].ToString());
+              b = Convert.ToInt32(bin.Rows[i][2].ToString());
+
+              for (int j = 0; j < labDS.Rows.Count; j++)
+              {
+                l = Convert.ToInt32(bin.Rows[i][0].ToString());
+                a = Convert.ToInt32(bin.Rows[i][1].ToString());
+                b = Convert.ToInt32(bin.Rows[i][2].ToString());
+              }
             }
 
-            //quatarent 2
+          //TO MAKE LAB STRUCTURE
+            //for (int i = 0; i < bin.Rows.Count; i++)
+            //{
+            //  l = Convert.ToInt32( bin.Rows[i][0].ToString());
+            //  a = Convert.ToInt32(bin.Rows[i][1].ToString());
+            //  b = Convert.ToInt32(bin.Rows[i][2].ToString());
+            //  int lvalue=50;
+            //  int lvalueindex=0;
+            //  if (l >= 50)
+            //  {
+            //    while (l != lvalue)
+            //    {
+            //      lvalue = lvalue + 5;
+            //      lvalueindex++;
+            //    }
+            //  }
+            //  else
+            //  {
+            //   while (l != lvalue)
+            //    {
+            //      lvalue = lvalue - 5;
+            //      lvalueindex--;
+            //    }
+            //  }
+            //  bin.Rows[i][3] = lvalueindex.ToString();
 
-            for (int l = 50; l <= 100; l = l + 5)
-            {
-                for (int a = 0; l <= 100; a = a + 5)
-                {
-                    for (int b = 0; b <= -110; b = b - 5)
-                    {
-                        if (l == 50 && a == 0 && b == 0)
-                        {
-                            lAxis = 0;
-                            aAxis = 0;
-                            bAxis = 0;
+            //  ax = a / 5;
+            //  bx = b / 5;
 
-                        }
-                        else
-                        {
-                            lAxis++;
-                            aAxis++;
-                            bAxis--;
-                        }
-                        newRow = bin.NewRow();
-                        newRow[0] = l.ToString();
-                        newRow[1] = a.ToString();
-                        newRow[2] = b.ToString();
-                        newRow[3] = lAxis;
-                        newRow[4] = aAxis;
-                        newRow[5] = bAxis;
-                        bin.Rows.Add(newRow);
+            //  bin.Rows[i][4] = ax.ToString();
+            //  bin.Rows[i][5] = bx.ToString();
 
-
-                    }
-                }
-            }
-
-            //quatarent 3
-
-            for (int l = 50; l <= 100; l = l + 5)
-            {
-                for (int a = 0; l <= -100; a = a - 5)
-                {
-                    for (int b = 0; b <= -110; b = b - 5)
-                    {
-                        if (l == 50 && a == 0 && b == 0)
-                        {
-                            lAxis = 0;
-                            aAxis = 0;
-                            bAxis = 0;
-
-                        }
-                        else
-                        {
-                            lAxis++;
-                            aAxis--;
-                            bAxis--;
-                        }
-                        newRow = bin.NewRow();
-                        newRow[0] = l.ToString();
-                        newRow[1] = a.ToString();
-                        newRow[2] = b.ToString();
-                        newRow[3] = lAxis;
-                        newRow[4] = aAxis;
-                        newRow[5] = bAxis;
-                        bin.Rows.Add(newRow);
-
-
-                    }
-                }
-
-            }
-
-            //quatarent 4
-
-            for (int l = 50; l <= 100; l = l + 5)
-            {
-                for (int a = 0; l <= -100; a = a - 5)
-                {
-                    for (int b = 0; b <= 110; b = b + 5)
-                    {
-                        if (l == 50 && a == 0 && b == 0)
-                        {
-                            lAxis = 0;
-                            aAxis = 0;
-                            bAxis = 0;
-
-                        }
-                        else
-                        {
-                            lAxis++;
-                            aAxis--;
-                            bAxis++;
-                        }
-                        newRow = bin.NewRow();
-                        newRow[0] = l.ToString();
-                        newRow[1] = a.ToString();
-                        newRow[2] = b.ToString();
-                        newRow[3] = lAxis;
-                        newRow[4] = aAxis;
-                        newRow[5] = bAxis;
-                        bin.Rows.Add(newRow);
-
-
-                    }
-                }
-            }
-
-            //quatarent 4
-
-            for (int l = 50; l <= 100; l = l + 5)
-            {
-                for (int a = 0; l <= -100; a = a - 5)
-                {
-                    for (int b = 0; b <= 110; b = b + 5)
-                    {
-                        if (l == 50 && a == 0 && b == 0)
-                        {
-                            lAxis = 0;
-                            aAxis = 0;
-                            bAxis = 0;
-
-                        }
-                        else
-                        {
-                            lAxis++;
-                            aAxis--;
-                            bAxis++;
-                        }
-                        newRow = bin.NewRow();
-                        newRow[0] = l.ToString();
-                        newRow[1] = a.ToString();
-                        newRow[2] = b.ToString();
-                        newRow[3] = lAxis;
-                        newRow[4] = aAxis;
-                        newRow[5] = bAxis;
-                        bin.Rows.Add(newRow);
-
-
-                    }
-                }
-            }
-
-
-
+            //}
             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+            btn_ExportGrid.IsEnabled = true;
+
         }
     }
 }
