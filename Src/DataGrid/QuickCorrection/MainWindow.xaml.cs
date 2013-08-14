@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PerceptionLib;
 using System.Windows.Media.Media3D;
+using GenericParsing;
+using System.Data;
 
 namespace QuickCorrection
 {
@@ -26,7 +28,8 @@ namespace QuickCorrection
       InitializeComponent();
     }
 
-
+    private DataView dataView;
+    private DataTable BinTable=new DataTable();
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
      // var results = PerceptionLib.Color.RGBbinedData();
@@ -38,6 +41,16 @@ namespace QuickCorrection
 
       //2- Load the profile in a three dimensional array
       Bin[, ,] p3700 = new Bin[21, 41, 45];
+
+      // add the csv bin file
+      using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\p3700.csv"))
+      {
+        System.Data.DataSet dsResult = parser.GetDataSet();
+        dataView = dsResult.Tables[0].AsDataView();
+       }
+      BinTable = dataView.ToTable();
+      
+
 
       //3- Get the parameters: foreground and background
       System.Drawing.Color foreGround = System.Drawing.Color.FromArgb(150, 150, 150);
@@ -103,7 +116,7 @@ namespace QuickCorrection
       
       return Euv;
     }
-
+    // adding xyz
     private Bin addXYZ(Bin Color1, CIEXYZ Color2)
     {
       double X1, X2, Y1, Y2, Z1, Z2, ResultX, ResultY, ResultZ;
@@ -135,8 +148,10 @@ namespace QuickCorrection
 
       return returnValue;
     }
+    //actual algorithm
     private Bin QuickCorrection(Bin[, ,] profile, Bin foreGroundBin, CIEXYZ backGround, Point3D origin, Vector3D step)
     {
+
       Bin anchor = GetProfileBin(profile, origin);
 
       Bin PredicitionAtOrigin = addXYZ(anchor, backGround);
@@ -169,7 +184,8 @@ namespace QuickCorrection
       //to run the prg
       return anchor;
     }
-
+    
+    //
     private Bin GetProfileBin(Bin[, ,] profile, Point3D coordinates)
     {
       Bin returnBin = profile[(int)coordinates.X, (int)coordinates.Y, (int)coordinates.Z];

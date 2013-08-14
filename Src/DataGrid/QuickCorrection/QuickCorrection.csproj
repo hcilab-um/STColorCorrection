@@ -94,10 +94,17 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GenericParser_src\GenericParsing\GenericParsing.csproj">
+      <Project>{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}</Project>
+      <Name>GenericParsing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PerceptionLib\PerceptionLib.csproj">
       <Project>{15B28B52-27B2-45B5-A914-864B1F286517}</Project>
       <Name>PerceptionLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="prediction-format.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
