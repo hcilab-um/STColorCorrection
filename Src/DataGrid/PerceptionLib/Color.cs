@@ -27,6 +27,7 @@ namespace PerceptionLib
       }
     }
   }
+
   public class RGBValue
   {
 
@@ -70,7 +71,6 @@ namespace PerceptionLib
       }
     }
     // dynamic array to caluclate RGB values
-
   }
 
   public class LABbin
@@ -1104,6 +1104,7 @@ namespace PerceptionLib
       return binedLabValues;
     }
 
+    public static List<RGBbin> OriginalRGB;
     public static List<LABbin> RGBBinneddData_David()
     {
       List<LABbin> binedLabValues = new List<LABbin>();
@@ -1112,6 +1113,7 @@ namespace PerceptionLib
       //List<double> lbin = new List<double>();
       //List<double> bina = new List<double>();
       //List<double> binb = new List<double>();
+      OriginalRGB = new List<RGBbin>();
 
       for (int rgb = 0; rgb < (1 + 0x00FFFFFF); rgb = rgb + 1)
       {
@@ -1160,6 +1162,7 @@ namespace PerceptionLib
         //});
 
         int checkForDublicate = 0;
+        //
         for (int i = 0; i < binedLabValues.Count; i++)
         {
           if (binedLabValues[i].L == Lbin && binedLabValues[i].A == Abin && binedLabValues[i].B == Bbin)
@@ -1179,6 +1182,15 @@ namespace PerceptionLib
             B = Bbin
 
           });
+
+          OriginalRGB.Add(new RGBbin
+          {
+            R = (byte)RGB.R,
+            G = (byte)RGB.G,
+            B = (byte)RGB.B
+
+          });
+
         }
 
 

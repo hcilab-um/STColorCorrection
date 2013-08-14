@@ -202,10 +202,9 @@ namespace DataGrid
           int BinNUmber = 0;
           for (int k = 0; k < 1001; k++)
           {
-            
+           
             int i;
-
-
+            
             double closestColorValue = double.MaxValue;
             PerceptionLib.CIEXYZ colorToCompareXYZ = new PerceptionLib.CIEXYZ(0, 0, 0);
 
@@ -228,14 +227,11 @@ namespace DataGrid
               if (ColorDistance >= closestColorValue)
                 continue;
 
-
               closestColorValue = ColorDistance;
-
               closestColorOnAddition = ColorDistance;
 
               BinNUmber = index;
               string a = bin.Rows[index][1].ToString();
-
             }
           }
           return BinNUmber;

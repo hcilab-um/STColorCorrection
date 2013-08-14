@@ -865,8 +865,7 @@ namespace DataGrid
                         EndPt = i;
                     else
                         break;
-
-
+                  
                 }
 
                 int index = 0;
@@ -1389,84 +1388,337 @@ namespace DataGrid
         /// <param name="e"></param>
         private void DSCal_Click(object sender, RoutedEventArgs e)
         {
-            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+          //data structure for the whole LAB space  
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\DS.csv");
             DataTable labDS = new DataTable();
             Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
             {
                 dtgrid_corrDisplay.Items.Refresh();
                 labDS = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
             }));
 
-            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+          // our bin data
+            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\binnedData_bigProjector.csv");
             DataTable bin = new DataTable();
             Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
             {
               dtgrid_corrDisplay.Items.Refresh();
               bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
             }));
 
-            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\GridData.csv");
+          // the template to fit in all the lab space
+            PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\Template.csv");
             DataTable template = new DataTable();
             Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
             {
               dtgrid_corrDisplay.Items.Refresh();
               template = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
-
             }));
-
-            int l, a, b, lx, ax, bx;
+          
+            DataRow newRow;
+            double l, a, b, lx, ax, bx, sl, sa, sb, distance=0;
+            int LABSpaceNo=0;
             for (int i = 0; i < bin.Rows.Count; i++)
             {
-              l = Convert.ToInt32(bin.Rows[i][0].ToString());
-              a = Convert.ToInt32(bin.Rows[i][1].ToString());
-              b = Convert.ToInt32(bin.Rows[i][2].ToString());
+              l = Convert.ToDouble(bin.Rows[i][0].ToString());
+              a = Convert.ToDouble(bin.Rows[i][1].ToString());
+              b = Convert.ToDouble(bin.Rows[i][2].ToString());
 
+              double closestColorValue = double.MaxValue;
               for (int j = 0; j < labDS.Rows.Count; j++)
               {
-                l = Convert.ToInt32(bin.Rows[i][0].ToString());
-                a = Convert.ToInt32(bin.Rows[i][1].ToString());
-                b = Convert.ToInt32(bin.Rows[i][2].ToString());
+
+                lx = Convert.ToDouble(labDS.Rows[j][0].ToString());
+                ax = Convert.ToDouble(labDS.Rows[j][1].ToString());
+                bx = Convert.ToDouble(labDS.Rows[j][2].ToString());
+
+                sl = l - lx;
+                sa = a - ax;
+                sb = b - bx;
+
+                sl = sl * sl;
+                sa = sa * sa;
+                sb = sb * sb;
+
+                double result = sl + sa + sb;
+                distance = Math.Sqrt(result);
+
+                if (distance > closestColorValue)
+                {
+                  continue;
+                }
+
+                closestColorValue = distance;
+                LABSpaceNo = j;
               }
+              newRow = template.NewRow();
+              newRow[0] = i.ToString(); //here i is bin index
+              newRow[1] = LABSpaceNo.ToString();
+              newRow[2] = closestColorValue.ToString();
+              newRow[3] = bin.Rows[i][0].ToString();
+              newRow[4] = bin.Rows[i][1].ToString();
+              newRow[5] = bin.Rows[i][2].ToString();
+              newRow[6] = labDS.Rows[LABSpaceNo][0].ToString();
+              newRow[7] = labDS.Rows[LABSpaceNo][1].ToString();
+              newRow[8] = labDS.Rows[LABSpaceNo][2].ToString();
+
+              template.Rows.Add(newRow);
             }
 
-          //TO MAKE LAB STRUCTURE
-            //for (int i = 0; i < bin.Rows.Count; i++)
-            //{
-            //  l = Convert.ToInt32( bin.Rows[i][0].ToString());
-            //  a = Convert.ToInt32(bin.Rows[i][1].ToString());
-            //  b = Convert.ToInt32(bin.Rows[i][2].ToString());
-            //  int lvalue=50;
-            //  int lvalueindex=0;
-            //  if (l >= 50)
-            //  {
-            //    while (l != lvalue)
-            //    {
-            //      lvalue = lvalue + 5;
-            //      lvalueindex++;
-            //    }
-            //  }
-            //  else
-            //  {
-            //   while (l != lvalue)
-            //    {
-            //      lvalue = lvalue - 5;
-            //      lvalueindex--;
-            //    }
-            //  }
-            //  bin.Rows[i][3] = lvalueindex.ToString();
-
-            //  ax = a / 5;
-            //  bx = b / 5;
-
-            //  bin.Rows[i][4] = ax.ToString();
-            //  bin.Rows[i][5] = bx.ToString();
-
-            //}
-            Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = bin.DefaultView));
+            Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = template.DefaultView));
             Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
             btn_ExportGrid.IsEnabled = true;
+
+        }
+
+        private void DsMAtching_Click(object sender, RoutedEventArgs e)
+        {
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\DS.csv");
+          DataTable labDS = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            labDS = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+          // our bin data
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\binnedData_bigProjector.csv");
+          DataTable bin = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+          // the template to fit in all the lab space
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\DSVSBIN_ORIGINAL.csv");
+          DataTable DSvsBin = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            DSvsBin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\Template.csv");
+          DataTable template = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            template = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+           
+          DataRow newRow;
+          int Dsno, BinNo;
+          double Distance;
+          int reboundIndex=1;
+          int reboundTimes = 11;
+          for (int j = 0; j < DSvsBin.Rows.Count; j++)
+          {
+            BinNo=Convert.ToInt32(DSvsBin.Rows[j][0].ToString());
+            Dsno = Convert.ToInt32(DSvsBin.Rows[j][1].ToString());
+            Distance = Convert.ToDouble(DSvsBin.Rows[j][2].ToString());
+            if (labDS.Rows[Dsno][8].ToString() == "-1")
+            {
+              labDS.Rows[Dsno][8] = BinNo.ToString();
+              labDS.Rows[Dsno][9] = bin.Rows[BinNo][0];//lab
+              labDS.Rows[Dsno][10] = bin.Rows[BinNo][1];
+              labDS.Rows[Dsno][11] = bin.Rows[BinNo][2];
+              labDS.Rows[Dsno][12] = bin.Rows[BinNo][3];//xyz
+              labDS.Rows[Dsno][13] = bin.Rows[BinNo][4];
+              labDS.Rows[Dsno][14] = bin.Rows[BinNo][5];
+              labDS.Rows[Dsno][15] = bin.Rows[BinNo][6];//rgb
+              labDS.Rows[Dsno][16] = bin.Rows[BinNo][7];
+              labDS.Rows[Dsno][17] = bin.Rows[BinNo][8];
+              labDS.Rows[Dsno][18] = Distance.ToString();//distance
+              labDS.Rows[Dsno][7] = 1;//distance
+              reboundIndex = 1;
+            }
+            else
+            {
+              newRow = labDS.NewRow();
+              reboundIndex = Convert.ToInt32(labDS.Rows[Dsno][7].ToString());
+              //int addFactor = reboundIndex * reboundTimes;
+              newRow[0] = labDS.Rows[Dsno][0];
+              newRow[1] = labDS.Rows[Dsno][1];
+              newRow[2] = labDS.Rows[Dsno][2];
+              newRow[3] = labDS.Rows[Dsno][3];
+              newRow[4] = labDS.Rows[Dsno][4];
+              newRow[5] = labDS.Rows[Dsno][5];
+              newRow[6] = labDS.Rows[Dsno][6];
+              reboundIndex++;
+              newRow[7] = reboundIndex.ToString();//distance
+              labDS.Rows[Dsno][7] = reboundIndex.ToString();
+              newRow[8] = BinNo.ToString();
+              newRow[9] = bin.Rows[BinNo][3];//lab
+              newRow[10] = bin.Rows[BinNo][4];
+              newRow[11] = bin.Rows[BinNo][5];
+              newRow[12] = bin.Rows[BinNo][6];//xyz
+              newRow[13] = bin.Rows[BinNo][7];
+              newRow[14] = bin.Rows[BinNo][8];
+              newRow[15] = bin.Rows[BinNo][9];//rgb
+              newRow[16] = bin.Rows[BinNo][10];
+              newRow[17] = bin.Rows[BinNo][11];
+              newRow[18] = Distance.ToString();//distance
+              labDS.Rows.Add(newRow);
+              //labDS.Rows[Dsno][8 + addFactor] = BinNo.ToString();
+              //labDS.Rows[Dsno][9 + addFactor] = bin.Rows[BinNo][0];//lab
+              //labDS.Rows[Dsno][10 + addFactor] = bin.Rows[BinNo][1];
+              //labDS.Rows[Dsno][11 + addFactor] = bin.Rows[BinNo][2];
+              //labDS.Rows[Dsno][12 + addFactor] = bin.Rows[BinNo][3];//xyz
+              //labDS.Rows[Dsno][13 + addFactor] = bin.Rows[BinNo][4];
+              //labDS.Rows[Dsno][14 + addFactor] = bin.Rows[BinNo][5];
+              //labDS.Rows[Dsno][15 + addFactor] = bin.Rows[BinNo][6];//rgb
+              //labDS.Rows[Dsno][16 + addFactor] = bin.Rows[BinNo][7];
+              //labDS.Rows[Dsno][17 + addFactor] = bin.Rows[BinNo][8];
+              //labDS.Rows[Dsno][18 + addFactor] = Distance.ToString();//distance
+            }
+            
+          }
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = labDS.DefaultView));
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+          btn_ExportGrid.IsEnabled = true;
+          
+        }
+
+        private void button11_Click(object sender, RoutedEventArgs e)
+        {
+
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\Ds_correction.txt");
+          DataTable DS = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            DS = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+          List<LABbin> bin =PerceptionLib.Color.RGBBinneddData_David();
+
+          int count = bin.Count();
+          
+          //int temp = -1;
+          DataRow newRow;
+          for (int i = 0; i < count; i++)
+          {
+
+            newRow = DS.NewRow();
+            newRow[0] = bin[i].L.ToString();
+            newRow[1] = bin[i].A.ToString();
+            newRow[2] = bin[i].B.ToString();
+            newRow[3] = PerceptionLib.Color.OriginalRGB[i].R.ToString();
+            newRow[4] = PerceptionLib.Color.OriginalRGB[i].G.ToString();
+            newRow[5] = PerceptionLib.Color.OriginalRGB[i].B.ToString();
+
+            DS.Rows.Add(newRow);
+          }
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = DS.DefaultView));
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+          PerceptionLib.Color lab = new PerceptionLib.Color();
+          RGBValue temp = new RGBValue();
+
+          for (int i = 0; i < DS.Rows.Count; i++)
+          {
+            lab.LA = bin[i].L;
+            lab.A = bin[i].A;
+            lab.B = bin[i].B;
+
+
+            temp = PerceptionLib.Color.ToRBGFromLAB(lab);
+
+            if (temp.R < 0 || temp.R > 255 || temp.B < 0 || temp.B > 255 || temp.G < 0 || temp.G > 255)
+            {
+              continue;
+            }
+            else
+            {
+              //BinRGB[binCount].R = (byte)temp.R;
+              //BinRGB[binCount].G= (byte)temp.G;
+              //BinRGB[binCount].B= (byte)temp.B;
+              //binCount++;
+
+              DS.Rows[i][6] = temp.R.ToString();
+              DS.Rows[i][7] = temp.G.ToString();
+              DS.Rows[i][8] = temp.B.ToString();
+
+            }
+            
+          }
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = DS.DefaultView));
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+        }
+
+        private void button12_Click(object sender, RoutedEventArgs e)
+        {
+
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\Template_for_lab.csv");
+          DataTable DS = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            DS = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+                 
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\binnedData_bigProjector.csv");
+          DataTable bin = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            bin = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+          PopulateGrid(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\template_for_bin_lab_matching.txt");
+          DataTable template = new DataTable();
+          Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
+          {
+            dtgrid_corrDisplay.Items.Refresh();
+            template = ((DataView)dtgrid_corrDisplay.ItemsSource).ToTable();
+          }));
+
+
+          DataRow newRow;
+
+          int GivenR, GivenG, GivenB, MatchingR, MatchingG, MatchingB;
+
+          for (int i = 0; i < bin.Rows.Count; i++)
+          {
+            GivenR = Convert.ToInt32(bin.Rows[i][9].ToString());
+            GivenG = Convert.ToInt32(bin.Rows[i][10].ToString());
+            GivenB = Convert.ToInt32(bin.Rows[i][11].ToString());
+            int j = 0;
+            for(j = 0; j < DS.Rows.Count-1; j++)
+            {
+              MatchingR = Convert.ToInt32(DS.Rows[j][6].ToString());
+              MatchingG = Convert.ToInt32(DS.Rows[j][7].ToString());
+              MatchingB = Convert.ToInt32(DS.Rows[j][8].ToString());
+
+              if (GivenR == MatchingR && GivenG == MatchingG && GivenB == MatchingB)
+                break;
+            }
+
+            newRow = template.NewRow();
+            newRow[0] = DS.Rows[j][0];
+            newRow[1] = DS.Rows[j][1];
+            newRow[2] = DS.Rows[j][2];
+            newRow[3] = bin.Rows[i][3];
+            newRow[4] = bin.Rows[i][4];
+            newRow[5] = bin.Rows[i][5];
+            newRow[6] = bin.Rows[i][6];
+            newRow[7] = bin.Rows[i][7];
+            newRow[8] = bin.Rows[i][8];
+            newRow[9] = DS.Rows[j][3];
+            newRow[10] = DS.Rows[j][4];
+            newRow[11] = DS.Rows[j][5];
+            newRow[12] = GivenR.ToString();
+            newRow[13] = GivenG.ToString();
+            newRow[14] = GivenB.ToString();
+            template.Rows.Add(newRow);
+          }
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.ItemsSource = template.DefaultView));
+          Dispatcher.Invoke(new Action(() => dtgrid_corrDisplay.Items.Refresh()));
+
+          btn_ExportGrid.IsEnabled=true;
+
+
 
         }
     }

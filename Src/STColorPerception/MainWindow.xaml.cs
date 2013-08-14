@@ -3809,8 +3809,7 @@ namespace STColorPerception
         newRow[0] = binRGB[i].R.ToString();
         newRow[1] = binRGB[i].G.ToString();
         newRow[2] = binRGB[i].B.ToString();
-
-
+        
         dt.Rows.Add(newRow);
       }
       DataView dv = new DataView(dt);
