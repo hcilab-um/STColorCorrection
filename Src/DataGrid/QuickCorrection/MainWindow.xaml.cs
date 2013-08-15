@@ -12,10 +12,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PerceptionLib;
-using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using GenericParsing;
 using System.Data;
+using System.Windows.Media.Media3D;
+using System.Diagnostics;
 
 namespace QuickCorrection
 {
@@ -24,112 +25,197 @@ namespace QuickCorrection
   /// </summary>
   public partial class MainWindow : Window
   {
-    public static int StepNumber=0;
+
+    public const int RANGEL = 21;
+    public const int RANGEA = 41;
+    public const int RANGEB = 45;
+
     public MainWindow()
     {
       InitializeComponent();
     }
-    
-    private void PopulateGrid(string fileName)
-    {
-      //DataTable table = CSV.GetDataTableFromCSV(@"C:\see-through-project\gt\STColorCorrection\Src\STColorPerception\bin\color.txt");
-      DataTable table = PerceptionLib.CSV.GetDataTableFromCSV(@fileName);
-      if (table.Columns.Count == 0)
-        System.Windows.MessageBox.Show("Error!");
-      else
-        dtgrid_corrDisplay.ItemsSource = table.DefaultView;
 
-      dtgrid_corrDisplay.AutoGenerateColumns = true;
+    private DataTable profile = new DataTable();
 
-    }
+    //1- Create the transformation matrix
+    private Matrix3D navigationMatrix = new Matrix3D();
 
-    private DataView dataView;
-    private DataTable BinTable=new DataTable();
-
-     //1- Create the transformation matrix
-      private Matrix3D navigationMatrix = new Matrix3D();
-    
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-     // var results = PerceptionLib.Color.RGBbinedData();
-
       navigationMatrix.Translate(new Vector3D(0, 100, 110));
       navigationMatrix.Scale(new Vector3D((double)1 / 5, (double)1 / 5, (double)1 / 5));
 
       //2- Load the profile in a three dimensional array
-      Bin[, ,] p3700 = new Bin[21, 41, 45];
+      Bin[, ,] p3700 = new Bin[RANGEL, RANGEA, RANGEB];
+      for (int l = 0; l < RANGEL; l++)
+        for (int a = 0; a < RANGEA; a++)
+          for (int b = 0; b < RANGEB; b++)
+            p3700[l, a, b] = new Bin(l, a, b);
 
-      // add the csv bin file
-      using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\see-through-project\gt\STColorCorrection\Src\DataGrid\DataGrid\data\p3700.csv"))
+      try
       {
-        System.Data.DataSet dsResult = parser.GetDataSet();
-        dataView = dsResult.Tables[0].AsDataView();
+        // add the csv bin file
+        using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Data\PROFILE\p3700.csv"))
+        {
+          System.Data.DataSet dsResult = parser.GetDataSet();
+          profile = dsResult.Tables[0];
+        }
       }
-      BinTable = dataView.ToTable();
+      catch
+      { }
 
-        
-      for (int i = 1; i < BinTable.Rows.Count; i++)
+      for (int i = 1; i < profile.Rows.Count; i++)
       {
-       
         //lab vale as got form profile index
-        Point3D LAB_Points = new Point3D();
-        LAB_Points.X = Convert.ToDouble(BinTable.Rows[i][0].ToString());
-        LAB_Points.Y = Convert.ToDouble(BinTable.Rows[i][1].ToString());
-        LAB_Points.Z = Convert.ToDouble(BinTable.Rows[i][2].ToString());
-        
-        //trasfered points
-        Point3D LAB = navigationMatrix.Transform(LAB_Points);
+        Point3D labBin = new Point3D();
+        labBin.X = Convert.ToDouble(profile.Rows[i][0].ToString());
+        labBin.Y = Convert.ToDouble(profile.Rows[i][1].ToString());
+        labBin.Z = Convert.ToDouble(profile.Rows[i][2].ToString());
 
-        // assing values into the aray
-        
-        //BinLAB VALUE
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].binLAB = LAB_Points;
+        if (labBin.X == 65 && labBin.Y == 0 && labBin.Z == 0)
+        {
+          Console.WriteLine("a");
+        }
+
+        //trasfered points
+        Point3D labCoordinate = navigationMatrix.Transform(labBin);
+
+        //gets the bin to fill up
+        Bin actualBin = GetProfileBin(p3700, labCoordinate);
+
+        //bin RGB Value
+        actualBin.binRGB.X = Convert.ToByte(profile.Rows[i][9].ToString());
+        actualBin.binRGB.Y = Convert.ToByte(profile.Rows[i][10].ToString());
+        actualBin.binRGB.Z = Convert.ToByte(profile.Rows[i][11].ToString());
 
         //Measure Lab Values
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredLAB.X = Convert.ToDouble(BinTable.Rows[i][3].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredLAB.Y = Convert.ToDouble(BinTable.Rows[i][4].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredLAB.Z = Convert.ToDouble(BinTable.Rows[i][5].ToString());
+        actualBin.measuredLAB.X = Convert.ToDouble(profile.Rows[i][3].ToString());
+        actualBin.measuredLAB.Y = Convert.ToDouble(profile.Rows[i][4].ToString());
+        actualBin.measuredLAB.Z = Convert.ToDouble(profile.Rows[i][5].ToString());
 
         //measured XYZ Values
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredX = Convert.ToDouble(BinTable.Rows[i][6].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredY = Convert.ToDouble(BinTable.Rows[i][7].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredZ = Convert.ToDouble(BinTable.Rows[i][8].ToString());
-
-        //measured XYZ Values
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredR = Convert.ToByte(BinTable.Rows[i][9].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredG = Convert.ToByte(BinTable.Rows[i][10].ToString());
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].measuredB = Convert.ToByte(BinTable.Rows[i][11].ToString());
+        actualBin.measuredXYZ.X = Convert.ToDouble(profile.Rows[i][6].ToString());
+        actualBin.measuredXYZ.Y = Convert.ToDouble(profile.Rows[i][7].ToString());
+        actualBin.measuredXYZ.Z = Convert.ToDouble(profile.Rows[i][8].ToString());
 
         //is empty check
-        p3700[(int)LAB.X, (int)LAB.Y, (int)LAB.Z].Empty = 1;
+        actualBin.isEmpty = false;
       }
-      
-
 
       //3- Get the parameters: foreground and background
-      System.Drawing.Color foreGround = System.Drawing.Color.FromArgb(150, 150, 150);
-      PerceptionLib.CIEXYZ backGround = new CIEXYZ(20, 20, 20);
+      System.Drawing.Color foreground = System.Drawing.Color.FromArgb(150, 150, 150);
+      PerceptionLib.CIEXYZ background = new CIEXYZ(0.2146, 0.43125, 0.07595); //RGB: 0	199	0 - greenish
 
-      //4- Converts the foreground to how the display shows it
-      Bin foreGroundBin = FindForeGroundBin(foreGround, p3700, navigationMatrix);
-      Vector3D origin1 = new Vector3D(1, 1, 1);
-      int X = (int)origin1.X / 2;
-      origin1.X = (double)X;
+      //5- Calls the correction alrorithm
+      try
+      {
+        Point3D origin = new Point3D(50, 0, 0);
+        Vector3D step = new Vector3D(50, 100, 110);
 
-      Point3D origin = new Point3D(50, 0, 0);
-      Vector3D step = new Vector3D(50, 100, 110);
-      //Vector3D step = new Vector3D(25, 50, 55);
-      Bin CorretedColor= QuickCorrection(p3700, foreGroundBin, backGround, navigationMatrix.Transform(origin), navigationMatrix.Transform(step));
+        Stopwatch stop = new Stopwatch();
+        stop.Start();
+        Bin corretedColor = null;
+        for (int i = 0; i < 640; i++)
+          for (int j = 0; j < 480; j++)
+            corretedColor = QuickCorrection(p3700, foreground, background, navigationMatrix.Transform(origin), navigationMatrix.Transform(step));
+        stop.Stop();
+        Console.WriteLine("Finished");
+      }
+      catch
+      { Console.WriteLine(""); }
+    }
+
+    //actual algorithm
+    private Bin QuickCorrection(Bin[, ,] profile, System.Drawing.Color foreground, CIEXYZ background, Point3D origin, Vector3D step)
+    {
+      //1- Converts the foreground to how the display shows it
+      Bin foregroundBin = FindForegroundBin(profile, navigationMatrix, foreground);
+
+      Bin originBin = GetProfileBin(profile, origin);
+      CalculateCorrectionAccuracy(originBin, background, foregroundBin);
+
+      Point3D top = new Point3D(origin.X + step.X, origin.Y, origin.Z);
+      Point3D bottom = new Point3D(origin.X - step.X, origin.Y, origin.Z);
+      Point3D left = new Point3D(origin.X, origin.Y - step.Y, origin.Z);
+      Point3D right = new Point3D(origin.X, origin.Y + step.Y, origin.Z);
+      Point3D forward = new Point3D(origin.X, origin.Y, origin.Z - step.Z);
+      Point3D backward = new Point3D(origin.X, origin.Y, origin.Z + step.Z);
+
+      List<Bin> samples = new List<Bin>();
+      samples.Add(GetProfileBin(profile, top, Location.Top));
+      samples.Add(GetProfileBin(profile, bottom, Location.Bottom));
+      samples.Add(GetProfileBin(profile, left, Location.Left));
+      samples.Add(GetProfileBin(profile, right, Location.Right));
+      samples.Add(GetProfileBin(profile, forward, Location.Forward));
+      samples.Add(GetProfileBin(profile, backward, Location.Backward));
+      samples.ForEach(sample => CalculateCorrectionAccuracy(sample, background, foregroundBin));
+
+      var closests = samples.Where(sample => sample.distance < originBin.distance);
+      if (closests.Count() == 0)
+      {
+        if (step.X == 1 && step.Y == 1 && step.Z == 1)
+          return originBin;
+
+        if (step.X > 1)
+          step.X = Math.Round(step.X / 2, MidpointRounding.AwayFromZero);
+        if (step.Y > 1)
+          step.Y = Math.Round(step.Y / 2, MidpointRounding.AwayFromZero);
+        if (step.Z > 1)
+          step.Z = Math.Round(step.Z / 2, MidpointRounding.AwayFromZero);
+        return QuickCorrection(profile, foreground, background, origin, step);
+      }
+      else
+      {
+        //calculates weights
+        double totalimprovements = 0;
+        foreach (var sample in closests)
+          totalimprovements += (originBin.distance - sample.distance);
+        foreach (var sample in closests)
+          sample.weight = (originBin.distance - sample.distance) / totalimprovements;
+
+        //calculates displacement
+        Vector3D displacement = new Vector3D(0, 0, 0);
+        foreach (var sample in closests)
+          displacement = displacement + (sample.binLAB - origin) * sample.weight;
+        displacement.X = Math.Round(displacement.X, MidpointRounding.AwayFromZero);
+        displacement.Y = Math.Round(displacement.Y, MidpointRounding.AwayFromZero);
+        displacement.Z = Math.Round(displacement.Z, MidpointRounding.AwayFromZero);
+
+        //pokes new origin
+        Point3D newOriginLoc = origin + displacement;
+        Bin newOrigin = GetProfileBin(profile, newOriginLoc);
+        while (newOrigin.isEmpty)
+        {
+          displacement.X = Math.Round(displacement.X / 2, MidpointRounding.AwayFromZero);
+          displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.AwayFromZero);
+          displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.AwayFromZero);
+
+          newOriginLoc = origin + displacement;
+          newOrigin = GetProfileBin(profile, newOriginLoc);
+        }
+
+        return QuickCorrection(profile, foreground, background, newOriginLoc, step);
+      }
+    }
+
+    private void CalculateCorrectionAccuracy(Bin actualBin, CIEXYZ background, Bin foregroundBin)
+    {
+      if (actualBin.isEmpty)
+        return;
+
+      Point3D predictionXYZ = AddXYZ(actualBin.measuredXYZ, new Point3D(background.X, background.Y, background.Z));
+      PerceptionLib.Color predictionLAB = PerceptionLib.Color.ToLAB(new CIEXYZ(predictionXYZ.X, predictionXYZ.Y, predictionXYZ.Z));
+      actualBin.distance = DistanceLAB(foregroundBin.measuredLAB, new Point3D(predictionLAB.L, predictionLAB.A, predictionLAB.B));
     }
 
     //to find fg bin
-    private Bin FindForeGroundBin(System.Drawing.Color foreGroundRGB, Bin[, ,] profile, Matrix3D navigationMatrix)
+    private Bin FindForegroundBin(Bin[, ,] profile, Matrix3D navigationMatrix, System.Drawing.Color foregroundRGB)
     {
-      PerceptionLib.Color foreGroundLAB = PerceptionLib.Color.ToLAB(foreGroundRGB);
+      PerceptionLib.Color foregroundLAB = PerceptionLib.Color.ToLAB(foregroundRGB);
 
-      int binL = ((int)(Math.Round(foreGroundLAB.LA / 5.0)) * 5);
-      int binA = ((int)(Math.Round(foreGroundLAB.A / 5.0)) * 5);
-      int binB = ((int)(Math.Round(foreGroundLAB.B / 5.0)) * 5);
+      int binL = ((int)(Math.Round(foregroundLAB.LA / 5.0)) * 5);
+      int binA = ((int)(Math.Round(foregroundLAB.A / 5.0)) * 5);
+      int binB = ((int)(Math.Round(foregroundLAB.B / 5.0)) * 5);
       if (binL < 0)
         binL = 0;
       if (binL > 100)
@@ -143,25 +229,39 @@ namespace QuickCorrection
       if (binB > 94.47705120353054)
         binB = 95;
 
-      Point3D profileCoordinates = navigationMatrix.Transform(new Point3D(binL, binA, binB));
-      Bin foregroundBin = profile[(int)profileCoordinates.X, (int)profileCoordinates.Y, (int)profileCoordinates.Z];
+      Bin foregroundBin = GetProfileBin(profile, navigationMatrix.Transform(new Point3D(binL, binA, binB)));
 
       return foregroundBin;
     }
 
-    // bin ditacne call function
-    private double DistanceLAB(Bin Color1, Bin Color2)
+    private Bin GetProfileBin(Bin[, ,] profile, Point3D coordinates, Location location = Location.Top)
     {
-      PerceptionLib.Color C1 = new PerceptionLib.Color();
-      PerceptionLib.Color C2 = new PerceptionLib.Color();
+      Bin outOfBounds = new Bin(-1, -1, -1);
+      outOfBounds.Location = location;
 
-      double l, a, b, result,L1,L2,A1,A2,B1,B2;
-      L1 = Color1.measuredLAB.X;
-      L2 = Color2.measuredLAB.X;
-      A1 = Color1.measuredLAB.Y;
-      A2 = Color2.measuredLAB.Y;
-      B1 = Color1.measuredLAB.Z;
-      B2 = Color2.measuredLAB.Z;
+      if (coordinates.X < 0 || coordinates.X >= RANGEL)
+        return outOfBounds;
+      if (coordinates.Y < 0 || coordinates.Y >= RANGEA)
+        return outOfBounds;
+      if (coordinates.Z < 0 || coordinates.Z >= RANGEB)
+        return outOfBounds;
+
+      Bin returnBin = profile[(int)coordinates.X, (int)coordinates.Y, (int)coordinates.Z];
+      returnBin.Location = location;
+      return returnBin;
+    }
+
+    // bin distance call function
+    private double DistanceLAB(Point3D colorLab1, Point3D colorLab2)
+    {
+      double l, a, b, result, L1, L2, A1, A2, B1, B2;
+
+      L1 = colorLab1.X;
+      L2 = colorLab2.X;
+      A1 = colorLab1.Y;
+      A2 = colorLab2.Y;
+      B1 = colorLab1.Z;
+      B2 = colorLab2.Z;
 
       l = L1 - L2;
       a = A1 - A2;
@@ -170,193 +270,57 @@ namespace QuickCorrection
       a = a * a;
       b = b * b;
       result = l + a + b;
-            
-      double Euv = Math.Sqrt(result);
-      
-      return Euv;
+
+      double distance = Math.Sqrt(result);
+      return distance;
     }
-   
+
     // adding xyz
-    private Bin addXYZ(Bin Color1, CIEXYZ Color2)
+    private Point3D AddXYZ(Point3D colorXYZ1, Point3D colorXYZ2)
     {
-      double X1, X2, Y1, Y2, Z1, Z2, ResultX, ResultY, ResultZ;
-      X1 = Color1.measuredX;
-      Y1 = Color1.measuredY;
-      Z1 = Color1.measuredZ;
+      double X1, X2, Y1, Y2, Z1, Z2, resultX, resultY, resultZ;
 
-      X2 = Color2.X;
-      Y2 = Color2.Y;
-      Z2 = Color2.Z;
+      X1 = colorXYZ1.X;
+      Y1 = colorXYZ1.Y;
+      Z1 = colorXYZ1.Z;
 
-      Bin returnValue = new Bin();
+      X2 = colorXYZ2.X;
+      Y2 = colorXYZ2.Y;
+      Z2 = colorXYZ2.Z;
 
-      
-      ResultX = X1 + X2;
-      ResultY = Y1 + Y2;
-      ResultZ = Z1 + Z2;
-      CIEXYZ ResultXYZ=new CIEXYZ(ResultX,ResultY,ResultZ);
+      resultX = X1 + X2;
+      resultY = Y1 + Y2;
+      resultZ = Z1 + Z2;
 
-      PerceptionLib.Color Result = new PerceptionLib.Color();
-
-      Result = PerceptionLib.Color.ToLAB(ResultXYZ);
-      returnValue.measuredX =ResultX;
-      returnValue.measuredY =ResultY;
-      returnValue.measuredX = ResultZ;
-      returnValue.measuredLAB.X = Result.LA;
-      returnValue.measuredLAB.Y = Result.A;
-      returnValue.measuredLAB.Z = Result.B;
-
-      return returnValue;
-    }
-    
-    //actual algorithm
-    private Bin QuickCorrection(Bin[, ,] profile, Bin foreGroundBin, CIEXYZ backGround, Point3D coordinate, Vector3D step)
-    {
-      ////////////////////
-      /// juan's code
-      ///// ///////////////
-      //Bin anchor = GetProfileBin(profile, origin);
-
-      //Bin PredicitionAtOrigin = addXYZ(anchor, backGround);
-      //double distanceAtOrigin=DistanceLAB(foreGroundBin, PredicitionAtOrigin);
-      //if (distanceAtOrigin < 2.3)
-      //  return anchor;
-      
-      
-      //Point3D top = new Point3D(origin.X + step.X, origin.Y, origin.Z);
-      //Point3D bottom = new Point3D(origin.X - step.X, origin.Y, origin.Z);
-      //Point3D left = new Point3D(origin.X, origin.Y - step.Y, origin.Z);
-      //Point3D right = new Point3D(origin.X, origin.Y + step.Y, origin.Z);
-      //Point3D forward = new Point3D(origin.X, origin.Y, origin.Z - step.Z);
-      //Point3D backward = new Point3D(origin.X, origin.Y, origin.Z + step.Z);
-
-      //Bin valueTop = GetProfileBin(profile, top);
-      //Bin valueBottom = GetProfileBin(profile, bottom);
-      //Bin valueLeft = GetProfileBin(profile, left);
-      //Bin valueRight = GetProfileBin(profile, right);
-      //Bin valueForward = GetProfileBin(profile, forward);
-      //Bin valueBackwards = GetProfileBin(profile, backward);
-
-      //List<Bin> samples = new List<Bin>();
-      //samples.Add(valueTop);
-      //samples.Add(valueBottom);
-      //samples.Add(valueLeft);
-      //samples.Add(valueRight);
-      //samples.Add(valueForward);
-      //samples.Add(valueBackwards);
-
-      ////////////////////////////
-      
-      // to see if the first point is good
-      double distanceAtOrigin = ChosenPointDistance(profile, coordinate, foreGroundBin, backGround);
-      if (distanceAtOrigin < 2.3)
-        return GetProfileBin(profile, coordinate);
-     
-     //to see in which step we are and accordingtly chose the size around to explore
-     StepNumber++;
-     step = step / StepNumber;
-
-
-     List<Bin> samples = Tracer(coordinate, step, profile);
-      List<double> distances= new List<double>();
-     foreach (Bin i in samples)
-     {
-       if (i.Empty == 1)
-       {
-         double dis= ChosenPointDistance(profile, navigationMatrix.Transform(i.binLAB), foreGroundBin, backGround);
-         distances.Add(dis) ;
-       }
-        
-     }
-      distances.Sort();
-
-      if(distances[0]<2.3)
-      return GetProfileBin(profile, navigationMatrix.Transform(samples[0].binLAB)); 
-
-      else
-           
-     return QuickCorrection(profile,  foreGroundBin, backGround,  navigationMatrix.Transform(samples[1].binLAB), step);
+      return new Point3D(resultX, resultY, resultZ);
     }
 
-    //to estabish the disatnce of the the size of the points which needs to be searched around
-    private List<Bin> Tracer(Point3D origin, Vector3D step, Bin[, ,] profile)
-    {
-      Point3D top = new Point3D(origin.X + step.X, origin.Y, origin.Z);
-      Point3D bottom = new Point3D(origin.X - step.X, origin.Y, origin.Z);
-      Point3D left = new Point3D(origin.X, origin.Y - step.Y, origin.Z);
-      Point3D right = new Point3D(origin.X, origin.Y + step.Y, origin.Z);
-      Point3D forward = new Point3D(origin.X, origin.Y, origin.Z - step.Z);
-      Point3D backward = new Point3D(origin.X, origin.Y, origin.Z + step.Z);
-
-      Bin valueTop = GetProfileBin(profile, top);
-      Bin valueBottom = GetProfileBin(profile, bottom);
-      Bin valueLeft = GetProfileBin(profile, left);
-      Bin valueRight = GetProfileBin(profile, right);
-      Bin valueForward = GetProfileBin(profile, forward);
-      Bin valueBackwards = GetProfileBin(profile, backward);
-
-      List<Bin> samples = new List<Bin>();
-      samples.Add(valueTop);
-      samples.Add(valueBottom);
-      samples.Add(valueLeft);
-      samples.Add(valueRight);
-      samples.Add(valueForward);
-      samples.Add(valueBackwards);
-
-      int NoOfEmptyPoints=0;
-      foreach (Bin i in samples)
-      {
-        if (i.Empty != 1)
-          NoOfEmptyPoints++;
-      }
-
-      if (NoOfEmptyPoints < 3)
-      {
-        return samples;
-      }
-      else
-      {
-        step = step/ 2;
-        samples = Tracer(origin, step, profile);
-        return samples;
-      }
-            
-    }
-
-    //distance caluclatpor for a chosen point
-    private double ChosenPointDistance(Bin[, ,] profile,Point3D coordinates,Bin foreGroundBin, CIEXYZ backGround)
-    {
-      Bin anchor = GetProfileBin(profile, coordinates);
-      Bin PredicitionAtCoordinate = addXYZ(anchor, backGround);
-      
-      double distanceAtCoordinate = DistanceLAB(foreGroundBin, PredicitionAtCoordinate);
-      return distanceAtCoordinate;
-    }
-    private Bin GetProfileBin(Bin[, ,] profile, Point3D coordinates)
-    {
-      Bin returnBin = profile[(int)coordinates.X, (int)coordinates.Y, (int)coordinates.Z];
-      return returnBin;
-    }
-
-    struct Bin
+    class Bin
     {
       public Point3D binLAB;
-
+      public Point3D binRGB;
       public Point3D measuredLAB;
+      public Point3D measuredXYZ;
 
-      public double measuredX;
-      public double measuredY;
-      public double measuredZ;
-
-      public Byte measuredR;
-      public Byte measuredG;
-      public Byte measuredB;
-
-
-      public int Empty;
-
+      public bool isEmpty;
       public double distance;
+      public Location Location;
+      public double weight;
+
+      public Bin(int l, int a, int b)
+      {
+        binLAB = new Point3D(l, a, b);
+        isEmpty = true;
+        distance = Double.MaxValue;
+      }
+
+      public override string ToString()
+      {
+        return String.Format("Coordinates: {0}, IsEmpty: {1}", binLAB, isEmpty);
+      }
     }
+
+    public enum Location { Top, Bottom, Left, Right, Forward, Backward }
 
   }
 }

@@ -2,7 +2,5 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid>
-        <DataGrid AutoGenerateColumns="False" Height="200" HorizontalAlignment="Left" Margin="0,12,0,0" Name="dtgrid_corrDisplay" VerticalAlignment="Top" Width="491" />
-    </Grid>
+    <Grid></Grid>
 </Window>
