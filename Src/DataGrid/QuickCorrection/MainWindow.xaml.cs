@@ -37,11 +37,9 @@ namespace QuickCorrection
 
     private DataTable profile = new DataTable();
 
-    //1- Create the transformation matrix
-    private Matrix3D navigationMatrix = new Matrix3D();
-
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
+      Matrix3D navigationMatrix = new Matrix3D();
       navigationMatrix.Translate(new Vector3D(0, 100, 110));
       navigationMatrix.Scale(new Vector3D((double)1 / 5, (double)1 / 5, (double)1 / 5));
 
@@ -109,15 +107,14 @@ namespace QuickCorrection
       //5- Calls the correction alrorithm
       try
       {
-        Point3D origin = new Point3D(50, 0, 0);
-        Vector3D step = new Vector3D(50, 100, 110);
+
 
         Stopwatch stop = new Stopwatch();
         stop.Start();
         Bin corretedColor = null;
         for (int i = 0; i < 640; i++)
           for (int j = 0; j < 480; j++)
-            corretedColor = QuickCorrection(p3700, foreground, background, navigationMatrix.Transform(origin), navigationMatrix.Transform(step));
+            corretedColor = QuickCorrection(p3700, navigationMatrix, foreground, background);
         stop.Stop();
         Console.WriteLine("Finished");
       }
@@ -126,76 +123,114 @@ namespace QuickCorrection
     }
 
     //actual algorithm
-    private Bin QuickCorrection(Bin[, ,] profile, System.Drawing.Color foreground, CIEXYZ background, Point3D origin, Vector3D step)
+    private Bin QuickCorrection(Bin[, ,] profile, Matrix3D navigationMatrix, System.Drawing.Color foreground, CIEXYZ background)
     {
       //1- Converts the foreground to how the display shows it
       Bin foregroundBin = FindForegroundBin(profile, navigationMatrix, foreground);
 
+      //2- general parameters
+      Point3D origin = navigationMatrix.Transform(new Point3D(50, 0, 0));
+      Vector3D step = navigationMatrix.Transform(new Vector3D(50, 100, 110));
+
+      //3- finds the correction accuracy of the current bin
       Bin originBin = GetProfileBin(profile, origin);
       CalculateCorrectionAccuracy(originBin, background, foregroundBin);
 
-      Point3D top = new Point3D(origin.X + step.X, origin.Y, origin.Z);
-      Point3D bottom = new Point3D(origin.X - step.X, origin.Y, origin.Z);
-      Point3D left = new Point3D(origin.X, origin.Y - step.Y, origin.Z);
-      Point3D right = new Point3D(origin.X, origin.Y + step.Y, origin.Z);
-      Point3D forward = new Point3D(origin.X, origin.Y, origin.Z - step.Z);
-      Point3D backward = new Point3D(origin.X, origin.Y, origin.Z + step.Z);
-
-      List<Bin> samples = new List<Bin>();
-      samples.Add(GetProfileBin(profile, top, Location.Top));
-      samples.Add(GetProfileBin(profile, bottom, Location.Bottom));
-      samples.Add(GetProfileBin(profile, left, Location.Left));
-      samples.Add(GetProfileBin(profile, right, Location.Right));
-      samples.Add(GetProfileBin(profile, forward, Location.Forward));
-      samples.Add(GetProfileBin(profile, backward, Location.Backward));
-      samples.ForEach(sample => CalculateCorrectionAccuracy(sample, background, foregroundBin));
-
-      var closests = samples.Where(sample => sample.distance < originBin.distance);
-      if (closests.Count() == 0)
+      //--- Iterative Version ---//
+      while (step.X > 1 || step.Y > 1 && step.Z > 1)
       {
-        if (step.X == 1 && step.Y == 1 && step.Z == 1)
-          return originBin;
+        //4- finds the correction accuracy of the 6 samplers and whether they are better than the origin
+        Point3D top = new Point3D(origin.X + step.X, origin.Y, origin.Z);
+        Point3D bottom = new Point3D(origin.X - step.X, origin.Y, origin.Z);
+        Point3D left = new Point3D(origin.X, origin.Y - step.Y, origin.Z);
+        Point3D right = new Point3D(origin.X, origin.Y + step.Y, origin.Z);
+        Point3D forward = new Point3D(origin.X, origin.Y, origin.Z - step.Z);
+        Point3D backward = new Point3D(origin.X, origin.Y, origin.Z + step.Z);
 
-        if (step.X > 1)
-          step.X = Math.Round(step.X / 2, MidpointRounding.AwayFromZero);
-        if (step.Y > 1)
-          step.Y = Math.Round(step.Y / 2, MidpointRounding.AwayFromZero);
-        if (step.Z > 1)
-          step.Z = Math.Round(step.Z / 2, MidpointRounding.AwayFromZero);
-        return QuickCorrection(profile, foreground, background, origin, step);
-      }
-      else
-      {
-        //calculates weights
-        double totalimprovements = 0;
-        foreach (var sample in closests)
-          totalimprovements += (originBin.distance - sample.distance);
-        foreach (var sample in closests)
-          sample.weight = (originBin.distance - sample.distance) / totalimprovements;
+        Bin[] samples = new Bin[6];
+        samples[0] = GetProfileBin(profile, top, Location.Top);
+        samples[1] = GetProfileBin(profile, bottom, Location.Bottom);
+        samples[2] = GetProfileBin(profile, left, Location.Left);
+        samples[3] = GetProfileBin(profile, right, Location.Right);
+        samples[4] = GetProfileBin(profile, forward, Location.Forward);
+        samples[5] = GetProfileBin(profile, backward, Location.Backward);
 
-        //calculates displacement
-        Vector3D displacement = new Vector3D(0, 0, 0);
-        foreach (var sample in closests)
-          displacement = displacement + (sample.binLAB - origin) * sample.weight;
-        displacement.X = Math.Round(displacement.X, MidpointRounding.AwayFromZero);
-        displacement.Y = Math.Round(displacement.Y, MidpointRounding.AwayFromZero);
-        displacement.Z = Math.Round(displacement.Z, MidpointRounding.AwayFromZero);
-
-        //pokes new origin
-        Point3D newOriginLoc = origin + displacement;
-        Bin newOrigin = GetProfileBin(profile, newOriginLoc);
-        while (newOrigin.isEmpty)
+        int countSamplesClosestThanOrigin = 0;
+        for (int index = 0; index < samples.Length; index++)
         {
-          displacement.X = Math.Round(displacement.X / 2, MidpointRounding.AwayFromZero);
-          displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.AwayFromZero);
-          displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.AwayFromZero);
-
-          newOriginLoc = origin + displacement;
-          newOrigin = GetProfileBin(profile, newOriginLoc);
+          CalculateCorrectionAccuracy(samples[index], background, foregroundBin);
+          if (samples[index].distance >= originBin.distance)
+            continue;
+          samples[index].isMoreAccurateThanOrigin = true;
+          countSamplesClosestThanOrigin++;
         }
 
-        return QuickCorrection(profile, foreground, background, newOriginLoc, step);
+        //5- if the origin is the most accurate, it halves the step and checks again
+        if (countSamplesClosestThanOrigin == 0)
+        {
+          if (step.X == 1 && step.Y == 1 && step.Z == 1)
+            return originBin;
+
+          if (step.X > 1)
+            step.X = Math.Round(step.X / 2, MidpointRounding.AwayFromZero);
+          if (step.Y > 1)
+            step.Y = Math.Round(step.Y / 2, MidpointRounding.AwayFromZero);
+          if (step.Z > 1)
+            step.Z = Math.Round(step.Z / 2, MidpointRounding.AwayFromZero);
+          continue;
+        }
+
+        //6- if there is at least one sample more accurate, it moves the origin in that direction, maintains the step and checks again
+        else
+        {
+          //6.1 calculates weights
+          double totalimprovements = 0;
+          for (int index = 0; index < samples.Length; index++)
+          {
+            if (!samples[index].isMoreAccurateThanOrigin)
+              continue;
+            totalimprovements += (originBin.distance - samples[index].distance);
+          }
+          for (int index = 0; index < samples.Length; index++)
+          {
+            if (!samples[index].isMoreAccurateThanOrigin)
+              continue;
+            samples[index].weight = (originBin.distance - samples[index].distance) / totalimprovements;
+          }
+
+          //6.2 calculates displacement
+          Vector3D displacement = new Vector3D(0, 0, 0);
+          for (int index = 0; index < samples.Length; index++)
+          {
+            if (!samples[index].isMoreAccurateThanOrigin)
+              continue;
+            displacement = displacement + (samples[index].binLAB - origin) * samples[index].weight;
+          }
+          displacement.X = Math.Round(displacement.X, MidpointRounding.AwayFromZero);
+          displacement.Y = Math.Round(displacement.Y, MidpointRounding.AwayFromZero);
+          displacement.Z = Math.Round(displacement.Z, MidpointRounding.AwayFromZero);
+
+          //6.3 pokes new origin
+          Point3D newOriginLoc = origin + displacement;
+          Bin newOriginBin = GetProfileBin(profile, newOriginLoc);
+          while (newOriginBin.isEmpty)
+          {
+            //6.4 moves half the magnitude in the given direction
+            displacement.X = Math.Round(displacement.X / 2, MidpointRounding.AwayFromZero);
+            displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.AwayFromZero);
+            displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.AwayFromZero);
+
+            newOriginLoc = origin + displacement;
+            newOriginBin = GetProfileBin(profile, newOriginLoc);
+          }
+
+          origin = newOriginLoc;
+          originBin = newOriginBin;
+          CalculateCorrectionAccuracy(originBin, background, foregroundBin);
+        }
       }
+
+      return originBin;
     }
 
     private void CalculateCorrectionAccuracy(Bin actualBin, CIEXYZ background, Bin foregroundBin)
@@ -248,6 +283,7 @@ namespace QuickCorrection
 
       Bin returnBin = profile[(int)coordinates.X, (int)coordinates.Y, (int)coordinates.Z];
       returnBin.Location = location;
+      returnBin.isMoreAccurateThanOrigin = false;
       return returnBin;
     }
 
@@ -303,6 +339,7 @@ namespace QuickCorrection
       public Point3D measuredXYZ;
 
       public bool isEmpty;
+      public bool isMoreAccurateThanOrigin;
       public double distance;
       public Location Location;
       public double weight;
@@ -312,11 +349,12 @@ namespace QuickCorrection
         binLAB = new Point3D(l, a, b);
         isEmpty = true;
         distance = Double.MaxValue;
+        isMoreAccurateThanOrigin = false;
       }
 
       public override string ToString()
       {
-        return String.Format("Coordinates: {0}, IsEmpty: {1}", binLAB, isEmpty);
+        return String.Format("Coordinates: {0}, IsEmpty: {1}, Location: {2}", binLAB, isEmpty, Location);
       }
     }
 
