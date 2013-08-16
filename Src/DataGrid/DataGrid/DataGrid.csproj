@@ -100,6 +100,10 @@
       <Project>{15B28B52-27B2-45B5-A914-864B1F286517}</Project>
       <Name>PerceptionLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuickCorrection\QuickCorrection.csproj">
+      <Project>{6C3CF0C9-0CAF-44F3-BDF5-7169A0DDA036}</Project>
+      <Name>QuickCorrection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
