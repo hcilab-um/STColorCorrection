@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.ComponentModel;
+using System.Windows.Media.Media3D;
 
 
 namespace PerceptionLib
@@ -469,6 +470,26 @@ namespace PerceptionLib
       rColor.B = 200 * (Fy - Fz);
 
       return rColor;
+    }
+
+    public static Point3D ToLAB(Point3D colorXYZ)
+    {
+      double Fx, Fy, Fz;
+      Point3D colorLAB = new Point3D();
+
+      double yr = colorXYZ.Y / CIEXYZ.D65.Y;
+      double xr = colorXYZ.X / CIEXYZ.D65.X;
+      double zr = colorXYZ.Z / CIEXYZ.D65.Z;
+
+      Fx = FX(xr);
+      Fy = FX(yr);
+      Fz = FX(zr);
+
+      colorLAB.X = Lxyz(yr);
+      colorLAB.Y = 500 * (Fx - Fy);
+      colorLAB.Z = 200 * (Fy - Fz);
+
+      return colorLAB;
     }
 
     public static Color ToLAB(CIEXYZ xyz, CIEXYZ WtPoint)
