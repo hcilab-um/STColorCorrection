@@ -61,7 +61,7 @@ namespace CudafyByExample
             public double MY;
             public double MZ;
             public double distance;
-            public int weight;
+            public double weight;
             public int isempty;
             public int isMoreAccurateThanOrigin;
         }
@@ -127,7 +127,7 @@ namespace CudafyByExample
         public static double Lxyz(double e)
         {
             if (e > 0.008856)
-                e = (116 * Math.Pow(e, 0.333333333333333)) - 16;
+                e = (116 * Math.Pow(e, (1.0 / 3.0))) - 16;
             else
                 e = (double)(903.3 * e);
             return e;
@@ -240,26 +240,17 @@ namespace CudafyByExample
             else
                 zr = ((903.3 * zr) + 16) / 116;
 
-
-            //Fx = FX(xr);
-            //Fy = FX(yr);
-            //Fz = FX(zr);
-
-
             Fx = xr;
             Fy = yr;
             Fz = zr;
 
             ProfileStrucuture rColor = new ProfileStrucuture();
 
-            //rColor.L = Lxyz(yr);
-
             if (yr > 0.008856)
-                yr = (116 * Math.Pow(yr, 0.333333333333333)) - 16;
+                yr = (116 * Math.Pow(yr, (1.0 / 3.0))) - 16;
             else
                 yr = (double)(903.3 * yr);
             rColor.L = yr;
-
             rColor.A = 500 * (Fx - Fy);
             rColor.B = 200 * (Fy - Fz);
 
@@ -269,20 +260,42 @@ namespace CudafyByExample
         [Cudafy]
         public static ProfileStrucuture XYZtoLAB_st(BackGroundStrucuture xyz)
         {
+            double Fx, Fy, Fz;
 
-
-            double yr = (double)(xyz.Y / 1.0000f);
             double xr = (double)(xyz.X / 0.9504f);
+            double yr = (double)(xyz.Y / 1.0000f);
             double zr = (double)(xyz.Z / 1.0888f);
 
-            double Fx, Fy, Fz;
-            Fx = FX(xr);
-            Fy = FX(yr);
-            Fz = FX(zr);
+            if (xr > 0.008856)
+                xr = Math.Pow(xr, (1.0 / 3.0));
+
+            else
+                xr = ((903.3 * xr) + 16) / 116;
+
+            if (yr > 0.008856)
+                yr = Math.Pow(yr, (1.0 / 3.0));
+
+            else
+                yr = ((903.3 * yr) + 16) / 116;
+
+
+            if (zr > 0.008856)
+                zr = Math.Pow(zr, (1.0 / 3.0));
+
+            else
+                zr = ((903.3 * zr) + 16) / 116;
+
+            Fx = xr;
+            Fy = yr;
+            Fz = zr;
 
             ProfileStrucuture rColor = new ProfileStrucuture();
 
-            rColor.L = Lxyz(yr);
+            if (yr > 0.008856)
+                yr = (116 * Math.Pow(yr, (1.0 / 3.0))) - 16;
+            else
+                yr = (double)(903.3 * yr);
+            rColor.L = yr;
             rColor.A = 500 * (Fx - Fy);
             rColor.B = 200 * (Fy - Fz);
 
@@ -402,9 +415,18 @@ namespace CudafyByExample
         [Cudafy]
         private static Point3D HalfTheStep(Point3D step)
         {
+            double truncated;
             if (step.X > 1)
             {
-                step.X = (int)Math.Round(step.X/2.0);
+                step.X = step.X / 2.0;
+                truncated = Math.Truncate(step.X);
+                truncated = step.X - truncated;
+                if (truncated > 0.4)
+                {
+                    step.X = step.X + 0.1;
+                }
+
+                step.X = (int)(Math.Round(step.X));
             }
             else if (step.X == 1)
             {
@@ -413,7 +435,15 @@ namespace CudafyByExample
 
             if (step.Y > 1)
             {
-                step.Y = (int)Math.Round(step.Y / 2.0);
+                step.Y = step.Y / 2.0;
+                truncated = Math.Truncate(step.Y);
+                truncated = step.Y - truncated;
+                if (truncated > 0.4)
+                {
+                    step.Y = step.Y + 0.1;
+                }
+
+                step.Y = (int)(Math.Round(step.Y));
             }
             else if (step.Y == 1)
             {
@@ -422,7 +452,14 @@ namespace CudafyByExample
 
             if (step.Z > 1)
             {
-                step.Z = (int)Math.Round(step.Z / 2.0);
+                step.Z = step.Z / 2.0;
+                truncated = Math.Truncate(step.Z);
+                truncated = step.Z - truncated;
+                if (truncated > 0.4)
+                {
+                    step.Z = step.Z + 0.1;
+                }
+                step.Z = (int)(Math.Round(step.Z));
             }
             else if (step.Z == 1)
             {
@@ -494,15 +531,15 @@ namespace CudafyByExample
 
             BackGroundStrucuture PredictionXYZ = addXYZ_st(actualBin.MX, actualBin.MY, actualBin.MZ, BackgroundXYZ_GPU[offset]);
 
-            //ProfileStrucuture PredictionlAB = XYZtoLAB_st(PredictionXYZ);
+            ProfileStrucuture PredictionLAB = XYZtoLAB_st(PredictionXYZ);
 
-            //diffL = PredictionlAB.L - returnBin.ML;
-            //diffA = PredictionlAB.A - returnBin.MA;
-            //diffB = PredictionlAB.B - returnBin.MB;
+            diffL = PredictionLAB.L - foregroundColorToShow.ML;
+            diffA = PredictionLAB.A - foregroundColorToShow.MA;
+            diffB = PredictionLAB.B - foregroundColorToShow.MB;
 
-            diffL = PredictionXYZ.X - foregroundColorToShow.MX;
-            diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
-            diffB = PredictionXYZ.Z - foregroundColorToShow.MZ;
+            //diffL = PredictionXYZ.X - foregroundColorToShow.MX;
+            //diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
+            //diffB = PredictionXYZ.Z - foregroundColorToShow.MZ;
 
             diffL = diffL * diffL;
             diffA = diffA * diffA;
@@ -567,15 +604,11 @@ namespace CudafyByExample
 
                     BackGroundStrucuture temp_XYZ = addXYZ_st(samples[offset,index].MX, samples[offset,index].MY, samples[offset,index].MZ, BackgroundXYZ_GPU[offset]);
 
-                    //ProfileStrucuture PredictionlAB = XYZtoLAB_st(PredictionXYZ);
+                    ProfileStrucuture PredictionlAB = XYZtoLAB_st(temp_XYZ);
 
-                    //diffL = PredictionlAB.L - returnBin.ML;
-                    //diffA = PredictionlAB.A - returnBin.MA;
-                    //diffB = PredictionlAB.B - returnBin.MB;
-
-                    diffL = temp_XYZ.X - foregroundColorToShow.MX;
-                    diffA = temp_XYZ.Y - foregroundColorToShow.MY;
-                    diffB = temp_XYZ.Z - foregroundColorToShow.MZ;
+                    diffL = PredictionlAB.L - foregroundColorToShow.ML;
+                    diffA = PredictionlAB.A - foregroundColorToShow.MA;
+                    diffB = PredictionlAB.B - foregroundColorToShow.MB;
 
                     diffL = diffL * diffL;
                     diffA = diffA * diffA;
@@ -624,7 +657,7 @@ namespace CudafyByExample
                         {
                             continue;
                         }
-                        samples[offset,index].weight = (int)((actualBin.distance - samples[offset,index].distance) / totalimprovements);
+                        samples[offset,index].weight = ((actualBin.distance - samples[offset,index].distance) / totalimprovements);
                     }
                     //6.2 calculates displacement
                     Point3D displacement = new Point3D(0, 0, 0);
@@ -831,6 +864,7 @@ namespace CudafyByExample
             // cuda or emulator
             //GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
             GPGPU gpu = CudafyHost.GetDevice(eGPUType.Emulator);
+            Console.WriteLine("Running examples using {0}", gpu.GetDeviceProperties(false).Name);
             gpu.LoadModule(km);
 
             double[] distance_CPU = new double[786432];
@@ -850,7 +884,6 @@ namespace CudafyByExample
             catch (Exception ex)
             { Console.WriteLine(ex); }
             #endregion
-
 
             // allocate temp memory, initialize it, copy to constant memory on the GPU
             // L 0-21 A 0-41 B 0-45
@@ -883,7 +916,7 @@ namespace CudafyByExample
                         profiles_CPU[indexL, indexA, indexB].distance = -1.0;
                         profiles_CPU[indexL, indexA, indexB].weight = -1.0;
 
-                        profiles_CPU[indexL, indexA, indexB].isempty = FALSE;
+                        profiles_CPU[indexL, indexA, indexB].isempty = TRUE;
                         profiles_CPU[indexL, indexA, indexB].isMoreAccurateThanOrigin = FALSE;
                     }
                 }
@@ -945,13 +978,13 @@ namespace CudafyByExample
             {
                 for (int i = 0; i < 786432; i++)
                 {
-                    foregorungRGB_CPU[i].R = 201;
-                    foregorungRGB_CPU[i].G = 78;
-                    foregorungRGB_CPU[i].B = 80;
+                    foregorungRGB_CPU[i].R = 1;
+                    foregorungRGB_CPU[i].G = 1;
+                    foregorungRGB_CPU[i].B = 255;
 
-                    BackgroundXYZ_CPU[i].X = 0.151966667F;
-                    BackgroundXYZ_CPU[i].Y = 0.085966667F;
-                    BackgroundXYZ_CPU[i].Z = 0.042566667F;
+                    BackgroundXYZ_CPU[i].X = 0.629866667F;
+                    BackgroundXYZ_CPU[i].Y = 0.653533333F;
+                    BackgroundXYZ_CPU[i].Z = 0.684966667F;
                 }
             }
             catch (Exception ex)
@@ -964,17 +997,15 @@ namespace CudafyByExample
 
             for (int i = 0; i < 22; i++)
             {
+                // capture the start time
                 gpu.StartTimer();
                 ForeGroundStrucuture[] foregorungRGB_GPU = gpu.CopyToDevice(foregorungRGB_CPU);
                 BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
 
-
-
-
                 //out put
                 double[] distance_GPU = gpu.Allocate(distance_CPU);
 
-                // capture the start time
+                
                 
 
                 // generate a bitmap from our sphere data

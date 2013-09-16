@@ -32,9 +32,9 @@ namespace CudafyByExample
                     goto theEnd;
                 }
                 GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
-                Console.WriteLine("Running examples using {0}", gpu.GetDeviceProperties(false).Name);
+               
 
-               //Color.Execute();
+               Color.Execute();
                quick_corr.Execute();
 
                 #region
