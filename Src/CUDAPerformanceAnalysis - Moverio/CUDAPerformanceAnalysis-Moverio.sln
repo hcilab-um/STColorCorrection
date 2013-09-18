@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUDAPerformanceAnalysis-Simple", "CUDAPerformanceAnalysis-Simple.csproj", "{755A1AF7-9A74-472F-8714-F656AA714B8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericParsing", "..\..\..\..\lev\STColorCorrection\Src\GenericParser_src\GenericParsing\GenericParsing.csproj", "{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Debug|Any CPU.Build.0 = Debug|x64
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Debug|x86.ActiveCfg = Debug|x86
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Debug|x86.Build.0 = Debug|x86
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Release|x86.ActiveCfg = Release|x86
+		{755A1AF7-9A74-472F-8714-F656AA714B8A}.Release|x86.Build.0 = Release|x86
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
