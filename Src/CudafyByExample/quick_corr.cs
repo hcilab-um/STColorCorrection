@@ -1061,10 +1061,10 @@ namespace CudafyByExample
 
         public static TestingStructure[] CorrectColour(System.Drawing.Color rgb, double X, double Y, double Z)
         {
-            rgb = System.Drawing.Color.FromArgb(69, 77, 217);
-            X = 0.0630982813175294;
-            Y = 0.616476271122916;
-            Z = 0.667048468232457;
+            //rgb = System.Drawing.Color.FromArgb(69, 77, 217);
+            //X = 0.0630982813175294;
+            //Y = 0.616476271122916;
+            //Z = 0.667048468232457;
 
             //cuda intializer
             CudafyModule km = CudafyModule.TryDeserialize();
