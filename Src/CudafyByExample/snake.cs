@@ -577,29 +577,30 @@ namespace CudafyByExample
             {
 
                 //sample 6 bins
-                top.X = origin.X + step.X;
+                top.X = origin.X + 1;
                 top.Y = origin.Y;
                 top.Z = origin.Z;
 
-                bottom.X = origin.X - step.X;
+                bottom.X = origin.X - 1;
                 bottom.Y = origin.Y;
                 bottom.Z = origin.Z;
 
                 left.X = origin.X;
-                left.Y = origin.Y - step.Y;
+                left.Y = origin.Y - 1;
                 left.Z = origin.Z;
 
                 right.X = origin.X;
-                right.Y = origin.Y + step.Y;
+                right.Y = origin.Y + 1;
                 right.Z = origin.Z;
 
                 forward.X = origin.X;
                 forward.Y = origin.Y;
-                forward.Z = origin.Z - step.Z;
+                forward.Z = origin.Z - 1;
 
                 backward.X = origin.X;
                 backward.Y = origin.Y;
-                backward.Z = origin.Z + step.Z;
+                backward.Z = origin.Z + 1;
+
 
                 samples[offset, 0] = GetProfileBinForSample(top.X, top.Y, top.Z, profile_GPU);
                 samples[offset, 1] = GetProfileBinForSample(bottom.X, bottom.Y, bottom.Z, profile_GPU);

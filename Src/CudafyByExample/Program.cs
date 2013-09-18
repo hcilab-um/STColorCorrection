@@ -194,7 +194,7 @@ namespace CudafyByExample
 
 
                 Random randomGenerater = new Random();
-                for (int num_colors = 0; num_colors < 20; num_colors++)
+                for (int num_colors = 0; num_colors < 500; num_colors++)
                 {
                     //create a new csv row
                     CsvRow new_row_file_1 = new CsvRow();
