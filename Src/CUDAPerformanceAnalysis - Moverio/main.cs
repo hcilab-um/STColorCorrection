@@ -203,25 +203,35 @@ namespace CudafyByExample
                     CsvRow new_row_file_1 = new CsvRow();
                     CsvRow new_row_file_2 = new CsvRow();
 
+                    const int image_size = 960 * 540;
 
 
-                    //colour selection
-                    Byte[] rgb = new Byte[3];
-                    randomGenerater.NextBytes(rgb);
-                    System.Drawing.Color foreground = System.Drawing.Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                    ForeGroundStrucuture[] foregorungRGB_BF = new ForeGroundStrucuture[image_size];
+                    BackGroundStrucuture[] BackgroundXYZ_BF = new BackGroundStrucuture[image_size];
 
-                    Point3D backgroundCIEXYZ = new Point3D(0, 0, 0);
-                    backgroundCIEXYZ.X = randomGenerater.NextDouble() * 0.9504;
-                    backgroundCIEXYZ.Y = randomGenerater.NextDouble() * 1.0000;
-                    backgroundCIEXYZ.Z = randomGenerater.NextDouble() * 1.0888;
-                    Point3D background = new Point3D(backgroundCIEXYZ.X, backgroundCIEXYZ.Y, backgroundCIEXYZ.Z);
+                    ForeGroundStrucuture[] foregorungRGB_QC = new ForeGroundStrucuture[image_size];
+                    BackGroundStrucuture[] BackgroundXYA_QC = new BackGroundStrucuture[image_size];
 
-                    Bin foregroundBin = FindForegroundBin(p3700, navigationMatrix, foreground);
-                    PerceptionLib.Color foregroundLAB = new PerceptionLib.Color();
+                    for (int i = 0; i < image_size; i++){
 
-                    foregroundLAB.LA = foregroundBin.measuredLAB.X;
-                    foregroundLAB.A = foregroundBin.measuredLAB.Y;
-                    foregroundLAB.B = foregroundBin.measuredLAB.Z;
+                        Byte[] rgb = new Byte[3];
+                        randomGenerater.NextBytes(rgb);
+                        System.Drawing.Color foreground = System.Drawing.Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+
+                        Point3D backgroundCIEXYZ = new Point3D(0, 0, 0);
+                        backgroundCIEXYZ.X = randomGenerater.NextDouble() * 0.9504;
+                        backgroundCIEXYZ.Y = randomGenerater.NextDouble() * 1.0000;
+                        backgroundCIEXYZ.Z = randomGenerater.NextDouble() * 1.0888;
+                        Point3D background = new Point3D(backgroundCIEXYZ.X, backgroundCIEXYZ.Y, backgroundCIEXYZ.Z);
+
+                        Bin foregroundBin = FindForegroundBin(p3700, navigationMatrix, foreground);
+                        PerceptionLib.Color foregroundLAB = new PerceptionLib.Color();
+
+                        foregroundLAB.LA = foregroundBin.measuredLAB.X;
+                        foregroundLAB.A = foregroundBin.measuredLAB.Y;
+                        foregroundLAB.B = foregroundBin.measuredLAB.Z;
+    
+                    }
 
                     //write the input colors
                     #region
@@ -252,43 +262,43 @@ namespace CudafyByExample
 
 
                     //get the brute force values
-                    bf.TestingStructure[] results_brute_force = bf.CorrectColour(foreground, background.X, background.Y, background.Z);
+                    bf.TestOutput results_brute_force = bf.CorrectColour();
 
-                    new_row_file_1.Add(results_brute_force[0].distance.ToString());
-                    new_row_file_1.Add(results_brute_force[0].execution_time.ToString());
+                    //new_row_file_1.Add(results_brute_force[0].distance.ToString());
+                    //new_row_file_1.Add(results_brute_force[0].execution_time.ToString());
 
-                    Point3D labBin = new Point3D();
-                    labBin.X = results_brute_force[0].Given_R;
-                    labBin.Y = results_brute_force[0].Given_G;
-                    labBin.Z = results_brute_force[0].Given_B;
+                    //Point3D labBin = new Point3D();
+                    //labBin.X = results_brute_force[0].Given_R;
+                    //labBin.Y = results_brute_force[0].Given_G;
+                    //labBin.Z = results_brute_force[0].Given_B;
 
-                    Bin actualBin = GetProfileBin(p3700, labBin);
+                    //Bin actualBin = GetProfileBin(p3700, labBin);
 
-                    new_row_file_2.Add(results_brute_force[0].distance.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.X.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.Y.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.Z.ToString());
+                    //new_row_file_2.Add(results_brute_force[0].distance.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.X.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.Y.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.Z.ToString());
 
 
-                    quick_corr.TestingStructure[] results_quick_corr = quick_corr.CorrectColour(foreground, background.X, background.Y, background.Z);
+                    //quick_corr.TestingStructure[] results_quick_corr = quick_corr.CorrectColour(foreground, background.X, background.Y, background.Z);
 
-                    new_row_file_1.Add(results_quick_corr[0].distance.ToString());
-                    new_row_file_1.Add(results_quick_corr[0].execution_time.ToString());
+                    //new_row_file_1.Add(results_quick_corr[0].distance.ToString());
+                    //new_row_file_1.Add(results_quick_corr[0].execution_time.ToString());
 
-                    labBin = new Point3D();
-                    labBin.X = results_quick_corr[0].Given_R;
-                    labBin.Y = results_quick_corr[0].Given_G;
-                    labBin.Z = results_quick_corr[0].Given_B;
+                    //labBin = new Point3D();
+                    //labBin.X = results_quick_corr[0].Given_R;
+                    //labBin.Y = results_quick_corr[0].Given_G;
+                    //labBin.Z = results_quick_corr[0].Given_B;
 
-                    actualBin = GetProfileBin(p3700, labBin);
+                    //actualBin = GetProfileBin(p3700, labBin);
 
-                    new_row_file_2.Add(results_quick_corr[0].distance.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.X.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.Y.ToString());
-                    new_row_file_2.Add(actualBin.binRGB.Z.ToString());
+                    //new_row_file_2.Add(results_quick_corr[0].distance.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.X.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.Y.ToString());
+                    //new_row_file_2.Add(actualBin.binRGB.Z.ToString());
 
-                    output_file_1.WriteRow(new_row_file_1);
-                    output_file_2.WriteRow(new_row_file_2);
+                    //output_file_1.WriteRow(new_row_file_1);
+                    //output_file_2.WriteRow(new_row_file_2);
                     
                 }
 
@@ -430,5 +440,20 @@ theEnd:
             return String.Format("Coordinates: {0}, IsEmpty: {1}, Location: {2}", binLAB, isEmpty);
         }
     }
-   
+
+    public struct BackGroundStrucuture
+    {
+        public double X;
+        public double Y;
+        public double Z;
+
+    }
+
+    public struct ForeGroundStrucuture
+    {
+        public byte R;
+        public byte G;
+        public byte B;
+    }
+
 }

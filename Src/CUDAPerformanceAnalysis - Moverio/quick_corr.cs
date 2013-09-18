@@ -49,9 +49,9 @@ namespace CudafyByExample
             public double L;
             public double A;
             public double B;
-            //public double Given_R;
-            //public double Given_G;
-            //public double Given_B;
+            public double Given_R;
+            public double Given_G;
+            public double Given_B;
             public double ML;
             public double MA;
             public double MB;
@@ -62,8 +62,6 @@ namespace CudafyByExample
             public double weight;
             public double isempty;
             public double isMoreAccurateThanOrigin;
-
-
         }
 
         [Cudafy]
