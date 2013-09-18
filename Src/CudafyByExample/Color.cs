@@ -22,6 +22,24 @@ namespace CudafyByExample
 
     public const int ImagreDimention = ImagreHeight * ImagreWidth;
 
+    [Cudafy]
+    public const double TRUE = 1.0;
+    [Cudafy]
+    public const double FALSE = -1.0;
+
+    /// <summary>
+    /// This struct is only used to return all the data to the testing 
+    /// algorithm. 
+    /// </summary>
+    [Cudafy]
+    public struct TestingStructure
+    {
+        public double Given_R;
+        public double Given_G;
+        public double Given_B;
+        public double distance;
+        public double execution_time;
+    }
 
 
     [Cudafy]
@@ -30,9 +48,9 @@ namespace CudafyByExample
       public double L ;
       public double A ;
       public double B ;
-      public double Given_R;
-      public double Given_G;
-      public double Given_B;
+      //public double Given_R;
+      //public double Given_G;
+      //public double Given_B;
       public double ML ;
       public double MA ;
       public double MB ;
@@ -42,7 +60,7 @@ namespace CudafyByExample
       public double isempty;
       public double isMoreAccurateThanOrigin;     
                 
-      }
+    }
 
     [Cudafy]
     public struct BackGroundStrucuture
@@ -99,68 +117,68 @@ namespace CudafyByExample
       //0.2126729  0.7151522  0.0721750
       //0.0193339  0.1191920  0.9503041
 
-      //// to make rgb values linear red, green, blue values
-	     BackGroundStrucuture XYZ= new BackGroundStrucuture();
-      double rLinear = (double)(RGB.R / 255.0);
-      double gLinear = (double)(RGB.G / 255.0);
-      double bLinear = (double)(RGB.B / 255.0);
+        //// to make rgb values linear red, green, blue values
+        BackGroundStrucuture XYZ = new BackGroundStrucuture();
+        double rLinear = (double)(RGB.R / 255.0);
+        double gLinear = (double)(RGB.G / 255.0);
+        double bLinear = (double)(RGB.B / 255.0);
 
-      // convert to a sRGB form
+        // convert to a sRGB form
 
-      //double r =  Math.pow((rLinear ), 2.2) ;
-      //double g =  Math.pow((gLinear ), 2.2) ;
-      //double b = Math.pow((bLinear ), 2.2) ;
-      double r, g, b;
+        //double r =  Math.pow((rLinear ), 2.2) ;
+        //double g =  Math.pow((gLinear ), 2.2) ;
+        //double b = Math.pow((bLinear ), 2.2) ;
+        double r, g, b;
 
-      if (rLinear > 0.04045)
-      {
-        r = (double)((double)(rLinear + 0.055) / 1.055);
-        r = Math.Pow(r, (double)2.200000);
-      }
-      else
-        r =(double)(rLinear / 12.92);
+        if (rLinear > 0.04045)
+        {
+            r = (double)((double)(rLinear + 0.055) / 1.055);
+            r = Math.Pow(r, (double)2.200000);
+        }
+        else
+            r = (double)(rLinear / 12.92);
 
-      if (gLinear > 0.04045)
-      {
-        g = (double)((double)(gLinear + 0.055) / 1.055);
-        g = Math.Pow((double)g, (double)2.2);
-      }
-      else
-        g = (double)(gLinear / 12.92);
+        if (gLinear > 0.04045)
+        {
+            g = (double)((double)(gLinear + 0.055) / 1.055);
+            g = Math.Pow((double)g, (double)2.2);
+        }
+        else
+            g = (double)(gLinear / 12.92);
 
-      if (bLinear > 0.04045)
-      {
-        b = (double)((double)(bLinear + 0.055) / 1.055);
-        b = Math.Pow((double)b, (double)2.2);
-      }
-      else
-        b = (double)(bLinear / 12.92);
+        if (bLinear > 0.04045)
+        {
+            b = (double)((double)(bLinear + 0.055) / 1.055);
+            b = Math.Pow((double)b, (double)2.2);
+        }
+        else
+            b = (double)(bLinear / 12.92);
 
 
-		    XYZ.X=(double)(r * 0.4124564 + g * 0.3575761 + b * 0.1804375);
-        XYZ.Y=(double)(r * 0.2126729 + g * 0.7151522 + b * 0.0721750);
-        XYZ.Z=(double)(r * 0.0193339 + g * 0.1191920 + b * 0.9503041);
+        XYZ.X = (double)(r * 0.4124564 + g * 0.3575761 + b * 0.1804375);
+        XYZ.Y = (double)(r * 0.2126729 + g * 0.7151522 + b * 0.0721750);
+        XYZ.Z = (double)(r * 0.0193339 + g * 0.1191920 + b * 0.9503041);
 
-        //if (XYZ.X > 0.9504)
-        //  XYZ.X = 0.9504F;
-        //else if (XYZ.X < 0)
-        //  XYZ.X = 0;
-        //else
-        //  XYZ.X = XYZ.X;
+        if (XYZ.X > 0.9504)
+            XYZ.X = 0.9504F;
+        else if (XYZ.X < 0)
+            XYZ.X = 0;
+        else
+            XYZ.X = XYZ.X;
 
-        //if (XYZ.Y > 1)
-        //  XYZ.Y = 1;
-        //else if (XYZ.Y < 0)
-        //  XYZ.Y = 0;
-        //else
-        //  XYZ.Y = XYZ.Y;
+        if (XYZ.Y > 1)
+            XYZ.Y = 1;
+        else if (XYZ.Y < 0)
+            XYZ.Y = 0;
+        else
+            XYZ.Y = XYZ.Y;
 
-        //if (XYZ.Z > 1.0888)
-        //  XYZ.Z = 1.0888F;
-        //else if (XYZ.Z < 0)
-        //  XYZ.Z = 0;
-        //else
-        //  XYZ.Z = XYZ.Z;
+        if (XYZ.Z > 1.0888)
+            XYZ.Z = 1.0888F;
+        else if (XYZ.Z < 0)
+            XYZ.Z = 0;
+        else
+            XYZ.Z = XYZ.Z;
 
         return XYZ;
 
@@ -389,132 +407,36 @@ namespace CudafyByExample
       XYZ.Y = Y1 + XYZbg.Y;
       XYZ.Z = Z1 + XYZbg.Z;
 
-      if (XYZ.X > 0.9504)
-        XYZ.X = 0.9504f;
-      else if (XYZ.X < 0)
-        XYZ.X = 0;
-      else
-        XYZ.X = XYZ.X;
+      //if (XYZ.X > 0.9504)
+      //  XYZ.X = 0.9504f;
+      //else if (XYZ.X < 0)
+      //  XYZ.X = 0;
+      //else
+      //  XYZ.X = XYZ.X;
 
-      if (XYZ.Y > 1)
-        XYZ.Y = 1;
-      else if (XYZ.Y < 0)
-        XYZ.Y = 0;
-      else
-        XYZ.Y = XYZ.Y;
+      //if (XYZ.Y > 1)
+      //  XYZ.Y = 1;
+      //else if (XYZ.Y < 0)
+      //  XYZ.Y = 0;
+      //else
+      //  XYZ.Y = XYZ.Y;
 
-      if (XYZ.Z > 1.0888)
-        XYZ.Z = 1.0888f;
-      else if (XYZ.Z < 0)
-        XYZ.Z = 0;
-      else
-        XYZ.Z = XYZ.Z;
+      //if (XYZ.Z > 1.0888)
+      //  XYZ.Z = 1.0888f;
+      //else if (XYZ.Z < 0)
+      //  XYZ.Z = 0;
+      //else
+      //  XYZ.Z = XYZ.Z;
 
       return XYZ;	  
    }
 
-    // to run in contst memory
-
-
-    // create a device variable for the profile
-    //[Cudafy]
-    //public static ProfileStrucuture[, ,] profile_GPU = new ProfileStrucuture[21, 41, 45];
+      ///
+      /// ORIGINAL BRUTE FORCE ALGORITHM!
+      ///
 
     //[Cudafy]
-    //public static ForeGroundStrucuture[] foregorungRGB_GPU = new ForeGroundStrucuture[1];
-
-    //[Cudafy]
-    //public static BackGroundStrucuture[] BackgroundXYZ_GPU = new BackGroundStrucuture[1];
-
-    //ProfileStrucuture[, ,] profile_GPU,ForeGroundStrucuture[] foregorungRGB_GPU,BackGroundStrucuture[] BackgroundXYZ_GPU,
-   
-    //[Cudafy]
-    //public static void Bruteforce(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, double[] ptr)
-    //{
-    //  // map from threadIdx/BlockIdx to pixel position
-    //  int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
-    //  int y = thread.threadIdx.y + thread.blockIdx.y * thread.blockDim.y;
-    //  int offset = x + y * thread.blockDim.x * thread.gridDim.x;
-    //  double ox = (x - 1.0 / 2.0);
-    //  double oy = (y - 1.0 / 2.0);
-
-    //  double  closestColor = double.MaxValue;
-
-    //  double diffL=0.0;
-    //  double diffA=0.0;
-    //  double diffB= 0.0;
-
-    //  int BestL = 0;
-    //  int BestA = 0;
-    //  int BestB = 0;
-
-    //  ProfileStrucuture returnBin = new ProfileStrucuture();
-    //  ProfileStrucuture foregroundLAB = ToLAB(foregorungRGB_GPU[offset]);
-
-    //  int binL = ((int)Math.Round(foregroundLAB.L / 5.0)) * 5;
-    //  int binA = ((int)Math.Round(foregroundLAB.A / 5.0)) * 5;
-    //  int binB = ((int)Math.Round(foregroundLAB.B / 5.0)) * 5;
-
-    //  if (binL > 100)
-    //      binL = 100;
-    //  if (binA < -86.17385493791946)
-    //      binA = -85;
-    //  if (binA > 98.2448002875424)
-    //      binA = 100;
-    //  if (binB < -107.8619171648283)
-    //      binB = -110;
-    //  if (binB > 94.47705120353054)
-    //      binB = 95;
-
-    //  binL = (int)(binL * 0.2) + 0;
-    //  binA = (int)(binA * 0.2) + 20;
-    //  binB = (int)(binB * 0.2) + 22;
-
-
-    //  returnBin = profile_GPU[binL, binA, binB];
-
-    //  double closestBinDistance;
-    //  for (int indexL = 0; indexL < 21; indexL++)
-    //  {
-    //    for (int indexA = 0; indexA < 41; indexA++)
-    //    {
-    //      for (int indexB = 0; indexB < 45; indexB++)
-    //      {
-    //        ProfileStrucuture actualBin = profile_GPU[indexL, indexA, indexB];
-    //        if (actualBin.isempty!=1)
-    //          continue;
-    //        BackGroundStrucuture PredictionXYZ = addXYZ_st(actualBin.MX, actualBin.MY, actualBin.MZ,BackgroundXYZ_GPU[offset]);
-
-    //        ProfileStrucuture PredictionlAB = XYZtoLAB_st(PredictionXYZ);
-
-    //        diffL = PredictionlAB.L - returnBin.ML;
-    //        diffA = PredictionlAB.A - returnBin.MA;
-    //        diffB = PredictionlAB.B - returnBin.MB;
-    //         diffL = diffL * diffL;
-    //         diffA = diffA * diffA;
-    //         diffB = diffB * diffB;
-    //        closestBinDistance = Math.Sqrt(diffL + diffA + diffB);
-
-    //        if (closestBinDistance >= closestColor)
-    //          continue;
-    //        else
-    //        {
-    //          closestColor = closestBinDistance;
-    //          BestL = indexL;
-    //          BestA = indexA;
-    //          BestB = indexB;
-    //        }
-              
-    //      }
-    //    }
-    //  }
-    //  ProfileStrucuture ValueToReturn = profile_GPU[BestL, BestA, BestB];
-    //  ptr[offset] = closestColor;
-     
-    //}
-
-    //[Cudafy]
-    //public static void Bruteforce(GThread thread, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, double[] ptr)
+    //public static void Bruteforce(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ProfileStrucuture[] ptr)
     //{
     //    // map from threadIdx/BlockIdx to pixel position
     //    int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
@@ -556,7 +478,9 @@ namespace CudafyByExample
     //    binB = (int)(binB * 0.2) + 22;
 
 
-    //    returnBin = profile_GPU[binL, binA, binB];
+    //    returnBin.MX = profile_GPU[binL, binA, binB].MX;
+    //    returnBin.MY = profile_GPU[binL, binA, binB].MY;
+    //    returnBin.MZ = profile_GPU[binL, binA, binB].MZ;
 
     //    double closestBinDistance;
     //    for (int indexL = 0; indexL < 21; indexL++)
@@ -575,9 +499,15 @@ namespace CudafyByExample
     //                diffL = PredictionlAB.L - returnBin.ML;
     //                diffA = PredictionlAB.A - returnBin.MA;
     //                diffB = PredictionlAB.B - returnBin.MB;
+
+    //                //diffL = PredictionXYZ.X - returnBin.MX;
+    //                //diffA = PredictionXYZ.Y - returnBin.MY;
+    //                //diffB = PredictionXYZ.Z - returnBin.MZ;
+
     //                diffL = diffL * diffL;
     //                diffA = diffA * diffA;
     //                diffB = diffB * diffB;
+                    
     //                closestBinDistance = Math.Sqrt(diffL + diffA + diffB);
 
     //                if (closestBinDistance >= closestColor)
@@ -594,13 +524,14 @@ namespace CudafyByExample
     //        }
     //    }
     //    ProfileStrucuture ValueToReturn = profile_GPU[BestL, BestA, BestB];
-    //    ptr[offset] = closestColor;
+    //    ptr[offset] = ValueToReturn;
 
     //}
 
     [Cudafy]
-    public static void Bruteforce(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, double[] ptr)
+    public static void Bruteforce(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, TestingStructure[] ptr)
     {
+
         // map from threadIdx/BlockIdx to pixel position
         int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
         int y = thread.threadIdx.y + thread.blockIdx.y * thread.blockDim.y;
@@ -641,9 +572,9 @@ namespace CudafyByExample
         binB = (int)(binB * 0.2) + 22;
 
 
-        returnBin.MX = profile_GPU[binL, binA, binB].MX;
-        returnBin.MY = profile_GPU[binL, binA, binB].MY;
-        returnBin.MZ = profile_GPU[binL, binA, binB].MZ;
+        returnBin.ML = profile_GPU[binL, binA, binB].ML;
+        returnBin.MA = profile_GPU[binL, binA, binB].MA;
+        returnBin.MB = profile_GPU[binL, binA, binB].MB;
 
         double closestBinDistance;
         for (int indexL = 0; indexL < 21; indexL++)
@@ -653,7 +584,7 @@ namespace CudafyByExample
                 for (int indexB = 0; indexB < 45; indexB++)
                 {
                     ProfileStrucuture actualBin = profile_GPU[indexL, indexA, indexB];
-                    if (actualBin.isempty != 1)
+                    if (actualBin.isempty == TRUE)
                         continue;
                     BackGroundStrucuture PredictionXYZ = addXYZ_st(actualBin.MX, actualBin.MY, actualBin.MZ, BackgroundXYZ_GPU[offset]);
 
@@ -670,7 +601,7 @@ namespace CudafyByExample
                     diffL = diffL * diffL;
                     diffA = diffA * diffA;
                     diffB = diffB * diffB;
-                    
+
                     closestBinDistance = Math.Sqrt(diffL + diffA + diffB);
 
                     if (closestBinDistance >= closestColor)
@@ -686,30 +617,211 @@ namespace CudafyByExample
                 }
             }
         }
-        ProfileStrucuture ValueToReturn = profile_GPU[BestL, BestA, BestB];
-        ptr[offset] = closestColor;
+        ProfileStrucuture return_bin = profile_GPU[BestL, BestA, BestB];
+        TestingStructure ValueToReturn = new TestingStructure();
+        ValueToReturn.Given_R = return_bin.L;
+        ValueToReturn.Given_G = return_bin.A;
+        ValueToReturn.Given_B = return_bin.B;
+        ValueToReturn.distance = closestColor;
+        ptr[offset] = ValueToReturn;
 
     }
 
-    public static void Execute()
+    //public static void Execute()
+    //{
+
+    //  //cuda intializer
+    //  CudafyModule km = CudafyModule.TryDeserialize();
+    //  if (km == null || !km.TryVerifyChecksums())
+    //  {
+    //   // km = CudafyTranslator.Cudafy((typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), typeof(Color));
+    //      km = CudafyTranslator.Cudafy(typeof(ProfileStrucuture),typeof(ForeGroundStrucuture), typeof(BackGroundStrucuture), typeof(Color));        
+    //    km.TrySerialize();
+    //  }
+
+    //  CudafyTranslator.GenerateDebug = true;
+    //  // cuda or emulator
+    //  GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
+    //  //GPGPU gpu = CudafyHost.GetDevice(eGPUType.Emulator);
+    //  gpu.LoadModule(km);
+
+    //  ProfileStrucuture[] distance_CPU = new ProfileStrucuture[786432];
+      
+    //  // allocate memory on the GPU for the bitmap (same size as ptr)
+      
+
+    //  DataTable profile = new DataTable();
+    //  try
+    //  {
+    //    // add the csv bin file
+    //    using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\lev\STColorCorrection\Data\PROFILE\p3700.csv"))
+    //    {
+    //      System.Data.DataSet dsResult = parser.GetDataSet();
+    //      profile = dsResult.Tables[0];
+    //    }
+    //  }
+    //  catch(Exception ex)
+    //  {Console.WriteLine(ex); }
+      
+
+    //  // allocate temp memory, initialize it, copy to constant memory on the GPU
+    //  // L 0-21 A 0-41 B 0-45
+   
+    // ProfileStrucuture[ , , ] profiles_CPU = new ProfileStrucuture[21,41,45];
+    // ForeGroundStrucuture[] foregorungRGB_CPU = new ForeGroundStrucuture[786432];
+    // BackGroundStrucuture[] BackgroundXYZ_CPU = new BackGroundStrucuture[786432];
+     
+    // for (int indexL = 0; indexL < 21; indexL++)
+    //  {
+    //    for (int indexA = 0; indexA < 41; indexA++)
+    //    {
+    //      for (int indexB = 0; indexB < 45; indexB++)
+    //      {
+    //        profiles_CPU[indexL, indexA, indexB].L = indexL;
+    //        profiles_CPU[indexL, indexA, indexB].A = indexA;
+    //        profiles_CPU[indexL, indexA, indexB].B = indexB;
+    //        //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
+    //        //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
+    //        //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
+    //        profiles_CPU[indexL, indexA, indexB].ML = 0;
+    //        profiles_CPU[indexL, indexA, indexB].MA = 0;
+    //        profiles_CPU[indexL, indexA, indexB].MB = 0;
+    //        profiles_CPU[indexL, indexA, indexB].MX = 0;
+    //        profiles_CPU[indexL, indexA, indexB].MY = 0;
+    //        profiles_CPU[indexL, indexA, indexB].MZ = 0;
+            
+    //        profiles_CPU[indexL, indexA, indexB].isempty = -1;
+    //        profiles_CPU[indexL, indexA, indexB].isMoreAccurateThanOrigin = -1;
+    //      }
+    //    }
+    //   }
+        
+    //  int lvalue, avalue, bvalue;
+    //  try
+    //  {
+    //  for (int i = 1; i < profile.Rows.Count; i++)
+    //  {
+    //      lvalue=Convert.ToInt32 (profile.Rows[i][0].ToString());
+    //      avalue = Convert.ToInt32(profile.Rows[i][1].ToString());
+    //      bvalue= Convert.ToInt32(profile.Rows[i][2].ToString());
+
+    //      lvalue=(int)(lvalue*0.2);
+    //      avalue=(int)(avalue*0.2)+20;
+    //      bvalue=(int)(bvalue*0.2)+22;
+            
+    //      profiles_CPU[lvalue, avalue, bvalue].L = lvalue;
+    //      profiles_CPU[lvalue, avalue, bvalue].A = avalue;
+    //      profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
+          
+    //      //profiles_CPU[lvalue, avalue, bvalue].Given_R = (double)Convert.ToByte(profile.Rows[i][9].ToString());
+    //      //profiles_CPU[lvalue, avalue, bvalue].Given_G = (double)Convert.ToByte(profile.Rows[i][10].ToString());
+    //      //profiles_CPU[lvalue, avalue, bvalue].Given_B = (double)Convert.ToByte(profile.Rows[i][11].ToString());
+
+    //      profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
+    //      profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
+    //      profiles_CPU[lvalue, avalue, bvalue].MB = (double)Convert.ToDouble(profile.Rows[i][5].ToString());
+
+    //      profiles_CPU[lvalue, avalue, bvalue].MX = (double)Convert.ToDouble(profile.Rows[i][6].ToString());
+    //      profiles_CPU[lvalue, avalue, bvalue].MY = (double)Convert.ToDouble(profile.Rows[i][7].ToString());
+    //      profiles_CPU[lvalue, avalue, bvalue].MZ = (double)Convert.ToDouble(profile.Rows[i][8].ToString());
+            
+
+    //      profiles_CPU[lvalue, avalue, bvalue].isempty = 1;
+         
+    //  }
+
+    //  }
+    //  catch (Exception ex)
+    //  { Console.WriteLine(ex); }
+      
+    //  try
+    //  {
+    //  for (int i = 0; i < 786432; i++)
+    //  {
+    //    foregorungRGB_CPU[i].R = 1;
+    //    foregorungRGB_CPU[i].G = 1;
+    //    foregorungRGB_CPU[i].B = 255;
+
+    //    BackgroundXYZ_CPU[i].X = 0.629866667F;
+    //    BackgroundXYZ_CPU[i].Y = 0.653533333F;
+    //    BackgroundXYZ_CPU[i].Z = 0.684966667F;
+    //  }
+    //  }
+    //  catch (Exception ex)
+    //  { Console.WriteLine(ex); }
+
+    //  ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
+
+    //  for (int i = 0; i < 1; i++)
+    //  {
+    //      // capture the start time
+    //      gpu.StartTimer();
+    //      ForeGroundStrucuture[] foregorungRGB_GPU = gpu.CopyToDevice(foregorungRGB_CPU);
+    //      BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
+          
+
+    //      //out put
+    //      ProfileStrucuture[] distance_GPU = gpu.Allocate(distance_CPU);
+
+    //      // generate a bitmap from our sphere data
+    //      //Image size: 1024 x 768
+
+    //      //dim3 grids = new dim3(1, 1);
+    //      //dim3 threads = new dim3(1,1);
+
+    //      dim3 grids = new dim3(1024 / 16, 768 / 16);
+    //      dim3 threads = new dim3(16, 16);
+
+    //      gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ProfileStrucuture[]>)Bruteforce), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
+
+    //      //gpu.Launch(grids, threads, ((Action<GThread, ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
+
+    //      // copy our bitmap back from the GPU for display
+    //      gpu.CopyFromDevice(distance_GPU, distance_CPU);
+
+
+    //      // get stop time, and display the timing results
+    //      double elapsedTime = gpu.StopTimer();
+    //      Console.WriteLine("Time to generate: {0} ms", elapsedTime);
+    //      gpu.Free(foregorungRGB_GPU);
+    //      gpu.Free(BackgroundXYZ_GPU);
+    //      gpu.Free(distance_GPU);
+    //  }
+
+      
+    //  gpu.FreeAll();
+
+    //  }
+
+    public static TestingStructure[] CorrectColour(System.Drawing.Color rgb, double X, double Y, double Z)
     {
+
+        //set these to constant if you want testing
+
+        //rgb = System.Drawing.Color.FromArgb(65, 108, 20);
+        //X = 0.613829950099918;
+        //Y = 0.938638756488747;
+        //Z = 1.08019833591292;
+
+
 
       //cuda intializer
       CudafyModule km = CudafyModule.TryDeserialize();
       if (km == null || !km.TryVerifyChecksums())
       {
        // km = CudafyTranslator.Cudafy((typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), typeof(Color));
-          km = CudafyTranslator.Cudafy(typeof(ProfileStrucuture),typeof(ForeGroundStrucuture), typeof(BackGroundStrucuture), typeof(Color));        
+          km = CudafyTranslator.Cudafy(typeof(ProfileStrucuture),typeof(ForeGroundStrucuture), typeof(BackGroundStrucuture), typeof(TestingStructure), typeof(Color));        
         km.TrySerialize();
       }
 
       CudafyTranslator.GenerateDebug = true;
       // cuda or emulator
-      //GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
-      GPGPU gpu = CudafyHost.GetDevice(eGPUType.Emulator);
+      GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
+      //sGPGPU gpu = CudafyHost.GetDevice(eGPUType.Emulator);
       gpu.LoadModule(km);
+      Console.WriteLine("Running brute force correction using {0}", gpu.GetDeviceProperties(false).Name);
 
-      double[] distance_CPU = new double[786432];
+      TestingStructure[] distance_CPU = new TestingStructure[1];
       
       // allocate memory on the GPU for the bitmap (same size as ptr)
       
@@ -732,8 +844,8 @@ namespace CudafyByExample
       // L 0-21 A 0-41 B 0-45
    
      ProfileStrucuture[ , , ] profiles_CPU = new ProfileStrucuture[21,41,45];
-     ForeGroundStrucuture[] foregorungRGB_CPU = new ForeGroundStrucuture[786432];
-     BackGroundStrucuture[] BackgroundXYZ_CPU = new BackGroundStrucuture[786432];
+     ForeGroundStrucuture[] foregorungRGB_CPU = new ForeGroundStrucuture[1];
+     BackGroundStrucuture[] BackgroundXYZ_CPU = new BackGroundStrucuture[1];
      
      for (int indexL = 0; indexL < 21; indexL++)
       {
@@ -744,9 +856,9 @@ namespace CudafyByExample
             profiles_CPU[indexL, indexA, indexB].L = indexL;
             profiles_CPU[indexL, indexA, indexB].A = indexA;
             profiles_CPU[indexL, indexA, indexB].B = indexB;
-            profiles_CPU[indexL, indexA, indexB].Given_R = 0;
-            profiles_CPU[indexL, indexA, indexB].Given_G = 0;
-            profiles_CPU[indexL, indexA, indexB].Given_B = 0;
+            //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
+            //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
+            //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
             profiles_CPU[indexL, indexA, indexB].ML = 0;
             profiles_CPU[indexL, indexA, indexB].MA = 0;
             profiles_CPU[indexL, indexA, indexB].MB = 0;
@@ -754,7 +866,7 @@ namespace CudafyByExample
             profiles_CPU[indexL, indexA, indexB].MY = 0;
             profiles_CPU[indexL, indexA, indexB].MZ = 0;
             
-            profiles_CPU[indexL, indexA, indexB].isempty = -1;
+            profiles_CPU[indexL, indexA, indexB].isempty = TRUE;
             profiles_CPU[indexL, indexA, indexB].isMoreAccurateThanOrigin = -1;
           }
         }
@@ -777,9 +889,9 @@ namespace CudafyByExample
           profiles_CPU[lvalue, avalue, bvalue].A = avalue;
           profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
           
-          profiles_CPU[lvalue, avalue, bvalue].Given_R = (double)Convert.ToByte(profile.Rows[i][9].ToString());
-          profiles_CPU[lvalue, avalue, bvalue].Given_G = (double)Convert.ToByte(profile.Rows[i][10].ToString());
-          profiles_CPU[lvalue, avalue, bvalue].Given_B = (double)Convert.ToByte(profile.Rows[i][11].ToString());
+          //profiles_CPU[lvalue, avalue, bvalue].Given_R = (double)Convert.ToByte(profile.Rows[i][9].ToString());
+          //profiles_CPU[lvalue, avalue, bvalue].Given_G = (double)Convert.ToByte(profile.Rows[i][10].ToString());
+          //profiles_CPU[lvalue, avalue, bvalue].Given_B = (double)Convert.ToByte(profile.Rows[i][11].ToString());
 
           profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
           profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
@@ -790,74 +902,74 @@ namespace CudafyByExample
           profiles_CPU[lvalue, avalue, bvalue].MZ = (double)Convert.ToDouble(profile.Rows[i][8].ToString());
             
 
-          profiles_CPU[lvalue, avalue, bvalue].isempty = 1;
+          profiles_CPU[lvalue, avalue, bvalue].isempty = FALSE;
          
       }
 
       }
       catch (Exception ex)
       { Console.WriteLine(ex); }
-      
+
+      //foreground and background image inicialization
+      #region
       try
       {
-      for (int i = 0; i < 786432; i++)
-      {
-        foregorungRGB_CPU[i].R = 1;
-        foregorungRGB_CPU[i].G = 1;
-        foregorungRGB_CPU[i].B = 255;
+          for (int i = 0; i < 1; i++)
+          {
+              foregorungRGB_CPU[i].R = rgb.R;
+              foregorungRGB_CPU[i].G = rgb.G;
+              foregorungRGB_CPU[i].B = rgb.B;
 
-        BackgroundXYZ_CPU[i].X = 0.629866667F;
-        BackgroundXYZ_CPU[i].Y = 0.653533333F;
-        BackgroundXYZ_CPU[i].Z = 0.684966667F;
-      }
+              BackgroundXYZ_CPU[i].X = X;
+              BackgroundXYZ_CPU[i].Y = Y;
+              BackgroundXYZ_CPU[i].Z = Z;
+          }
       }
       catch (Exception ex)
       { Console.WriteLine(ex); }
+      #endregion
 
       ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
 
-      for (int i = 0; i < 1; i++)
-      {
-          ForeGroundStrucuture[] foregorungRGB_GPU = gpu.CopyToDevice(foregorungRGB_CPU);
-          BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
+
+        // capture the start time
+        gpu.StartTimer();
+        ForeGroundStrucuture[] foregorungRGB_GPU = gpu.CopyToDevice(foregorungRGB_CPU);
+        BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
           
 
-          //out put
-          double[] distance_GPU = gpu.Allocate(distance_CPU);
-          
-          // capture the start time
-          gpu.StartTimer();
+        //out put
+        TestingStructure[] distance_GPU = gpu.Allocate(distance_CPU);
 
-          // generate a bitmap from our sphere data
-          //Image size: 1024 x 768
+        // generate a bitmap from our sphere data
+        //Image size: 1024 x 768
 
-          dim3 grids = new dim3(1, 1);
-          dim3 threads = new dim3(1,1);
+        dim3 grids = new dim3(1, 1);
+        dim3 threads = new dim3(1,1);
 
-          //dim3 grids = new dim3(1024 / 16, 768 / 16);
-          //dim3 threads = new dim3(16, 16);
+        //dim3 grids = new dim3(1024 / 16, 768 / 16);
+        //dim3 threads = new dim3(16, 16);
 
-          gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
+        gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], TestingStructure[]>)Bruteforce), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
 
-          //gpu.Launch(grids, threads, ((Action<GThread, ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
+        //gpu.Launch(grids, threads, ((Action<GThread, ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
 
-          // copy our bitmap back from the GPU for display
-          gpu.CopyFromDevice(distance_GPU, distance_CPU);
+        // copy our bitmap back from the GPU for display
+        gpu.CopyFromDevice(distance_GPU, distance_CPU);
 
 
-          // get stop time, and display the timing results
-          double elapsedTime = gpu.StopTimer();
-          Console.WriteLine("Time to generate: {0} ms", elapsedTime);
-          gpu.Free(foregorungRGB_GPU);
-          gpu.Free(BackgroundXYZ_GPU);
-          gpu.Free(distance_GPU);
-      }
+        // get stop time, and display the timing results
+        double elapsedTime = gpu.StopTimer();
+        distance_CPU[0].execution_time = elapsedTime;
+        Console.WriteLine("Time to generate: {0} ms", elapsedTime);
 
-      
-      gpu.FreeAll();
+        gpu.Free(foregorungRGB_GPU);
+        gpu.Free(BackgroundXYZ_GPU);
+        gpu.Free(distance_GPU);
+        gpu.FreeAll();
+        return distance_CPU;
+    }
 
-      }
- 
     }
   }
   
