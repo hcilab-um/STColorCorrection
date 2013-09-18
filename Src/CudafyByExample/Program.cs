@@ -151,12 +151,11 @@ namespace CudafyByExample
                 header.Add("Cuda BF time");
                 header.Add("QC_Dist");
                 header.Add("Cuda QC time");
-                //header.Add("Half_QC");
-                //header.Add("Cuda HF time");
-                //header.Add("Reduce_Dist");
-                //header.Add("Cuda Re time");
-                //header.Add("Snake_Dist");
-                //header.Add("Cuda Snake time");
+                header.Add("Snake_Dist");
+                header.Add("Cuda Snake time");
+                header.Add("DecreaseStep_DS");
+                header.Add("Cuda DS time");
+
                 output_file_1.WriteRow(header);
                 header = new CsvRow();
                 header.Add("R_fg_in");
@@ -179,25 +178,23 @@ namespace CudafyByExample
                 header.Add("R_fg_out");
                 header.Add("G_fg_out");
                 header.Add("B_fg_out");
-                //header.Add("Half_QC");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
-                //header.Add("Reduce_Dist");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
-                //header.Add("Snake_Dist");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
+
+                header.Add("Snake_Dist");
+                header.Add("R_fg_out");
+                header.Add("G_fg_out");
+                header.Add("B_fg_out");
+
+                header.Add("DecreaseStep_DS");
+                header.Add("R_fg_out");
+                header.Add("G_fg_out");
+                header.Add("B_fg_out");
                 output_file_2.WriteRow(header);
                 //write the header to the CSV file
                 #endregion
 
 
                 Random randomGenerater = new Random();
-                for (int num_colors = 0; num_colors < 1000; num_colors++)
+                for (int num_colors = 0; num_colors < 20; num_colors++)
                 {
                     //create a new csv row
                     CsvRow new_row_file_1 = new CsvRow();
@@ -287,6 +284,46 @@ namespace CudafyByExample
                     new_row_file_2.Add(actualBin.binRGB.Y.ToString());
                     new_row_file_2.Add(actualBin.binRGB.Z.ToString());
 
+
+                    snake.TestingStructure[] results_snake = snake.CorrectColour(foreground, background.X, background.Y, background.Z);
+
+                    new_row_file_1.Add(results_snake[0].distance.ToString());
+                    new_row_file_1.Add(results_snake[0].execution_time.ToString());
+
+                    labBin = new Point3D();
+                    labBin.X = results_snake[0].Given_R;
+                    labBin.Y = results_snake[0].Given_G;
+                    labBin.Z = results_snake[0].Given_B;
+
+                    actualBin = GetProfileBin(p3700, labBin);
+
+                    new_row_file_2.Add(results_snake[0].distance.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.X.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.Y.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.Z.ToString());
+
+                    half_step.TestingStructure[] results_half_step = half_step.CorrectColour(foreground, background.X, background.Y, background.Z);
+
+                    new_row_file_1.Add(results_half_step[0].distance.ToString());
+                    new_row_file_1.Add(results_half_step[0].execution_time.ToString());
+
+                    labBin = new Point3D();
+                    labBin.X = results_half_step[0].Given_R;
+                    labBin.Y = results_half_step[0].Given_G;
+                    labBin.Z = results_half_step[0].Given_B;
+
+                    actualBin = GetProfileBin(p3700, labBin);
+
+                    new_row_file_2.Add(results_half_step[0].distance.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.X.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.Y.ToString());
+                    new_row_file_2.Add(actualBin.binRGB.Z.ToString());
+
+
+
+
+
+                    //write the results
                     output_file_1.WriteRow(new_row_file_1);
                     output_file_2.WriteRow(new_row_file_2);
                     
