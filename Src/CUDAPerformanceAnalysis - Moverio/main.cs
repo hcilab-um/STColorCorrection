@@ -206,11 +206,12 @@ namespace CudafyByExample
                     const int image_size = 960 * 540;
 
 
-                    ForeGroundStrucuture[] foregorungRGB_BF = new ForeGroundStrucuture[image_size];
-                    BackGroundStrucuture[] BackgroundXYZ_BF = new BackGroundStrucuture[image_size];
+                    bf.ForeGroundStrucuture[] foregorungRGB_BF = new bf.ForeGroundStrucuture[image_size];
+                    bf.BackGroundStrucuture[] BackgroundXYZ_BF = new bf.BackGroundStrucuture[image_size];
 
-                    ForeGroundStrucuture[] foregorungRGB_QC = new ForeGroundStrucuture[image_size];
-                    BackGroundStrucuture[] BackgroundXYA_QC = new BackGroundStrucuture[image_size];
+                    bf.ForeGroundStrucuture[] foregorungRGB_QC = new bf.ForeGroundStrucuture[image_size];
+                    bf.BackGroundStrucuture[] BackgroundXYZ_QC = new bf.BackGroundStrucuture[image_size];
+
 
                     for (int i = 0; i < image_size; i++){
 
@@ -224,45 +225,56 @@ namespace CudafyByExample
                         backgroundCIEXYZ.Z = randomGenerater.NextDouble() * 1.0888;
                         Point3D background = new Point3D(backgroundCIEXYZ.X, backgroundCIEXYZ.Y, backgroundCIEXYZ.Z);
 
-                        Bin foregroundBin = FindForegroundBin(p3700, navigationMatrix, foreground);
-                        PerceptionLib.Color foregroundLAB = new PerceptionLib.Color();
+                        foregorungRGB_BF[i].R = foreground.R;
+                        foregorungRGB_BF[i].G = foreground.G;
+                        foregorungRGB_BF[i].B = foreground.B;
 
-                        foregroundLAB.LA = foregroundBin.measuredLAB.X;
-                        foregroundLAB.A = foregroundBin.measuredLAB.Y;
-                        foregroundLAB.B = foregroundBin.measuredLAB.Z;
+                        BackgroundXYZ_BF[i].X = backgroundCIEXYZ.X;
+                        BackgroundXYZ_BF[i].Y = backgroundCIEXYZ.Y;
+                        BackgroundXYZ_BF[i].Z = backgroundCIEXYZ.Z;
+
+                        foregorungRGB_QC[i].R = foreground.R;
+                        foregorungRGB_QC[i].G = foreground.G;
+                        foregorungRGB_QC[i].B = foreground.B;
+
+                        BackgroundXYZ_QC[i].X = backgroundCIEXYZ.X;
+                        BackgroundXYZ_QC[i].Y = backgroundCIEXYZ.Y;
+                        BackgroundXYZ_QC[i].Z = backgroundCIEXYZ.Z;
     
                     }
 
                     //write the input colors
                     #region
-                    new_row_file_1.Add(foreground.R.ToString());
-                    new_row_file_1.Add(foreground.G.ToString());
-                    new_row_file_1.Add(foreground.B.ToString());
+                    //new_row_file_1.Add(foreground.R.ToString());
+                    //new_row_file_1.Add(foreground.G.ToString());
+                    //new_row_file_1.Add(foreground.B.ToString());
 
-                    new_row_file_1.Add(foregroundLAB.LA.ToString());
-                    new_row_file_1.Add(foregroundLAB.A.ToString());
-                    new_row_file_1.Add(foregroundLAB.B.ToString());
+                    //new_row_file_1.Add(foregroundLAB.LA.ToString());
+                    //new_row_file_1.Add(foregroundLAB.A.ToString());
+                    //new_row_file_1.Add(foregroundLAB.B.ToString());
 
-                    new_row_file_1.Add(background.X.ToString());
-                    new_row_file_1.Add(background.Y.ToString());
-                    new_row_file_1.Add(background.Z.ToString());
+                    //new_row_file_1.Add(background.X.ToString());
+                    //new_row_file_1.Add(background.Y.ToString());
+                    //new_row_file_1.Add(background.Z.ToString());
 
-                    new_row_file_2.Add(foreground.R.ToString());
-                    new_row_file_2.Add(foreground.G.ToString());
-                    new_row_file_2.Add(foreground.B.ToString());
+                    //new_row_file_2.Add(foreground.R.ToString());
+                    //new_row_file_2.Add(foreground.G.ToString());
+                    //new_row_file_2.Add(foreground.B.ToString());
                                  
-                    new_row_file_2.Add(foregroundLAB.LA.ToString());
-                    new_row_file_2.Add(foregroundLAB.A.ToString());
-                    new_row_file_2.Add(foregroundLAB.B.ToString());
+                    //new_row_file_2.Add(foregroundLAB.LA.ToString());
+                    //new_row_file_2.Add(foregroundLAB.A.ToString());
+                    //new_row_file_2.Add(foregroundLAB.B.ToString());
                                  
-                    new_row_file_2.Add(background.X.ToString());
-                    new_row_file_2.Add(background.Y.ToString());
-                    new_row_file_2.Add(background.Z.ToString());
+                    //new_row_file_2.Add(background.X.ToString());
+                    //new_row_file_2.Add(background.Y.ToString());
+                    //new_row_file_2.Add(background.Z.ToString());
                     #endregion
 
+                    //prepare a BF specific struct
 
                     //get the brute force values
-                    bf.TestOutput results_brute_force = bf.CorrectColour();
+                    bf.TestOutput results_brute_force = bf.CorrectColour(foregorungRGB_BF, BackgroundXYZ_BF);
+                    Console.WriteLine("");
 
                     //new_row_file_1.Add(results_brute_force[0].distance.ToString());
                     //new_row_file_1.Add(results_brute_force[0].execution_time.ToString());

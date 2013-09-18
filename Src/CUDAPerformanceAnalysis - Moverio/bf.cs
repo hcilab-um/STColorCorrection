@@ -552,11 +552,11 @@ namespace CudafyByExample
         // generate a bitmap from our sphere data
         //Image size: 1024 x 768
 
-        dim3 grids = new dim3(1, 1);
-        dim3 threads = new dim3(1,1);
+        //dim3 grids = new dim3(1, 1);
+        //dim3 threads = new dim3(1,1);
 
-        //dim3 grids = new dim3(1024 / 16, 768 / 16);
-        //dim3 threads = new dim3(16, 16);
+        dim3 grids = new dim3(960 / 16, 540 / 16);
+        dim3 threads = new dim3(16, 16);
 
         gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[]>)Bruteforce), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
 
