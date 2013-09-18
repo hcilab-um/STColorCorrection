@@ -209,8 +209,8 @@ namespace CudafyByExample
                     bf.ForeGroundStrucuture[] foregorungRGB_BF = new bf.ForeGroundStrucuture[image_size];
                     bf.BackGroundStrucuture[] BackgroundXYZ_BF = new bf.BackGroundStrucuture[image_size];
 
-                    bf.ForeGroundStrucuture[] foregorungRGB_QC = new bf.ForeGroundStrucuture[image_size];
-                    bf.BackGroundStrucuture[] BackgroundXYZ_QC = new bf.BackGroundStrucuture[image_size];
+                    quick_corr.ForeGroundStrucuture[] foregorungRGB_QC = new quick_corr.ForeGroundStrucuture[image_size];
+                    quick_corr.BackGroundStrucuture[] BackgroundXYZ_QC = new quick_corr.BackGroundStrucuture[image_size];
 
 
                     for (int i = 0; i < image_size; i++){
@@ -292,7 +292,8 @@ namespace CudafyByExample
                     //new_row_file_2.Add(actualBin.binRGB.Z.ToString());
 
 
-                    //quick_corr.TestingStructure[] results_quick_corr = quick_corr.CorrectColour(foreground, background.X, background.Y, background.Z);
+                    quick_corr.TestOutput results_quick_corr = quick_corr.CorrectColour(foregorungRGB_QC, BackgroundXYZ_QC);
+                    Console.WriteLine("");
 
                     //new_row_file_1.Add(results_quick_corr[0].distance.ToString());
                     //new_row_file_1.Add(results_quick_corr[0].execution_time.ToString());

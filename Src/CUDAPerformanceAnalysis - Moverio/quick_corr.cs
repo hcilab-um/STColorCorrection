@@ -29,17 +29,19 @@ namespace CudafyByExample
 
 
         /// <summary>
-        /// This struct is only used to return all the data to the testing 
+        /// This class is only used to return all the data to the testing 
         /// algorithm. 
         /// </summary>
-        [Cudafy]
-        public struct TestingStructure
+        public class TestOutput
         {
-            public double Given_R;
-            public double Given_G;
-            public double Given_B;
-            public double distance;
-            public double execution_time;
+            public double timeTaken;
+            public ForeGroundStrucuture[] output_image;
+
+            public TestOutput()
+            {
+
+            }
+
         }
 
 
@@ -49,9 +51,9 @@ namespace CudafyByExample
             public double L;
             public double A;
             public double B;
-            public double Given_R;
-            public double Given_G;
-            public double Given_B;
+            public byte Given_R;
+            public byte Given_G;
+            public byte Given_B;
             public double ML;
             public double MA;
             public double MB;
@@ -477,295 +479,11 @@ namespace CudafyByExample
         }
 
         ///
-        /// ORIGINAL QUICK CORRECTION ALGORITHM
-        ///
-
-        //[Cudafy]
-        //public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ProfileStrucuture[] ptr, SampleStructure[,] samples)
-        //{
-        //    // map from threadIdx/BlockIdx to pixel position
-        //    int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
-        //    int y = thread.threadIdx.y + thread.blockIdx.y * thread.blockDim.y;
-        //    int offset = x + y * thread.blockDim.x * thread.gridDim.x;
-        //    double ox = (x - 1.0 / 2.0);
-        //    double oy = (y - 1.0 / 2.0);
-
-        //    // double closestColor = double.MaxValue;
-
-        //    double diffL = 0.0;
-        //    double diffA = 0.0;
-        //    double diffB = 0.0;
-
-        //    //int BestL = 0;
-        //    //int BestA = 0;
-        //    //int BestB = 0;
-
-        //    //1 - Converts the foreground to how the display shows it
-        //    ProfileStrucuture foregroundColorToShow = new ProfileStrucuture();
-        //    ProfileStrucuture foregroundLAB = ToLAB(foregorungRGB_GPU[offset]);
-
-        //    int binL = ((int)Math.Round(foregroundLAB.L / 5.0)) * 5;
-        //    int binA = ((int)Math.Round(foregroundLAB.A / 5.0)) * 5;
-        //    int binB = ((int)Math.Round(foregroundLAB.B / 5.0)) * 5;
-
-        //    if (binL > 100)
-        //        binL = 100;
-        //    if (binA < -86.17385493791946)
-        //        binA = -85;
-        //    if (binA > 98.2448002875424)
-        //        binA = 100;
-        //    if (binB < -107.8619171648283)
-        //        binB = -110;
-        //    if (binB > 94.47705120353054)
-        //        binB = 95;
-
-        //    binL = (int)(binL * 0.2) + 0;
-        //    binA = (int)(binA * 0.2) + 20;
-        //    binB = (int)(binB * 0.2) + 22;
-
-
-        //    foregroundColorToShow.ML = profile_GPU[binL, binA, binB].ML;
-        //    foregroundColorToShow.MA = profile_GPU[binL, binA, binB].MA;
-        //    foregroundColorToShow.MB = profile_GPU[binL, binA, binB].MB;
-
-        //    //1.1 - Extra step for Quick Correction
-        //    Point3D origin = new Point3D(10.0, 20.0, 22.0);
-        //    Point3D step = new Point3D(10, 20, 22);
-
-        //    //2 - Get the accuracy
-
-        //    ProfileStrucuture actualBin = GetProfileBin(origin.X, origin.Y, origin.Z, profile_GPU);
-
-        //    if (actualBin.isempty == TRUE)
-        //        return;
-
-        //    BackGroundStrucuture PredictionXYZ = addXYZ_st(actualBin.MX, actualBin.MY, actualBin.MZ, BackgroundXYZ_GPU[offset]);
-
-        //    ProfileStrucuture PredictionLAB = XYZtoLAB_st(PredictionXYZ);
-
-        //    diffL = PredictionLAB.L - foregroundColorToShow.ML;
-        //    diffA = PredictionLAB.A - foregroundColorToShow.MA;
-        //    diffB = PredictionLAB.B - foregroundColorToShow.MB;
-
-        //    //diffL = PredictionXYZ.X - foregroundColorToShow.MX;
-        //    //diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
-        //    //diffB = PredictionXYZ.Z - foregroundColorToShow.MZ;
-
-        //    diffL = diffL * diffL;
-        //    diffA = diffA * diffA;
-        //    diffB = diffB * diffB;
-
-        //    //originBin.distanceLAB
-        //    actualBin.distance = Math.Sqrt(diffL + diffA + diffB);
-
-        //    //declaring 6 separate samples - CUDA does not support array declaration in kernel device code
-
-        //    Point3D top = new Point3D();
-        //    Point3D bottom = new Point3D();
-        //    Point3D left = new Point3D();
-        //    Point3D right = new Point3D();
-        //    Point3D forward = new Point3D();
-        //    Point3D backward = new Point3D();
-
-        //    while (step.X > 0 || step.Y > 0 && step.Z > 0)
-        //    {
-
-        //        //sample 6 bins
-        //        top.X = origin.X + step.X;
-        //        top.Y = origin.Y;
-        //        top.Z = origin.Z;
-
-        //        bottom.X = origin.X - step.X;
-        //        bottom.Y = origin.Y;
-        //        bottom.Z = origin.Z;
-
-        //        left.X = origin.X;
-        //        left.Y = origin.Y - step.Y;
-        //        left.Z = origin.Z;
-
-        //        right.X = origin.X;
-        //        right.Y = origin.Y + step.Y;
-        //        right.Z = origin.Z;
-
-        //        forward.X = origin.X;
-        //        forward.Y = origin.Y;
-        //        forward.Z = origin.Z - step.Z;
-
-        //        backward.X = origin.X;
-        //        backward.Y = origin.Y;
-        //        backward.Z = origin.Z + step.Z;
-
-        //        samples[offset, 0] = GetProfileBinForSample(top.X, top.Y, top.Z, profile_GPU);
-        //        samples[offset, 1] = GetProfileBinForSample(bottom.X, bottom.Y, bottom.Z, profile_GPU);
-        //        samples[offset, 2] = GetProfileBinForSample(left.X, left.Y, left.Z, profile_GPU);
-        //        samples[offset, 3] = GetProfileBinForSample(right.X, right.Y, right.Z, profile_GPU);
-        //        samples[offset, 4] = GetProfileBinForSample(forward.X, forward.Y, forward.Z, profile_GPU);
-        //        samples[offset, 5] = GetProfileBinForSample(backward.X, backward.Y, backward.Z, profile_GPU);
-
-
-        //        int countSamplesClosestThanOrigin = 0;
-
-        //        //calculate color correction for all samples
-        //        #region
-        //        for (int index = 0; index < 6; index++)
-        //        {
-        //            if (samples[offset,index].isempty == TRUE || samples[offset,index].isempty == 0.0)
-        //                continue;
-
-        //            BackGroundStrucuture temp_XYZ = addXYZ_st(samples[offset,index].MX, samples[offset,index].MY, samples[offset,index].MZ, BackgroundXYZ_GPU[offset]);
-
-        //            ProfileStrucuture PredictionlAB = XYZtoLAB_st(temp_XYZ);
-
-        //            diffL = PredictionlAB.L - foregroundColorToShow.ML;
-        //            diffA = PredictionlAB.A - foregroundColorToShow.MA;
-        //            diffB = PredictionlAB.B - foregroundColorToShow.MB;
-
-        //            diffL = diffL * diffL;
-        //            diffA = diffA * diffA;
-        //            diffB = diffB * diffB;
-
-        //            //curr_distanceLAB
-        //            samples[offset,index].distance = Math.Sqrt(diffL + diffA + diffB);
-        //            if (samples[offset,index].distance >= actualBin.distance)
-        //            {
-        //                continue;
-        //            }
-        //            else
-        //            {
-        //                samples[offset,index].isMoreAccurateThanOrigin = (int)TRUE;
-        //                countSamplesClosestThanOrigin++;
-        //            }
-        //        }
-        //        #endregion
-
-                
-
-        //        if (countSamplesClosestThanOrigin == 0)
-        //        {
-        //            step = HalfTheStep(step);
-        //            continue;
-        //        }
-
-                
-
-        //        //if there is at least one sample more accurate, it moves the origin in that direction, maintains the step and checks again
-        //        else
-        //        {
-        //            //6.1 calculates weights
-        //            double totalimprovements = 0;
-        //            for (int index = 0; index < 6; index++)
-        //            {
-        //                if (!(samples[offset,index].isMoreAccurateThanOrigin == TRUE))
-        //                {
-        //                    continue;
-        //                }
-        //                totalimprovements += (actualBin.distance - samples[offset,index].distance);
-        //            }
-        //            for (int index = 0; index < 6; index++)
-        //            {
-        //                if (!(samples[offset, index].isMoreAccurateThanOrigin == 1))
-        //                {
-        //                    continue;
-        //                }
-        //                samples[offset,index].weight = ((actualBin.distance - samples[offset,index].distance) / totalimprovements);
-        //            }
-        //            //6.2 calculates displacement
-        //            Point3D displacement = new Point3D(0, 0, 0);
-        //            for (int index = 0; index < 6; index++)
-        //            {
-        //                if (!(samples[offset,index].isMoreAccurateThanOrigin == 1))
-        //                {
-        //                    continue;
-        //                }
-
-
-        //                displacement.X = displacement.X + (samples[offset,index].L - origin.X) * samples[offset,index].weight;
-        //                displacement.Y = displacement.Y + (samples[offset,index].A - origin.Y) * samples[offset,index].weight;
-        //                displacement.Z = displacement.Z + (samples[offset,index].B - origin.Z) * samples[offset,index].weight;
-        //            }
-
-        //            if (displacement.X > 0)
-        //                displacement.X = Math.Ceiling(displacement.X);
-        //            else
-        //                displacement.X = Math.Floor(displacement.X);
-
-        //            if (displacement.Y > 0)
-        //                displacement.Y = Math.Ceiling(displacement.Y);
-        //            else
-        //                displacement.Y = Math.Floor(displacement.Y);
-
-        //            if (displacement.Z > 0)
-        //                displacement.Z = Math.Ceiling(displacement.Z);
-        //            else
-        //                displacement.Z = Math.Floor(displacement.Z);
-
-        //            //6.3 pokes new origin
-        //            Point3D newOriginLoc = new Point3D();
-
-        //            newOriginLoc.X = origin.X + displacement.X;
-        //            newOriginLoc.Y = origin.Y + displacement.Y;
-        //            newOriginLoc.Z = origin.Z + displacement.Z;
-
-        //            ProfileStrucuture newOriginBin = GetProfileBin(newOriginLoc.X, newOriginLoc.Y, newOriginLoc.Z, profile_GPU);
-        //            while (newOriginBin.isempty == TRUE)
-        //            {
-        //                /////////////////////// round to even missing ///////////////////
-
-        //                //6.4 moves half the magnitude in the given direction
-        //                displacement.X = Math.Round(displacement.X / 2);
-        //                displacement.Y = Math.Round(displacement.Y / 2);
-        //                displacement.Z = Math.Round(displacement.Z / 2);
-
-        //                newOriginLoc.X = origin.X + displacement.X;
-        //                newOriginLoc.Y = origin.Y + displacement.Y;
-        //                newOriginLoc.Z = origin.Z + displacement.Z;
-
-        //                newOriginBin = GetProfileBin(newOriginLoc.X, newOriginLoc.Y, newOriginLoc.Z, profile_GPU);
-        //            }
-        //            //calclates the accuracy of the posible new origin
-        //            if (newOriginBin.isempty == TRUE)
-        //                return;
-
-        //            PredictionXYZ = addXYZ_st(newOriginBin.MX, newOriginBin.MY, newOriginBin.MZ, BackgroundXYZ_GPU[offset]);
-
-        //            ProfileStrucuture PredictionlAB = XYZtoLAB_st(PredictionXYZ);
-
-        //            diffL = PredictionlAB.L - foregroundColorToShow.ML;
-        //            diffA = PredictionlAB.A - foregroundColorToShow.MA;
-        //            diffB = PredictionlAB.B - foregroundColorToShow.MB;
-
-        //            //diffL = PredictionXYZ.X - foregroundColorToShow.MX;
-        //            //diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
-        //            //diffB = PredictionXYZ.Z - foregroundColorToShow.MZ;
-
-        //            diffL = diffL * diffL;
-        //            diffA = diffA * diffA;
-        //            diffB = diffB * diffB;
-
-        //            //originBin.distanceLAB
-        //            newOriginBin.distance = Math.Sqrt(diffL + diffA + diffB);
-
-        //            if ((origin.X == newOriginLoc.X && origin.Z == newOriginLoc.X && origin.X == newOriginLoc.X) || actualBin.distance <= newOriginBin.distance) // it's the same location then just reduces the step
-        //                step = HalfTheStep(step);
-        //            else
-        //            {
-        //                origin = newOriginLoc;
-        //                actualBin = newOriginBin;
-        //            }
-
-        //        }
-
-        //    }
-        //    ptr[offset] = actualBin;
-
-        //}
-
-        ///
         /// MODIFIED QUICK CORRECTION ALGORITHM
         ///
 
         [Cudafy]
-        public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, TestingStructure[] ptr, SampleStructure[,] samples)
+        public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ForeGroundStrucuture[] ptr, SampleStructure[,] samples)
         {
             // map from threadIdx/BlockIdx to pixel position
             int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
@@ -1045,31 +763,32 @@ namespace CudafyByExample
 
             }
 
-            TestingStructure ValueToReturn = new TestingStructure();
-            ValueToReturn.Given_R = actualBin.L;
-            ValueToReturn.Given_G = actualBin.A;
-            ValueToReturn.Given_B = actualBin.B;
 
-            ValueToReturn.distance = actualBin.distance;
+            ForeGroundStrucuture ValueToReturn = new ForeGroundStrucuture();
+            ValueToReturn.R = actualBin.Given_R;
+            ValueToReturn.G = actualBin.Given_G;
+            ValueToReturn.B = actualBin.Given_B;
 
             ptr[offset] = ValueToReturn;
 
         }
 
 
-        public static TestingStructure[] CorrectColour(System.Drawing.Color rgb, double X, double Y, double Z)
+        public static TestOutput CorrectColour(ForeGroundStrucuture[] foregorungRGB_CPU, BackGroundStrucuture[] BackgroundXYZ_CPU)
         {
             //rgb = System.Drawing.Color.FromArgb(69, 77, 217);
             //X = 0.0630982813175294;
             //Y = 0.616476271122916;
             //Z = 0.667048468232457;
 
+            const int image_size = 960 * 540;
+
             //cuda intializer
             CudafyModule km = CudafyModule.TryDeserialize();
             if (km == null || !km.TryVerifyChecksums())
             {
                 // km = CudafyTranslator.Cudafy((typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), typeof(Color));
-                km = CudafyTranslator.Cudafy((typeof(ProfileStrucuture)), (typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), (typeof(SampleStructure)), (typeof(TestingStructure)), typeof(quick_corr));
+                km = CudafyTranslator.Cudafy((typeof(ProfileStrucuture)), (typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), (typeof(SampleStructure)), typeof(quick_corr));
                 km.TrySerialize();
             }
 
@@ -1080,7 +799,7 @@ namespace CudafyByExample
             Console.WriteLine("Running quick correction using {0}", gpu.GetDeviceProperties(false).Name);
             gpu.LoadModule(km);
 
-            TestingStructure[] distance_CPU = new TestingStructure[1];
+            ForeGroundStrucuture[] distance_CPU = new ForeGroundStrucuture[image_size];
 
             // allocate memory on the GPU for the bitmap (same size as ptr)
             #region
@@ -1102,9 +821,7 @@ namespace CudafyByExample
             // L 0-21 A 0-41 B 0-45
 
             ProfileStrucuture[, ,] profiles_CPU = new ProfileStrucuture[21, 41, 45];
-            ForeGroundStrucuture[] foregorungRGB_CPU = new ForeGroundStrucuture[1];
-            BackGroundStrucuture[] BackgroundXYZ_CPU = new BackGroundStrucuture[1];
-            SampleStructure[,] samples_CPU = new SampleStructure[1, 6];
+            SampleStructure[,] samples_CPU = new SampleStructure[image_size, 6];
 
             //profile inicialization
             #region
@@ -1117,9 +834,9 @@ namespace CudafyByExample
                         profiles_CPU[indexL, indexA, indexB].L = indexL;
                         profiles_CPU[indexL, indexA, indexB].A = indexA;
                         profiles_CPU[indexL, indexA, indexB].B = indexB;
-                        //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_R = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_G = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_B = 0;
                         profiles_CPU[indexL, indexA, indexB].ML = 0;
                         profiles_CPU[indexL, indexA, indexB].MA = 0;
                         profiles_CPU[indexL, indexA, indexB].MB = 0;
@@ -1154,9 +871,9 @@ namespace CudafyByExample
                     profiles_CPU[lvalue, avalue, bvalue].A = avalue;
                     profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
 
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_R = (double)Convert.ToByte(profile.Rows[i][9].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_G = (double)Convert.ToByte(profile.Rows[i][10].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_B = (double)Convert.ToByte(profile.Rows[i][11].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_R = (byte)Convert.ToByte(profile.Rows[i][9].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_G = (byte)Convert.ToByte(profile.Rows[i][10].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_B = (byte)Convert.ToByte(profile.Rows[i][11].ToString());
 
                     profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
                     profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
@@ -1181,27 +898,6 @@ namespace CudafyByExample
             ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
             SampleStructure[,] samples_GPU = gpu.CopyToDevice(samples_CPU);
 
-            Point3D background = new Point3D(X, Y, Z);
-
-            //foreground and background image inicialization
-            #region
-            try
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    foregorungRGB_CPU[i].R = rgb.R;
-                    foregorungRGB_CPU[i].G = rgb.G;
-                    foregorungRGB_CPU[i].B = rgb.B;
-
-                    BackgroundXYZ_CPU[i].X = background.X;
-                    BackgroundXYZ_CPU[i].Y = background.Y;
-                    BackgroundXYZ_CPU[i].Z = background.Z;
-                }
-            }
-            catch (Exception ex)
-            { Console.WriteLine(ex); }
-            #endregion
-
             //begin execution
             // capture the start time
             gpu.StartTimer();
@@ -1209,22 +905,22 @@ namespace CudafyByExample
             BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
 
             //out put
-            TestingStructure[] distance_GPU = gpu.Allocate(distance_CPU);
+            ForeGroundStrucuture[] distance_GPU = gpu.Allocate(distance_CPU);
 
             // generate a bitmap from our sphere data
             //Image size: 1024 x 768
 
-            //dim3 grids = new dim3(1024 / 16, 768 / 16);
-            //dim3 threads = new dim3(16, 16);
+            dim3 grids = new dim3(960 / 16, 540 / 16);
+            dim3 threads = new dim3(16, 16);
 
-            dim3 grids = new dim3(1, 1);
-            dim3 threads = new dim3(1, 1);
+            //dim3 grids = new dim3(1, 1);
+            //dim3 threads = new dim3(1, 1);
 
             //quick_correct
             //gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ProfileStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
 
             //quick correct - testing
-            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], TestingStructure[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
+            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
 
 
             // copy our bitmap back from the GPU for display
@@ -1233,217 +929,18 @@ namespace CudafyByExample
 
             // get stop time, and display the timing results
             double elapsedTime = gpu.StopTimer();
-            distance_CPU[0].execution_time = elapsedTime;
+            TestOutput to_return = new TestOutput();
+            to_return.output_image = distance_CPU;
+            to_return.timeTaken = elapsedTime;
             Console.WriteLine("Time to generate: {0} ms", elapsedTime);
             gpu.Free(foregorungRGB_GPU);
             gpu.Free(BackgroundXYZ_GPU);
             gpu.Free(distance_GPU);
             gpu.FreeAll();
 
-            return distance_CPU;
+            return to_return;
 
         }
-
-        //public static TestingStructure[] Execute()
-        //{
-
-        //    //cuda intializer
-        //    CudafyModule km = CudafyModule.TryDeserialize();
-        //    if (km == null || !km.TryVerifyChecksums())
-        //    {
-        //        // km = CudafyTranslator.Cudafy((typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), typeof(Color));
-        //        km = CudafyTranslator.Cudafy((typeof(ProfileStrucuture)), (typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), (typeof(SampleStructure)), typeof(quick_corr));
-        //        km.TrySerialize();
-        //    }
-
-        //    CudafyTranslator.GenerateDebug = true;
-        //    // cuda or emulator
-        //    //GPGPU gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
-        //    GPGPU gpu = CudafyHost.GetDevice(eGPUType.Emulator);
-        //    Console.WriteLine("Running examples using {0}", gpu.GetDeviceProperties(false).Name);
-        //    gpu.LoadModule(km);
-
-        //    TestingStructure[] distance_CPU = new TestingStructure[786432];
-
-        //    // allocate memory on the GPU for the bitmap (same size as ptr)
-        //    #region
-        //    DataTable profile = new DataTable();
-        //    try
-        //    {
-        //        // add the csv bin file
-        //        using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\lev\STColorCorrection\Data\PROFILE\p3700.csv"))
-        //        {
-        //            System.Data.DataSet dsResult = parser.GetDataSet();
-        //            profile = dsResult.Tables[0];
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    { Console.WriteLine(ex); }
-        //    #endregion
-
-        //    // allocate temp memory, initialize it, copy to constant memory on the GPU
-        //    // L 0-21 A 0-41 B 0-45
-
-        //    ProfileStrucuture[, ,] profiles_CPU = new ProfileStrucuture[21, 41, 45];
-        //    ForeGroundStrucuture[] foregorungRGB_CPU = new ForeGroundStrucuture[786432];
-        //    BackGroundStrucuture[] BackgroundXYZ_CPU = new BackGroundStrucuture[786432];
-        //    SampleStructure[,] samples_CPU = new SampleStructure[786432, 6];
-
-        //    //profile inicialization
-        //    #region
-        //    for (int indexL = 0; indexL < 21; indexL++)
-        //    {
-        //        for (int indexA = 0; indexA < 41; indexA++)
-        //        {
-        //            for (int indexB = 0; indexB < 45; indexB++)
-        //            {
-        //                profiles_CPU[indexL, indexA, indexB].L = indexL;
-        //                profiles_CPU[indexL, indexA, indexB].A = indexA;
-        //                profiles_CPU[indexL, indexA, indexB].B = indexB;
-        //                //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
-        //                //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
-        //                //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
-        //                profiles_CPU[indexL, indexA, indexB].ML = 0;
-        //                profiles_CPU[indexL, indexA, indexB].MA = 0;
-        //                profiles_CPU[indexL, indexA, indexB].MB = 0;
-        //                profiles_CPU[indexL, indexA, indexB].MX = 0;
-        //                profiles_CPU[indexL, indexA, indexB].MY = 0;
-        //                profiles_CPU[indexL, indexA, indexB].MZ = 0;
-        //                profiles_CPU[indexL, indexA, indexB].distance = -1.0;
-        //                profiles_CPU[indexL, indexA, indexB].weight = -1.0;
-
-        //                profiles_CPU[indexL, indexA, indexB].isempty = TRUE;
-        //                profiles_CPU[indexL, indexA, indexB].isMoreAccurateThanOrigin = FALSE;
-        //            }
-        //        }
-        //    }
-
-
-
-        //    int lvalue, avalue, bvalue;
-        //    int temp_l, temp_a, temp_b;
-        //    try
-        //    {
-        //        for (int i = 1; i < profile.Rows.Count; i++)
-        //        {
-        //            lvalue = Convert.ToInt32(profile.Rows[i][0].ToString());
-        //            avalue = Convert.ToInt32(profile.Rows[i][1].ToString());
-        //            bvalue = Convert.ToInt32(profile.Rows[i][2].ToString());
-
-        //            temp_l = lvalue;
-        //            temp_a = avalue;
-        //            temp_b = bvalue;
-
-        //            lvalue = (int)(lvalue * 0.2);
-        //            avalue = (int)(avalue * 0.2) + 20;
-        //            bvalue = (int)(bvalue * 0.2) + 22;
-
-        //            profiles_CPU[lvalue, avalue, bvalue].L = lvalue;
-        //            profiles_CPU[lvalue, avalue, bvalue].A = avalue;
-        //            profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
-
-        //            //profiles_CPU[lvalue, avalue, bvalue].Given_R = (double)Convert.ToByte(profile.Rows[i][9].ToString());
-        //            //profiles_CPU[lvalue, avalue, bvalue].Given_G = (double)Convert.ToByte(profile.Rows[i][10].ToString());
-        //            //profiles_CPU[lvalue, avalue, bvalue].Given_B = (double)Convert.ToByte(profile.Rows[i][11].ToString());
-
-        //            profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
-        //            profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
-        //            profiles_CPU[lvalue, avalue, bvalue].MB = (double)Convert.ToDouble(profile.Rows[i][5].ToString());
-
-        //            profiles_CPU[lvalue, avalue, bvalue].MX = (double)Convert.ToDouble(profile.Rows[i][6].ToString());
-        //            profiles_CPU[lvalue, avalue, bvalue].MY = (double)Convert.ToDouble(profile.Rows[i][7].ToString());
-        //            profiles_CPU[lvalue, avalue, bvalue].MZ = (double)Convert.ToDouble(profile.Rows[i][8].ToString());
-
-
-        //            profiles_CPU[lvalue, avalue, bvalue].isempty = FALSE;
-
-
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    { Console.WriteLine(ex); }
-        //    #endregion
-
-
-
-        //    ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
-        //    SampleStructure[,] samples_GPU = gpu.CopyToDevice(samples_CPU);
-
-        //    System.Drawing.Color foreground = System.Drawing.Color.FromArgb(97, 195, 86);
-
-        //    Point3D background = new Point3D(0.661546612768968, 0.878671692627795, 0.328385183960379);
-
-
-        //        //foreground and background image inicialization
-        //        #region
-        //        try
-        //        {
-        //            for (int i = 0; i < 786432; i++)
-        //            {
-        //                foregorungRGB_CPU[i].R = foreground.R;
-        //                foregorungRGB_CPU[i].G = foreground.G;
-        //                foregorungRGB_CPU[i].B = foreground.B;
-
-        //                BackgroundXYZ_CPU[i].X = background.X;
-        //                BackgroundXYZ_CPU[i].Y = background.Y;
-        //                BackgroundXYZ_CPU[i].Z = background.Z;
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        { Console.WriteLine(ex); }
-        //        #endregion
-
-
-
-        //        // capture the start time
-        //        gpu.StartTimer();
-        //        ForeGroundStrucuture[] foregorungRGB_GPU = gpu.CopyToDevice(foregorungRGB_CPU);
-        //        BackGroundStrucuture[] BackgroundXYZ_GPU = gpu.CopyToDevice(BackgroundXYZ_CPU);
-
-        //        //out put
-        //        TestingStructure[] distance_GPU = gpu.Allocate(distance_CPU);
-
-
-
-
-        //        // generate a bitmap from our sphere data
-        //        //Image size: 1024 x 768
-
-        //        //dim3 grids = new dim3(1024 / 16, 768 / 16);
-        //        //dim3 threads = new dim3(16, 16);
-
-        //        dim3 grids = new dim3(1, 1);
-        //        dim3 threads = new dim3(1, 1);
-
-        //        //brute force
-        //        //gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
-
-        //        //quick_correct
-        //        gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], TestingStructure[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
-
-        //        //gpu.Launch(grids, threads, ((Action<GThread, ForeGroundStrucuture[], BackGroundStrucuture[], double[]>)Bruteforce), foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU);
-
-        //        // copy our bitmap back from the GPU for display
-        //        gpu.CopyFromDevice(distance_GPU, distance_CPU);
-
-
-        //        // get stop time, and display the timing results
-        //        double elapsedTime = gpu.StopTimer();
-        //        return distance_CPU;
-        //        Console.WriteLine("Time to generate: {0} ms", elapsedTime);
-        //        gpu.Free(foregorungRGB_GPU);
-        //        gpu.Free(BackgroundXYZ_GPU);
-        //        gpu.Free(distance_GPU);
-
-
-
-
-
-            
-        //    gpu.FreeAll();
-
-        //}
 
     }
 
