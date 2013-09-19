@@ -16,7 +16,7 @@ namespace VideoToBP
   class Program
   {
 
-    private const String PATH_TO_VIDEO = @"\..\..\..\clawmachine.mp4";
+    private const String PATH_TO_VIDEO = @"\..\..\videoBP-clawmachine.mp4";
     private const String PATH_TO_BIN_PROFILE = @"C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Data\PROFILE\p3700.csv";
 
     private static Matrix3D navigationMatrix = Matrix3D.Identity;
