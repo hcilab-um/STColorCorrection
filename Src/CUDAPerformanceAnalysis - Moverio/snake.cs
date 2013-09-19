@@ -10,11 +10,11 @@ using Cudafy.Translator;
 using System.Data;
 using GenericParsing;
 
-
 namespace CudafyByExample
 {
-    class quick_corr
+    class snake
     {
+
         [Cudafy]
         public const int ImagreHeight = 800;
         [Cudafy]
@@ -51,9 +51,9 @@ namespace CudafyByExample
             public double L;
             public double A;
             public double B;
-            //public byte Given_R;
-            //public byte Given_G;
-            //public byte Given_B;
+            public byte Given_R;
+            public byte Given_G;
+            public byte Given_B;
             public double ML;
             public double MA;
             public double MB;
@@ -483,7 +483,7 @@ namespace CudafyByExample
         ///
 
         [Cudafy]
-        public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ForeGroundStrucuture[] ptr, SampleStructure[,] samples)
+        public static void Snake(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ForeGroundStrucuture[] ptr, SampleStructure[,] samples)
         {
             // map from threadIdx/BlockIdx to pixel position
             int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
@@ -573,33 +573,35 @@ namespace CudafyByExample
             Point3D forward = new Point3D();
             Point3D backward = new Point3D();
 
-            while (step.X > 0 || step.Y > 0 && step.Z > 0)
+            int countSamplesClosestThanOrigin = 0;
+
+            do
             {
 
                 //sample 6 bins
-                top.X = origin.X + step.X;
+                top.X = origin.X + 1;
                 top.Y = origin.Y;
                 top.Z = origin.Z;
 
-                bottom.X = origin.X - step.X;
+                bottom.X = origin.X - 1;
                 bottom.Y = origin.Y;
                 bottom.Z = origin.Z;
 
                 left.X = origin.X;
-                left.Y = origin.Y - step.Y;
+                left.Y = origin.Y - 1;
                 left.Z = origin.Z;
 
                 right.X = origin.X;
-                right.Y = origin.Y + step.Y;
+                right.Y = origin.Y + 1;
                 right.Z = origin.Z;
 
                 forward.X = origin.X;
                 forward.Y = origin.Y;
-                forward.Z = origin.Z - step.Z;
+                forward.Z = origin.Z - 1;
 
                 backward.X = origin.X;
                 backward.Y = origin.Y;
-                backward.Z = origin.Z + step.Z;
+                backward.Z = origin.Z + 1;
 
                 samples[offset, 0] = GetProfileBinForSample(top.X, top.Y, top.Z, profile_GPU);
                 samples[offset, 1] = GetProfileBinForSample(bottom.X, bottom.Y, bottom.Z, profile_GPU);
@@ -609,7 +611,7 @@ namespace CudafyByExample
                 samples[offset, 5] = GetProfileBinForSample(backward.X, backward.Y, backward.Z, profile_GPU);
 
 
-                int countSamplesClosestThanOrigin = 0;
+                countSamplesClosestThanOrigin = 0;
 
                 //calculate color correction for all samples
                 #region
@@ -646,16 +648,7 @@ namespace CudafyByExample
 
 
 
-                if (countSamplesClosestThanOrigin == 0)
-                {
-                    step = HalfTheStep(step);
-                    continue;
-                }
-
-
-
-                //if there is at least one sample more accurate, it moves the origin in that direction, maintains the step and checks again
-                else
+                if (countSamplesClosestThanOrigin > 0)
                 {
                     //6.1 calculates weights
                     double totalimprovements = 0;
@@ -748,12 +741,11 @@ namespace CudafyByExample
                     diffA = diffA * diffA;
                     diffB = diffB * diffB;
 
-
                     //originBin.distanceLAB
                     newOriginBin.distance = Math.Sqrt(diffL + diffA + diffB);
 
                     if ((origin.X == newOriginLoc.X && origin.Y == newOriginLoc.Y && origin.Z == newOriginLoc.Z) || actualBin.distance <= newOriginBin.distance) // it's the same location then just reduces the step
-                        step = HalfTheStep(step);
+                        countSamplesClosestThanOrigin = 0;
                     else
                     {
                         origin = newOriginLoc;
@@ -762,13 +754,13 @@ namespace CudafyByExample
 
                 }
 
-            }
+            } while (countSamplesClosestThanOrigin > 0);
 
 
             ForeGroundStrucuture ValueToReturn = new ForeGroundStrucuture();
-            //ValueToReturn.R = actualBin.Given_R;
-            //ValueToReturn.G = actualBin.Given_G;
-            //ValueToReturn.B = actualBin.Given_B;
+            ValueToReturn.R = actualBin.Given_R;
+            ValueToReturn.G = actualBin.Given_G;
+            ValueToReturn.B = actualBin.Given_B;
 
             ptr[offset] = ValueToReturn;
 
@@ -782,14 +774,14 @@ namespace CudafyByExample
             //Y = 0.616476271122916;
             //Z = 0.667048468232457;
 
-            const int image_size = 1024 * 768;
+            const int image_size = 960 * 540;
 
             //cuda intializer
             CudafyModule km = CudafyModule.TryDeserialize();
             if (km == null || !km.TryVerifyChecksums())
             {
                 // km = CudafyTranslator.Cudafy((typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), typeof(Color));
-                km = CudafyTranslator.Cudafy((typeof(ProfileStrucuture)), (typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), (typeof(SampleStructure)), typeof(quick_corr));
+                km = CudafyTranslator.Cudafy((typeof(ProfileStrucuture)), (typeof(ForeGroundStrucuture)), (typeof(BackGroundStrucuture)), (typeof(SampleStructure)), typeof(snake));
                 km.TrySerialize();
             }
 
@@ -835,9 +827,9 @@ namespace CudafyByExample
                         profiles_CPU[indexL, indexA, indexB].L = indexL;
                         profiles_CPU[indexL, indexA, indexB].A = indexA;
                         profiles_CPU[indexL, indexA, indexB].B = indexB;
-                        //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_R = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_G = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_B = 0;
                         profiles_CPU[indexL, indexA, indexB].ML = 0;
                         profiles_CPU[indexL, indexA, indexB].MA = 0;
                         profiles_CPU[indexL, indexA, indexB].MB = 0;
@@ -872,9 +864,9 @@ namespace CudafyByExample
                     profiles_CPU[lvalue, avalue, bvalue].A = avalue;
                     profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
 
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_R = (byte)Convert.ToByte(profile.Rows[i][9].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_G = (byte)Convert.ToByte(profile.Rows[i][10].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_B = (byte)Convert.ToByte(profile.Rows[i][11].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_R = (byte)Convert.ToByte(profile.Rows[i][9].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_G = (byte)Convert.ToByte(profile.Rows[i][10].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_B = (byte)Convert.ToByte(profile.Rows[i][11].ToString());
 
                     profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
                     profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
@@ -894,7 +886,7 @@ namespace CudafyByExample
             catch (Exception ex)
             { Console.WriteLine(ex); }
             #endregion
-            
+
             //grab the colors
             ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
             SampleStructure[,] samples_GPU = gpu.CopyToDevice(samples_CPU);
@@ -911,8 +903,8 @@ namespace CudafyByExample
             // generate a bitmap from our sphere data
             //Image size: 1024 x 768
 
-            dim3 grids = new dim3(1024/16, 768/16);
-            dim3 threads = new dim3(16, 16);
+            dim3 grids = new dim3(24, 675);
+            dim3 threads = new dim3(8, 4);
 
             //dim3 grids = new dim3(1, 1);
             //dim3 threads = new dim3(1, 1);
@@ -921,7 +913,7 @@ namespace CudafyByExample
             //gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ProfileStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
 
             //quick correct - testing
-            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
+            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,]>)Snake), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
 
 
             // copy our bitmap back from the GPU for display
@@ -944,5 +936,4 @@ namespace CudafyByExample
         }
 
     }
-
 }

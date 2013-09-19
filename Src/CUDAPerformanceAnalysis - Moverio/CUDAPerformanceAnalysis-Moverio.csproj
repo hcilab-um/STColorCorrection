@@ -120,9 +120,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cudafy.NET, Version=1.25.4962.12440, Culture=neutral, PublicKeyToken=63a4c9931616906b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Cudafy.NET.dll</HintPath>
+    <Reference Include="Cudafy.NET">
+      <HintPath>..\..\..\..\Users\z-space\Documents\Visual Studio 2012\CudafyV1.25\bin\Cudafy.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PerceptionLib">
@@ -146,6 +145,8 @@
     <Compile Include="main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="quick_corr.cs" />
+    <Compile Include="reduce_step.cs" />
+    <Compile Include="snake.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

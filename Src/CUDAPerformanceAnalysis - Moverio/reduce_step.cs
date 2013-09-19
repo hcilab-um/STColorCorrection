@@ -10,11 +10,12 @@ using Cudafy.Translator;
 using System.Data;
 using GenericParsing;
 
-
 namespace CudafyByExample
 {
-    class quick_corr
+    class reduce_step
     {
+        
+    
         [Cudafy]
         public const int ImagreHeight = 800;
         [Cudafy]
@@ -51,9 +52,9 @@ namespace CudafyByExample
             public double L;
             public double A;
             public double B;
-            //public byte Given_R;
-            //public byte Given_G;
-            //public byte Given_B;
+            public byte Given_R;
+            public byte Given_G;
+            public byte Given_B;
             public double ML;
             public double MA;
             public double MB;
@@ -423,56 +424,12 @@ namespace CudafyByExample
         [Cudafy]
         private static Point3D HalfTheStep(Point3D step)
         {
-            double truncated;
-            if (step.X > 1)
-            {
-                step.X = step.X / 2.0;
-                truncated = Math.Truncate(step.X);
-                truncated = step.X - truncated;
-                if (truncated > 0.4)
-                {
-                    step.X = step.X + 0.1;
-                }
-
-                step.X = (int)(Math.Round(step.X));
-            }
-            else if (step.X == 1)
-            {
-                step.X = 0;
-            }
-
-            if (step.Y > 1)
-            {
-                step.Y = step.Y / 2.0;
-                truncated = Math.Truncate(step.Y);
-                truncated = step.Y - truncated;
-                if (truncated > 0.4)
-                {
-                    step.Y = step.Y + 0.1;
-                }
-
-                step.Y = (int)(Math.Round(step.Y));
-            }
-            else if (step.Y == 1)
-            {
-                step.Y = 0;
-            }
-
-            if (step.Z > 1)
-            {
-                step.Z = step.Z / 2.0;
-                truncated = Math.Truncate(step.Z);
-                truncated = step.Z - truncated;
-                if (truncated > 0.4)
-                {
-                    step.Z = step.Z + 0.1;
-                }
-                step.Z = (int)(Math.Round(step.Z));
-            }
-            else if (step.Z == 1)
-            {
-                step.Z = 0;
-            }
+            if (step.X > 0)
+                step.X = step.X - 1;
+            if (step.Y > 0)
+                step.Y = step.Y - 1;
+            if (step.Z > 0)
+                step.Z = step.Z - 1;
 
             return step;
 
@@ -748,7 +705,6 @@ namespace CudafyByExample
                     diffA = diffA * diffA;
                     diffB = diffB * diffB;
 
-
                     //originBin.distanceLAB
                     newOriginBin.distance = Math.Sqrt(diffL + diffA + diffB);
 
@@ -766,9 +722,9 @@ namespace CudafyByExample
 
 
             ForeGroundStrucuture ValueToReturn = new ForeGroundStrucuture();
-            //ValueToReturn.R = actualBin.Given_R;
-            //ValueToReturn.G = actualBin.Given_G;
-            //ValueToReturn.B = actualBin.Given_B;
+            ValueToReturn.R = actualBin.Given_R;
+            ValueToReturn.G = actualBin.Given_G;
+            ValueToReturn.B = actualBin.Given_B;
 
             ptr[offset] = ValueToReturn;
 
@@ -782,7 +738,7 @@ namespace CudafyByExample
             //Y = 0.616476271122916;
             //Z = 0.667048468232457;
 
-            const int image_size = 1024 * 768;
+            const int image_size = 960 * 540;
 
             //cuda intializer
             CudafyModule km = CudafyModule.TryDeserialize();
@@ -835,9 +791,9 @@ namespace CudafyByExample
                         profiles_CPU[indexL, indexA, indexB].L = indexL;
                         profiles_CPU[indexL, indexA, indexB].A = indexA;
                         profiles_CPU[indexL, indexA, indexB].B = indexB;
-                        //profiles_CPU[indexL, indexA, indexB].Given_R = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_G = 0;
-                        //profiles_CPU[indexL, indexA, indexB].Given_B = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_R = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_G = 0;
+                        profiles_CPU[indexL, indexA, indexB].Given_B = 0;
                         profiles_CPU[indexL, indexA, indexB].ML = 0;
                         profiles_CPU[indexL, indexA, indexB].MA = 0;
                         profiles_CPU[indexL, indexA, indexB].MB = 0;
@@ -872,9 +828,9 @@ namespace CudafyByExample
                     profiles_CPU[lvalue, avalue, bvalue].A = avalue;
                     profiles_CPU[lvalue, avalue, bvalue].B = bvalue;
 
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_R = (byte)Convert.ToByte(profile.Rows[i][9].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_G = (byte)Convert.ToByte(profile.Rows[i][10].ToString());
-                    //profiles_CPU[lvalue, avalue, bvalue].Given_B = (byte)Convert.ToByte(profile.Rows[i][11].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_R = (byte)Convert.ToByte(profile.Rows[i][9].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_G = (byte)Convert.ToByte(profile.Rows[i][10].ToString());
+                    profiles_CPU[lvalue, avalue, bvalue].Given_B = (byte)Convert.ToByte(profile.Rows[i][11].ToString());
 
                     profiles_CPU[lvalue, avalue, bvalue].ML = (double)Convert.ToDouble(profile.Rows[i][3].ToString());
                     profiles_CPU[lvalue, avalue, bvalue].MA = (double)Convert.ToDouble(profile.Rows[i][4].ToString());
@@ -911,8 +867,8 @@ namespace CudafyByExample
             // generate a bitmap from our sphere data
             //Image size: 1024 x 768
 
-            dim3 grids = new dim3(1024/16, 768/16);
-            dim3 threads = new dim3(16, 16);
+            dim3 grids = new dim3(24, 675);
+            dim3 threads = new dim3(8, 4);
 
             //dim3 grids = new dim3(1, 1);
             //dim3 threads = new dim3(1, 1);
@@ -943,6 +899,6 @@ namespace CudafyByExample
 
         }
 
+    
     }
-
 }

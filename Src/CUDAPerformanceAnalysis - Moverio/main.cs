@@ -131,79 +131,25 @@ namespace CudafyByExample
                 //CVS FILE CREATING AND INICIALIZATION
                 #region
                 //create the CSV file
-                CsvFileWriter output_file_1 = new CsvFileWriter(@"C:\lev\STColorCorrection\Data\CUDA performance analysis\out_file1.csv");
-                CsvFileWriter output_file_2 = new CsvFileWriter(@"C:\lev\STColorCorrection\Data\CUDA performance analysis\out_file2.csv");
-
+                CsvFileWriter output_file_1 = new CsvFileWriter(@"C:\lev\STColorCorrection\Data\CUDA performance analysis\times_file.csv");
                 //create the header
                 CsvRow header = new CsvRow();
-                header.Add("R_fg_in");
-                header.Add("G_fg_in");
-                header.Add("B_fg_in");
-                header.Add("L_fg_in");
-                header.Add("A_fg_in");
-                header.Add("B_fg_in");
-
-                header.Add("X_bg_in");
-                header.Add("Y_bg_in");
-                header.Add("Z_bg_in");
-
-                header.Add("BF_Dist");
                 header.Add("Cuda BF time");
-                header.Add("QC_Dist");
                 header.Add("Cuda QC time");
-                //header.Add("Half_QC");
-                //header.Add("Cuda HF time");
-                //header.Add("Reduce_Dist");
-                //header.Add("Cuda Re time");
-                //header.Add("Snake_Dist");
-                //header.Add("Cuda Snake time");
+                header.Add("Cuda Snake time");
+                header.Add("Cuda HF time");
+
                 output_file_1.WriteRow(header);
-                header = new CsvRow();
-                header.Add("R_fg_in");
-                header.Add("G_fg_in");
-                header.Add("B_fg_in");
-                header.Add("L_fg_in");
-                header.Add("A_fg_in");
-                header.Add("B_fg_in");
-
-                header.Add("X_bg_in");
-                header.Add("Y_bg_in");
-                header.Add("Z_bg_in");
-
-                header.Add("BF_Dist");
-                header.Add("R_fg_out");
-                header.Add("G_fg_out");
-                header.Add("B_fg_out");
-
-                header.Add("QC_Dist");
-                header.Add("R_fg_out");
-                header.Add("G_fg_out");
-                header.Add("B_fg_out");
-                //header.Add("Half_QC");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
-                //header.Add("Reduce_Dist");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
-                //header.Add("Snake_Dist");
-                //header.Add("R_fg_out");
-                //header.Add("G_fg_out");
-                //header.Add("B_fg_out");
-                output_file_2.WriteRow(header);
-                //write the header to the CSV file
                 #endregion
 
 
                 Random randomGenerater = new Random();
-                for (int num_colors = 0; num_colors < 1000; num_colors++)
+                for (int num_colors = 0; num_colors < 20; num_colors++)
                 {
                     //create a new csv row
                     CsvRow new_row_file_1 = new CsvRow();
-                    CsvRow new_row_file_2 = new CsvRow();
 
-                    const int image_size = 960 * 540;
+                    const int image_size = 1024 * 768;
 
 
                     bf.ForeGroundStrucuture[] foregorungRGB_BF = new bf.ForeGroundStrucuture[image_size];
@@ -212,6 +158,11 @@ namespace CudafyByExample
                     quick_corr.ForeGroundStrucuture[] foregorungRGB_QC = new quick_corr.ForeGroundStrucuture[image_size];
                     quick_corr.BackGroundStrucuture[] BackgroundXYZ_QC = new quick_corr.BackGroundStrucuture[image_size];
 
+                    snake.ForeGroundStrucuture[] foregorungRGB_SN = new snake.ForeGroundStrucuture[image_size];
+                    snake.BackGroundStrucuture[] BackgroundXYZ_SN = new snake.BackGroundStrucuture[image_size];
+
+                    reduce_step.ForeGroundStrucuture[] foregorungRGB_RS = new reduce_step.ForeGroundStrucuture[image_size];
+                    reduce_step.BackGroundStrucuture[] BackgroundXYZ_RS = new reduce_step.BackGroundStrucuture[image_size];
 
                     for (int i = 0; i < image_size; i++){
 
@@ -240,79 +191,51 @@ namespace CudafyByExample
                         BackgroundXYZ_QC[i].X = backgroundCIEXYZ.X;
                         BackgroundXYZ_QC[i].Y = backgroundCIEXYZ.Y;
                         BackgroundXYZ_QC[i].Z = backgroundCIEXYZ.Z;
+
+                        foregorungRGB_SN[i].R = foreground.R;
+                        foregorungRGB_SN[i].G = foreground.G;
+                        foregorungRGB_SN[i].B = foreground.B;
+                                      
+                        BackgroundXYZ_SN[i].X = backgroundCIEXYZ.X;
+                        BackgroundXYZ_SN[i].Y = backgroundCIEXYZ.Y;
+                        BackgroundXYZ_SN[i].Z = backgroundCIEXYZ.Z;
+
+                        foregorungRGB_RS[i].R = foreground.R;
+                        foregorungRGB_RS[i].G = foreground.G;
+                        foregorungRGB_RS[i].B = foreground.B;
+                                      
+                        BackgroundXYZ_RS[i].X = backgroundCIEXYZ.X;
+                        BackgroundXYZ_RS[i].Y = backgroundCIEXYZ.Y;
+                        BackgroundXYZ_RS[i].Z = backgroundCIEXYZ.Z;
     
                     }
 
                     //write the input colors
                     #region
-                    //new_row_file_1.Add(foreground.R.ToString());
-                    //new_row_file_1.Add(foreground.G.ToString());
-                    //new_row_file_1.Add(foreground.B.ToString());
 
-                    //new_row_file_1.Add(foregroundLAB.LA.ToString());
-                    //new_row_file_1.Add(foregroundLAB.A.ToString());
-                    //new_row_file_1.Add(foregroundLAB.B.ToString());
-
-                    //new_row_file_1.Add(background.X.ToString());
-                    //new_row_file_1.Add(background.Y.ToString());
-                    //new_row_file_1.Add(background.Z.ToString());
-
-                    //new_row_file_2.Add(foreground.R.ToString());
-                    //new_row_file_2.Add(foreground.G.ToString());
-                    //new_row_file_2.Add(foreground.B.ToString());
-                                 
-                    //new_row_file_2.Add(foregroundLAB.LA.ToString());
-                    //new_row_file_2.Add(foregroundLAB.A.ToString());
-                    //new_row_file_2.Add(foregroundLAB.B.ToString());
-                                 
-                    //new_row_file_2.Add(background.X.ToString());
-                    //new_row_file_2.Add(background.Y.ToString());
-                    //new_row_file_2.Add(background.Z.ToString());
                     #endregion
 
                     //prepare a BF specific struct
 
                     //get the brute force values
-                    bf.TestOutput results_brute_force = bf.CorrectColour(foregorungRGB_BF, BackgroundXYZ_BF);
-                    Console.WriteLine("");
-
-                    //new_row_file_1.Add(results_brute_force[0].distance.ToString());
-                    //new_row_file_1.Add(results_brute_force[0].execution_time.ToString());
-
-                    //Point3D labBin = new Point3D();
-                    //labBin.X = results_brute_force[0].Given_R;
-                    //labBin.Y = results_brute_force[0].Given_G;
-                    //labBin.Z = results_brute_force[0].Given_B;
-
-                    //Bin actualBin = GetProfileBin(p3700, labBin);
-
-                    //new_row_file_2.Add(results_brute_force[0].distance.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.X.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.Y.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.Z.ToString());
+                    //bf.TestOutput results_brute_force = bf.CorrectColour(foregorungRGB_BF, BackgroundXYZ_BF);
+                    //new_row_file_1.Add(results_brute_force.timeTaken.ToString());
+                    //Console.WriteLine("");
 
 
                     quick_corr.TestOutput results_quick_corr = quick_corr.CorrectColour(foregorungRGB_QC, BackgroundXYZ_QC);
-                    Console.WriteLine("");
+                    //new_row_file_1.Add(results_quick_corr.timeTaken.ToString());
+                    //Console.WriteLine("");
 
-                    //new_row_file_1.Add(results_quick_corr[0].distance.ToString());
-                    //new_row_file_1.Add(results_quick_corr[0].execution_time.ToString());
+                    //snake.TestOutput results_snake_corr = snake.CorrectColour(foregorungRGB_SN, BackgroundXYZ_SN);
+                    //new_row_file_1.Add(results_snake_corr.timeTaken.ToString());
+                    //Console.WriteLine("");
 
-                    //labBin = new Point3D();
-                    //labBin.X = results_quick_corr[0].Given_R;
-                    //labBin.Y = results_quick_corr[0].Given_G;
-                    //labBin.Z = results_quick_corr[0].Given_B;
+                    //reduce_step.TestOutput results_reduce_step = reduce_step.CorrectColour(foregorungRGB_RS, BackgroundXYZ_RS);
+                    //new_row_file_1.Add(results_reduce_step.timeTaken.ToString());
 
-                    //actualBin = GetProfileBin(p3700, labBin);
+                    output_file_1.WriteRow(new_row_file_1);
 
-                    //new_row_file_2.Add(results_quick_corr[0].distance.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.X.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.Y.ToString());
-                    //new_row_file_2.Add(actualBin.binRGB.Z.ToString());
-
-                    //output_file_1.WriteRow(new_row_file_1);
-                    //output_file_2.WriteRow(new_row_file_2);
-                    
                 }
 
                 
@@ -322,7 +245,6 @@ namespace CudafyByExample
 
                 //close the CSV files
                 output_file_1.Close();
-                output_file_2.Close();
 
                 Console.WriteLine("Done!");
             }
