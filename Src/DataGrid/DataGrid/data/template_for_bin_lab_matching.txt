@@ -1,0 +1,1 @@
+BinL,BinA,BinB,MeasuredL,MeasuredA,MeasuredB,MeasuredX,MeasuredY,MeasuredZ,R,G,B,OldR,OldG,OldB,Empty
