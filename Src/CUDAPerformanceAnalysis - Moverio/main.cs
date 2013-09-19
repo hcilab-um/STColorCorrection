@@ -144,7 +144,7 @@ namespace CudafyByExample
 
 
                 Random randomGenerater = new Random();
-                for (int num_colors = 0; num_colors < 20; num_colors++)
+                for (int num_colors = 0; num_colors < 2; num_colors++)
                 {
                     //create a new csv row
                     CsvRow new_row_file_1 = new CsvRow();
@@ -166,6 +166,11 @@ namespace CudafyByExample
 
                     for (int i = 0; i < image_size; i++){
 
+                        //static colour
+                        //System.Drawing.Color foreground = System.Drawing.Color.FromArgb(69, 77, 217);
+                        //Point3D backgroundCIEXYZ = new Point3D(0.0630982813175294, 0.616476271122916, 0.667048468232457);
+
+                        //dynamic random colour
                         Byte[] rgb = new Byte[3];
                         randomGenerater.NextBytes(rgb);
                         System.Drawing.Color foreground = System.Drawing.Color.FromArgb(rgb[0], rgb[1], rgb[2]);
@@ -224,8 +229,8 @@ namespace CudafyByExample
 
 
                     quick_corr.TestOutput results_quick_corr = quick_corr.CorrectColour(foregorungRGB_QC, BackgroundXYZ_QC);
-                    //new_row_file_1.Add(results_quick_corr.timeTaken.ToString());
-                    //Console.WriteLine("");
+                    new_row_file_1.Add(results_quick_corr.timeTaken.ToString());
+                    //Console.WriteLine(results_quick_corr.timeTaken.ToString());
 
                     //snake.TestOutput results_snake_corr = snake.CorrectColour(foregorungRGB_SN, BackgroundXYZ_SN);
                     //new_row_file_1.Add(results_snake_corr.timeTaken.ToString());

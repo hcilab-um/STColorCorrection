@@ -112,12 +112,27 @@ namespace CudafyByExample
             public byte R;
             public byte G;
             public byte B;
+
+            public ForeGroundStrucuture(byte r, byte g, byte b)
+            {
+                R = r;
+                G = g;
+                B = b;
+            }
         }
 
         public const int LAxis = 21;
         public const int AAxis = 41;
         public const int BAxis = 45;
 
+        [Cudafy]
+        public struct FGLookupStructure
+        {
+            public int L;
+            public int A;
+            public int B;
+
+        }
 
         [Cudafy]
         public static double FX(double e)
@@ -219,7 +234,7 @@ namespace CudafyByExample
         }
 
         [Cudafy]
-        public static ProfileStrucuture ToLAB(ForeGroundStrucuture cRGB)
+        public static Point3D ToLAB(ForeGroundStrucuture cRGB)
         {
             double Fx, Fy, Fz;
 
@@ -252,21 +267,21 @@ namespace CudafyByExample
             Fy = yr;
             Fz = zr;
 
-            ProfileStrucuture rColor = new ProfileStrucuture();
+            Point3D rColor = new Point3D();
 
             if (yr > 0.008856)
                 yr = (116 * Math.Pow(yr, (1.0 / 3.0))) - 16;
             else
                 yr = (double)(903.3 * yr);
-            rColor.L = yr;
-            rColor.A = 500 * (Fx - Fy);
-            rColor.B = 200 * (Fy - Fz);
+            rColor.X = yr;
+            rColor.Y = 500 * (Fx - Fy);
+            rColor.Z = 200 * (Fy - Fz);
 
             return rColor;
         }
 
         [Cudafy]
-        public static ProfileStrucuture XYZtoLAB_st(BackGroundStrucuture xyz)
+        public static Point3D XYZtoLAB_st(BackGroundStrucuture xyz)
         {
             double Fx, Fy, Fz;
 
@@ -297,15 +312,15 @@ namespace CudafyByExample
             Fy = yr;
             Fz = zr;
 
-            ProfileStrucuture rColor = new ProfileStrucuture();
+            Point3D rColor = new Point3D();
 
             if (yr > 0.008856)
                 yr = (116 * Math.Pow(yr, (1.0 / 3.0))) - 16;
             else
                 yr = (double)(903.3 * yr);
-            rColor.L = yr;
-            rColor.A = 500 * (Fx - Fy);
-            rColor.B = 200 * (Fy - Fz);
+            rColor.X = yr;
+            rColor.Y = 500 * (Fx - Fy);
+            rColor.Z = 200 * (Fy - Fz);
 
             return rColor;
         }
@@ -358,30 +373,11 @@ namespace CudafyByExample
         }
 
         [Cudafy]
-        private static ProfileStrucuture FindForegroundBin(ForeGroundStrucuture foregorungRGB_GPU, ProfileStrucuture[, ,] profile_GPU)
+        private static ProfileStrucuture FindForegroundBin(ForeGroundStrucuture foregorungRGB_GPU, ProfileStrucuture[, ,] profile_GPU, FGLookupStructure[,,]fg_lookup)
         {
-            ProfileStrucuture foregroundLAB = ToLAB(foregorungRGB_GPU);
-
-            int binL = ((int)Math.Round(foregroundLAB.L / 5.0)) * 5;
-            int binA = ((int)Math.Round(foregroundLAB.A / 5.0)) * 5;
-            int binB = ((int)Math.Round(foregroundLAB.B / 5.0)) * 5;
-
-            if (binL < 0)
-                binL = 0;
-            if (binL > 100)
-                binL = 100;
-            if (binA < -86.17385493791946)
-                binA = -85;
-            if (binA > 98.2448002875424)
-                binA = 100;
-            if (binB < -107.8619171648283)
-                binB = -110;
-            if (binB > 94.47705120353054)
-                binB = 95;
-
-            binL = (int)(binL * 0.2) + 0;
-            binA = (int)(binA * 0.2) + 20;
-            binB = (int)(binB * 0.2) + 22;
+            int binL = fg_lookup[foregorungRGB_GPU.R, foregorungRGB_GPU.G, foregorungRGB_GPU.B].L;
+            int binA = fg_lookup[foregorungRGB_GPU.R, foregorungRGB_GPU.G, foregorungRGB_GPU.B].A;
+            int binB = fg_lookup[foregorungRGB_GPU.R, foregorungRGB_GPU.G, foregorungRGB_GPU.B].B;
 
             ProfileStrucuture foregroundBin = GetProfileBin(binL, binA, binB, profile_GPU);
 
@@ -483,7 +479,7 @@ namespace CudafyByExample
         ///
 
         [Cudafy]
-        public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ForeGroundStrucuture[] ptr, SampleStructure[,] samples)
+        public static void QuickCorr(GThread thread, ProfileStrucuture[, ,] profile_GPU, ForeGroundStrucuture[] foregorungRGB_GPU, BackGroundStrucuture[] BackgroundXYZ_GPU, ForeGroundStrucuture[] ptr, SampleStructure[,] samples, FGLookupStructure[,,] fg_lookup)
         {
             // map from threadIdx/BlockIdx to pixel position
             int x = thread.threadIdx.x + thread.blockIdx.x * thread.blockDim.x;
@@ -504,26 +500,10 @@ namespace CudafyByExample
 
             //1 - Converts the foreground to how the display shows it
             ProfileStrucuture foregroundColorToShow = new ProfileStrucuture();
-            ProfileStrucuture foregroundLAB = ToLAB(foregorungRGB_GPU[offset]);
 
-            int binL = ((int)Math.Round(foregroundLAB.L / 5.0)) * 5;
-            int binA = ((int)Math.Round(foregroundLAB.A / 5.0)) * 5;
-            int binB = ((int)Math.Round(foregroundLAB.B / 5.0)) * 5;
-
-            if (binL > 100)
-                binL = 100;
-            if (binA < -86.17385493791946)
-                binA = -85;
-            if (binA > 98.2448002875424)
-                binA = 100;
-            if (binB < -107.8619171648283)
-                binB = -110;
-            if (binB > 94.47705120353054)
-                binB = 95;
-
-            binL = (int)(binL * 0.2) + 0;
-            binA = (int)(binA * 0.2) + 20;
-            binB = (int)(binB * 0.2) + 22;
+            int binL = fg_lookup[foregorungRGB_GPU[offset].R, foregorungRGB_GPU[offset].G, foregorungRGB_GPU[offset].B].L;
+            int binA = fg_lookup[foregorungRGB_GPU[offset].R, foregorungRGB_GPU[offset].G, foregorungRGB_GPU[offset].B].A;
+            int binB = fg_lookup[foregorungRGB_GPU[offset].R, foregorungRGB_GPU[offset].G, foregorungRGB_GPU[offset].B].B;
 
 
             foregroundColorToShow.ML = profile_GPU[binL, binA, binB].ML;
@@ -543,15 +523,15 @@ namespace CudafyByExample
 
             BackGroundStrucuture PredictionXYZ = addXYZ_st(actualBin.MX, actualBin.MY, actualBin.MZ, BackgroundXYZ_GPU[offset]);
 
-            ProfileStrucuture PredictionLAB = XYZtoLAB_st(PredictionXYZ);
+            Point3D PredictionLAB = XYZtoLAB_st(PredictionXYZ);
 
             //diffL = foregroundColorToShow.ML - PredictionLAB.L;
             //diffA = foregroundColorToShow.MA - PredictionLAB.A;
             //diffB = foregroundColorToShow.MB - PredictionLAB.B;
 
-            diffL = PredictionLAB.L - foregroundColorToShow.ML;
-            diffA = PredictionLAB.A - foregroundColorToShow.MA;
-            diffB = PredictionLAB.B - foregroundColorToShow.MB;
+            diffL = PredictionLAB.X - foregroundColorToShow.ML;
+            diffA = PredictionLAB.Y - foregroundColorToShow.MA;
+            diffB = PredictionLAB.Z - foregroundColorToShow.MB;
 
             //diffL = PredictionXYZ.X - foregroundColorToShow.MX;
             //diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
@@ -620,11 +600,11 @@ namespace CudafyByExample
 
                     BackGroundStrucuture temp_XYZ = addXYZ_st(samples[offset, index].MX, samples[offset, index].MY, samples[offset, index].MZ, BackgroundXYZ_GPU[offset]);
 
-                    ProfileStrucuture PredictionlAB = XYZtoLAB_st(temp_XYZ);
+                    Point3D PredictionlAB = XYZtoLAB_st(temp_XYZ);
 
-                    diffL = PredictionlAB.L - foregroundColorToShow.ML;
-                    diffA = PredictionlAB.A - foregroundColorToShow.MA;
-                    diffB = PredictionlAB.B - foregroundColorToShow.MB;
+                    diffL = PredictionlAB.X - foregroundColorToShow.ML;
+                    diffA = PredictionlAB.Y - foregroundColorToShow.MA;
+                    diffB = PredictionlAB.Z - foregroundColorToShow.MB;
 
                     diffL = diffL * diffL;
                     diffA = diffA * diffA;
@@ -734,11 +714,11 @@ namespace CudafyByExample
 
                     PredictionXYZ = addXYZ_st(newOriginBin.MX, newOriginBin.MY, newOriginBin.MZ, BackgroundXYZ_GPU[offset]);
 
-                    ProfileStrucuture PredictionlAB = XYZtoLAB_st(PredictionXYZ);
+                    Point3D PredictionlAB = XYZtoLAB_st(PredictionXYZ);
 
-                    diffL = PredictionlAB.L - foregroundColorToShow.ML;
-                    diffA = PredictionlAB.A - foregroundColorToShow.MA;
-                    diffB = PredictionlAB.B - foregroundColorToShow.MB;
+                    diffL = PredictionlAB.X - foregroundColorToShow.ML;
+                    diffA = PredictionlAB.Y - foregroundColorToShow.MA;
+                    diffB = PredictionlAB.Z - foregroundColorToShow.MB;
 
                     //diffL = PredictionXYZ.X - foregroundColorToShow.MX;
                     //diffA = PredictionXYZ.Y - foregroundColorToShow.MY;
@@ -823,6 +803,7 @@ namespace CudafyByExample
 
             ProfileStrucuture[, ,] profiles_CPU = new ProfileStrucuture[21, 41, 45];
             SampleStructure[,] samples_CPU = new SampleStructure[image_size, 6];
+            FGLookupStructure[, ,] fg_loopup_CPU = new FGLookupStructure[256, 256, 256];
 
             //profile inicialization
             #region
@@ -894,10 +875,46 @@ namespace CudafyByExample
             catch (Exception ex)
             { Console.WriteLine(ex); }
             #endregion
-            
+
+            //fg lookup inicialization
+            #region
+            for (int r = 0; r < 255; r++)
+            {
+                for (int g = 0; g < 255; g++)
+                {
+                    for (int b = 0; b < 255; b++)
+                    {
+                        Point3D foregroundLAB = ToLAB(new ForeGroundStrucuture((byte)r, (byte)g, (byte)b));
+
+                        int binL = ((int)Math.Round(foregroundLAB.X / 5.0)) * 5;
+                        int binA = ((int)Math.Round(foregroundLAB.Y / 5.0)) * 5;
+                        int binB = ((int)Math.Round(foregroundLAB.Z / 5.0)) * 5;
+
+                        if (binL > 100)
+                            binL = 100;
+                        if (binA < -86.17385493791946)
+                            binA = -85;
+                        if (binA > 98.2448002875424)
+                            binA = 100;
+                        if (binB < -107.8619171648283)
+                            binB = -110;
+                        if (binB > 94.47705120353054)
+                            binB = 95;
+
+                        fg_loopup_CPU[r, g, b].L = (int)(binL * 0.2) + 0;
+                        fg_loopup_CPU[r, g, b].A = (int)(binA * 0.2) + 20;
+                        fg_loopup_CPU[r, g, b].B = (int)(binB * 0.2) + 22;
+
+                    }
+                }
+            }
+            #endregion
+
+
             //grab the colors
             ProfileStrucuture[, ,] profile_GPU = gpu.CopyToDevice(profiles_CPU);
             SampleStructure[,] samples_GPU = gpu.CopyToDevice(samples_CPU);
+            FGLookupStructure[, ,] fg_loopup_GPU = gpu.CopyToDevice(fg_loopup_CPU);
 
             //begin execution
             // capture the start time
@@ -921,7 +938,9 @@ namespace CudafyByExample
             //gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ProfileStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
 
             //quick correct - testing
-            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
+            //gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU);
+
+            gpu.Launch(grids, threads, ((Action<GThread, ProfileStrucuture[, ,], ForeGroundStrucuture[], BackGroundStrucuture[], ForeGroundStrucuture[], SampleStructure[,], FGLookupStructure[,,]>)QuickCorr), profile_GPU, foregorungRGB_GPU, BackgroundXYZ_GPU, distance_GPU, samples_GPU, fg_loopup_GPU);
 
 
             // copy our bitmap back from the GPU for display
