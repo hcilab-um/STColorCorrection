@@ -58,7 +58,7 @@ namespace QuickCorrection
       try
       {
         // add the csv bin file
-        using (GenericParserAdapter parser = new GenericParserAdapter(@"C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Data\PROFILE\p3700.csv"))
+        using (GenericParserAdapter parser = new GenericParserAdapter(Environment.CurrentDirectory + @"\..\..\..\..\..\Data\PROFILE\p3700.csv"))
         {
           System.Data.DataSet dsResult = parser.GetDataSet();
           profile = dsResult.Tables[0];
@@ -107,7 +107,7 @@ namespace QuickCorrection
       /////////////////
       //code for comarison
       //populate template in datagrid
-      PopulateGrid(@"C:\Users\jhincapie\Desktop\Projects\STColorCorrection\Data\PROFILE\Comparison_Template.txt");
+      PopulateGrid(Environment.CurrentDirectory + @"\..\..\..\..\..\Data\PROFILE\Comparison_Template.txt");
       DataTable template = new DataTable();
       Dispatcher.Invoke(DispatcherPriority.Render, new Action(() =>
       {
@@ -276,7 +276,7 @@ namespace QuickCorrection
       Point3D backward = new Point3D();
 
       //--- Iterative Version ---//
-      while (step.X > 0 || step.Y > 0 && step.Z > 0)
+      while (step.X > 0 || step.Y > 0 || step.Z > 0)
       {
         cycles++;
 
