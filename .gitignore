@@ -18,6 +18,13 @@ local.properties
 .settings/
 .loadpath
 
+opencv_*.dll
+cu*.dll
+npp*.dll
+cvextern.dll
+Emgu.*.dll
+videoBP-*.mp4
+
 # External tool builders
 .externalToolBuilders/
 

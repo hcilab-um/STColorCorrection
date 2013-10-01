@@ -317,7 +317,7 @@
       <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
         <!--<Rectangle Name="rec_surround" Width="2008" Height="1248" Fill="Black" Stroke="Black" Margin="0,0,0,0">-->
         <Border BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2"  CornerRadius="0,0,0,0" BorderBrush="Black" Background="Black"  Width="1195">
-                    <Rectangle Name="rec_displayColor" Width="814" Height="768" VerticalAlignment="Top" Stroke="Black" Margin="0,10,0,0" Fill="White"/>
+                    <Rectangle Name="rec_displayColor" Width="814" Height="768" VerticalAlignment="Top" Stroke="Black" Margin="0,10,0,0" Fill="black"/>
          </Border>
         <!--</Rectangle>-->
         <Rectangle Name="rec_BgColor" Width="3415" Height="1260" Stroke="Black" Margin="0,0,0,0" Fill="Black"/>
