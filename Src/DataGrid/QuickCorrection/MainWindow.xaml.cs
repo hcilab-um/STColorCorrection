@@ -58,7 +58,7 @@ namespace QuickCorrection
       try
       {
         // add the csv bin file
-        using (GenericParserAdapter parser = new GenericParserAdapter(Environment.CurrentDirectory + @"\..\..\..\..\..\Data\PROFILE\p3700.csv"))
+        using (GenericParserAdapter parser = new GenericParserAdapter(Environment.CurrentDirectory + @"\..\..\..\..\..\Data\PROFILE\IdealProfile.csv"))
         {
           System.Data.DataSet dsResult = parser.GetDataSet();
           profile = dsResult.Tables[0];
@@ -366,9 +366,9 @@ namespace QuickCorrection
           while (newOriginBin.isEmpty)
           {
             //6.4 moves half the magnitude in the given direction
-            displacement.X = Math.Round(displacement.X / 2, MidpointRounding.AwayFromZero);
-            displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.AwayFromZero);
-            displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.AwayFromZero);
+            displacement.X = Math.Round(displacement.X / 2, MidpointRounding.ToEven);
+            displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.ToEven);
+            displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.ToEven);
 
             newOriginLoc = origin + displacement;
             newOriginBin = GetProfileBin(profile, newOriginLoc);
