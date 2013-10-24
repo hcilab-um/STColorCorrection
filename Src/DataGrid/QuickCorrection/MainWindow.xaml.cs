@@ -256,8 +256,8 @@ namespace QuickCorrection
       Bin foregroundBin = FindForegroundBin(profile, navigationMatrix, foreground);
 
       //2- general parameters
-      Point3D origin = navigationMatrix.Transform(new Point3D(50, 0, 0));
-      Vector3D step = navigationMatrix.Transform(new Vector3D(50, 100, 110));
+      Point3D origin = foregroundBin.binLAB;
+      Vector3D step = new Vector3D(3, 5, 6);
 
       //3- finds the correction accuracy of the current bin
       Bin originBin = GetProfileBin(profile, origin);
@@ -366,9 +366,9 @@ namespace QuickCorrection
           while (newOriginBin.isEmpty)
           {
             //6.4 moves half the magnitude in the given direction
-            displacement.X = Math.Round(displacement.X / 2, MidpointRounding.ToEven);
-            displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.ToEven);
-            displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.ToEven);
+            displacement.X = Math.Round(displacement.X / 2, MidpointRounding.AwayFromZero);
+            displacement.Y = Math.Round(displacement.Y / 2, MidpointRounding.AwayFromZero);
+            displacement.Z = Math.Round(displacement.Z / 2, MidpointRounding.AwayFromZero);
 
             newOriginLoc = origin + displacement;
             newOriginBin = GetProfileBin(profile, newOriginLoc);

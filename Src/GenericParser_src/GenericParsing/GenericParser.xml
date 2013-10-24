@@ -4,12 +4,30 @@
         <name>GenericParsing</name>
     </assembly>
     <members>
-        <member name="T:GenericParsing.GenericParserAdapter">
+        <member name="T:GenericParsing.ParserState">
             <summary>
-              The <see cref="T:GenericParsing.GenericParserAdapter"/> is used to modify the <see cref="T:GenericParsing.GenericParser"/>
-              to allow it parse a file and place them into various formats.
+            The current internal state of the parser.
             </summary>
-            <threadsafety static="false" instance="false"/>
+        </member>
+        <member name="F:GenericParsing.ParserState.NoDataSource">
+            <summary>
+              Indicates that the parser has no datasource and is not properly setup.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Ready">
+            <summary>
+              Indicates that the parser is ready to begin parsing.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Parsing">
+            <summary>
+              Indicates that the parser is currently parsing the datasource.
+            </summary>
+        </member>
+        <member name="F:GenericParsing.ParserState.Finished">
+            <summary>
+              Indicates that the parser has finished parsing the datasource.
+            </summary>
         </member>
         <member name="T:GenericParsing.GenericParser">
             <summary>
@@ -1109,6 +1127,73 @@
               The row type is data row that is intended to be extracted.
             </summary>
         </member>
+        <member name="T:GenericParsing.ParsingException">
+            <summary>
+              <see cref="T:GenericParsing.ParsingException"/> is an exception class meant for states where
+              the parser can no longer continue parsing due to the data found in the
+              data-source.
+            </summary>
+        </member>
+        <member name="M:GenericParsing.ParsingException.#ctor">
+            <summary>
+              Creates a new <see cref="T:GenericParsing.ParsingException"/> with default values.
+            </summary>
+        </member>
+        <member name="M:GenericParsing.ParsingException.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+              Creates a new <see cref="T:GenericParsing.ParsingException"/> containing a message and the
+              file line number that the error occured.
+            </summary>
+            <param name="strMessage">
+              The message indicating the root cause of the error.
+            </param>
+            <param name="intFileRowNumber">The file line number the error occured on.</param>
+            <param name="intColumnNumber">The column number the error occured on.</param>
+        </member>
+        <member name="M:GenericParsing.ParsingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Creates a new <see cref="T:GenericParsing.ParsingException"/> with seralized data.
+            </summary>
+            <param name="sInfo">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that contains information
+              about the exception.
+            </param>
+            <param name="sContext">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains information
+              about the source/destination of the exception.
+            </param>
+        </member>
+        <member name="M:GenericParsing.ParsingException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
+              with information about the exception.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data
+              about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source
+              or destination.
+            </param>
+        </member>
+        <member name="P:GenericParsing.ParsingException.FileRowNumber">
+            <summary>
+              The line number in the file that the exception was thrown at.
+            </summary>
+        </member>
+        <member name="P:GenericParsing.ParsingException.ColumnNumber">
+            <summary>
+              The column number in the file that the exception was thrown at.
+            </summary>
+        </member>
+        <member name="T:GenericParsing.GenericParserAdapter">
+            <summary>
+              The <see cref="T:GenericParsing.GenericParserAdapter"/> is used to modify the <see cref="T:GenericParsing.GenericParser"/>
+              to allow it parse a file and place them into various formats.
+            </summary>
+            <threadsafety static="false" instance="false"/>
+        </member>
         <member name="F:GenericParsing.GenericParserAdapter.DefaultIncludeFileLineNumber">
             <summary>
               Defines the default value for including the file line number (false).
@@ -1291,66 +1376,6 @@
             </remarks>
             <exception cref="T:System.InvalidOperationException">Attempting to modify the configuration, while parsing.</exception>
         </member>
-        <member name="T:GenericParsing.ParsingException">
-            <summary>
-              <see cref="T:GenericParsing.ParsingException"/> is an exception class meant for states where
-              the parser can no longer continue parsing due to the data found in the
-              data-source.
-            </summary>
-        </member>
-        <member name="M:GenericParsing.ParsingException.#ctor">
-            <summary>
-              Creates a new <see cref="T:GenericParsing.ParsingException"/> with default values.
-            </summary>
-        </member>
-        <member name="M:GenericParsing.ParsingException.#ctor(System.String,System.Int32,System.Int32)">
-            <summary>
-              Creates a new <see cref="T:GenericParsing.ParsingException"/> containing a message and the
-              file line number that the error occured.
-            </summary>
-            <param name="strMessage">
-              The message indicating the root cause of the error.
-            </param>
-            <param name="intFileRowNumber">The file line number the error occured on.</param>
-            <param name="intColumnNumber">The column number the error occured on.</param>
-        </member>
-        <member name="M:GenericParsing.ParsingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-              Creates a new <see cref="T:GenericParsing.ParsingException"/> with seralized data.
-            </summary>
-            <param name="sInfo">
-              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that contains information
-              about the exception.
-            </param>
-            <param name="sContext">
-              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains information
-              about the source/destination of the exception.
-            </param>
-        </member>
-        <member name="M:GenericParsing.ParsingException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-              When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
-              with information about the exception.
-            </summary>
-            <param name="info">
-              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data
-              about the exception being thrown.
-            </param>
-            <param name="context">
-              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source
-              or destination.
-            </param>
-        </member>
-        <member name="P:GenericParsing.ParsingException.FileRowNumber">
-            <summary>
-              The line number in the file that the exception was thrown at.
-            </summary>
-        </member>
-        <member name="P:GenericParsing.ParsingException.ColumnNumber">
-            <summary>
-              The column number in the file that the exception was thrown at.
-            </summary>
-        </member>
         <member name="T:GenericParsing.FieldType">
             <summary>
               Indicates whether text fields are delimited or fixed width.
@@ -1364,31 +1389,6 @@
         <member name="F:GenericParsing.FieldType.FixedWidth">
             <summary>
               Indicates that the fields are fixed width.
-            </summary>
-        </member>
-        <member name="T:GenericParsing.ParserState">
-            <summary>
-            The current internal state of the parser.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.NoDataSource">
-            <summary>
-              Indicates that the parser has no datasource and is not properly setup.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Ready">
-            <summary>
-              Indicates that the parser is ready to begin parsing.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Parsing">
-            <summary>
-              Indicates that the parser is currently parsing the datasource.
-            </summary>
-        </member>
-        <member name="F:GenericParsing.ParserState.Finished">
-            <summary>
-              Indicates that the parser has finished parsing the datasource.
             </summary>
         </member>
     </members>
